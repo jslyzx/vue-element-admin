@@ -24,35 +24,13 @@ const users = {
 }
 
 module.exports = [
-  // user login
-  {
-    url: '/vue-element-admin/user/login',
-    type: 'post',
-    response: config => {
-      const { username } = config.body
-      const token = tokens[username]
-
-      // mock error
-      if (!token) {
-        return {
-          code: 60204,
-          message: 'Account and password are incorrect.'
-        }
-      }
-
-      return {
-        code: 20000,
-        data: token
-      }
-    }
-  },
 
   // get user info
   {
     url: '/vue-element-admin/user/info\.*',
     type: 'get',
     response: config => {
-      const { token } = config.query
+      const token = 'admin-token'
       const info = users[token]
 
       // mock error
@@ -64,7 +42,7 @@ module.exports = [
       }
 
       return {
-        code: 20000,
+        code: 0,
         data: info
       }
     }
@@ -76,7 +54,7 @@ module.exports = [
     type: 'post',
     response: _ => {
       return {
-        code: 20000,
+        code: 0,
         data: 'success'
       }
     }

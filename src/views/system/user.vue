@@ -13,7 +13,6 @@
           {{ scope.row.nickname }}
         </template>
       </el-table-column>
-      </el-table-column>
       <el-table-column align="center" label="操作">
         <template slot-scope="scope">
           <el-button type="primary" size="small" @click="handleEdit(scope)">编辑</el-button>
