@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import { deepClone } from '@/utils'
 import { getUsers } from '@/api/user'
 import Pagination from '@/components/Pagination'
 
@@ -90,8 +89,6 @@ export default {
         type: 'warning'
       })
         .then(async() => {
-          await deleteRole(row.key)
-          this.usersList.splice($index, 1)
           this.$message({
             type: 'success',
             message: 'Delete succed!'
@@ -103,9 +100,9 @@ export default {
       const isEdit = this.dialogType === 'edit'
 
       if (isEdit) {
-        
+
       } else {
-        
+
       }
 
       const { username, nickname } = this.user
