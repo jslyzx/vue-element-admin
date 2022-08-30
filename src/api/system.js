@@ -7,3 +7,18 @@ export function fetchAreaList() {
   })
 }
 
+export function saveRegion(data) {
+  return request({
+    url: '/api/admin/area/save',
+    method: 'post',
+    data
+  })
+}
+
+export function fetchProvList() {
+  return request({
+    url: '/api/admin/division/query',
+    method: 'get'
+  })
+}
+
