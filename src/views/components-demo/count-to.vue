@@ -12,6 +12,7 @@
       :separator="_separator"
       :prefix="_prefix"
       :suffix="_suffix"
+      :color="_color"
       :autoplay="false"
       class="example"
     />
@@ -46,7 +47,7 @@
       </label>
     </div>
     <aside>&lt;count-to :start-val=&#x27;{{ _startVal }}&#x27; :end-val=&#x27;{{ _endVal }}&#x27; :duration=&#x27;{{ _duration }}&#x27;
-      :decimals=&#x27;{{ _decimals }}&#x27; :separator=&#x27;{{ _separator }}&#x27; :prefix=&#x27;{{ _prefix }}&#x27; :suffix=&#x27;{{ _suffix }}&#x27;
+      :decimals=&#x27;{{ _decimals }}&#x27; :separator=&#x27;{{ _separator }}&#x27; :prefix=&#x27;{{ _prefix }}&#x27; :color=&#x27;{{ _color }}&#x27; :suffix=&#x27;{{ _suffix }}&#x27;
       :autoplay=false&gt;</aside>
   </div>
 </template>
@@ -65,7 +66,8 @@ export default {
       setDecimals: 0,
       setSeparator: ',',
       setSuffix: ' rmb',
-      setPrefix: '¥ '
+      setPrefix: '¥ ',
+      setColor: '#ff8d1a'
     }
   },
   computed: {
@@ -106,6 +108,9 @@ export default {
     },
     _suffix() {
       return this.setSuffix
+    },
+    _color() {
+      return this.setColor
     },
     _prefix() {
       return this.setPrefix
