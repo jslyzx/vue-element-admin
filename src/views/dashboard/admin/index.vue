@@ -667,6 +667,7 @@ export default {
     background: #fff;
     line-height: 40px;
     font-size: 16px;
+    font-weight: 700;
     vertical-align: top;
     padding-left: 16px;
     border-bottom: 1px solid rgba(233, 233, 233, 1);

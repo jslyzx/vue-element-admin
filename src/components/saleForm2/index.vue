@@ -84,7 +84,7 @@
 
 <script>
 export default {
-  name: 'SaleForm',
+  name: 'SaleForm2',
   props: {
     ruleForm: {
       type: Object,

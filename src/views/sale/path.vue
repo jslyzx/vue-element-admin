@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <saleForm :rule-form="ruleForm" :utilsShow="utilsShow" />
+      <sale-form :rule-form="ruleForm" :utilsShow="utilsShow" />
     </div>
     <div class="chartBox">
       <div style="height: 100%">
@@ -99,7 +99,7 @@ let BMap = {};
 let map = {};
 let heatmapOverlay = {};
 export default {
-  name: "Yearly",
+  name: "Path",
   components: {
     saleForm,
   },
@@ -115,6 +115,7 @@ export default {
         middleArea: "",
         provienceArea: "",
         shop: "",
+        hospital: "",
       },
       utilsShow: 1,
       options: [
@@ -657,6 +658,7 @@ export default {
     line-height: 40px;
     font-size: 16px;
     vertical-align: top;
+    font-weight: 700;
     padding-left: 16px;
     border-bottom: 1px solid rgba(233, 233, 233, 1);
   }
