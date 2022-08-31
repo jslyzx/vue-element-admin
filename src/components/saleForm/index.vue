@@ -88,6 +88,16 @@
                 />
               </el-select>
             </el-form-item>
+            <el-form-item v-if="utilsShow == 1" label="医院">
+              <el-select v-model="ruleForm.hospital" placeholder="请选择">
+                <el-option
+                  v-for="item in options1"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </el-form-item>
             <el-form-item class="lastForm">
               <el-button type="primary" @click="submitForm('ruleForm')">查询</el-button>
               <el-button @click="resetForm('ruleForm')">重置</el-button>
@@ -106,8 +116,10 @@ export default {
     ruleForm: {
       type: Object,
       default: () => { }
+    },
+    utilsShow: {
+      default: ''
     }
-
   },
   data() {
     return {
