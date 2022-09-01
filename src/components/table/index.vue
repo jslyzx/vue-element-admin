@@ -3,7 +3,7 @@
         <el-table :data="tableData" style="width: 100%"
             :header-cell-style="{ background: '#f5f7fa', color: '#606266' }">
             <el-table-column v-for="(item, index) in headerData" :key="item.id" :prop="item.prop" :label="item.label"
-                width="180">
+                >
             </el-table-column>
         </el-table>
         <div style="display:flex;flex-flow:row-reverse wrap;margin: 10px 0 0 0;">
