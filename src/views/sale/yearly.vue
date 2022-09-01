@@ -539,7 +539,7 @@ export default {
           trigger: 'item',
           formatter: '销售金额{c}万<br />销售占比{d}'
         },
-        // color: ['#2A58C7FF', '#FF8D1AFF', '#00BAADFF', '#A5D63FFF', '#EE6666FF'],
+        color: ['#2A58C7', '#FF8D1A', '#00BAAD', '#A5D63F', '#EE6666'],
         legend: {
           formatter: function (name) {
             if (name == '片区一') {
