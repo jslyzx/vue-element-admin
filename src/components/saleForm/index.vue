@@ -98,6 +98,36 @@
                 />
               </el-select>
             </el-form-item>
+            <el-form-item v-if="utilsShow == 2" label="性别">
+              <el-select v-model="ruleForm.sex" placeholder="请选择">
+                <el-option
+                  v-for="item in options1"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </el-form-item>
+            <el-form-item v-if="utilsShow == 2" class="mode" label="年龄段">
+              <el-select v-model="ruleForm.age" placeholder="请选择">
+                <el-option
+                  v-for="item in options1"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </el-form-item>
+            <el-form-item v-if="utilsShow == 2" class="mode" label="适应症">
+              <el-select v-model="ruleForm.indication" placeholder="请选择">
+                <el-option
+                  v-for="item in options1"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </el-form-item>
             <el-form-item class="lastForm">
               <el-button type="primary" @click="submitForm('ruleForm')">查询</el-button>
               <el-button @click="resetForm('ruleForm')">重置</el-button>
