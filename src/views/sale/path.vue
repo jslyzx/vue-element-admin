@@ -524,48 +524,6 @@ export default {
           price: "12345",
         },
       ],
-      tableData: [
-        {
-          num: "2",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "4",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "1",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-      ],
       currentPage: 1, // 当前页码
       total: 0, // 总条数
       pageSize: 5, // 每页的数据条数
