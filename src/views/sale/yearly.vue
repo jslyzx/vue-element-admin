@@ -183,6 +183,7 @@
 <script>
 import saleForm from '@/components/saleForm'
 import * as echarts from 'echarts'
+require("echarts/theme/macarons"); // echarts theme
 export default {
   name: 'Yearly',
   components: {
@@ -315,13 +316,13 @@ export default {
     },
     initCharts2() {
       const that = this
-      const charts2 = echarts.init(this.$refs['chartBox2'])
+      const charts2 = echarts.init(this.$refs['chartBox2'], "macarons")
       charts2.setOption({
         tooltip: {
           trigger: 'item',
           formatter: '销售金额{c}万<br />销售占比{d}'
         },
-        color: ['#2A58C7FF', '#3AA0FFFF', '#FF8D1AFF', '#D43030FF', '#00BAADFF', '#FFC300FF', '#A5D63FFF', '#AC33C1FF'],
+        // color: ['#2A58C7FF', '#3AA0FFFF', '#FF8D1AFF', '#D43030FF', '#00BAADFF', '#FFC300FF', '#A5D63FFF', '#AC33C1FF'],
         legend: [{
           bottom: '50px',
           left: '35px',
@@ -405,31 +406,26 @@ export default {
         }],
         series: [
           {
-            // name: 'Access From',
+            name: 'Access From',
             type: 'pie',
             radius: ['65%', '25%'],
             center: ['50%', '30%'],
-            hoverAnimation:true, //鼠标悬浮是否有区域弹出动画，false:无  true:有
-            // avoidLabelOverlap: false,
+            // hoverAnimation:true, //鼠标悬浮是否有区域弹出动画，false:无  true:有
+            avoidLabelOverlap: false,
             label: {
               show: true,
               position: 'inner',
               // color: '#fff',
               fontSize: 14,
-              // formatter: '{b}\n{d}%'
+              formatter: '{b}\n{d}%'
             },
+            data: this.chartsData1,
             itemStyle: {
               emphasis: {
                 shadowBlur: 10,
-                shadowOffsetX: 1000,
-                // shadowColor: 'rgba(0, 0, 0, 0.1)'
-              }
-            },
-            data: this.chartsData1,
-            emphasis: {
-              shadowBlur: 10,
-              shadowOffsetX: 1000,
-              shadowColor: 'rgba(0, 0, 0, 0.1)'
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              },
             }
           }
         ]
@@ -438,13 +434,13 @@ export default {
     },
     initCharts3() {
       const that = this
-      const charts3 = echarts.init(this.$refs['chartBox3'])
+      const charts3 = echarts.init(this.$refs['chartBox3'], "macarons")
       charts3.setOption({
         tooltip: {
           trigger: 'item',
           formatter: '销售金额{c}万<br />销售占比{d}'
         },
-        color: ['#2A58C7FF', '#FF8D1AFF', '#00BAADFF', '#A5D63FFF', '#EE6666FF'],
+        // color: ['#2A58C7FF', '#FF8D1AFF', '#00BAADFF', '#A5D63FFF', '#EE6666FF'],
         legend: {
           formatter: function (name) {
             if (name == '大区一') {
@@ -470,7 +466,8 @@ export default {
           data: [
             {
               name: '大区一',
-              icon: 'rect'
+              icon: 'rect',
+              color: '#2A58C7FF',
             },
             {
               name: '大区二',
@@ -492,7 +489,7 @@ export default {
         },
         series: [
           {
-            name: 'Access From',
+            // name: 'Access From',
             type: 'pie',
             radius: ['35%', '20%'],
             center: ['50%', '16%'],
@@ -507,6 +504,27 @@ export default {
             label: {
               show: false
             },
+            itemStyle: {
+              normal: {
+                label: {
+                  show: false,
+                },
+                labelLine: {
+                  show: false,
+                  length: 100,
+                  smooth: 0.5,
+                },
+                // borderWidth: BorderWidth,
+                shadowBlur: 40,
+                borderColor: "#59CFFF",
+                shadowColor: "rgba(0, 0, 0, 0)", //边框阴影
+              },
+              emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              },
+            },
             data: this.chartsData2
           }
         ]
@@ -515,13 +533,13 @@ export default {
     },
     initCharts4() {
       const that = this
-      const charts4 = echarts.init(this.$refs['chartBox4'])
+      const charts4 = echarts.init(this.$refs['chartBox4'], "macarons")
       charts4.setOption({
         tooltip: {
           trigger: 'item',
           formatter: '销售金额{c}万<br />销售占比{d}'
         },
-        color: ['#2A58C7FF', '#FF8D1AFF', '#00BAADFF', '#A5D63FFF', '#EE6666FF'],
+        // color: ['#2A58C7FF', '#FF8D1AFF', '#00BAADFF', '#A5D63FFF', '#EE6666FF'],
         legend: {
           formatter: function (name) {
             if (name == '片区一') {
@@ -584,7 +602,14 @@ export default {
             label: {
               show: false
             },
-            data: this.chartsData3
+            data: this.chartsData3,
+            itemStyle:{
+              emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              },
+            }
           }
         ]
 
