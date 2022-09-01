@@ -135,7 +135,7 @@ export default {
             ruleForm: {
                 time: 'year',
                 year: '',
-                month:'',
+                month: '',
                 goods: '',
                 bigArea: '',
                 middleArea: '',
@@ -169,9 +169,6 @@ export default {
     },
     mounted() {
         this.initCharts()
-        this.initCharts2()
-        this.initCharts3()
-        this.initCharts4()
     },
     methods: {
         handleClick() {
@@ -190,18 +187,18 @@ export default {
                         }
                     },
                     formatter: function (params) {
-                        let str ='';
-                        params.forEach((item,index) => {
+                        let str = '';
+                        params.forEach((item, index) => {
                             str +=
-                                '<span style="display:inline-block;margin-right:5px;border-radius:50%;width:10px;height:10px;left:5px;background-color:' + item.color + '"></span>' + new Date().getFullYear() +'年' +item.name+" : " + item.data*100 +'万'+ "<br />";
+                                '<span style="display:inline-block;margin-right:5px;border-radius:50%;width:10px;height:10px;left:5px;background-color:' + item.color + '"></span>' + new Date().getFullYear() + '年' + item.name + " : " + item.data * 100 + '万' + "<br />";
                         });
                         return str;
                     },
                 },
                 legend: {
                     data: ['选定年', '前一年'],
-                    right:150,
-                    top:20,
+                    right: 150,
+                    top: 20,
                 },
 
                 // grid: {
@@ -253,9 +250,9 @@ export default {
                             opacity: 0,
                         },
                         select: {
-                            scale:10,
-                            label:{
-                                show:true,
+                            scale: 10,
+                            label: {
+                                show: true,
                             }
                         },
                         areaStyle: {
@@ -325,7 +322,7 @@ export default {
   }
   
   .chartBox {
-      margin: 25px 24px 25px -1px;
+      margin: 25px 0 25px 0;
   
       .display {
           display: flex;
@@ -370,6 +367,8 @@ export default {
                   }
               }
   
+             
+  
               .bottomBox {
                   width: 100%;
                   display: flex;
@@ -402,6 +401,9 @@ export default {
                   }
               }
           }
+          .s_box:nth-child(3) {
+                  margin-right: 0px;
+              }
       }
   
       .chartDisplay {
@@ -414,10 +416,11 @@ export default {
           }
   
           .inBox {
-              width: 1656px;
+              width: 1655px;
               height: 527px;
   
               .topBox {
+                  width: 1655px;
                   height: 56px;
                   display: flex;
                   flex-flow: row wrap;
@@ -427,7 +430,7 @@ export default {
               }
   
               .inChartBox {
-                  width: 1700px;
+                  width: 1500px;
                   height: 400px;
                   margin-left: -50px;
               }

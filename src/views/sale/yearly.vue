@@ -27,17 +27,9 @@
                   </div>
                   <div class="compare">
                     <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span
-                      style="margin-left: 16px;"
-                    ><img
-                      src="@/assets/sale_images/路径 16.png"
-                    ></span></div>
-                    <div style="margin-left:37px"><span>环比</span><span
-                      style="margin-left: 19px;"
-                    >-15.89%</span><span
-                      style="margin-left: 16px;"
-                    ><img
-                      src="@/assets/sale_images/Info Icon.png"
-                    ></span></div>
+                        style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
+                    <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
+                        style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
                   </div>
                 </div>
               </div>
@@ -66,17 +58,9 @@
                   </div>
                   <div class="compare">
                     <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span
-                      style="margin-left: 16px;"
-                    ><img
-                      src="@/assets/sale_images/路径 16.png"
-                    ></span></div>
-                    <div style="margin-left:37px"><span>环比</span><span
-                      style="margin-left: 19px;"
-                    >-15.89%</span><span
-                      style="margin-left: 16px;"
-                    ><img
-                      src="@/assets/sale_images/Info Icon.png"
-                    ></span></div>
+                        style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
+                    <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
+                        style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
                   </div>
                 </div>
               </div>
@@ -105,17 +89,9 @@
                   </div>
                   <div class="compare">
                     <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span
-                      style="margin-left: 16px;"
-                    ><img
-                      src="@/assets/sale_images/路径 16.png"
-                    ></span></div>
-                    <div style="margin-left:37px"><span>环比</span><span
-                      style="margin-left: 19px;"
-                    >-15.89%</span><span
-                      style="margin-left: 16px;"
-                    ><img
-                      src="@/assets/sale_images/Info Icon.png"
-                    ></span></div>
+                        style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
+                    <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
+                        style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
                   </div>
                 </div>
 
@@ -145,17 +121,9 @@
                   </div>
                   <div class="compare">
                     <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span
-                      style="margin-left: 16px;"
-                    ><img
-                      src="@/assets/sale_images/路径 16.png"
-                    ></span></div>
-                    <div style="margin-left:37px"><span>环比</span><span
-                      style="margin-left: 19px;"
-                    >-15.89%</span><span
-                      style="margin-left: 16px;"
-                    ><img
-                      src="@/assets/sale_images/Info Icon.png"
-                    ></span></div>
+                        style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
+                    <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
+                        style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
                   </div>
                 </div>
               </div>
@@ -357,7 +325,7 @@ export default {
         legend: [{
           bottom: '50px',
           left: '35px',
-          formatter: function(name) {
+          formatter: function (name) {
             if (name == '浙江省') {
               return `${name}   ${(that.chartsData1[0].value / that.countSum) * 100}%`
             } else if (name == '海南省') {
@@ -396,7 +364,7 @@ export default {
           ]
         }, {
           bottom: '50px',
-          formatter: function(name) {
+          formatter: function (name) {
             if (name == '江苏省') {
               return `${name}   ${(that.chartsData1[1].value / that.countSum) * 100}%`
             } else if (name == '安徽省') {
@@ -437,26 +405,32 @@ export default {
         }],
         series: [
           {
-            name: 'Access From',
+            // name: 'Access From',
             type: 'pie',
             radius: ['65%', '25%'],
             center: ['50%', '30%'],
-            avoidLabelOverlap: false,
+            hoverAnimation:true, //鼠标悬浮是否有区域弹出动画，false:无  true:有
+            // avoidLabelOverlap: false,
             label: {
               show: true,
               position: 'inner',
-              color: '#fff',
+              // color: '#fff',
               fontSize: 14,
-              formatter: '{b}\n{d}%'
+              // formatter: '{b}\n{d}%'
             },
+            itemStyle: {
+              emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 1000,
+                // shadowColor: 'rgba(0, 0, 0, 0.1)'
+              }
+            },
+            data: this.chartsData1,
             emphasis: {
-              scale: true,
-              scaleSize: 20
-            },
-            labelLine: {
-              show: false
-            },
-            data: this.chartsData1
+              shadowBlur: 10,
+              shadowOffsetX: 1000,
+              shadowColor: 'rgba(0, 0, 0, 0.1)'
+            }
           }
         ]
 
@@ -472,7 +446,7 @@ export default {
         },
         color: ['#2A58C7FF', '#FF8D1AFF', '#00BAADFF', '#A5D63FFF', '#EE6666FF'],
         legend: {
-          formatter: function(name) {
+          formatter: function (name) {
             if (name == '大区一') {
               return `${name}   ${(that.chartsData2[0].value / that.countSum2) * 100}%`
             } else if (name == '大区二') {
@@ -549,7 +523,7 @@ export default {
         },
         color: ['#2A58C7FF', '#FF8D1AFF', '#00BAADFF', '#A5D63FFF', '#EE6666FF'],
         legend: {
-          formatter: function(name) {
+          formatter: function (name) {
             if (name == '片区一') {
               return `${name}   ${(that.chartsData3[0].value / that.countSum3) * 100}%`
             } else if (name == '片区二') {
@@ -622,124 +596,124 @@ export default {
 
 <style lang="scss" scoped>
 .body {
-    width: 100%;
-    height: 100vh;
-    background: rgba(235, 238, 242, 1);
-    padding: 29px;
+  width: 100%;
+  height: 100vh;
+  background: rgba(235, 238, 242, 1);
+  padding: 29px;
 }
 
 .formCard {
-    margin: 0px 24px 25px -10px;
-    width: 1655px;
-    height: 143px;
+  margin: 0px 24px 25px -10px;
+  width: 1655px;
+  height: 143px;
 }
 
 .chartBox {
-    margin: 25px 24px 25px -1px;
-    width: 1655px;
-    height: 80vh;
-    background-color: #fff;
-    padding: 39px 36px 34px 27px;
+  margin: 25px 24px 25px -1px;
+  width: 1655px;
+  height: 80vh;
+  background-color: #fff;
+  padding: 39px 36px 34px 27px;
 
-    .display {
+  .display {
+    display: flex;
+    flex-flow: row nowrap;
+
+    .s_box {
+      width: 383px;
+      height: 140px;
+      margin: 0 21px 0 0;
+
+      ::v-deep .el-card__body {
+        padding: 0px !important;
+      }
+
+      .topBox {
+        width: 100%;
+        height: 41px;
+        border-bottom: 1px solid rgba(216, 220, 229, 1);
         display: flex;
-        flex-flow: row nowrap;
+        justify-content: space-between;
+        padding: 16px 26px 0 16px;
 
-        .s_box {
-            width: 383px;
-            height: 140px;
-            margin: 0 21px 0 0;
-
-            ::v-deep .el-card__body {
-                padding: 0px !important;
-            }
-
-            .topBox {
-                width: 100%;
-                height: 41px;
-                border-bottom: 1px solid rgba(216, 220, 229, 1);
-                display: flex;
-                justify-content: space-between;
-                padding: 16px 26px 0 16px;
-
-                ::v-deep .el-tabs__header {
-                    margin: -15px 0 15px
-                }
-            }
-
-            .bottomBox {
-                width: 100%;
-                padding: 10px 29px 0 16px;
-
-                .price {
-                    font-size: 36px;
-                    font-weight: 700;
-                    color: rgba(58, 160, 255, 1);
-                    text-align: left;
-                }
-
-                .compare {
-                    display: flex;
-                    flex-flow: row nowrap;
-                    padding: 10px 0 0 0;
-                }
-            }
+        ::v-deep .el-tabs__header {
+          margin: -15px 0 15px
         }
+      }
+
+      .bottomBox {
+        width: 100%;
+        padding: 10px 29px 0 16px;
+
+        .price {
+          font-size: 36px;
+          font-weight: 700;
+          color: rgba(58, 160, 255, 1);
+          text-align: left;
+        }
+
+        .compare {
+          display: flex;
+          flex-flow: row nowrap;
+          padding: 10px 0 0 0;
+        }
+      }
+    }
+  }
+
+  .chartDisplay {
+    margin-top: 32px;
+    display: flex;
+    flex-flow: row wrap;
+
+    ::v-deep .el-card__body {
+      padding: 0px !important;
     }
 
-    .chartDisplay {
-        margin-top: 32px;
+    .inBox {
+      width: 787px;
+      height: 566px;
+
+      .topBox {
+        height: 52px;
         display: flex;
         flex-flow: row wrap;
+        justify-content: space-between;
+        padding: 16px 16px 10px 20px;
+        border-bottom: 1px solid rgba(216, 220, 229, 1);
+      }
 
-        ::v-deep .el-card__body {
-            padding: 0px !important;
-        }
-
-        .inBox {
-            width: 787px;
-            height: 566px;
-
-            .topBox {
-                height: 52px;
-                display: flex;
-                flex-flow: row wrap;
-                justify-content: space-between;
-                padding: 16px 16px 10px 20px;
-                border-bottom: 1px solid rgba(216, 220, 229, 1);
-            }
-
-            .inChartBox {
-                margin: 0 auto;
-                width: 800px;
-                height: 500px;
-            }
-        }
-
-        .inBox2 {
-            width: 383px;
-            height: 566px;
-            padding: 21px 0 0 18px;
-
-            ::v-deep .el-card__body {
-                padding: 0px !important;
-            }
-
-            .inChartBox2 {
-                width: 350px;
-                height: 450px;
-            }
-        }
-
-        .inChartBox3 {
-            width: 450px;
-            height: 550px;
-        }
-
-        .inChartBox4 {
-            width: 450px;
-            height: 550px;
-        }
+      .inChartBox {
+        margin: 0 auto;
+        width: 800px;
+        height: 500px;
+      }
     }
+
+    .inBox2 {
+      width: 383px;
+      height: 566px;
+      padding: 21px 0 0 18px;
+
+      ::v-deep .el-card__body {
+        padding: 0px !important;
+      }
+
+      .inChartBox2 {
+        width: 350px;
+        height: 450px;
+      }
+    }
+
+    .inChartBox3 {
+      width: 450px;
+      height: 550px;
+    }
+
+    .inChartBox4 {
+      width: 450px;
+      height: 550px;
+    }
+  }
 }
 </style>
