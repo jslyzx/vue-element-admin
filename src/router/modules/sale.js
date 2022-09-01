@@ -6,7 +6,7 @@ const saleRouter = {
   redirect: 'noRedirect',
   name: 'Sale',
   meta: {
-    title: '患者',
+    title: '销售',
     icon: 'user'
   },
   children: [

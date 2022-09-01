@@ -7,7 +7,7 @@ const systemRouter = {
   name: 'System',
   meta: {
     title: '系统管理',
-    icon: 'setting'
+    icon: 'user'
   },
   children: [
     {
