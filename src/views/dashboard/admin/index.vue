@@ -552,6 +552,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.el-row {
+  margin-bottom: 20px !important;
+}
 .dashboard-editor-container {
   padding: 20px;
   background-color: rgb(240, 242, 245);
@@ -689,10 +692,5 @@ li {
     padding: 8px;
     height: 100%;
   }
-}
-</style>
-<style>
-.el-row {
-  margin-bottom: 20px !important;
 }
 </style>
