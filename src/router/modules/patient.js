@@ -30,6 +30,11 @@ const patientRouter = {
       component: () => import('@/views/patient/service'),
       name: 'ShopService',
       meta: { title: '门店服务情况' }
+    },{
+      path: 'baseInfo',
+      component: () => import('@/views/patient/basicInfo'),
+      name: 'ShopService',
+      meta: { title: '基本信息',hidden:true }
     }
   ]
 }
