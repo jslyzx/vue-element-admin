@@ -246,7 +246,6 @@ export default {
                             focus: 'series'
                         },
                         itemStyle: {
-
                             opacity: 0,
                         },
                         select: {

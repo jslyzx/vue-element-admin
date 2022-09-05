@@ -420,7 +420,6 @@ export default {
                         },
                         splitLine: {
                             show: false,
-
                         },
                     }
                 ],
@@ -470,7 +469,6 @@ export default {
                         areaStyle: {
                             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                                 {
-
                                     offset: 0,
                                     color: 'rgba(185, 219, 140,0.39)'
                                 }, {
