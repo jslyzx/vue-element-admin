@@ -5,7 +5,7 @@
     </div>
     <div class="chartBox">
       <div style="height: 100%">
-        <div class="chartTitle">患者分布热力图</div>
+        <div class="chartTitle">患者分布热点图</div>
         <div class="mapBox">
           <div id="map" class="chart-part" style="height: 100%" />
         </div>
