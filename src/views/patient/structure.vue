@@ -12,11 +12,11 @@
       </div>
       <div class="chartContent1">
         <div class="smallChartTitle">按省区分布</div>
-        <div id="smallChartBox1" style="height: 220px; width: 100%" />
+        <div id="smallChartBox1" style="height: 100%; width: 100%" />
       </div>
       <div class="chartContent2">
         <div class="smallChartTitle">按年龄分布</div>
-        <div id="smallChartBox2" style="height: 220px; width: 100%" />
+        <div id="smallChartBox2" style="height: 100%; width: 100%" />
       </div>
     </div>
     <div class="container">
@@ -38,11 +38,11 @@
       </div>
       <div class="chartContent1">
         <div class="smallChartTitle">按性别分布</div>
-        <div id="smallChartBox3" style="height: 220px; width: 100%" />
+        <div id="smallChartBox3" style="height: 100%; width: 100%" />
       </div>
       <div class="chartContent2">
         <div class="smallChartTitle">按BMI分布</div>
-        <div id="smallChartBox4" style="height: 220px; width: 100%" />
+        <div id="smallChartBox4" style="height: 100%; width: 100%" />
       </div>
     </div>
   </div>
@@ -147,16 +147,73 @@ export default {
         tooltip: {
           trigger: "item",
         },
+        legend: [
+          {
+            orient: "horizontal",
+            icon: "circle",
+            align: "left",
+            bottom: "0",
+            itemWidth: 8,
+            itemHeight: 8,
+            y: "240",
+            x: "100",
+            data: ["浙江省", "江苏省", "海南省"],
+            formatter: (name) => {
+              return `{b|${name}} `;
+            },
+            textStyle: {
+              color: "#999999",
+              fontSize: 12,
+              align: "left",
+              // 文字块背景色，一定要加上，否则对齐不会生效
+              backgroundColor: "transparent",
+              rich: {
+                b: {
+                  width: 200,
+                },
+              },
+            },
+          },
+          {
+            orient: "horizontal",
+            icon: "circle",
+            align: "left",
+            bottom: "0",
+            itemWidth: 8,
+            itemHeight: 8,
+            y: "240",
+            x: "220",
+            data: ["安徽省", "山东省"],
+            formatter: (name) => {
+              return `{a|${name}} `;
+            },
+
+            textStyle: {
+              color: "#999999",
+              fontSize: 12,
+              align: "left",
+              // 文字块背景色，一定要加上，否则对齐不会生效
+              backgroundColor: "transparent",
+              rich: {
+                a: {
+                  width: 200,
+                },
+              },
+            },
+          },
+        ],
         series: [
           {
             name: "按省区分布",
             type: "pie",
-            radius: ["40%", "70%"],
+            top: -125,
+            radius: ["30%", "50%"],
             avoidLabelOverlap: false,
             label: {
               show: false,
               position: "center",
             },
+
             emphasis: {},
             labelLine: {
               show: false,
@@ -182,11 +239,67 @@ export default {
         tooltip: {
           trigger: "item",
         },
+        legend: [
+          {
+            orient: "horizontal",
+            icon: "circle",
+            align: "left",
+            bottom: "0",
+            itemWidth: 8,
+            itemHeight: 8,
+            y: "240",
+            x: "100",
+            data: ["0-20岁", "20-30岁", "30-45岁"],
+            formatter: (name) => {
+              return `{b|${name}} `;
+            },
+            textStyle: {
+              color: "#999999",
+              fontSize: 12,
+              align: "left",
+              // 文字块背景色，一定要加上，否则对齐不会生效
+              backgroundColor: "transparent",
+              rich: {
+                b: {
+                  width: 200,
+                },
+              },
+            },
+          },
+          {
+            orient: "horizontal",
+            icon: "circle",
+            align: "left",
+            bottom: "0",
+            itemWidth: 8,
+            itemHeight: 8,
+            y: "240",
+            x: "220",
+            data: ["45-56岁", "56-80岁"],
+            formatter: (name) => {
+              return `{a|${name}} `;
+            },
+
+            textStyle: {
+              color: "#999999",
+              fontSize: 12,
+              align: "left",
+              // 文字块背景色，一定要加上，否则对齐不会生效
+              backgroundColor: "transparent",
+              rich: {
+                a: {
+                  width: 200,
+                },
+              },
+            },
+          },
+        ],
         series: [
           {
             name: "按年龄分布",
             type: "pie",
-            radius: ["40%", "70%"],
+            top: -125,
+            radius: ["30%", "50%"],
             avoidLabelOverlap: false,
             label: {
               show: false,
@@ -275,13 +388,32 @@ export default {
           },
         },
         color: ["#7B79FF", "#FFB0E2", "#59CFFF"],
+        legend: [
+          {
+            icon: "bar",
+            data: ["男", "女"],
+            itemGap: 60,
+            itemWidth: 14,
+            y: "240",
+            x: "100",
+          },
+          {
+            icon: "bar",
+            data: ["不详"],
+            itemGap: 60,
+            itemWidth: 14,
+            y: "260",
+            x: "100",
+          },
+        ],
         series: [
           {
-            name: "入厕人数",
+            name: "男",
             type: "pie",
+            top: -125,
             clockWise: true, //顺时加载
             hoverAnimation: false, //鼠标移入变大
-            radius: ["70%", "71%"],
+            radius: ["50%", "51%"],
             itemStyle: {
               normal: {
                 label: {
@@ -302,21 +434,22 @@ export default {
             data: [
               {
                 value: 7,
-                name: "入厕人数",
+                name: "男",
               },
               {
-                value: 3,
+                value: 10,
                 name: "",
                 itemStyle: placeHolderStyle,
               },
             ],
           },
           {
-            name: "就餐人数",
+            name: "女",
+            top: -125,
             type: "pie",
             clockWise: true,
             hoverAnimation: false,
-            radius: ["60%", "61%"],
+            radius: ["40%", "41%"],
             itemStyle: {
               normal: {
                 label: {
@@ -336,21 +469,22 @@ export default {
             data: [
               {
                 value: 6,
-                name: "就餐人数",
+                name: "女",
               },
               {
-                value: 4,
+                value: 10,
                 name: "",
                 itemStyle: placeHolderStyle,
               },
             ],
           },
           {
-            name: "购物人数",
+            name: "不详",
             type: "pie",
+            top: -125,
             clockWise: true,
             hoverAnimation: false,
-            radius: ["50%", "51%"],
+            radius: ["30%", "31%"],
             itemStyle: {
               normal: {
                 label: {
@@ -370,10 +504,10 @@ export default {
             data: [
               {
                 value: 5,
-                name: "购物人数",
+                name: "不详",
               },
               {
-                value: 5,
+                value: 10,
                 name: "",
                 itemStyle: placeHolderStyle,
               },
@@ -398,17 +532,74 @@ export default {
         tooltip: {
           trigger: "item",
         },
+        legend: [
+          {
+            orient: "horizontal",
+            icon: "circle",
+            align: "left",
+            bottom: "0",
+            itemWidth: 8,
+            itemHeight: 8,
+            y: "240",
+            x: "100",
+            data: ["BMI区间一", "BMI区间二", "BMI区间三"],
+            formatter: (name) => {
+              return `{b|${name}} `;
+            },
+            textStyle: {
+              color: "#999999",
+              fontSize: 12,
+              align: "left",
+              // 文字块背景色，一定要加上，否则对齐不会生效
+              backgroundColor: "transparent",
+              rich: {
+                b: {
+                  width: 200,
+                },
+              },
+            },
+          },
+          {
+            orient: "horizontal",
+            icon: "circle",
+            align: "left",
+            bottom: "0",
+            itemWidth: 8,
+            itemHeight: 8,
+            y: "240",
+            x: "220",
+            data: ["BMI区间四", "BMI区间五", "BMI区间六"],
+            formatter: (name) => {
+              return `{a|${name}} `;
+            },
+
+            textStyle: {
+              color: "#999999",
+              fontSize: 12,
+              align: "left",
+              // 文字块背景色，一定要加上，否则对齐不会生效
+              backgroundColor: "transparent",
+              rich: {
+                a: {
+                  width: 200,
+                },
+              },
+            },
+          },
+        ],
         series: [
           {
             name: "按BMI分布",
             type: "pie",
-            radius: "70%",
+            top: -125,
+            radius: "50%",
             data: [
               { value: 1048, name: "BMI区间一" },
               { value: 735, name: "BMI区间二" },
               { value: 580, name: "BMI区间三" },
               { value: 484, name: "BMI区间四" },
               { value: 300, name: "BMI区间五" },
+              { value: 300, name: "BMI区间六" },
             ],
             label: {
               show: false,

@@ -5,7 +5,7 @@
     </div>
     <div class="chartBox">
       <div style="height: 100%">
-        <div class="chartTitle">患者分布热力图</div>
+        <div class="chartTitle">患者分布热点图</div>
         <div class="mapBox">
           <div id="map" class="chart-part" style="height: 100%" />
         </div>
@@ -480,48 +480,6 @@ export default {
         },
         {
           count: 5,
-        },
-      ],
-      tableData: [
-        {
-          num: "2",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "4",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "1",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
         },
       ],
       tableData: [

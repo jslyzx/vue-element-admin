@@ -5,24 +5,33 @@
         ><div class="grid-content bg-purple">首页数据统计</div></el-col
       >
       <el-col :span="12">
-        <el-radio-group v-model="dateActive" style="float: right">
-          <el-radio-button label="year" name="year">当年</el-radio-button>
-          <el-radio-button label="quarter" name="quarter">当季</el-radio-button>
-          <el-radio-button label="month" name="month">当月</el-radio-button>
-          <el-radio-button label="day" name="day">当天</el-radio-button>
+        <el-radio-group
+          @change="handleClick()"
+          v-model="dateActive"
+          style="float: right"
+        >
+          <el-radio-button label="1" name="1">当年</el-radio-button>
+          <el-radio-button label="2" name="2">当季</el-radio-button>
+          <el-radio-button label="3" name="3">当月</el-radio-button>
+          <el-radio-button label="4" name="4">当天</el-radio-button>
         </el-radio-group>
       </el-col>
     </el-row>
-    <panel-group @handleSetLineChartData="handleSetLineChartData" />
+    <panel-group
+      :dotInfo="dotInfo"
+      :salesNumInfo="salesNumInfo"
+      :salesPriceInfo="salesPriceInfo"
+      :salesInfo="salesInfo"
+      @handleClick1="getClick1"
+      @handleClick2="getClick2"
+      @handleClick3="getClick3"
+      @handleClick4="getClick4"
+    />
     <el-row :gutter="40" style="height: 305px">
       <el-col :xs="18" :sm="18" style="height: 100%">
-        <div class="chartTitle">患者分布热力图</div>
+        <div class="chartTitle">患者分布热点图</div>
         <div class="mapBox">
-          <div
-          id="map"
-          class="chart-part"
-          style="height: 100%;"
-        />
+          <div id="map" class="chart-part" style="height: 100%" />
         </div>
       </el-col>
       <el-col :xs="6" :sm="6" style="height: 100%">
@@ -30,11 +39,11 @@
           <div class="xsTitleBox">
             <div>销售预估完成率</div>
             <div class="completionRate">完成率</div>
-            <div class="completionRateNum">80%</div>
+            <div class="completionRateNum">{{salesCompletionRate.estimateRate}}%</div>
           </div>
           <div>
             <div class="chart-wrapper">
-              <pie-chart />
+              <div id="pieChart1" style="height: 100px; width: 160px;"></div>
             </div>
           </div>
         </div>
@@ -42,11 +51,11 @@
           <div class="xsTitleBox">
             <div>销售年度完成率</div>
             <div class="completionRate">完成率</div>
-            <div class="completionRateNum">60%</div>
+            <div class="completionRateNum">{{salesCompletionRate.yearRate}}%</div>
           </div>
           <div>
             <div class="chart-wrapper">
-              <pie-chart />
+              <div id="pieChart2" style="height: 100px; width: 160px;"></div>
             </div>
           </div>
         </div>
@@ -56,7 +65,11 @@
       <el-col :xs="18" :sm="18" style="height: 100%">
         <div class="chartTitle">销售统计</div>
         <div class="barChartBox">
-          <bar-chart />
+          <bar-chart
+            v-if="medicine1Data.length > 0"
+            :medicine1Data="medicine1Data"
+            :medicine2Data="medicine2Data"
+          />
         </div>
       </el-col>
       <el-col :xs="6" :sm="6" style="height: 100%">
@@ -72,31 +85,27 @@
               <div class="thirdPb">本月销售额</div>
             </li>
             <li
-              v-for="(item, index) in shopList"
+              v-for="(item, index) in shopSaleList"
               :key="index"
               class="pbBox bgfff"
             >
               <div class="firstPb">
-                <img
-                  v-if="index == 0"
-                  src="../../../assets/index_img/gold.png"
-                />
-                <img
-                  v-if="index == 1"
-                  src="../../../assets/index_img/silver.png"
-                />
-                <img
-                  v-if="index == 2"
-                  src="../../../assets/index_img/bronze.png"
-                />
+                <img v-if="index == 0" src="@/assets/index_img/gold.png" />
+                <img v-if="index == 1" src="@/assets/index_img/silver.png" />
+                <img v-if="index == 2" src="@/assets/index_img/bronze.png" />
                 <div v-if="index > 2">{{ index + 1 }}</div>
               </div>
-              <div class="secondPb">
-                {{ item.name }}
-              </div>
-              <div class="thirdPb">
-                {{ item.money }}
-              </div>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                :content="item.shopName"
+                placement="top-start"
+              >
+                <div class="secondPb">
+                  {{ item.shopName }}
+                </div>
+              </el-tooltip>
+              <div class="thirdPb">￥{{ item.salePrice }}</div>
             </li>
           </ul>
         </div>
@@ -106,21 +115,26 @@
 </template>
 
 <script>
+import {
+  queryDot,
+  querySalesPrice,
+  querySalesNum,
+  querySalesInfo,
+  queryCustomerHotInfo,
+  queryShopSale,
+  querySalesCompletionRate,
+  queryMonthSalesPrice,
+} from "@/api/home";
 import PanelGroup from "./components/PanelGroup";
 import PieChart from "./components/PieChart";
 import BarChart from "./components/BarChart";
 import echarts from "echarts";
 import _ from "lodash";
+import ieee754 from "ieee754";
 
 let BMap = {};
 let map = {};
-let heatmapOverlay = {}
-const lineChartData = {
-  newVisitis: {
-    expectedData: [100, 120, 161, 134, 105, 160, 165],
-    actualData: [120, 82, 91, 154, 162, 140, 145],
-  },
-};
+let heatmapOverlay = {};
 
 export default {
   name: "DashboardAdmin",
@@ -131,398 +145,133 @@ export default {
   },
   data() {
     return {
-      lineChartData: lineChartData.newVisitis,
-      dateActive: "year",
-      options: [
-        {
-          count: 134,
-        },
-        {
-          lng: "117.1735760356",
-          count: 32,
-          lat: "34.2597049057",
-        },
-        {
-          lng: "120.6338846979",
-          count: 1,
-          lat: "31.2746197161",
-        },
-        {
-          lng: "120.3328896266",
-          count: 9,
-          lat: "31.6086091302",
-        },
-        {
-          lng: "118.7512007783",
-          count: 5,
-          lat: "32.0867914530",
-        },
-        {
-          lng: "119.9505910586",
-          count: 21,
-          lat: "31.7856270488",
-        },
-        {
-          lng: "120.8568556227",
-          count: 5,
-          lat: "32.0244682185",
-        },
-        {
-          lng: "120.8726688908",
-          count: 42,
-          lat: "32.0101819359",
-        },
-        {
-          lng: "120.8726250780",
-          count: 7,
-          lat: "32.0261301477",
-        },
-        {
-          lng: "120.8711949627",
-          count: 19,
-          lat: "32.0151678890",
-        },
-        {
-          lng: "120.7552214006",
-          count: 14,
-          lat: "32.1084861085",
-        },
-        {
-          lng: "120.8746653502",
-          count: 2,
-          lat: "32.0607906299",
-        },
-        {
-          lng: "120.6260226246",
-          count: 17,
-          lat: "31.3069631346",
-        },
-        {
-          lng: "120.6037970054",
-          count: 5,
-          lat: "31.2747131899",
-        },
-        {
-          lng: "120.7326630430",
-          count: 1,
-          lat: "31.3344155454",
-        },
-        {
-          lng: "120.3117990093",
-          count: 2,
-          lat: "31.5746282267",
-        },
-        {
-          lng: "120.2964003072",
-          count: 14,
-          lat: "31.6028731388",
-        },
-        {
-          lng: "120.2807518255",
-          count: 20,
-          lat: "31.9154041083",
-        },
-        {
-          lng: "117.2028750974",
-          count: 29,
-          lat: "34.2790363208",
-        },
-        {
-          lng: "117.1850852688",
-          count: 62,
-          lat: "34.2690328267",
-        },
-        {
-          lng: "119.4399434703",
-          count: 7,
-          lat: "32.7875592722",
-        },
-        {
-          lng: "118.8011767341",
-          count: 29,
-          lat: "32.0403197058",
-        },
-        {
-          lng: "118.7832995975",
-          count: 19,
-          lat: "32.0773181018",
-        },
-        {
-          lng: "119.9662940842",
-          count: 78,
-          lat: "31.7802386621",
-        },
-        {
-          lng: "119.9512956886",
-          count: 64,
-          lat: "31.7565951399",
-        },
-        {
-          lng: "119.9756923410",
-          count: 29,
-          lat: "31.7981570711",
-        },
-        {
-          lng: "119.9703940842",
-          count: 5,
-          lat: "31.7794286621",
-        },
-        {
-          lng: "120.1624821421",
-          count: 1,
-          lat: "32.5127508928",
-        },
-        {
-          lng: "120.6731566048",
-          count: 14,
-          lat: "31.3968606941",
-        },
-        {
-          lng: "119.3833957620",
-          count: 1,
-          lat: "32.1769516583",
-        },
-        {
-          lng: "119.5730894162",
-          count: 7,
-          lat: "32.0007946317",
-        },
-        {
-          lng: "118.7738578240",
-          count: 107,
-          lat: "32.0538699053",
-        },
-        {
-          lng: "118.7814440148",
-          count: 23,
-          lat: "32.0480943146",
-        },
-        {
-          lng: "118.7919567436",
-          count: 168,
-          lat: "32.0742364655",
-        },
-        {
-          lng: "118.8138918411",
-          count: 161,
-          lat: "32.0467820683",
-        },
-        {
-          lng: "118.7897266259",
-          count: 2,
-          lat: "32.0611620741",
-        },
-        {
-          lng: "119.9672534443",
-          count: 224,
-          lat: "31.7854570297",
-        },
-        {
-          lng: "119.0253961294",
-          count: 1,
-          lat: "33.6314234546",
-        },
-        {
-          lng: "120.5904723397",
-          count: 99,
-          lat: "31.3022665027",
-        },
-        {
-          lng: "119.9245343735",
-          count: 1,
-          lat: "32.4901981820",
-        },
-        {
-          lng: "120.2747533704",
-          count: 4,
-          lat: "31.5735023182",
-        },
-        {
-          lng: "120.6550203648",
-          count: 9,
-          lat: "31.1654613137",
-        },
-        {
-          lng: "120.1259083620",
-          count: 21,
-          lat: "33.3893210656",
-        },
-        {
-          lng: "119.4594542549",
-          count: 62,
-          lat: "32.3999936608",
-        },
-        {
-          lng: "119.4379155733",
-          count: 269,
-          lat: "32.3911527622",
-        },
-        {
-          lng: "119.4251171965",
-          count: 28,
-          lat: "32.3999721462",
-        },
-        {
-          lng: "119.8254738628",
-          count: 5,
-          lat: "31.3667648590",
-        },
-        {
-          lng: "119.4519445024",
-          count: 11,
-          lat: "32.2119068447",
-        },
-        {
-          lng: "120.3286830789",
-          count: 39,
-          lat: "31.5458025532",
-        },
-        {
-          lng: "118.7908022371",
-          count: 8,
-          lat: "32.0240585088",
-        },
-        {
-          lng: "118.7759598782",
-          count: 14,
-          lat: "32.0944108629",
-        },
-        {
-          lng: "118.8011767341",
-          count: 11,
-          lat: "32.0403197058",
-        },
-        {
-          lng: "120.6116028870",
-          count: 318,
-          lat: "31.3503219426",
-        },
-        {
-          lng: "119.4598045024",
-          count: 21,
-          lat: "32.2182968447",
-        },
-        {
-          lng: "120.4657245136",
-          count: 26,
-          lat: "32.5482838088",
-        },
-        {
-          lng: "120.7552214006",
-          count: 35,
-          lat: "32.1084861085",
-        },
-        {
-          lng: "120.3026416422",
-          count: 12,
-          lat: "31.5975488534",
-        },
-        {
-          lng: "119.7480017385",
-          count: 12,
-          lat: "32.2221327938",
-        },
-        {
-          lng: "120.9165782769",
-          count: 3,
-          lat: "31.9444558626",
-        },
-        {
-          lng: "120.1676485296",
-          count: 6,
-          lat: "33.3462783072",
-        },
-        {
-          lng: "121.6672569389",
-          count: 1,
-          lat: "31.8188279070",
-        },
-        {
-          lng: "117.2746159238",
-          count: 10,
-          lat: "31.8518470265",
-        },
-        {
-          lng: "117.2972780938",
-          count: 19,
-          lat: "31.8635287419",
-        },
-        {
-          lng: "117.2008478286",
-          count: 12,
-          lat: "34.2466644754",
-        },
-        {
-          lng: "120.4137557858",
-          count: 9,
-          lat: "31.3544255910",
-        },
-        {
-          lng: "117.2540549441",
-          count: 4,
-          lat: "31.8584800335",
-        },
-        {
-          lng: "119.9505910586",
-          count: 45,
-          lat: "31.7856270488",
-        },
-        {
-          lng: "120.6410150449",
-          count: 786,
-          lat: "31.3085366323",
-        },
-        {
-          count: 33,
-        },
-        {
-          count: 1,
-        },
-        {
-          count: 9,
-        },
-        {
-          count: 2,
-        },
-        {
-          count: 4,
-        },
-        {
-          count: 3,
-        },
-        {
-          count: 2,
-        },
-        {
-          count: 5,
-        },
-      ],
-      shopList: [
-        { id: 1, name: "南京德众堂大药房", money: "134200" },
-        { id: 2, name: "南京德众堂大药房", money: "134200" },
-        { id: 3, name: "南京德众堂大药房", money: "134200" },
-        { id: 4, name: "南京德众堂大药房", money: "134200" },
-        { id: 5, name: "南京德众堂大药房", money: "134200" },
-        { id: 6, name: "南京德众堂大药房", money: "134200" },
-        { id: 7, name: "南京德众堂大药房", money: "134200" },
-        { id: 8, name: "南京德众堂大药房", money: "134200" },
-        { id: 9, name: "南京德众堂大药房", money: "134200" },
-        { id: 10, name: "南京德众堂大药房", money: "134200" },
-      ],
+      dateActive: "1",
+      salesPriceInfo: {},
+      salesPriceData: {
+        medicineId: "",
+      },
+      dotInfo: {},
+      dotData: {
+        medicineId: "",
+      },
+      salesNumInfo: {},
+      salesNumData: {
+        medicineId: "",
+      },
+      salesInfo: {},
+      salesInfoData: {
+        medicineId: "",
+      },
+      options: [],
+      shopSaleList: [],
+      medicine1Data: [],
+      medicine2Data: [],
+      salesCompletionRate: {}
     };
   },
-  mounted() {
-    this.dealHearMap();
+  created() {
+    this.queryDot();
+    this.querySalesPrice();
+    this.querySalesNum();
+    this.querySalesInfo();
+    this.getHearMap();
+    this.queryShopSale();
+    this.querySalesCompletionRate();
+    this.queryMonthSalesPrice();
   },
-  created() {},
   methods: {
-    handleSetLineChartData(type) {
-      this.lineChartData = lineChartData[type];
+    // 切换年季月日
+    handleClick(tab, event) {
+      this.queryDot();
+      this.querySalesPrice();
+      this.querySalesNum();
+      setTimeout(() => {
+        this.querySalesInfo();
+      }, 1000);
+      this.getHearMap();
+      this.queryShopSale();
+    },
+    // 查患者数
+    querySalesInfo() {
+      querySalesInfo({
+        queryType: this.dateActive,
+        medicineId: this.salesInfoData.medicineId,
+      }).then((res) => {
+        if (res.code == 0) {
+          this.salesInfo = res.data[0];
+        }
+      });
+    },
+    // 查销售额
+    querySalesPrice() {
+      querySalesPrice({
+        queryType: this.dateActive,
+        medicineId: this.salesPriceData.medicineId,
+      }).then((res) => {
+        if (res.code == 0) {
+          this.salesPriceInfo = res.data[0];
+        }
+      });
+    },
+    // 查销售数量
+    querySalesNum() {
+      querySalesNum({
+        queryType: this.dateActive,
+        medicineId: this.salesNumData.medicineId,
+      }).then((res) => {
+        if (res.code == 0) {
+          this.salesNumInfo = res.data[0];
+        }
+      });
+    },
+    // 查DOT
+    queryDot() {
+      queryDot({
+        queryType: this.dateActive,
+        medicineId: this.dotData.medicineId,
+      }).then((res) => {
+        if (res.code == 0) {
+          this.dotInfo = res.data[0];
+        }
+      });
+    },
+    // 切换规格
+    getClick1(item) {
+      this.salesPriceData.medicineId = item;
+      this.querySalesPrice();
+    },
+    getClick2(item) {
+      this.salesNumData.medicineId = item;
+      this.querySalesNum();
+    },
+    getClick3(item) {
+      this.dotData.medicineId = item;
+      this.queryDot();
+    },
+    getClick4(item) {
+      console.log("cpnclick", item);
+    },
+    // 热力图
+    getHearMap() {
+      queryCustomerHotInfo({
+        queryType: this.dateActive,
+      }).then((res) => {
+        if (res.code == 0) {
+          res.data.forEach((item) => {
+            item.count = item.customerNum;
+          });
+          this.options = res.data;
+          this.dealHearMap();
+        }
+      });
     },
     dealHearMap() {
       BMap = window.BMap;
       map = new BMap.Map("map");
-      heatmapOverlay = new BMapLib.HeatmapOverlay({"radius": 20,'minOpacity':0.2})
+      heatmapOverlay = new BMapLib.HeatmapOverlay({
+        radius: 20,
+        minOpacity: 0.2,
+      });
       var point = new BMap.Point(119.208435, 32.02404);
       map.centerAndZoom(point, 8); // 初始化地图，设置中心点坐标和地图级别
       map.enableScrollWheelZoom(); // 允许滚轮缩放
@@ -538,14 +287,119 @@ export default {
           },
         ],
       });
-      heatmapOverlay = new BMapLib.HeatmapOverlay({"radius": 20,'minOpacity':0.2});
+      heatmapOverlay = new BMapLib.HeatmapOverlay({
+        radius: 20,
+        minOpacity: 0.2,
+      });
       map.addOverlay(heatmapOverlay);
       var maxNum = _.max(
         this.options.map(function (v) {
-          return v.count;
+          return v.customerNum;
         })
       );
       heatmapOverlay.setDataSet({ data: this.options, max: maxNum });
+    },
+    // 销售预估完成率和年度完成率
+    querySalesCompletionRate() {
+      querySalesCompletionRate({
+        queryType: this.dateActive,
+      }).then((res) => {
+        if (res.code == 0) {
+          this.salesCompletionRate = res.data
+          this.pieChart1()
+          this.pieChart2()
+        }
+      });
+    },
+    // 每月销售柱状图
+    queryMonthSalesPrice() {
+      queryMonthSalesPrice({
+        queryType: this.dateActive,
+      }).then((res) => {
+        if (res.code == 0) {
+          let arr1 = [];
+          let arr2 = [];
+          res.data.monthSalesNum160.forEach((item) => {
+            arr1.push(item.salesNum);
+          });
+          res.data.monthSalesNum357.forEach((item) => {
+            arr2.push(item.salesNum);
+          });
+          this.medicine1Data = arr1;
+          this.medicine2Data = arr2;
+        }
+      });
+    },
+    // 完成率
+    pieChart1() {
+      const chart = echarts.init(document.getElementById("pieChart1"), 'macarons')
+      chart.setOption({
+        tooltip: {
+          trigger: 'item'
+        },
+        series: [
+          {
+            name: '预估金额: ' + this.salesCompletionRate.salesPrice,
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+              show: false,
+              position: 'center'
+            },
+            labelLine: {
+              show: false
+            },
+            data: [
+              { value: this.salesCompletionRate.salesPrice - this.salesCompletionRate.estimateTotalMetrics, name: '未完成金额' },
+              { value: this.salesCompletionRate.estimateTotalMetrics, name: '完成金额' }
+            ]
+          }
+        ]
+      })
+    },
+    pieChart2() {
+      let chart = echarts.init(document.getElementById('pieChart2'), 'macarons')
+      chart.setOption({
+        tooltip: {
+          trigger: 'item'
+        },
+        series: [
+          {
+            name: '年度金额: ' + this.salesCompletionRate.salesPrice,
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+              show: false,
+              position: 'center'
+            },
+            labelLine: {
+              show: false
+            },
+            data: [
+              { value: this.salesCompletionRate.salesPrice - this.salesCompletionRate.totalYearMetrics, name: '未完成金额' },
+              { value: this.salesCompletionRate.totalYearMetrics, name: '完成金额' }
+            ]
+          }
+        ]
+      })
+    },
+    // 门店排行榜
+    queryShopSale() {
+      queryShopSale({
+        queryType: this.dateActive,
+      }).then((res) => {
+        if (res.code == 0) {
+          let arr = [];
+          res.data.forEach((item, index) => {
+            if (index < 10) {
+              arr.push(item);
+            }
+          });
+          this.shopSaleList = arr;
+        }
+      });
     },
   },
 };
@@ -640,6 +494,9 @@ export default {
         }
         .secondPb {
           width: 45%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         .thirdPb {
           width: 30%;
@@ -660,6 +517,7 @@ export default {
     background-color: #fff;
     padding: 16px;
     box-sizing: border-box;
+    height: 418px;
   }
   .chart-wrapper {
     background: #fff;
@@ -677,7 +535,7 @@ export default {
   }
   .mapBox {
     padding: 10px;
-    height: calc(100% - 40px); 
+    height: calc(100% - 40px);
     background: #fff;
   }
 }
