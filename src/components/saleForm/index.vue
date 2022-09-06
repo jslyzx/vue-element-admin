@@ -98,7 +98,9 @@ export default {
   props: {
     ruleForm: {
       type: Object,
-      default: () => {}
+      default: {
+        queryType: 1
+      }
     },
     utilsShow: {
       default: ''
@@ -206,15 +208,6 @@ export default {
    
     submitForm() {
       let form=JSON.parse(JSON.stringify(this.ruleForm));
-      delete form.queryType;
-      form.provinceId=form.provinceId*1;
-      form.queryType=form.queryType*1;
-      form.regionId=form.regionId*1;
-      form.sectionId=form.sectionId*1;
-      form.shopId=form.shopId*1;
-      form.year=form.year*1;
-      form.startMonth=form.startMonth*1;
-      form.endMonth=form.endMonth*1;
       this.$emit("changeForm",form)
     },
     resetForm() {
@@ -252,6 +245,7 @@ export default {
         text-align: center;
         vertical-align: center;
         line-height: 27.05px;
+        cursor: pointer;
       }
     }
 
