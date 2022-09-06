@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <saleForm @queryProvinceSalePrice="queryProvinceSalePrice" :ruleForm="ruleForm" />
+      <saleForm @queryProvinceSalePrice="queryProvinceSalePrice" :ruleForm="ruleForm" @changeForm="changeForm" />
       <div class="chartBox">
         <div class="display">
           <el-card class="s_box">
@@ -20,9 +20,9 @@
                 </div>
               </div>
               <div class="bottomBox">
-                <!-- <div v-show="tabIndex == ''"> -->
                   <div class="price">
-                    {{topData.salesPrice[0].currSalePrice||''}}
+                    <!-- {{topData}} -->
+                    {{topData.salesPrice?topData.salesPrice[0].currSalePrice:''}}
                   </div>
                   <div class="compare">
                     <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span
@@ -30,7 +30,6 @@
                     <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
                         style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
                   </div>
-                <!-- </div> -->
               </div>
             </div>
           </el-card>
@@ -42,7 +41,7 @@
                   <span style="margin-left:9px"><i class="el-icon-warning-outline" /></span>
                 </div>
                 <div>
-                  <el-tabs v-model="tabIndex2" @tab-click="handleClick">
+                  <el-tabs v-model="tabIndex2" @tab-click="handleClick2">
                     <el-tab-pane label="全部" name="" />
                     <el-tab-pane label="规格一" name="160" />
                     <el-tab-pane label="规格二" name="357" />
@@ -51,9 +50,8 @@
 
               </div>
               <div class="bottomBox">
-                <!-- <div v-show="tabIndex2 == ''"> -->
                   <div class="price">
-                    {{topData.salesNum[0].currSaleNum||''}}
+                    {{topData.salesNum?topData.salesNum[0].currSaleNum:''}}
                   </div>
                   <div class="compare">
                     <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span
@@ -61,7 +59,6 @@
                     <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
                         style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
                   </div>
-                <!-- </div> -->
               </div>
             </div>
           </el-card>
@@ -73,8 +70,8 @@
                   <span style="margin-left:9px"><i class="el-icon-warning-outline" /></span>
                 </div>
                 <div>
-                  <el-tabs v-model="tabIndex3" @tab-click="handleClick">
-                    <el-tab-pane label="全部" name="total" />
+                  <el-tabs v-model="tabIndex3" @tab-click="handleClick3">
+                    <el-tab-pane label="全部" name="" />
                     <el-tab-pane label="规格一" name="160" />
                     <el-tab-pane label="规格二" name="357" />
                   </el-tabs>
@@ -82,9 +79,8 @@
 
               </div>
               <div class="bottomBox">
-                <!-- <div v-show="tabIndex3 == ''"> -->
                   <div class="price">
-                   {{customerSalesPrice[0].currSalePrice||''}}
+                   {{topData.oldCustomerSalesPrice?topData.oldCustomerSalesPrice[0].currSalePrice:''}}
                   </div>
                   <div class="compare">
                     <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span
@@ -92,7 +88,6 @@
                     <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
                         style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
                   </div>
-                <!-- </div> -->
               </div>
             </div>
           </el-card>
@@ -104,7 +99,7 @@
                   <span style="margin-left:9px"><i class="el-icon-warning-outline" /></span>
                 </div>
                 <div>
-                  <el-tabs v-model="tabIndex4" @tab-click="handleClick">
+                  <el-tabs v-model="tabIndex4" @tab-click="handleClick4">
                     <el-tab-pane label="全部" name="" />
                     <el-tab-pane label="规格一" name="160" />
                     <el-tab-pane label="规格二" name="357" />
@@ -113,9 +108,8 @@
 
               </div>
               <div class="bottomBox">
-                <!-- <div v-show="tabIndex4 == ''"> -->
                   <div class="price">
-                    1,438,900
+                    {{topData.customerSalesPrice?topData.customerSalesPrice[0].currSalePrice:''}}
                   </div>
                   <div class="compare">
                     <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span
@@ -123,7 +117,6 @@
                     <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
                         style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
                   </div>
-                <!-- </div> -->
               </div>
             </div>
           </el-card>
@@ -171,7 +164,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -247,28 +239,48 @@ export default {
       }, 0)
     }
   },
+  created(){
+    this.submitTop1('');
+  },
   mounted() {
     this.initCharts()
     this.initCharts2()
     this.initCharts3()
     this.initCharts4()
     this.queryProvinceSalePrice({
-      queryType:this.ruleForm.time*1,
+      queryType:this.ruleForm.queryType*1,
     })
-    this.submitTop1();
   },
   methods: {
-    async submitTop1(){
-      // debugger;
-      // console.log(this.ruleForm);
-      let res=await submitTop({queryType:2,medicineId:357});
+    changeForm(form){
+      console.log(form);
+      form.provinceId=form.provinceId*1;
+      form.queryType=form.queryType*1;
+      form.regionId=form.regionId*1;
+      form.sectionId=form.sectionId*1;
+      form.shopId=form.shopId*1;
+      form.year=form.year*1;
+      this.queryProvinceSalePrice(form);
+    },
+    async submitTop1(id){
+      let res=await submitTop({queryType:this.ruleForm.queryType*1,medicineId:id});
       if(res.code==0){
         console.log(res);
         this.topData=res.data;
       }
     },
-    handleClick() {
+    async handleClick(tab) {
+      this.submitTop1(this.tabIndex*1);
+    },
+    handleClick2(tab) {
+      this.submitTop1(this.tabIndex2*1);
+    },
+    handleClick3(tab) {
+      this.submitTop1(this.tabIndex3*1);
 
+    },
+    handleClick4(tab) {
+      this.submitTop1(this.tabIndex4*1);
     },
     initCharts() {
       const charts1 = echarts.init(this.$refs['chartBox'])
@@ -300,7 +312,7 @@ export default {
             name: '规格一',
             barWidth: '17',
             itemStyle: {
-              color: '#3AA0FFFF'
+              color: '#3AA0FF'
             }
           },
           {
@@ -309,7 +321,7 @@ export default {
             name: '规格二',
             barWidth: '17',
             itemStyle: {
-              color: '#00BAADFF'
+              color: '#00BAAD'
             }
           }
         ],
