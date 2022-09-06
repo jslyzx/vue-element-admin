@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <saleForm :rule-form="ruleForm" />
+      <saleForm @queryProvinceSalePrice="queryProvinceSalePrice" :ruleForm="ruleForm" />
       <div class="chartBox">
         <div class="display">
           <el-card class="s_box">
@@ -13,17 +13,16 @@
                 </div>
                 <div>
                   <el-tabs v-model="tabIndex" @tab-click="handleClick">
-                    <el-tab-pane label="全部" name="total" />
-                    <el-tab-pane label="规格一" name="first" />
-                    <el-tab-pane label="规格二" name="second" />
+                    <el-tab-pane label="全部" name="" />
+                    <el-tab-pane label="规格一" name="160" />
+                    <el-tab-pane label="规格二" name="357" />
                   </el-tabs>
                 </div>
-
               </div>
               <div class="bottomBox">
-                <div v-show="tabIndex == 'total'">
+                <!-- <div v-show="tabIndex == ''"> -->
                   <div class="price">
-                    1,438,900
+                    {{topData.salesPrice[0].currSalePrice||''}}
                   </div>
                   <div class="compare">
                     <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span
@@ -31,7 +30,7 @@
                     <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
                         style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
                   </div>
-                </div>
+                <!-- </div> -->
               </div>
             </div>
           </el-card>
@@ -44,17 +43,17 @@
                 </div>
                 <div>
                   <el-tabs v-model="tabIndex2" @tab-click="handleClick">
-                    <el-tab-pane label="全部" name="total" />
-                    <el-tab-pane label="规格一" name="first" />
-                    <el-tab-pane label="规格二" name="second" />
+                    <el-tab-pane label="全部" name="" />
+                    <el-tab-pane label="规格一" name="160" />
+                    <el-tab-pane label="规格二" name="357" />
                   </el-tabs>
                 </div>
 
               </div>
               <div class="bottomBox">
-                <div v-show="tabIndex2 == 'total'">
+                <!-- <div v-show="tabIndex2 == ''"> -->
                   <div class="price">
-                    1,438,900
+                    {{topData.salesNum[0].currSaleNum||''}}
                   </div>
                   <div class="compare">
                     <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span
@@ -62,7 +61,7 @@
                     <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
                         style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
                   </div>
-                </div>
+                <!-- </div> -->
               </div>
             </div>
           </el-card>
@@ -76,16 +75,16 @@
                 <div>
                   <el-tabs v-model="tabIndex3" @tab-click="handleClick">
                     <el-tab-pane label="全部" name="total" />
-                    <el-tab-pane label="规格一" name="first" />
-                    <el-tab-pane label="规格二" name="second" />
+                    <el-tab-pane label="规格一" name="160" />
+                    <el-tab-pane label="规格二" name="357" />
                   </el-tabs>
                 </div>
 
               </div>
               <div class="bottomBox">
-                <div v-show="tabIndex3 == 'total'">
+                <!-- <div v-show="tabIndex3 == ''"> -->
                   <div class="price">
-                    1,438,900
+                   {{customerSalesPrice[0].currSalePrice||''}}
                   </div>
                   <div class="compare">
                     <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span
@@ -93,8 +92,7 @@
                     <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
                         style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
                   </div>
-                </div>
-
+                <!-- </div> -->
               </div>
             </div>
           </el-card>
@@ -107,15 +105,15 @@
                 </div>
                 <div>
                   <el-tabs v-model="tabIndex4" @tab-click="handleClick">
-                    <el-tab-pane label="全部" name="total" />
-                    <el-tab-pane label="规格一" name="first" />
-                    <el-tab-pane label="规格二" name="second" />
+                    <el-tab-pane label="全部" name="" />
+                    <el-tab-pane label="规格一" name="160" />
+                    <el-tab-pane label="规格二" name="357" />
                   </el-tabs>
                 </div>
 
               </div>
               <div class="bottomBox">
-                <div v-show="tabIndex4 == 'total'">
+                <!-- <div v-show="tabIndex4 == ''"> -->
                   <div class="price">
                     1,438,900
                   </div>
@@ -125,7 +123,7 @@
                     <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
                         style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
                   </div>
-                </div>
+                <!-- </div> -->
               </div>
             </div>
           </el-card>
@@ -182,6 +180,7 @@
 
 <script>
 import saleForm from '@/components/saleForm'
+import {queryProvinceSalePriceRate,submitTop} from "@/api/sales"
 import * as echarts from 'echarts'
 require("echarts/theme/macarons"); // echarts theme
 export default {
@@ -192,29 +191,21 @@ export default {
   data() {
     return {
       ruleForm: {
-        time: 'year',
+        queryType: '1',
         year: '',
         startMonth: '',
         endMonth: '',
-        goods: '',
-        bigArea: '',
-        middleArea: '',
-        provienceArea: '',
-        shop: ''
+        productId: 127,
+        regionId: '',
+        sectionId: '',
+        provinceId: '',
+        shopId: ''
       },
-      tabIndex: 'total',
-      tabIndex2: 'total',
-      tabIndex3: 'total',
-      tabIndex4: 'total',
+      tabIndex: '',
+      tabIndex2: '',
+      tabIndex3: '',
+      tabIndex4: '',
       chartsData1: [
-        { value: 10, name: '浙江省' },
-        { value: 10, name: '江苏省' },
-        { value: 10, name: '海南省' },
-        { value: 10, name: '安徽省' },
-        { value: 10, name: '云南省' },
-        { value: 10, name: '河南省' },
-        { value: 10, name: '四川省' },
-        { value: 10, name: '贵州省' }
       ],
       chartsData2: [
         { value: 10, name: '大区一' },
@@ -229,7 +220,8 @@ export default {
         { value: 10, name: '片区三' },
         { value: 10, name: '片区四' },
         { value: 10, name: '片区五' }
-      ]
+      ],
+      topData:{},
     }
   },
   computed: {
@@ -260,8 +252,21 @@ export default {
     this.initCharts2()
     this.initCharts3()
     this.initCharts4()
+    this.queryProvinceSalePrice({
+      queryType:this.ruleForm.time*1,
+    })
+    this.submitTop1();
   },
   methods: {
+    async submitTop1(){
+      // debugger;
+      // console.log(this.ruleForm);
+      let res=await submitTop({queryType:2,medicineId:357});
+      if(res.code==0){
+        console.log(res);
+        this.topData=res.data;
+      }
+    },
     handleClick() {
 
     },
@@ -322,19 +327,17 @@ export default {
           trigger: 'item',
           formatter: '销售金额{c}万<br />销售占比{d}'
         },
-        // color: ['#2A58C7FF', '#3AA0FFFF', '#FF8D1AFF', '#D43030FF', '#00BAADFF', '#FFC300FF', '#A5D63FFF', '#AC33C1FF'],
+        color: ['#2A58C7', '#3AA0FF', '#FF8D1A', '#D43030', '#00BAAD', '#FFC300', '#A5D63FFF', '#AC33C1FF'],
         legend: [{
           bottom: '50px',
-          left: '35px',
+          left: '65px',
           formatter: function (name) {
-            if (name == '浙江省') {
-              return `${name}   ${(that.chartsData1[0].value / that.countSum) * 100}%`
-            } else if (name == '海南省') {
-              return `${name}   ${(that.chartsData1[2].value / that.countSum) * 100}%`
-            } else if (name == '云南省') {
-              return `${name}   ${(that.chartsData1[4].value / that.countSum) * 100}%`
-            } else if (name == '四川省') {
-              return `${name}   ${(that.chartsData1[6].value / that.countSum) * 100}%`
+            if (name == '江苏省') {
+              return `${name}   ${that.chartsData1[0].rate}%`
+            } else if (name == '安徽省') {
+              return `${name}   ${that.chartsData1[1].rate}%`
+            } else if (name == '广东省') {
+              return `${name}   ${that.chartsData1[2].rate}%`
             }
           },
           orient: 'vertical',
@@ -345,65 +348,67 @@ export default {
           x: 'left',
           itemHeight: 12,
           itemWidth: 12,
-          data: [
-            {
-              name: '浙江省',
-              icon: 'rect'
-            },
-            {
-              name: '海南省',
-              icon: 'rect'
-            },
-            {
-              name: '云南省',
-              icon: 'rect'
-            },
-            {
-              name: '四川省',
-              icon: 'rect'
-            }
-          ]
-        }, {
-          bottom: '50px',
-          formatter: function (name) {
-            if (name == '江苏省') {
-              return `${name}   ${(that.chartsData1[1].value / that.countSum) * 100}%`
-            } else if (name == '安徽省') {
-              return `${name}   ${(that.chartsData1[3].value / that.countSum) * 100}%`
-            } else if (name == '河南省') {
-              return `${name}   ${(that.chartsData1[5].value / that.countSum) * 100}%`
-            } else if (name == '贵州省') {
-              return `${name}   ${(that.chartsData1[7].value / that.countSum) * 100}%`
-            }
-          },
-          left: '175px',
-          orient: 'vertical',
-          itemHeight: 12,
-          padding: [20, 30],
-          textStyle: {
-            fontSize: '20px'
-          },
-          itemWidth: 12,
-          data: [
-            {
-              name: '江苏省',
-              icon: 'rect'
-            },
-            {
-              name: '安徽省',
-              icon: 'rect'
-            },
-            {
-              name: '河南省',
-              icon: 'rect'
-            },
-            {
-              name: '贵州省',
-              icon: 'rect'
-            }
+          // data: [
+          //   {
+          //     name: '浙江省',
+          //     icon: 'rect'
+          //   },
+          //   {
+          //     name: '海南省',
+          //     icon: 'rect'
+          //   },
+          //   {
+          //     name: '云南省',
+          //     icon: 'rect'
+          //   },
+          //   {
+          //     name: '四川省',
+          //     icon: 'rect'
+          //   }
+          // ]
+        }, 
+        // {
+        //   bottom: '50px',
+        //   formatter: function (name) {
+        //     if (name == '江苏省') {
+        //       return `${name}   ${(that.chartsData1[1].value / that.countSum) * 100}%`
+        //     } else if (name == '安徽省') {
+        //       return `${name}   ${(that.chartsData1[3].value / that.countSum) * 100}%`
+        //     } else if (name == '河南省') {
+        //       return `${name}   ${(that.chartsData1[5].value / that.countSum) * 100}%`
+        //     } else if (name == '贵州省') {
+        //       return `${name}   ${(that.chartsData1[7].value / that.countSum) * 100}%`
+        //     }
+        //   },
+        //   left: '175px',
+        //   orient: 'vertical',
+        //   itemHeight: 12,
+        //   padding: [20, 30],
+        //   textStyle: {
+        //     fontSize: '20px'
+        //   },
+        //   itemWidth: 12,
+        //   data: [
+        //     {
+        //       name: '江苏省',
+        //       icon: 'rect'
+        //     },
+        //     {
+        //       name: '安徽省',
+        //       icon: 'rect'
+        //     },
+        //     {
+        //       name: '河南省',
+        //       icon: 'rect'
+        //     },
+        //     {
+        //       name: '贵州省',
+        //       icon: 'rect'
+        //     }
 
-          ]
-        }],
+        //   ]
+        // }
+      ],
         series: [
           {
             name: 'Access From',
@@ -414,11 +419,16 @@ export default {
             avoidLabelOverlap: false,
             label: {
               show: true,
-              position: 'inner',
+              position: 'inside',
               // color: '#fff',
               fontSize: 14,
               formatter: '{b}\n{d}%'
             },
+            labelLine:{
+              show:true,
+            },
+            minAngle:5,
+            minShowLabelAngle:10,
             data: this.chartsData1,
             itemStyle: {
               emphasis: {
@@ -614,6 +624,22 @@ export default {
         ]
 
       })
+    },
+    async queryProvinceSalePrice(query){
+      // debugger;
+    let res=await queryProvinceSalePriceRate(query);
+    // console.log(res);
+    if(res.code==0){
+      this.chartsData1=res.data.provinceSalePriceRate.map((item,index)=>{
+        return{name:item.province,value:item.salesPrice,rate:item.salePriceRate}
+      });
+      // console.log(this.chartsData1);
+    }
+    }
+  },
+  watch:{
+    chartsData1(){
+      this.initCharts2();
     }
   }
 }
