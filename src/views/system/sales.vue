@@ -8,6 +8,11 @@
           {{ scope.row.name }}
         </template>
       </el-table-column>
+      <el-table-column align="center" label="性别" width="220">
+        <template slot-scope="scope">
+          {{ scope.row.gender }}
+        </template>
+      </el-table-column>
       <el-table-column align="center" label="电话" width="220">
         <template slot-scope="scope">
           {{ scope.row.phone }}
@@ -27,29 +32,63 @@
         <el-form-item label="名称">
           <el-input v-model="sale.name" placeholder="名称" />
         </el-form-item>
+        <el-form-item label="gender">
+          <el-input v-model="sale.gender" placeholder="性别" />
+        </el-form-item>
         <el-form-item label="电话">
           <el-input v-model="sale.phone" placeholder="电话" />
         </el-form-item>
         <el-form-item label="所属大区">
-          <el-input v-model="sale.name" placeholder="名称" />
+          <el-select v-model="sale.regionId" filterable placeholder="请选择" @change="onSelectRegion">
+            <el-option
+              v-for="item in regionList"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="所属片区">
+          <el-select v-model="sale.sectionId" filterable placeholder="请选择" @change="onSelectSection">
+            <el-option
+              v-for="item in sectionList"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="所属省份">
+          <el-select v-model="sale.provinceId" filterable placeholder="请选择">
+            <el-option
+              v-for="item in provinceList"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id">
+            </el-option>
+          </el-select>
         </el-form-item>
       </el-form>
       <div style="text-align:right;">
-        <el-button type="danger" @click="dialogVisible=false">取消</el-button>
-        <el-button type="primary" @click="confirmUser">确认</el-button>
+        <el-button type="danger" @click="dialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="confirmSale">确认</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { fetchSaleList } from '@/api/system'
+import { fetchSaleList, fetchAreaSubList, saveSale, deleteSale } from '@/api/system'
 import Pagination from '@/components/Pagination'
 
 const defaultSale = {
   id: '',
   name: '',
-  phone: ''
+  gender: '',
+  phone: '',
+  regionId: '',
+  sectionId: '',
+  provinceId: ''
 }
 
 export default {
@@ -64,16 +103,32 @@ export default {
       listQuery: {
         page: 1,
         pageSize: 10
-      }
+      },
+      regionList: [],
+      sectionList: [],
+      provinceList: []
     }
   },
   created() {
     this.getSales()
+    this.getRegionList()
   },
   methods: {
     async getSales() {
       const res = await fetchSaleList(this.listQuery)
       this.salesList = res.data.data
+    },
+    async getRegionList() {
+      const res = await fetchAreaSubList({pId: 1})
+      this.regionList = res.data
+    },
+    async getSectionList(pId) {
+      const res = await fetchAreaSubList({pId: pId})
+      this.sectionList = res.data
+    },
+    async getProvinceList(pId) {
+      const res = await fetchAreaSubList({pId: pId})
+      this.provinceList = res.data
     },
     handleAdd() {
       this.sale = Object.assign({}, defaultSale)
@@ -86,39 +141,47 @@ export default {
       this.dialogVisible = true
     },
     handleDelete({ $index, row }) {
-      this.$confirm('Confirm to remove the role?', 'Warning', {
-        confirmButtonText: 'Confirm',
-        cancelButtonText: 'Cancel',
+      this.$confirm('确定删除?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
         type: 'warning'
       })
         .then(async() => {
-          this.$message({
-            type: 'success',
-            message: 'Delete succed!'
+          deleteSale({id: row.id})
+          .then(() => {
+            this.$notify({
+              title: '成功',
+              message: '删除业务员成功',
+              type: 'success',
+              duration: 5000
+            })
+            this.getSales()
+          })
+          .catch(() => {
           })
         })
         .catch(err => { console.error(err) })
     },
-    async confirmUser() {
-      const isEdit = this.dialogType === 'edit'
-
-      if (isEdit) {
-
-      } else {
-
-      }
-
-      const { username, nickname } = this.user
-      this.dialogVisible = false
-      this.$notify({
-        title: 'Success',
-        dangerouslyUseHTMLString: true,
-        message: `
-            <div>username: ${username}</div>
-            <div>nickname: ${nickname}</div>
-          `,
-        type: 'success'
+    async confirmSale() {
+      saveSale(this.sale)
+      .then(() => {
+        this.$notify({
+          title: '成功',
+          message: '维护业务员信息成功',
+          type: 'success',
+          duration: 5000
+        })
+        this.dialogVisible = false
+        this.getSales()
       })
+      .catch(() => {
+      })
+    },
+    onSelectRegion(){
+      this.getSectionList(this.sale.regionId)
+    },
+    onSelectSection(){
+      this.getProvinceList(this.sale.sectionId)
     }
   }
 }

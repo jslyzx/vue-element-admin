@@ -30,3 +30,26 @@ export function fetchSaleList(data) {
   })
 }
 
+export function fetchAreaSubList(data) {
+  return request({
+    url: '/api/admin/area/query',
+    method: 'get',
+    params: data
+  })
+}
+
+export function saveSale(data) {
+  return request({
+    url: '/api/admin/salesman/save',
+    method: 'post',
+    data
+  })
+}
+
+export function deleteSale(data) {
+  return request({
+    url: '/api/admin/salesman/delete_physical',
+    method: 'delete',
+    params: data
+  })
+}
