@@ -31,3 +31,11 @@ export function getUsers(data) {
     params: data
   })
 }
+
+export function deleteUser(data) {
+  return request({
+    url: '/api/admin/user/delete_physical',
+    method: 'delete',
+    params: data
+  })
+}

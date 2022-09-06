@@ -53,3 +53,35 @@ export function deleteSale(data) {
     params: data
   })
 }
+
+export function deleteRegion(data) {
+  return request({
+    url: '/api/admin/area/deleteTree',
+    method: 'delete',
+    params: data
+  })
+}
+
+export function fetchShopList(data) {
+  return request({
+    url: '/api/admin/shop/grid',
+    method: 'get',
+    params: data
+  })
+}
+
+export function fetchCityList(data) {
+  return request({
+    url: '/api/admin/division/query',
+    method: 'get',
+    params: data
+  })
+}
+
+export function saveShop(data) {
+  return request({
+    url: '/api/admin/shop/save',
+    method: 'post',
+    data
+  })
+}

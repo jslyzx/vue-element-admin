@@ -11,7 +11,7 @@
         <template slot-scope="scope">
           <el-button v-loading="loading" type="primary" size="small" @click="addNode(scope)" v-if="scope.row.category !== 3">新建子节点</el-button>
           <el-button v-loading="loading" type="primary" size="small" @click="editNode(scope)">编辑</el-button>
-          <el-button v-loading="loading" type="danger" size="small" v-if="scope.row.category !== 0">删除</el-button>
+          <el-button v-loading="loading" type="danger" size="small" v-if="scope.row.category !== 0" @click="handleDelete(scope)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -41,7 +41,7 @@
   </div>
 </template>
 <script>
-import { fetchAreaList, saveRegion, fetchProvList } from '@/api/system'
+import { fetchAreaList, saveRegion, fetchProvList, deleteRegion } from '@/api/system'
 import _ from 'lodash'
 
 const defaultForm = {
@@ -128,6 +128,28 @@ export default {
           return false
         }
       })
+    },
+    handleDelete({ $index, row }) {
+      this.$confirm('确定删除?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(async() => {
+          deleteRegion({id: row.id})
+          .then(() => {
+            this.$notify({
+              title: '成功',
+              message: '删除成功',
+              type: 'success',
+              duration: 5000
+            })
+            this.fetchAreaList()
+          })
+          .catch(() => {
+          })
+        })
+        .catch(err => { console.error(err) })
     },
     addNode(node) {
       this.isProvince = node.row.category === 2
