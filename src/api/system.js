@@ -22,3 +22,11 @@ export function fetchProvList() {
   })
 }
 
+export function fetchSaleList(data) {
+  return request({
+    url: '/api/admin/salesman/grid',
+    method: 'get',
+    params: data
+  })
+}
+
