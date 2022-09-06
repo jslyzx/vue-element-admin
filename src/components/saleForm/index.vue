@@ -16,15 +16,16 @@
         <div class="inputBox">
           <el-form ref="ruleForm" :model="ruleForm" :inline="true" status-icon :rules="rules" label-width="100px">
             <el-form-item label="年份">
-              <el-date-picker v-model="ruleForm.year" value-format="yyyy" type="year" placeholder="选择年" class="selectRegion" />
+              <el-date-picker v-model="ruleForm.year" value-format="yyyy" type="year" placeholder="选择年"
+                class="selectRegion" />
             </el-form-item>
             <el-form-item label="开始月份">
-              <el-date-picker v-model="ruleForm.startMonth" type="month" placeholder="选择开始日期"
-                :picker-options="pickerOptions" value-format="yyyy-MM" class="selectRegion" />
+              <el-date-picker v-model="ruleForm.startMonth" popper-class="monthStyle" type="month" placeholder="选择开始日期"
+                :picker-options="pickerOptions" value-format="MM" class="selectRegion" />
             </el-form-item>
             <el-form-item label="截止月份">
-              <el-date-picker v-model="ruleForm.endMonth" type="month" placeholder="选择结束日期"
-                :picker-options="pickerOptions1" value-format="yyyy-MM" class="selectRegion" />
+              <el-date-picker v-model="ruleForm.endMonth" popper-class="monthStyle" type="month" placeholder="选择结束日期"
+                :picker-options="pickerOptions1" value-format="MM" class="selectRegion" />
             </el-form-item>
             <el-form-item label="商品">
               <!-- <el-cascader v-model="ruleForm.productId" class="selectRegion" :options="options" @change="handleChange" /> -->
@@ -86,6 +87,14 @@ import { queryProvinceSalePriceRate, queryArea,queryShop,submitTop} from "@/api/
 import { emit } from "process"
 export default {
   name: 'SaleForm',
+  // watch: {
+  //     'ruleForm.startMonth'(val) {
+  //       this.ruleForm.startMonth= '2022-' + val;
+  //     },
+  //     'ruleForm.endMonth'(val) {
+  //       this.ruleForm.endtMonth= '2022-' + val;
+  //     }
+  // },
   props: {
     ruleForm: {
       type: Object,
@@ -196,7 +205,17 @@ export default {
     },
    
     submitForm() {
-      this.$emit("changeForm",this.ruleForm)
+      let form=JSON.parse(JSON.stringify(this.ruleForm));
+      delete form.queryType;
+      form.provinceId=form.provinceId*1;
+      form.queryType=form.queryType*1;
+      form.regionId=form.regionId*1;
+      form.sectionId=form.sectionId*1;
+      form.shopId=form.shopId*1;
+      form.year=form.year*1;
+      form.startMonth=form.startMonth*1;
+      form.endMonth=form.endMonth*1;
+      this.$emit("changeForm",form)
     },
     resetForm() {
 
@@ -252,7 +271,15 @@ export default {
     // .selectRegion{
     //     width: 50px;
     // }
+    
   }
 
 }
+</style>
+<style lang="scss">
+  .monthStyle {
+      .el-date-picker__header--bordered {
+        display: none !important;
+      }
+    }
 </style>

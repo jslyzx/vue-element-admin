@@ -172,7 +172,7 @@
 
 <script>
 import saleForm from '@/components/saleForm'
-import {queryProvinceSalePriceRate,submitTop} from "@/api/sales"
+import {queryProvinceSalePriceRate,submitTop,queryShopSale} from "@/api/sales"
 import * as echarts from 'echarts'
 require("echarts/theme/macarons"); // echarts theme
 export default {
@@ -183,7 +183,7 @@ export default {
   data() {
     return {
       ruleForm: {
-        queryType: '1',
+        queryType: 1,
         year: '',
         startMonth: '',
         endMonth: '',
@@ -249,23 +249,18 @@ export default {
     this.initCharts4()
     this.queryProvinceSalePrice({
       queryType:this.ruleForm.queryType*1,
-    })
+    });
   },
   methods: {
-    changeForm(form){
+   async changeForm(form){
       console.log(form);
-      form.provinceId=form.provinceId*1;
-      form.queryType=form.queryType*1;
-      form.regionId=form.regionId*1;
-      form.sectionId=form.sectionId*1;
-      form.shopId=form.shopId*1;
-      form.year=form.year*1;
       this.queryProvinceSalePrice(form);
+      let res=await queryShopSale({year:2022});
+      console.log(res);
     },
     async submitTop1(id){
       let res=await submitTop({queryType:this.ruleForm.queryType*1,medicineId:id});
       if(res.code==0){
-        console.log(res);
         this.topData=res.data;
       }
     },
@@ -638,14 +633,11 @@ export default {
       })
     },
     async queryProvinceSalePrice(query){
-      // debugger;
     let res=await queryProvinceSalePriceRate(query);
-    // console.log(res);
     if(res.code==0){
       this.chartsData1=res.data.provinceSalePriceRate.map((item,index)=>{
         return{name:item.province,value:item.salesPrice,rate:item.salePriceRate}
       });
-      // console.log(this.chartsData1);
     }
     }
   },

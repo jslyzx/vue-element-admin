@@ -31,3 +31,12 @@ export function submitTop(data) {
         params:data,
     })
 }
+
+
+export function queryShopSale(data) {
+    return request({
+        url: `/api/sale/shop/queryShopSaleAnalysis`,
+        method: 'get',
+        params:data,
+    })
+}
