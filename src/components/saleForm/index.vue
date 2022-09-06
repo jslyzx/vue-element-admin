@@ -19,12 +19,12 @@
               <el-date-picker v-model="ruleForm.year" value-format="yyyy" type="year" placeholder="选择年" class="selectRegion" />
             </el-form-item>
             <el-form-item label="开始月份">
-              <el-date-picker v-model="ruleForm.startMonth" type="date" placeholder="选择开始日期"
-                :picker-options="pickerOptions" value-format="yyyy-MM-dd" class="selectRegion" />
+              <el-date-picker v-model="ruleForm.startMonth" type="month" placeholder="选择开始日期"
+                :picker-options="pickerOptions" value-format="yyyy-MM" class="selectRegion" />
             </el-form-item>
             <el-form-item label="截止月份">
-              <el-date-picker v-model="ruleForm.endMonth" type="date" placeholder="选择结束日期"
-                :picker-options="pickerOptions1" value-format="yyyy-MM-dd" class="selectRegion" />
+              <el-date-picker v-model="ruleForm.endMonth" type="month" placeholder="选择结束日期"
+                :picker-options="pickerOptions1" value-format="yyyy-MM" class="selectRegion" />
             </el-form-item>
             <el-form-item label="商品">
               <!-- <el-cascader v-model="ruleForm.productId" class="selectRegion" :options="options" @change="handleChange" /> -->
@@ -195,8 +195,8 @@ export default {
 
     },
    
-    async submitForm() {
-      
+    submitForm() {
+      this.$emit("changeForm",this.ruleForm)
     },
     resetForm() {
 

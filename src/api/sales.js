@@ -28,6 +28,6 @@ export function submitTop(data) {
     return request({
         url: `/api/yearSales/querySalesInfo`,
         method: 'post',
-        data,
+        params:data,
     })
 }
