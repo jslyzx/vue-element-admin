@@ -8,6 +8,20 @@ export function queryProvinceSalePriceRate(data) {
     })
 }
 
+export function queryRegionSale(data) {
+    return request({
+        url: `/api/yearSales/queryRegionSalePriceRate`,
+        method: 'post',
+        data,
+    })
+}
+export function querySectionSale(data) {
+    return request({
+        url: `/api/yearSales/querySectionSalePriceRate`,
+        method: 'post',
+        data,
+    })
+}
 export function queryArea(pId) {
     return request({
         url: `/api/admin/area/query`,
@@ -40,3 +54,4 @@ export function queryShopSale(data) {
         params:data,
     })
 }
+
