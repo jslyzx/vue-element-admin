@@ -138,6 +138,12 @@ export default {
     handleEdit(scope) {
       this.sale = scope.row
       this.dialogType = 'edit'
+      if(scope.row.regionId){
+        this.getSectionList(scope.row.regionId)
+      }
+      if(scope.row.sectionId){
+        this.getProvinceList(scope.row.sectionId)
+      }
       this.dialogVisible = true
     },
     handleDelete({ $index, row }) {

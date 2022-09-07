@@ -1,0 +1,3 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18" viewBox="0 0 18 18" fill="none"><defs><path id="path_0"
+        transform="translate(0 0) rotate(0 9 9)"
+        d="M0,18L18,18L18,0L0,0L0,18Z" /></defs><g opacity="1" transform="translate(0 0)  rotate(0 9 9)"><mask id="mask-0" fill="white"><use xlink:href="#path_0"></use></mask><g mask="url(#mask-0)"></g><g mask="url(#mask-0)"><path id="vector" fill-rule="evenodd" style="fill:#BFCBD9" transform="translate(2.25 2.25)  rotate(0 6.75 6.75)" opacity="1" d="M13.5,5.63L6.75,0L0,5.63L0,13.5L4.5,13.5L4.5,9L9,9L9,13.5L13.5,13.5L13.5,5.63Z " /></g></g></svg>
