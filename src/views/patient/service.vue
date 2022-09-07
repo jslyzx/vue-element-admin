@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <sale-form :rule-form="ruleForm" />
+      <sale-form :rule-form="ruleForm" @changeForm="changeForm" />
       <div class="chartBox">
         <div class="display">
           <el-card class="s_box">
@@ -12,11 +12,7 @@
                 </div>
               </div>
               <div class="bottomBox">
-                <div
-                  id="chartBox1"
-                  ref="chartBox1"
-                  style="width: 100%; height: 180px; padding: 10px"
-                />
+                <div id="chartBox1" ref="chartBox1" style="width: 100%; height: 180px; padding: 10px" />
               </div>
             </div>
           </el-card>
@@ -28,11 +24,7 @@
                 </div>
               </div>
               <div class="bottomBox">
-                <div
-                  id="chartBox2"
-                  ref="chartBox2"
-                  style="width: 100%; height: 180px; padding: 10px"
-                />
+                <div id="chartBox2" ref="chartBox2" style="width: 100%; height: 180px; padding: 10px" />
               </div>
             </div>
           </el-card>
@@ -44,11 +36,7 @@
                 </div>
               </div>
               <div class="bottomBox lineBox">
-                <div
-                  id="chartBox3"
-                  ref="chartBox3"
-                  style="width: 100%; height: 220px; padding: 10px"
-                />
+                <div id="chartBox3" ref="chartBox3" style="width: 100%; height: 220px; padding: 10px" />
               </div>
             </div>
           </el-card>
@@ -60,11 +48,7 @@
                 </div>
               </div>
               <div class="bottomBox lineBox">
-                <div
-                  id="chartBox4"
-                  ref="chartBox4"
-                  style="width: 100%; height: 220px; padding: 10px"
-                />
+                <div id="chartBox4" ref="chartBox4" style="width: 100%; height: 220px; padding: 10px" />
               </div>
             </div>
           </el-card>
@@ -76,39 +60,18 @@
                 <h3 style="margin-top: 1px">月度数据统计</h3>
                 <div style="margin-top: -5px"></div>
               </div>
-              <div class="tableBox" >
-                <el-table
-                  :data="
-                    tableData.slice(
-                      (currentPage - 1) * pageSize,
-                      currentPage * pageSize
-                    )
-                  "
-                  style="width: 100%"
-                  :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }"
-                >
-                  <el-table-column prop="name" label="片区"></el-table-column>
-                  <el-table-column prop="num" label="门店名称"></el-table-column>
-                  <el-table-column prop="price" label="会员总数"></el-table-column>
-                  <el-table-column prop="price" label="新会员占比"> </el-table-column>
-                  <el-table-column prop="price" label="信息完善度"> </el-table-column>
-                  <el-table-column prop="price" label="回访率"> </el-table-column>
-                  <el-table-column prop="price" label="配送时效"> </el-table-column>
-                  <el-table-column prop="price" label="平均患教次数"> </el-table-column>
+              <div class="tableBox">
+                <el-table :data="serviceList" style="width: 100%" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }">
+                  <el-table-column prop="sectionName" label="片区"></el-table-column>
+                  <el-table-column prop="name" label="门店名称"></el-table-column>
+                  <el-table-column prop="customerNum" label="会员总数"></el-table-column>
+                  <el-table-column prop="newCustomerRate" label="新会员占比"> </el-table-column>
+                  <el-table-column prop="infoRate" label="信息完善度"> </el-table-column>
+                  <el-table-column prop="returnRatio" label="回访率"> </el-table-column>
+                  <el-table-column prop="timeDiffAvg" label="配送时效"> </el-table-column>
+                  <el-table-column prop="eduTimesAvg" label="平均患教次数"> </el-table-column>
                 </el-table>
-                <el-pagination
-                  align="right"
-                  background
-                  @size-change="handleSizeChange"
-                  @current-change="handleCurrentChange"
-                  :current-page="currentPage"
-                  :page-sizes="[5, 10]"
-                  :page-size="pageSize"
-                  layout="total, sizes, prev, pager, next"
-                  :total="tableData.length"
-                  style="margin-top: 12px"
-                >
-                </el-pagination>
+                <pagination v-show="total > 0" :total="total" :page.sync="ruleForm.page" :limit.sync="ruleForm.pageSize" @pagination="getServiceList" />
               </div>
             </div>
           </el-card>
@@ -117,15 +80,18 @@
     </div>
   </div>
 </template>
-    
-    <script>
-import saleForm from "@/components/saleForm";
-import echarts from "echarts";
-require("echarts/theme/macarons"); // echarts theme
+<script>
+import { shopServiceList, shopServiceCharts } from '@/api/user'
+import saleForm from "@/components/saleForm"
+import Pagination from '@/components/Pagination'
+import echarts from "echarts"
+require("echarts/theme/macarons")
+
 export default {
   name: "Service",
   components: {
     saleForm,
+    Pagination
   },
   data() {
     return {
@@ -139,55 +105,21 @@ export default {
         middleArea: "",
         provienceArea: "",
         shop: "",
+        page: 1,
+        pageSize: 5
       },
-      tableData: [
-        {
-          num: "2",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "4",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "1",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-      ],
-      currentPage: 1, // 当前页码
-      total: 0, // 总条数
-      pageSize: 5, // 每页的数据条数
-    };
+      total: 0,
+      serviceList: [],
+      returnRatio: [],
+      infoRate: [],
+      eduTimesAvg: [],
+      timeDiffAvg: []
+    }
   },
   computed: {},
+  created() {
+    this.changeForm()
+  },
   mounted() {
     this.initCharts1();
     this.initCharts2();
@@ -195,6 +127,18 @@ export default {
     this.initCharts4();
   },
   methods: {
+    async getServiceList() {
+      const res = await shopServiceList(this.ruleForm)
+      this.serviceList = res.data.data
+      this.total = res.data.total
+    },
+    async getServiceChart() {
+      const res = await shopServiceCharts(this.ruleForm)
+      this.returnRatio = res.data.returnRatio
+      this.infoRate = res.data.infoRate
+      this.eduTimesAvg = res.data.eduTimesAvg
+      this.timeDiffAvg = res.data.timeDiffAvg
+    },
     initCharts1() {
       const that = this;
       const charts1 = echarts.init(
@@ -208,7 +152,7 @@ export default {
         legend: {
           type: "scroll",
           orient: "vertical",
-          formatter: function (name) {
+          formatter: function(name) {
             var str = option.series[0].data.filter((item) => {
               return item.name == name;
             });
@@ -218,33 +162,31 @@ export default {
           top: 20,
           bottom: 20,
         },
-        series: [
-          {
-            label: {
-              show: false,
-              position: "center",
-            },
-            emphasis: {
-              label: {
-                show: true,
-              },
-            },
-            name: "按DOT分布",
-            type: "pie",
-            radius: ["30%", "90%"],
-            center: ["30%", "50%"],
-            roseType: "area",
-            itemStyle: {
-              borderRadius: 8,
-            },
-            data: [
-              { value: 80, name: "门店1" },
-              { value: 48, name: "门店2" },
-              { value: 32, name: "门店3" },
-              { value: 60, name: "其他" },
-            ],
+        series: [{
+          label: {
+            show: false,
+            position: "center",
           },
-        ],
+          emphasis: {
+            label: {
+              show: true,
+            },
+          },
+          name: "按DOT分布",
+          type: "pie",
+          radius: ["30%", "90%"],
+          center: ["30%", "50%"],
+          roseType: "area",
+          itemStyle: {
+            borderRadius: 8,
+          },
+          data: [
+            { value: 80, name: "门店1" },
+            { value: 48, name: "门店2" },
+            { value: 32, name: "门店3" },
+            { value: 60, name: "其他" },
+          ],
+        }, ],
       };
       charts1.setOption(option);
     },
@@ -273,14 +215,13 @@ export default {
       const option = {
         tooltip: {
           trigger: "item",
-          formatter: function (params) {
+          formatter: function(params) {
             return `${params.name}：${params.value} %`;
           },
         },
-        legend: [
-          {
+        legend: [{
             icon: "bar",
-            formatter: function (name) {
+            formatter: function(name) {
               for (let i = 0, l = option.series.length; i < l; i++) {
                 if (name == option.series[i].data[0].name) {
                   return name + "：" + option.series[i].data[0].value + "%";
@@ -303,8 +244,7 @@ export default {
             x: "100",
           },
         ],
-        series: [
-          {
+        series: [{
             name: "门店1",
             type: "pie",
             clockWise: true, //顺时加载
@@ -329,8 +269,7 @@ export default {
                 shadowColor: "rgba(0, 0, 0, 0)", //边框阴影
               },
             },
-            data: [
-              {
+            data: [{
                 value: 70,
                 name: "门店1",
               },
@@ -364,8 +303,7 @@ export default {
                 shadowColor: "rgba(0, 0, 0, 0)", //边框阴影
               },
             },
-            data: [
-              {
+            data: [{
                 value: 46,
                 name: "门店2",
               },
@@ -399,8 +337,7 @@ export default {
                 shadowColor: "rgba(0, 0, 0, 0)", //边框阴影
               },
             },
-            data: [
-              {
+            data: [{
                 value: 54,
                 name: "门店3",
               },
@@ -434,8 +371,7 @@ export default {
                 shadowColor: "rgba(0, 0, 0, 0)", //边框阴影
               },
             },
-            data: [
-              {
+            data: [{
                 value: 75,
                 name: "门店4",
               },
@@ -472,12 +408,10 @@ export default {
         yAxis: {
           type: "value",
         },
-        series: [
-          {
-            data: [20, 24, 26, 32, 34, 46, 57],
-            type: "line",
-          },
-        ],
+        series: [{
+          data: [20, 24, 26, 32, 34, 46, 57],
+          type: "line",
+        }, ],
       };
       charts3.setOption(option);
     },
@@ -498,12 +432,10 @@ export default {
         yAxis: {
           type: "value",
         },
-        series: [
-          {
-            data: [20, 24, 26, 32, 34, 46, 57],
-            type: "bar",
-          },
-        ],
+        series: [{
+          data: [20, 24, 26, 32, 34, 46, 57],
+          type: "bar",
+        }, ],
       };
       charts4.setOption(option);
     },
@@ -525,11 +457,14 @@ export default {
         return "gray-row";
       }
     },
-  },
-};
+    changeForm() {
+      this.getServiceList()
+      this.getServiceChart()
+    }
+  }
+}
 </script>
-    
-    <style lang="scss" scoped>
+<style lang="scss" scoped>
 .body {
   width: 100%;
   background: rgba(235, 238, 242, 1);
@@ -629,10 +564,11 @@ export default {
         box-sizing: border-box;
       }
     }
+
     .tableBox {
       padding: 16px;
     }
   }
 }
+
 </style>
-    

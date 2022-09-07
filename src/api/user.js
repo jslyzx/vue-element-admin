@@ -39,3 +39,19 @@ export function deleteUser(data) {
     params: data
   })
 }
+
+export function shopServiceList(data) {
+  return request({
+    url: '/api/patient/shop/serve/grid',
+    method: 'get',
+    params: data
+  })
+}
+
+export function shopServiceCharts(data) {
+  return request({
+    url: '/api/patient/shop/serve/chartData',
+    method: 'get',
+    params: data
+  })
+}
