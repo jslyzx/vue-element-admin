@@ -71,6 +71,7 @@ export default {
     async getUsers() {
       const res = await getUsers(this.listQuery)
       this.usersList = res.data.data
+      this.total = res.data.total
     },
     handleAdd() {
       this.user = Object.assign({}, defaultUser)

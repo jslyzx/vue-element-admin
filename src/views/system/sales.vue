@@ -117,7 +117,7 @@ export default {
     async getSales() {
       const res = await fetchSaleList(this.listQuery)
       this.salesList = res.data.data
-      this.total = response.data.total
+      this.total = res.data.total
     },
     async getRegionList() {
       const res = await fetchAreaSubList({pId: 1})

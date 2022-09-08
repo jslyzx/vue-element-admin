@@ -281,17 +281,6 @@ export default {
                 }
             }, 0)
         }
-    },
-    mounted() {
-        this.initCharts()
-        this.initCharts2()
-        this.initCharts3()
-        this.initCharts4()
-    },
-    methods: {
-        handleClick() {
-
-        },
     }
 }
 </script>

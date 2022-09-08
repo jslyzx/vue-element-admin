@@ -85,3 +85,11 @@ export function saveShop(data) {
     data
   })
 }
+
+export function queryShopInfo(data) {
+  return request({
+    url: '/api/patient/shop/serve/queryShopInfo',
+    method: 'get',
+    params: data
+  })
+}
