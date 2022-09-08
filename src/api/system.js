@@ -93,3 +93,27 @@ export function queryShopInfo(data) {
     params: data
   })
 }
+
+export function getPatientStructure(data) {
+  return request({
+    url: '/api/patient/analysis/queryPatientStructure',
+    method: 'get',
+    params: data
+  })
+}
+
+export function queryPatientComparison(data) {
+  return request({
+    url: '/api/patient/analysis/queryPatientComparison',
+    method: 'get',
+    params: data
+  })
+}
+
+export function queryPatientCountByMonth(data) {
+  return request({
+    url: '/api/patient/analysis/queryPatientCountByMonth',
+    method: 'get',
+    params: data
+  })
+}
