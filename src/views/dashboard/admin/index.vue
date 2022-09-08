@@ -27,14 +27,14 @@
       @handleClick3="getClick3"
       @handleClick4="getClick4"
     />
-    <el-row :gutter="40" style="height: 305px">
+    <el-row :gutter="40" class="allChartBox" style="height: 305px">
       <el-col :xs="18" :sm="18" style="height: 100%">
         <div class="chartTitle">患者分布热点图</div>
         <div class="mapBox">
           <div id="map" class="chart-part" style="height: 100%" />
         </div>
       </el-col>
-      <el-col :xs="6" :sm="6" style="height: 100%">
+      <!-- <el-col :xs="6" :sm="6" style="height: 100%">
         <div class="xsyg">
           <div class="xsTitleBox">
             <div>销售预估完成率</div>
@@ -59,19 +59,8 @@
             </div>
           </div>
         </div>
-      </el-col>
-    </el-row>
-    <el-row :gutter="40" class="allChartBox">
-      <el-col :xs="18" :sm="18" style="height: 100%">
-        <div class="chartTitle">销售统计</div>
-        <div class="barChartBox">
-          <bar-chart
-            v-if="medicine1Data.length > 0"
-            :medicine1Data="medicine1Data"
-            :medicine2Data="medicine2Data"
-          />
-        </div>
-      </el-col>
+      </el-col> -->
+      
       <el-col :xs="6" :sm="6" style="height: 100%">
         <div class="phBox">
           <div class="phTitle">
@@ -108,6 +97,18 @@
               <div class="thirdPb">￥{{ item.salePrice }}</div>
             </li>
           </ul>
+        </div>
+      </el-col>
+    </el-row>
+    <el-row :gutter="40" class="allChartBox">
+      <el-col :xs="18" :sm="18" style="height: 100%">
+        <div class="chartTitle">销售统计</div>
+        <div class="barChartBox">
+          <bar-chart
+            v-if="medicine1Data.length > 0"
+            :medicine1Data="medicine1Data"
+            :medicine2Data="medicine2Data"
+          />
         </div>
       </el-col>
     </el-row>
@@ -391,13 +392,7 @@ export default {
         queryType: this.dateActive,
       }).then((res) => {
         if (res.code == 0) {
-          let arr = [];
-          res.data.forEach((item, index) => {
-            if (index < 10) {
-              arr.push(item);
-            }
-          });
-          this.shopSaleList = arr;
+          this.shopSaleList = res.data;
         }
       });
     },
@@ -476,12 +471,13 @@ export default {
     margin-bottom: 32px;
     .phBox {
       background: #fff;
-      height: 100%;
+      // height: 100%;
+      height: 783px;
       padding: 16px;
       box-sizing: border-box;
       ul {
-        height: 370px;
-        overflow-y: scroll;
+        // height: 370px;
+        // overflow-y: scroll;
       }
       .pbBox {
         display: flex;

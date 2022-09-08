@@ -275,7 +275,7 @@ export default {
     queryHospitalSales(form) {
       queryHospitalSales(form).then((res) => {
         if (res.code == 0) {
-          this.hospitalSales = res.data.hospitalSales;
+          this.hospitalSales = res.data.data;
         }
       });
     },
