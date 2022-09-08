@@ -16,7 +16,7 @@
 import saleForm from '@/components/saleForm'
 import sTable from '@/components/table'
 export default {
-    name: 'Yearly',
+    name: 'ShopSale',
     components: {
         saleForm,
         sTable

@@ -121,7 +121,6 @@ import * as echarts from 'echarts'
 // import {el-descriptions,el-
 require("echarts/theme/macarons"); // echarts theme
 export default {
-    name: 'Yearly',
     components: {
         saleForm
     },

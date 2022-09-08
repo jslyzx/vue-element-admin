@@ -33,7 +33,6 @@ const patientRouter = {
     },{
       path: 'baseInfo',
       component: () => import('@/views/patient/basicInfo'),
-      name: 'ShopService',
       meta: { title: '基本信息',hidden:true }
     }
   ]

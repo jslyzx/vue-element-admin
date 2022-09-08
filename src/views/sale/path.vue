@@ -144,7 +144,7 @@ let BMap = {};
 let map = {};
 let heatmapOverlay = {};
 export default {
-  name: "Path",
+  name: "SalePath",
   components: {
     saleForm,
   },

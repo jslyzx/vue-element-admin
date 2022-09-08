@@ -104,7 +104,7 @@ import sTable from '@/components/table'
 import * as echarts from 'echarts'
 require("echarts/theme/macarons"); // echarts theme
 export default {
-    name: 'Yearly',
+    name: 'PatientAge',
     components: {
         saleForm,
         sTable

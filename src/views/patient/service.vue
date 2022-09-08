@@ -88,7 +88,7 @@ import echarts from "echarts"
 require("echarts/theme/macarons")
 
 export default {
-  name: "Service",
+  name: "ShopService",
   components: {
     saleForm,
     Pagination
