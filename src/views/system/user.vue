@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { getUsers } from '@/api/user'
+import { getUsers, deleteUser } from '@/api/user'
 import Pagination from '@/components/Pagination'
 
 const defaultUser = {
@@ -71,6 +71,7 @@ export default {
     async getUsers() {
       const res = await getUsers(this.listQuery)
       this.usersList = res.data.data
+      this.total = res.data.total
     },
     handleAdd() {
       this.user = Object.assign({}, defaultUser)
@@ -78,19 +79,28 @@ export default {
       this.dialogVisible = true
     },
     handleEdit(scope) {
+      this.user = scope.row
       this.dialogType = 'edit'
       this.dialogVisible = true
     },
     handleDelete({ $index, row }) {
-      this.$confirm('Confirm to remove the role?', 'Warning', {
-        confirmButtonText: 'Confirm',
-        cancelButtonText: 'Cancel',
+      this.$confirm('确定删除?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
         type: 'warning'
       })
         .then(async() => {
-          this.$message({
-            type: 'success',
-            message: 'Delete succed!'
+          deleteUser({id: row.id})
+          .then(() => {
+            this.$notify({
+              title: '成功',
+              message: '删除用户成功',
+              type: 'success',
+              duration: 5000
+            })
+            this.getUsers()
+          })
+          .catch(() => {
           })
         })
         .catch(err => { console.error(err) })

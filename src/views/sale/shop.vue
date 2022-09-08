@@ -16,7 +16,7 @@
 import saleForm from '@/components/saleForm'
 import sTable from '@/components/table'
 export default {
-    name: 'Yearly',
+    name: 'ShopSale',
     components: {
         saleForm,
         sTable
@@ -281,17 +281,6 @@ export default {
                 }
             }, 0)
         }
-    },
-    mounted() {
-        this.initCharts()
-        this.initCharts2()
-        this.initCharts3()
-        this.initCharts4()
-    },
-    methods: {
-        handleClick() {
-
-        },
     }
 }
 </script>

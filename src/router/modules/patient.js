@@ -7,7 +7,7 @@ const patientRouter = {
   name: 'Patient',
   meta: {
     title: '患者',
-    icon: 'user'
+    icon: 'person'
   },
   children: [
     {
@@ -30,11 +30,13 @@ const patientRouter = {
       component: () => import('@/views/patient/service'),
       name: 'ShopService',
       meta: { title: '门店服务情况' }
-    },{
-      path: 'baseInfo',
+    },
+    {
+      path: 'shop/detail/:id(\\d+)',
       component: () => import('@/views/patient/basicInfo'),
-      name: 'ShopService',
-      meta: { title: '基本信息',hidden:true }
+      name: 'ShopDetail',
+      meta: { title: '门店详情', noCache: true, activeMenu: '/patient/service' },
+      hidden: true
     }
   ]
 }

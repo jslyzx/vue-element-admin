@@ -117,6 +117,7 @@ export default {
     async getSales() {
       const res = await fetchSaleList(this.listQuery)
       this.salesList = res.data.data
+      this.total = res.data.total
     },
     async getRegionList() {
       const res = await fetchAreaSubList({pId: 1})
@@ -138,6 +139,12 @@ export default {
     handleEdit(scope) {
       this.sale = scope.row
       this.dialogType = 'edit'
+      if(scope.row.regionId){
+        this.getSectionList(scope.row.regionId)
+      }
+      if(scope.row.sectionId){
+        this.getProvinceList(scope.row.sectionId)
+      }
       this.dialogVisible = true
     },
     handleDelete({ $index, row }) {

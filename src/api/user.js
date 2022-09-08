@@ -31,3 +31,27 @@ export function getUsers(data) {
     params: data
   })
 }
+
+export function deleteUser(data) {
+  return request({
+    url: '/api/admin/user/delete_physical',
+    method: 'delete',
+    params: data
+  })
+}
+
+export function shopServiceList(data) {
+  return request({
+    url: '/api/patient/shop/serve/grid',
+    method: 'get',
+    params: data
+  })
+}
+
+export function shopServiceCharts(data) {
+  return request({
+    url: '/api/patient/shop/serve/chartData',
+    method: 'get',
+    params: data
+  })
+}

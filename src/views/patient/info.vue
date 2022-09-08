@@ -200,7 +200,7 @@ import saleForm from "@/components/saleForm";
 import echarts from "echarts";
 require("echarts/theme/macarons"); // echarts theme
 export default {
-  name: "Info",
+  name: "PatientInfo",
   components: {
     saleForm,
   },

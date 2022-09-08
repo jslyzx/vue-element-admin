@@ -137,7 +137,7 @@ import sTable from '@/components/table'
 import saleForm from '@/components/saleForm2'
 import * as echarts from 'echarts'
 export default {
-    name: 'Yearly',
+    name: 'SalesMan',
     components: {
         saleForm,
         sTable

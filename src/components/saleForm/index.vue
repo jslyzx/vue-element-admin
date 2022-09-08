@@ -31,22 +31,22 @@
               <!-- <el-cascader v-model="ruleForm.productId" class="selectRegion" :options="options" @change="handleChange" /> -->
               <el-input v-model="ruleForm.productId" disabled></el-input>
             </el-form-item>
-            <el-form-item label="大区">
+            <el-form-item label="大区" v-if="regionShow">
               <el-select v-model="ruleForm.regionId" placeholder="请选择" @change="changeRegion">
                 <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
-            <el-form-item label="片区" class="mode">
+            <el-form-item label="片区" class="mode" v-if="regionShow">
               <el-select v-model="ruleForm.sectionId" placeholder="请选择" @change="changeRegion2">
                 <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
-            <el-form-item label="省区" class="mode">
+            <el-form-item label="省区" class="mode" v-if="regionShow">
               <el-select v-model="ruleForm.provinceId" placeholder="请选择" @change="changeRegion3">
                 <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
-            <el-form-item label="门店" class="mode">
+            <el-form-item label="门店" class="mode" v-if="regionShow">
               <el-select v-model="ruleForm.shopId" placeholder="请选择">
                 <el-option v-for="item in options4" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
@@ -104,6 +104,10 @@ export default {
     },
     utilsShow: {
       default: ''
+    },
+    regionShow: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
