@@ -73,7 +73,7 @@
           <el-card>
             <div class="inBox">
               <div class="topBox">
-                <el-tabs v-model="tabIndex" @tab-click="handleClick">
+                <el-tabs v-model="tabIndex">
                   <el-tab-pane label="患者数据列表" name="list" />
                   <el-tab-pane label="脱落原因分析" name="reason" />
                 </el-tabs>

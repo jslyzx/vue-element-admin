@@ -2,7 +2,8 @@
   <div class="body">
     <div class="formCard">
       <saleForm @queryProvinceSalePrice="queryProvinceSalePrice" :ruleForm="ruleForm" @changeForm="changeForm" />
-      <div class="chartBox">
+    </div>
+    <div class="chartBox">
         <div class="display">
           <el-card class="s_box">
             <div>
@@ -143,7 +144,7 @@
                 </div>
               </el-card>
             </div>
-            <div>
+            <div style="margin-top: 20px;">
               <el-card>
                 <div style="box-sizing:border-box;padding:17px 16px;width:383px;height:274px">
                   <h3>各片区销售占比</h3>
@@ -154,7 +155,6 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
 <script>
@@ -732,21 +732,16 @@ export default {
 <style lang="scss" scoped>
 .body {
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 84px);
   background: rgba(235, 238, 242, 1);
-  padding: 29px;
-}
-
-.formCard {
-  margin: 0px 24px 25px -10px;
-  width: 1655px;
-  height: 143px;
+  padding: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .chartBox {
-  margin: 25px 24px 25px -1px;
-  width: 1655px;
-  height: 80vh;
+  margin-top: 20px;
+  height: 86vh;
   background-color: #fff;
   padding: 39px 36px 34px 27px;
 
