@@ -1,53 +1,57 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <sale-form :rule-form="ruleForm" :utilsShow="utilsShow" @changeForm="changeForm" />
+      <sale-form
+        :rule-form="ruleForm"
+        :utilsShow="utilsShow"
+        @changeForm="changeForm"
+      />
     </div>
     <div class="container">
       <div class="chartBox">
-        <div class="chartTitle">按DOT分布</div>
+        <div class="chartTitle">按DOT分布(人)</div>
         <div class="mapBox">
           <div id="chartBox1" style="height: 288px" />
         </div>
       </div>
       <div class="chartContent1">
-        <div class="smallChartTitle">按省区分布</div>
+        <div class="smallChartTitle">按省区分布(人)</div>
         <div id="smallChartBox1" style="height: 100%; width: 100%" />
       </div>
       <div class="chartContent2">
-        <div class="smallChartTitle">按年龄分布</div>
+        <div class="smallChartTitle">按年龄分布(人)</div>
         <div id="smallChartBox2" style="height: 100%; width: 100%" />
       </div>
     </div>
     <div class="container">
       <div class="chartBox">
-        <div class="chartTitle">按适应症分布</div>
+        <div class="chartTitle">按适应症分布(人)</div>
         <div class="mapBox syzBox">
           <div id="chartBox2" style="height: 288px; width: 100%" />
         </div>
       </div>
       <div class="chartContent1">
-        <div class="smallChartTitle">按性别分布</div>
+        <div class="smallChartTitle">按性别分布(人)</div>
         <div id="smallChartBox3" style="height: 100%; width: 100%" />
       </div>
       <div class="chartContent2">
-        <div class="smallChartTitle">按BMI分布</div>
+        <div class="smallChartTitle">按BMI分布(人)</div>
         <div id="smallChartBox4" style="height: 100%; width: 100%" />
       </div>
     </div>
   </div>
 </template>
 <script>
-import { getPatientStructure } from '@/api/system'
-import saleForm from "@/components/saleForm"
-import echarts from "echarts"
-import _ from 'lodash'
-require("echarts/theme/macarons")
+import { getPatientStructure } from "@/api/system";
+import saleForm from "@/components/saleForm";
+import echarts from "echarts";
+import _ from "lodash";
+require("echarts/theme/macarons");
 
 export default {
   name: "PatientStructure",
   components: {
-    saleForm
+    saleForm,
   },
   data() {
     return {
@@ -63,7 +67,7 @@ export default {
         shop: "",
         sex: "",
         age: "",
-        indication: ""
+        indication: "",
       },
       utilsShow: 2,
       dotRange: [],
@@ -71,72 +75,84 @@ export default {
       ageRange: [],
       diseaseRange: [],
       genderRange: [],
-      bmiRange: []
-    }
+      bmiRange: [],
+    };
   },
   created() {
-    this.changeForm(this.ruleForm)
+    this.changeForm(this.ruleForm);
   },
   methods: {
     changeForm(form) {
-      this.getPatientStructure(form)
+      this.getPatientStructure(form);
     },
     async getPatientStructure(form) {
-      const res = await getPatientStructure(form)
-      this.dotRange = res.data.dotRange
-      this.locationRange = res.data.locationRange
-      this.ageRange = res.data.ageRange
-      this.diseaseRange = res.data.diseaseRange
-      this.genderRange = res.data.genderRange
-      this.bmiRange = res.data.bmiRange
+      const res = await getPatientStructure(form);
+      this.dotRange = res.data.dotRange;
+      this.locationRange = res.data.locationRange;
+      this.ageRange = res.data.ageRange;
+      this.diseaseRange = res.data.diseaseRange;
+      this.genderRange = res.data.genderRange;
+      this.bmiRange = res.data.bmiRange;
     },
     initCharts1() {
-      const that = this
-      const charts1 = echarts.init(document.getElementById("chartBox1"), "macarons")
+      const that = this;
+      const charts1 = echarts.init(
+        document.getElementById("chartBox1"),
+        "macarons"
+      );
       charts1.setOption({
         tooltip: {
-          trigger: "item"
+          trigger: "item",
         },
         legend: {
           type: "scroll",
           orient: "vertical",
           left: 20,
           top: 20,
-          bottom: 20
+          bottom: 20,
         },
-        series: [{
-          label: {
-            show: false,
-            position: "center",
-          },
-          emphasis: {
+        series: [
+          {
             label: {
-              show: true
-            }
+              show: true,
+              position: "inside",
+              formatter: function (arg) {
+                return arg.value;
+              },
+            },
+            emphasis: {
+              label: {
+                show: true,
+              },
+            },
+            name: "按DOT分布",
+            type: "pie",
+            radius: [50, 100],
+            center: ["50%", "50%"],
+            itemStyle: {
+              borderRadius: 12,
+            },
+            data: this.dotRange,
           },
-          name: "按DOT分布",
-          type: "pie",
-          radius: [80, 140],
-          center: ["50%", "50%"],
-          roseType: "area",
-          itemStyle: {
-            borderRadius: 12
-          },
-          data: this.dotRange
-        }]
-      })
+        ],
+      });
     },
     initSmallChartBox1() {
-      const that = this
-      const charts = echarts.init(document.getElementById("smallChartBox1"), "macarons")
+      const that = this;
+      const charts = echarts.init(
+        document.getElementById("smallChartBox1"),
+        "macarons"
+      );
       charts.setOption({
         tooltip: {
-          trigger: "item"
+          trigger: "item",
         },
         legend: {
-          orient: 'horizontal',
+          orient: "horizontal",
           icon: "circle",
-          data: _.map(this.locationRange, function(v) { return v.name }),
+          data: _.map(this.locationRange, function (v) {
+            return v.name;
+          }),
           bottom: 60,
           textStyle: {
             color: "#999999",
@@ -146,39 +162,50 @@ export default {
             backgroundColor: "transparent",
             rich: {
               b: {
-                width: 200
-              }
-            }
-          }
+                width: 200,
+              },
+            },
+          },
         },
-        series: [{
-          type: "pie",
-          top: -125,
-          radius: ["30%", "50%"],
-          avoidLabelOverlap: false,
-          label: {
-            show: false,
-            position: "center"
+        series: [
+          {
+            label: {
+              show: true,
+              position: "inside",
+              formatter: function (arg) {
+                return arg.value;
+              },
+            },
+            emphasis: {
+              label: {
+                show: true,
+              },
+            },
+            type: "pie",
+            top: -125,
+            radius: ["20%", "40%"],
+            avoidLabelOverlap: false,
+            data: this.locationRange,
           },
-          emphasis: {},
-          labelLine: {
-            show: false
-          },
-          data: this.locationRange
-        }]
-      })
+        ],
+      });
     },
     initSmallChartBox2() {
-      const that = this
-      const charts = echarts.init(document.getElementById("smallChartBox2"), "macarons")
+      const that = this;
+      const charts = echarts.init(
+        document.getElementById("smallChartBox2"),
+        "macarons"
+      );
       charts.setOption({
         tooltip: {
-          trigger: "item"
+          trigger: "item",
         },
         legend: {
-          orient: 'horizontal',
+          orient: "horizontal",
           icon: "circle",
-          data: _.map(this.ageRange, function(v) { return v.name }),
+          data: _.map(this.ageRange, function (v) {
+            return v.name;
+          }),
           bottom: 60,
           textStyle: {
             color: "#999999",
@@ -188,104 +215,119 @@ export default {
             backgroundColor: "transparent",
             rich: {
               b: {
-                width: 200
-              }
-            }
-          }
+                width: 200,
+              },
+            },
+          },
         },
-        series: [{
-          name: "按年龄分布",
-          type: "pie",
-          top: -125,
-          radius: ["30%", "50%"],
-          avoidLabelOverlap: false,
-          label: {
-            show: false,
-            position: "center"
+        series: [
+          {
+            name: "按年龄分布",
+            type: "pie",
+            top: -125,
+            radius: ["20%", "40%"],
+            avoidLabelOverlap: false,
+            label: {
+              show: true,
+              position: "inside",
+              formatter: function (arg) {
+                return arg.value;
+              },
+            },
+            data: this.ageRange,
           },
-          emphasis: {},
-          labelLine: {
-            show: false
-          },
-          data: this.ageRange
-        }]
-      })
+        ],
+      });
     },
     initCharts2() {
-      const that = this
-      const charts2 = echarts.init(document.getElementById("chartBox2"), "macarons")
+      const that = this;
+      const charts2 = echarts.init(
+        document.getElementById("chartBox2"),
+        "macarons"
+      );
       charts2.setOption({
         tooltip: {
-          trigger: "item"
+          trigger: "item",
         },
         legend: {
-          top: 'middle',
+          top: "middle",
           right: 10,
-          orient: 'vertical'
+          orient: "vertical",
         },
-        series: [{
-          name: "按适应症分布",
-          type: "pie",
-          radius: ["40%", "70%"],
-          avoidLabelOverlap: false,
-          label: {
-            show: false,
-            position: "center"
-          },
-          emphasis: {
+        series: [
+          {
+            name: "按适应症分布",
+            type: "pie",
+            radius: ["40%", "70%"],
+            avoidLabelOverlap: false,
             label: {
-              show: true
-            }
+              show: true,
+              position: "inside",
+              formatter: function (arg) {
+                return arg.value;
+              },
+            },
+            labelLine: {
+              show: false,
+            },
+            data: this.diseaseRange,
           },
-          labelLine: {
-            show: false
-          },
-          data: this.diseaseRange
-        }]
-      })
+        ],
+      });
     },
     initSmallChartBox3() {
-      var BorderWidth = "6"
-      var total = _.sum(_.map(this.genderRange,function(v){return v.value}))
-      var maleNum = _.filter(this.genderRange,function(v){return v.name === '男'})[0].value
-      var femaleNum = _.filter(this.genderRange,function(v){return v.name === '女'})[0].value
-      var unknownNum = _.filter(this.genderRange,function(v){return v.name === '未知'})[0].value
+      var BorderWidth = "6";
+      var total = _.sum(
+        _.map(this.genderRange, function (v) {
+          return v.value;
+        })
+      );
+      var maleNum = _.filter(this.genderRange, function (v) {
+        return v.name === "男";
+      })[0].value;
+      var femaleNum = _.filter(this.genderRange, function (v) {
+        return v.name === "女";
+      })[0].value;
+      var unknownNum = _.filter(this.genderRange, function (v) {
+        return v.name === "未知";
+      })[0].value;
       //反方向剩下部分的样式
       var placeHolderStyle = {
         normal: {
           label: {
             show: false,
-            position: "center"
+            position: "center",
           },
           labelLine: {
-            show: false
+            show: false,
           },
           color: "transparent",
           borderColor: "transparent",
-          borderWidth: 6
+          borderWidth: 6,
         },
         emphasis: {
           color: "transparent",
           borderColor: "transparent",
-          borderWidth: 0
-        }
-      }
+          borderWidth: 0,
+        },
+      };
       const option = {
         tooltip: {
           trigger: "item",
-          formatter: function(params) {
-            var percent = (params.value / total * 100).toFixed(1)
-            return `${params.name}${params.value} <br/> 占比${percent}%`
-          }
+          formatter: function (params) {
+            var percent = ((params.value / total) * 100).toFixed(1);
+            return `${params.name}${params.value} <br/> 占比${percent}%`;
+          },
         },
         color: ["#7B79FF", "#FFB0E2", "#59CFFF"],
-        legend: [{
+        legend: [
+          {
             icon: "bar",
             data: ["男", "女"],
             itemGap: 60,
             itemWidth: 14,
             y: "240",
-            x: "100"
+            x: "100",
           },
           {
             icon: "bar",
@@ -293,10 +335,11 @@ export default {
             itemGap: 60,
             itemWidth: 14,
             y: "260",
-            x: "100"
-          }
+            x: "100",
+          },
         ],
-        series: [{
+        series: [
+          {
             name: "男",
             type: "pie",
             top: -125,
@@ -306,30 +349,29 @@ export default {
             itemStyle: {
               normal: {
                 label: {
-                  show: false,
-                  position: "outside"
-                },
-                labelLine: {
-                  show: false,
-                  length: 100,
-                  smooth: 0.5
+                  show: true,
+                  position: "inside",
+                  formatter: function (arg) {
+                    return arg.value;
+                  },
                 },
                 borderWidth: BorderWidth,
                 shadowBlur: 40,
                 borderColor: "#7B79FF",
-                shadowColor: "rgba(0, 0, 0, 0)"
-              }
+                shadowColor: "rgba(0, 0, 0, 0)",
+              },
             },
-            data: [{
+            data: [
+              {
                 value: maleNum,
-                name: "男"
+                name: "男",
               },
               {
                 value: total - maleNum,
                 name: "",
-                itemStyle: placeHolderStyle
-              }
-            ]
+                itemStyle: placeHolderStyle,
+              },
+            ],
           },
           {
             name: "女",
@@ -341,29 +383,29 @@ export default {
             itemStyle: {
               normal: {
                 label: {
-                  show: false
-                },
-                labelLine: {
-                  show: false,
-                  length: 100,
-                  smooth: 0.5
+                  show: true,
+                  position: "inside",
+                  formatter: function (arg) {
+                    return arg.value;
+                  },
                 },
                 borderWidth: BorderWidth,
                 shadowBlur: 40,
                 borderColor: "#FFB0E2",
-                shadowColor: "rgba(0, 0, 0, 0)"
+                shadowColor: "rgba(0, 0, 0, 0)",
               },
             },
-            data: [{
+            data: [
+              {
                 value: femaleNum,
-                name: "女"
+                name: "女",
               },
               {
                 value: total - femaleNum,
                 name: "",
-                itemStyle: placeHolderStyle
-              }
-            ]
+                itemStyle: placeHolderStyle,
+              },
+            ],
           },
           {
             name: "不详",
@@ -375,47 +417,55 @@ export default {
             itemStyle: {
               normal: {
                 label: {
-                  show: false,
-                },
-                labelLine: {
-                  show: false,
-                  length: 100,
-                  smooth: 0.5,
+                  show: true,
+                  position: "inside",
+                  formatter: function (arg) {
+                    return arg.value;
+                  },
                 },
                 borderWidth: BorderWidth,
                 shadowBlur: 40,
                 borderColor: "#59CFFF",
-                shadowColor: "rgba(0, 0, 0, 0)"
-              }
+                shadowColor: "rgba(0, 0, 0, 0)",
+              },
             },
-            data: [{
+            data: [
+              {
                 value: unknownNum,
-                name: "不详"
+                name: "不详",
               },
               {
                 value: total - unknownNum,
                 name: "",
-                itemStyle: placeHolderStyle
-              }
-            ]
-          }
-        ]
-      }
-      const that = this
-      const charts = echarts.init(document.getElementById("smallChartBox3"), "macarons")
-      charts.setOption(option)
+                itemStyle: placeHolderStyle,
+              },
+            ],
+          },
+        ],
+      };
+      const that = this;
+      const charts = echarts.init(
+        document.getElementById("smallChartBox3"),
+        "macarons"
+      );
+      charts.setOption(option);
     },
     initSmallChartBox4() {
-      const that = this
-      const charts = echarts.init(document.getElementById("smallChartBox4"), "macarons")
+      const that = this;
+      const charts = echarts.init(
+        document.getElementById("smallChartBox4"),
+        "macarons"
+      );
       charts.setOption({
         tooltip: {
-          trigger: "item"
+          trigger: "item",
         },
         legend: {
-          orient: 'horizontal',
+          orient: "horizontal",
           icon: "circle",
-          data: _.map(this.bmiRange, function(v) { return v.name }),
+          data: _.map(this.bmiRange, function (v) {
+            return v.name;
+          }),
           bottom: 60,
           textStyle: {
             color: "#999999",
@@ -425,68 +475,56 @@ export default {
             backgroundColor: "transparent",
             rich: {
               b: {
-                width: 200
-              }
-            }
-          }
-        },
-        series: [{
-          name: "按BMI分布",
-          type: "pie",
-          top: -125,
-          radius: "50%",
-          data: this.bmiRange,
-          label: {
-            show: false
+                width: 200,
+              },
+            },
           },
-          labelLine: {
-            show: false
-          }
-        }]
-      })
-    }
+        },
+        series: [
+          {
+            name: "按BMI分布",
+            type: "pie",
+            top: -125,
+            radius: "50%",
+            data: this.bmiRange,
+            label: {
+              show: true,
+              position: "inside",
+              formatter: function (arg) {
+                return arg.value;
+              },
+            },
+          },
+        ],
+      });
+    },
   },
   watch: {
     dotRange() {
-      this.initCharts1()
+      this.initCharts1();
     },
     locationRange() {
-      this.initSmallChartBox1()
+      this.initSmallChartBox1();
     },
     ageRange() {
-      this.initSmallChartBox2()
+      this.initSmallChartBox2();
     },
     diseaseRange() {
-      this.initCharts2()
+      this.initCharts2();
     },
     genderRange() {
-      this.initSmallChartBox3()
+      this.initSmallChartBox3();
     },
     bmiRange() {
-      this.initSmallChartBox4()
-    }
-  }
-}
-
+      this.initSmallChartBox4();
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
-.body {
-  width: 100%;
-  min-height: 100vh;
-  background: rgba(235, 238, 242, 1);
-  padding: 29px;
-}
-
-.formCard {
-  margin: 0px 24px 25px -10px;
-  width: 1655px;
-  height: 196px;
-}
-
 .container {
   display: flex;
-  margin: 0px 24px 25px -10px;
-  width: 1655px;
+  margin-top: 20px;
 
   .chartBox {
     width: 844px;
@@ -529,7 +567,7 @@ export default {
 
   .chartContent1,
   .chartContent2 {
-    width: 383px;
+    width: 394px;
     height: 360px;
     background: #fff;
     margin-left: 20px;
@@ -545,5 +583,4 @@ export default {
     }
   }
 }
-
 </style>

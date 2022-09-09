@@ -2,7 +2,8 @@
   <div class="body">
     <div class="formCard">
       <sale-form :rule-form="ruleForm" @changeForm="changeForm" />
-      <div class="chartBox">
+    </div>
+    <div class="chartBox">
         <div class="display">
           <el-card class="s_box">
             <div>
@@ -61,7 +62,7 @@
                 <div style="margin-top: -5px"></div>
               </div>
               <div class="tableBox">
-                <el-table :data="serviceList" style="width: 100%" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }">
+                <el-table :data="serviceList" style="width: 100%" max-height="270" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }">
                   <el-table-column prop="sectionName" label="片区"></el-table-column>
                   <el-table-column label="门店名称">
                     <template slot-scope="{row}">
@@ -83,7 +84,6 @@
           </el-card>
         </div>
       </div>
-    </div>
   </div>
 </template>
 <script>
@@ -351,22 +351,9 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-.body {
-  width: 100%;
-  background: rgba(235, 238, 242, 1);
-  padding: 29px;
-}
-
-.formCard {
-  margin: 0px 24px 25px -10px;
-  width: 1655px;
-}
 
 .chartBox {
-  margin: 25px 24px 25px -1px;
-  width: 1655px;
-  background-color: #fff;
-  padding: 39px 36px 34px 27px;
+  margin-top: 16px;
 
   .display {
     display: flex;
@@ -420,18 +407,18 @@ export default {
   }
 
   .chartDisplay {
-    margin-top: 32px;
-    width: 1593px;
+    margin-top: 16px;
     display: flex;
     flex-flow: row wrap;
-
+    .el-card{
+      width: 100%;
+    }
     ::v-deep .el-card__body {
       padding: 0px !important;
     }
 
     .inBox {
       height: 100%;
-      width: 1593px;
 
       .topBox {
         height: 52px;
@@ -452,7 +439,11 @@ export default {
     }
 
     .tableBox {
-      padding: 16px;
+      padding: 10px;
+      .pagination-container{
+        padding: 0;
+        margin-top: 10px;
+      }
     }
   }
 }

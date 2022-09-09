@@ -19,12 +19,7 @@
           <div class="inBox">
             <div>
               <el-table
-                :data="
-                  hospitalSales.slice(
-                    (currentPage - 1) * pageSize,
-                    currentPage * pageSize
-                  )
-                "
+                :data="hospitalSales"
                 style="width: 100%"
                 :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }"
               >
@@ -59,12 +54,12 @@
                   label="环比"
                 >
                   <template scope="scope">
-                    {{ scope.row.monthGrowthRate }}%
+                    {{ scope.row.monthGrowthRate }}
                   </template>
                 </el-table-column>
                 <el-table-column width="100" prop="yearGrowthRate" label="同比">
                   <template scope="scope">
-                    {{ scope.row.yearGrowthRate }}%
+                    {{ scope.row.yearGrowthRate }}
                   </template>
                 </el-table-column>
               </el-table>
@@ -73,11 +68,10 @@
                 background
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page="currentPage"
-                :page-sizes="[5, 10]"
-                :page-size="pageSize"
+                :current-page="ruleForm.page"
+                :page-size="ruleForm.pageNum"
                 layout="total, sizes, prev, pager, next"
-                :total="hospitalSales.length"
+                :total="total"
                 style="margin-top: 12px"
               >
               </el-pagination>
@@ -91,7 +85,7 @@
                 class="hospitalImg"
                 src="../../assets/index_img/hospitalIcon.png"
               />
-              <div>江苏省人民医院流向数据</div>
+              <div>{{ officeSalesName }}流向数据</div>
             </div>
             <div>
               <el-table
@@ -110,19 +104,6 @@
                 <el-table-column prop="yearGrowthRate" label="同比">
                 </el-table-column>
               </el-table>
-              <!-- <el-pagination
-                align="right"
-                background
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage"
-                :page-sizes="[5, 10]"
-                :page-size="pageSize"
-                layout="total, sizes, prev, pager, next"
-                :total="hospitalOfficeSales.length"
-                style="margin-top: 12px"
-              >
-              </el-pagination> -->
             </div>
           </div>
         </el-card>
@@ -153,57 +134,15 @@ export default {
       ruleForm: {
         queryType: 1,
         page: 1,
-        pageNum: 10
+        pageNum: 5,
       },
       utilsShow: 1,
       options: [],
-      hospitalOfficeSales: [
-        {
-          num: "2",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "4",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "1",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-        {
-          num: "3",
-          name: "德益康",
-          price: "12345",
-        },
-      ],
-      dateActive: 1,
+      hospitalOfficeSales: [],
+      officeSalesName: "",
       hospitalSales: [],
-      currentPage: 1, // 当前页码
-      total: 0, // 总条数
-      pageSize: 5, // 每页的数据条数
+      total: 0,
+      flag: true,
     };
   },
   created() {
@@ -212,12 +151,13 @@ export default {
   },
   methods: {
     changeForm(form) {
+      this.getHearMap();
       this.queryHospitalSales(form);
     },
     // 热力图
     getHearMap() {
       queryCustomerHotInfo({
-        queryType: this.dateActive,
+        queryType: this.ruleForm.queryType,
       }).then((res) => {
         if (res.code == 0) {
           res.data.forEach((item) => {
@@ -264,6 +204,7 @@ export default {
     },
     // 点击查科室
     queryOfficeSales(row) {
+      this.officeSalesName = row.hosptailName;
       queryHospitalOfficeSales({
         queryType: 1,
         hospitalId: row.hospitalId,
@@ -277,20 +218,25 @@ export default {
     queryHospitalSales(form) {
       queryHospitalSales(form).then((res) => {
         if (res.code == 0) {
+          this.total = res.data.count;
           this.hospitalSales = res.data.data;
+          if (this.flag) {
+            this.queryOfficeSales(res.data.data[0]);
+            this.officeSalesName = res.data.data[0].hosptailName;
+            this.flag = false;
+          }
         }
       });
     },
     //每页条数改变时触发 选择一页显示多少行
     handleSizeChange(val) {
-      //console.log(`每页 ${val} 条`);
-      this.currentPage = 1;
-      this.pageSize = val;
+      this.ruleForm.pageNum = val;
+      this.queryHospitalSales(this.ruleForm);
     },
     //当前页改变时触发 跳转其他页
     handleCurrentChange(val) {
-      //console.log(`当前页: ${val}`);
-      this.currentPage = val;
+      this.ruleForm.page = val;
+      this.queryHospitalSales(this.ruleForm);
     },
     tableRowClassName({ row, rowIndex }) {
       if (rowIndex % 2 !== 0) {
@@ -304,6 +250,10 @@ export default {
 </script>
   
   <style lang="scss" scoped>
+.formCard {
+  margin: 0px 24px 25px -10px;
+  width: 1655px;
+}
 
 .chartBox {
   margin-top: 16px;
@@ -336,7 +286,6 @@ export default {
       width: 816px;
       height: 341px;
       padding: 16px;
-      overflow-y: scroll;
       .topBox {
         display: flex;
         line-height: 28px;

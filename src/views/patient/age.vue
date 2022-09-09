@@ -2,7 +2,8 @@
   <div class="body">
     <div class="formCard">
       <saleForm :rule-form="ruleForm" @changeForm="changeForm" />
-      <div class="chartBox">
+    </div>
+    <div class="chartBox">
         <div class="display">
           <el-card class="s_box">
             <div>
@@ -79,13 +80,13 @@
                 </el-tabs>
               </div>
               <div class="inChartBox">
-                <div v-show="tabIndex == 'list'" style="padding:31px 64px 0 71px">
-                  <el-table :data="dataList" style="width: 100%" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }">
+                <div v-show="tabIndex == 'list'" style="padding:15px">
+                  <el-table :data="dataList" style="width: 100%" max-height="340" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }">
                     <el-table-column prop="month" label="月份"></el-table-column>
-                    <el-table-column prop="totalnum" label="总患者数"></el-table-column>
-                    <el-table-column prop="newnum" label="本月新增患者数"> </el-table-column>
-                    <el-table-column prop="stopnum" label="脱落人数"> </el-table-column>
-                    <el-table-column prop="stoprate" label="脱落率"> </el-table-column>
+                    <el-table-column prop="totalnum" label="总患者数(人)"></el-table-column>
+                    <el-table-column prop="newnum" label="本月新增患者数(人)"> </el-table-column>
+                    <el-table-column prop="stopnum" label="脱落人数(人)"> </el-table-column>
+                    <el-table-column prop="stoprate" label="脱落率(%)"> </el-table-column>
                   </el-table>
                 </div>
                 <div v-show="tabIndex == 'reason'">
@@ -96,7 +97,6 @@
           </el-card>
         </div>
       </div>
-    </div>
   </div>
 </template>
 <script>
@@ -259,6 +259,7 @@ export default {
         },
         yAxis: {
           type: 'value',
+          name: '人',
           min: 0,
           max: 60,
           axisLine: {
@@ -295,32 +296,16 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-.body {
-  width: 100%;
-  height: 100vh;
-  background: rgba(235, 238, 242, 1);
-  padding: 29px;
-}
-
-.formCard {
-  margin: 0px 24px 25px -10px;
-  width: 1655px;
-  height: 143px;
-}
 
 .chartBox {
-  margin: 0px 24px 25px -1px;
-  width: 1655px;
-  height: 80vh;
-  padding: 26px 0px 34px 0px;
+  margin-top: 20px;
 
   .display {
     display: flex;
     flex-flow: row nowrap;
 
     .s_box {
-      width: 812px;
-      height: 203px;
+      width: 838px;
       margin: 0 28px 0 0;
 
       ::v-deep .el-card__body {
@@ -416,18 +401,19 @@ export default {
   }
 
   .chartDisplay {
-    margin-top: 32px;
+    margin-top: 16px;
     display: flex;
     flex-flow: row wrap;
-
+    .el-card{
+      width: 100%;
+    }
     ::v-deep .el-card__body {
       padding: 0px !important;
     }
 
     .inBox {
-      width: 1655px;
-      height: 547px;
-
+      height: 430px;
+      width: 100%;
       .topBox {
         border-bottom: 1px solid rgba(216, 220, 229, 1);
 
@@ -442,14 +428,13 @@ export default {
       }
 
       .inChartBox {
-        width: 1655px;
-        height: 547px;
+        height: 360px;
         margin: 0 auto;
       }
 
       .inChartBox1 {
-        width: 1655px;
-        height: 447px;
+        width: 1680px;
+        height: 360px;
         margin: 0 auto;
       }
     }
