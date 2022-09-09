@@ -390,7 +390,7 @@ export default {
           trigger: "axis",
         },
         legend: {
-          data: ["规格1", "规格2"],
+          data: ["20mg", "80mg"],
         },
         calculable: true,
         xAxis: [
@@ -419,7 +419,7 @@ export default {
         ],
         series: [
           {
-            name: "规格1",
+            name: "20mg",
             type: "bar",
             data: this.medicine3Data,
             markPoint: {
@@ -433,7 +433,7 @@ export default {
             },
           },
           {
-            name: "规格2",
+            name: "80mg",
             type: "bar",
             data: this.medicine4Data,
             itemStyle: {
@@ -730,14 +730,6 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-.body {
-  width: 100%;
-  height: calc(100vh - 84px);
-  background: rgba(235, 238, 242, 1);
-  padding: 10px;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
 
 .chartBox {
   margin-top: 20px;
