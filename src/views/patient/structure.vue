@@ -470,23 +470,9 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-.body {
-  width: 100%;
-  min-height: 100vh;
-  background: rgba(235, 238, 242, 1);
-  padding: 29px;
-}
-
-.formCard {
-  margin: 0px 24px 25px -10px;
-  width: 1655px;
-  height: 196px;
-}
-
 .container {
   display: flex;
-  margin: 0px 24px 25px -10px;
-  width: 1655px;
+  margin-top: 20px;
 
   .chartBox {
     width: 844px;
@@ -529,7 +515,7 @@ export default {
 
   .chartContent1,
   .chartContent2 {
-    width: 383px;
+    width: 394px;
     height: 360px;
     background: #fff;
     margin-left: 20px;

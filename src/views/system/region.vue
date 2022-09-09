@@ -7,9 +7,9 @@
           <span>{{ row.category | transCat }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" width="260">
+      <el-table-column label="操作" align="left" width="260">
         <template slot-scope="scope">
-          <el-button v-loading="loading" type="primary" size="small" @click="addNode(scope)" v-if="scope.row.category !== 3">新建子节点</el-button>
+          <el-button v-loading="loading" type="primary" size="small" @click="addNode(scope)" v-if="scope.row.category !== 3">{{ scope.row.category | newCat}}</el-button>
           <el-button v-loading="loading" type="primary" size="small" @click="editNode(scope)">编辑</el-button>
           <el-button v-loading="loading" type="danger" size="small" v-if="scope.row.category !== 0" @click="handleDelete(scope)">删除</el-button>
         </template>
@@ -81,6 +81,17 @@ export default {
         realVal = '片区'
       } else {
         realVal = '省区'
+      }
+      return realVal
+    },
+    newCat(value){
+      let realVal = "";
+      if (value === 0) {
+        realVal = '新建大区'
+      } else if (value === 1) {
+        realVal = '新建片区'
+      } else if (value === 2) {
+        realVal = '新建省区'
       }
       return realVal
     }

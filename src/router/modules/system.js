@@ -18,13 +18,6 @@ const systemRouter = {
         title: '用户管理'
       }
     },{
-      path: 'sales',
-      component: () => import('@/views/system/sales'),
-      name: 'Sales',
-      meta: {
-        title: '业务员管理'
-      }
-    },{
       path: 'shop',
       component: () => import('@/views/system/shop'),
       name: 'Shop',
