@@ -23,7 +23,7 @@
                   <div>患者人数/占比</div>
                 </div>
                 <div>
-                  <div>{{newInfo.dot}}</div>
+                  <div class="orange">{{newInfo.dot}}</div>
                   <div>Dot</div>
                 </div>
                 <div>
@@ -55,7 +55,7 @@
                   <div>患者人数/占比</div>
                 </div>
                 <div>
-                  <div>{{oldInfo.dot}}</div>
+                  <div class="orange">{{oldInfo.dot}}</div>
                   <div>Dot</div>
                 </div>
                 <div>
@@ -354,7 +354,15 @@ export default {
         display: flex;
         flex-flow: row wrap;
         justify-content: space-around;
-
+        .orange{
+          color: rgb(255, 141, 26);
+        }
+        .red{
+          color: rgb(240, 96, 96);
+        }
+        .green{
+          color: rgb(0, 186, 173);
+        }
         >div {
           width: 25%;
           height: 135px;
