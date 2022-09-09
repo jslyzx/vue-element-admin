@@ -19,7 +19,6 @@
           <el-table-column prop="mom" label="环比"> </el-table-column>
           <el-table-column prop="yoy" label="同比"> </el-table-column>
         </el-table>
-        <pagination v-show="total > 0" :total="total" :page.sync="ruleForm.page" :limit.sync="ruleForm.pageSize" @pagination="queryShopSaleAnalysis" />
       </div>
     </div>
   </div>
@@ -27,12 +26,10 @@
 <script>
 import { queryShopSaleAnalysis } from '@/api/system'
 import saleForm from '@/components/saleForm'
-import Pagination from '@/components/Pagination'
 export default {
   name: 'ShopSale',
   components: {
-    saleForm,
-    Pagination
+    saleForm
   },
   data() {
     return {
@@ -45,12 +42,9 @@ export default {
         bigArea: '',
         middleArea: '',
         provienceArea: '',
-        shop: '',
-        page: 1,
-        pageSize: 10
+        shop: ''
       },
-      saleList: [],
-      total: 0
+      saleList: []
     }
   },
   created(){
@@ -62,7 +56,6 @@ export default {
     },
     async queryShopSaleAnalysis() {
       const res = await queryShopSaleAnalysis(this.ruleForm)
-      this.total = res.data.length
       this.saleList = res.data
     }
   }
