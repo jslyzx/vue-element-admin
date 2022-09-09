@@ -5,6 +5,7 @@
         :rule-form="ruleForm"
         :utilsShow="utilsShow"
         @changeForm="changeForm"
+        @queryProvinceSalePrice="changeTime"
       />
     </div>
     <div class="container">
@@ -84,6 +85,10 @@ export default {
   methods: {
     changeForm(form) {
       this.getPatientStructure(form);
+    },
+    changeTime(form) {
+      this.ruleForm.queryType = form.queryType
+      this.getPatientStructure(this.ruleForm);
     },
     async getPatientStructure(form) {
       const res = await getPatientStructure(form);

@@ -5,6 +5,7 @@
         :rule-form="ruleForm"
         :utilsShow="utilsShow"
         @changeForm="changeForm"
+        @queryProvinceSalePrice="changeTime"
       />
     </div>
     <div class="chartBox">
@@ -153,6 +154,10 @@ export default {
   },
   methods: {
     changeForm(form) {
+      this.getHearMap();
+      this.queryHospitalSales(form);
+    },
+    changeTime(form) {
       this.getHearMap();
       this.queryHospitalSales(form);
     },
