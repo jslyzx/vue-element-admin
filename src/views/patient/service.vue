@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <sale-form :rule-form="ruleForm" @changeForm="changeForm" />
+      <sale-form :rule-form="ruleForm" @changeForm="changeForm" @queryProvinceSalePrice="changeTime" />
     </div>
     <div class="chartBox">
         <div class="display">
@@ -33,7 +33,7 @@
             <div>
               <div class="topBox">
                 <div>
-                  <span>平均配送时效</span>
+                  <span>平均配送时效(h)</span>
                 </div>
               </div>
               <div class="bottomBox lineBox">
@@ -71,8 +71,8 @@
                       </router-link>
                     </template>
                   </el-table-column>
-                  <el-table-column prop="customerNum" label="会员总数"></el-table-column>
-                  <el-table-column prop="newCustomerRate" label="新会员占比"> </el-table-column>
+                  <el-table-column prop="customerNum" label="患者总数"></el-table-column>
+                  <el-table-column prop="newCustomerRate" label="新患者占比"> </el-table-column>
                   <el-table-column prop="infoRate" label="信息完善度"> </el-table-column>
                   <el-table-column prop="returnRatio" label="回访率"> </el-table-column>
                   <el-table-column prop="timeDiffAvg" label="配送时效"> </el-table-column>
@@ -331,7 +331,12 @@ export default {
     changeForm(form) {
       this.getServiceList(form)
       this.getServiceChart(form)
-    }
+    },
+    changeTime(form) {
+      this.ruleForm.queryType = form.queryType
+      this.getServiceList(this.ruleForm)
+      this.getServiceChart(this.ruleForm)
+    },
   },
   watch: {
     infoRate() {

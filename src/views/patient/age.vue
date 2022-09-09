@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <saleForm :rule-form="ruleForm" @changeForm="changeForm" />
+      <saleForm :rule-form="ruleForm" @changeForm="changeForm" @queryProvinceSalePrice="changeTime"/>
     </div>
     <div class="chartBox">
         <div class="display">
@@ -23,7 +23,7 @@
                   <div>患者人数/占比</div>
                 </div>
                 <div>
-                  <div>{{newInfo.dot}}</div>
+                  <div class="orange">{{newInfo.dot}}</div>
                   <div>Dot</div>
                 </div>
                 <div>
@@ -55,7 +55,7 @@
                   <div>患者人数/占比</div>
                 </div>
                 <div>
-                  <div>{{oldInfo.dot}}</div>
+                  <div class="orange">{{oldInfo.dot}}</div>
                   <div>Dot</div>
                 </div>
                 <div>
@@ -247,6 +247,12 @@ export default {
       this.queryPatientComparison(form)
       this.queryPatientStopReasonRange(form)
     },
+    changeTime(form) {
+      this.ruleForm.queryType = form.queryType
+      this.getPatientList(this.ruleForm)
+      this.queryPatientComparison(this.ruleForm)
+      this.queryPatientStopReasonRange(this.ruleForm)
+    },
     initCharts() {
       const charts1 = echarts.init(this.$refs['chartBox'])
       charts1.setOption({
@@ -354,7 +360,15 @@ export default {
         display: flex;
         flex-flow: row wrap;
         justify-content: space-around;
-
+        .orange{
+          color: rgb(255, 141, 26);
+        }
+        .red{
+          color: rgb(240, 96, 96);
+        }
+        .green{
+          color: rgb(0, 186, 173);
+        }
         >div {
           width: 25%;
           height: 135px;

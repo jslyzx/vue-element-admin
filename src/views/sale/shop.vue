@@ -1,12 +1,24 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <saleForm :rule-form="ruleForm" @changeForm="changeForm" />
+      <saleForm
+        :rule-form="ruleForm"
+        @changeForm="changeForm"
+        @queryProvinceSalePrice="changeTime"
+      />
       <div class="chartBox">
-        <el-table :data="saleList" style="width: 100%" max-height="600" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }">
+        <el-table
+          :data="saleList"
+          style="width: 100%"
+          max-height="600"
+          :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }"
+        >
           <el-table-column label="门店名称">
-            <template slot-scope="{row}">
-              <router-link :to="'/patient/shop/detail/' + row.id" class="link-type">
+            <template slot-scope="{ row }">
+              <router-link
+                :to="'/patient/shop/detail/' + row.id"
+                class="link-type"
+              >
                 <span>{{ row.name }}</span>
               </router-link>
             </template>
@@ -24,43 +36,46 @@
   </div>
 </template>
 <script>
-import { queryShopSaleAnalysis } from '@/api/system'
-import saleForm from '@/components/saleForm'
+import { queryShopSaleAnalysis } from "@/api/system";
+import saleForm from "@/components/saleForm";
 export default {
-  name: 'ShopSale',
+  name: "ShopSale",
   components: {
-    saleForm
+    saleForm,
   },
   data() {
     return {
       ruleForm: {
         queryType: 1,
-        year: '2022',
-        startMonth: '',
-        endMonth: '',
-        goods: '',
-        bigArea: '',
-        middleArea: '',
-        provienceArea: '',
-        shop: ''
+        year: "2022",
+        startMonth: "",
+        endMonth: "",
+        goods: "",
+        bigArea: "",
+        middleArea: "",
+        provienceArea: "",
+        shop: "",
       },
-      saleList: []
-    }
+      saleList: [],
+    };
   },
   created() {
-    this.changeForm(this.ruleForm)
+    this.changeForm(this.ruleForm);
   },
   methods: {
     changeForm(form) {
-      this.queryShopSaleAnalysis(form)
+      this.queryShopSaleAnalysis(form);
+    },
+    changeTime(form) {
+      this.ruleForm.queryType = form.queryType;
+      this.queryShopSaleAnalysis(this.ruleForm);
     },
     async queryShopSaleAnalysis(form) {
-      const res = await queryShopSaleAnalysis(form)
-      this.saleList = res.data
-    }
-  }
-}
-
+      const res = await queryShopSaleAnalysis(form);
+      this.saleList = res.data;
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 .chartBox {
@@ -69,5 +84,4 @@ export default {
   background-color: #fff;
   padding: 20px;
 }
-
 </style>
