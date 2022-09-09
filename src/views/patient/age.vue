@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <saleForm :rule-form="ruleForm" @changeForm="changeForm" />
+      <saleForm :rule-form="ruleForm" @changeForm="changeForm" @queryProvinceSalePrice="changeTime"/>
     </div>
     <div class="chartBox">
         <div class="display">
@@ -246,6 +246,12 @@ export default {
       this.getPatientList(form)
       this.queryPatientComparison(form)
       this.queryPatientStopReasonRange(form)
+    },
+    changeTime(form) {
+      this.ruleForm.queryType = form.queryType
+      this.getPatientList(this.ruleForm)
+      this.queryPatientComparison(this.ruleForm)
+      this.queryPatientStopReasonRange(this.ruleForm)
     },
     initCharts() {
       const charts1 = echarts.init(this.$refs['chartBox'])

@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <sale-form :rule-form="ruleForm" @changeForm="changeForm" />
+      <sale-form :rule-form="ruleForm" @changeForm="changeForm" @queryProvinceSalePrice="changeTime" />
     </div>
     <div class="chartBox">
         <div class="display">
@@ -331,7 +331,12 @@ export default {
     changeForm(form) {
       this.getServiceList(form)
       this.getServiceChart(form)
-    }
+    },
+    changeTime(form) {
+      this.ruleForm.queryType = form.queryType
+      this.getServiceList(this.ruleForm)
+      this.getServiceChart(this.ruleForm)
+    },
   },
   watch: {
     infoRate() {

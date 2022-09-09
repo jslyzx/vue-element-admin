@@ -534,9 +534,9 @@ export default {
       .bgfff {
         background-color: #fff;
         border-bottom: 1px solid rgba(216, 220, 229, 1);
-        line-height: 30px;
+        line-height: 40px;
         box-sizing: border-box;
-        height: 42px;
+        height: 56px;
       }
     }
   }

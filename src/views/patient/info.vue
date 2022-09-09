@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <sale-form :rule-form="ruleForm" @changeForm="changeForm" />
+      <sale-form :rule-form="ruleForm" @changeForm="changeForm" @queryProvinceSalePrice="changeTime" />
     </div>
     <div class="chartBox">
         <div class="display">
@@ -191,6 +191,10 @@ export default {
     },
     changeForm(form) {
       this.queryPatientAnalysis(form)
+    },
+    changeTime(form) {
+      this.ruleForm.queryType = form.queryType;
+      this.queryPatientAnalysis(this.ruleForm);
     },
     initCharts() {
       const charts1 = echarts.init(document.getElementById("chartBox"),"macarons")
