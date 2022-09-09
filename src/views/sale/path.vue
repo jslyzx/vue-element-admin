@@ -73,6 +73,7 @@
                 :page-size="ruleForm.pageNum"
                 layout="total, sizes, prev, pager, next"
                 :total="total"
+                :page-sizes="pageSizes"
                 style="margin-top: 12px"
               >
               </el-pagination>
@@ -135,8 +136,9 @@ export default {
       ruleForm: {
         queryType: 1,
         page: 1,
-        pageNum: 5,
+        pageNum: 5
       },
+      pageSizes: [5,10,15],
       utilsShow: 1,
       options: [],
       hospitalOfficeSales: [],
@@ -255,10 +257,6 @@ export default {
 </script>
   
   <style lang="scss" scoped>
-.formCard {
-  margin: 0px 24px 25px -10px;
-  width: 1655px;
-}
 
 .chartBox {
   margin-top: 16px;
@@ -288,8 +286,8 @@ export default {
     }
     margin-bottom: 10px;
     .inBox {
-      width: 816px;
-      height: 341px;
+      width: 832px;
+      height: 330px;
       padding: 16px;
       .topBox {
         display: flex;

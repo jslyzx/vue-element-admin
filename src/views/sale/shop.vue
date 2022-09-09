@@ -6,11 +6,12 @@
         @changeForm="changeForm"
         @queryProvinceSalePrice="changeTime"
       />
-      <div class="chartBox">
+    </div>
+    <div class="chartBox">
         <el-table
           :data="saleList"
           style="width: 100%"
-          max-height="600"
+          max-height="650"
           :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }"
         >
           <el-table-column label="门店名称">
@@ -32,7 +33,6 @@
           <el-table-column prop="yoy" label="同比"> </el-table-column>
         </el-table>
       </div>
-    </div>
   </div>
 </template>
 <script>
@@ -80,8 +80,8 @@ export default {
 <style lang="scss" scoped>
 .chartBox {
   margin-top: 16px;
-  height: 650px;
   background-color: #fff;
   padding: 20px;
+  height: calc(100% - 130px);
 }
 </style>

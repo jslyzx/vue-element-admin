@@ -23,15 +23,15 @@
                   <div>患者人数/占比</div>
                 </div>
                 <div>
-                  <div>{{newInfo.dot}}</div>
+                  <div class="orange">{{newInfo.dot}}</div>
                   <div>Dot</div>
                 </div>
                 <div>
-                  <div>{{newInfo.sales}}/{{newInfo.salesRate}}</div>
+                  <div class="green">{{newInfo.sales | integMoney}}/{{newInfo.salesRate}}</div>
                   <div>销售额/占比</div>
                 </div>
                 <div>
-                  <div>{{newInfo.buyTimesAvg}}</div>
+                  <div class="red">{{newInfo.buyTimesAvg}}</div>
                   <div>平均购买次数</div>
                 </div>
               </div>
@@ -55,15 +55,15 @@
                   <div>患者人数/占比</div>
                 </div>
                 <div>
-                  <div>{{oldInfo.dot}}</div>
+                  <div class="orange">{{oldInfo.dot}}</div>
                   <div>Dot</div>
                 </div>
                 <div>
-                  <div>{{oldInfo.sales}}/{{oldInfo.salesRate}}</div>
+                  <div class="green">{{oldInfo.sales | integMoney}}/{{oldInfo.salesRate}}</div>
                   <div>销售额/占比</div>
                 </div>
                 <div>
-                  <div>{{oldInfo.buyTimesAvg}}</div>
+                  <div class="red">{{oldInfo.buyTimesAvg}}</div>
                   <div>平均购买次数</div>
                 </div>
               </div>
@@ -81,7 +81,7 @@
               </div>
               <div class="inChartBox">
                 <div v-show="tabIndex == 'list'" style="padding:15px">
-                  <el-table :data="dataList" style="width: 100%" max-height="340" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }">
+                  <el-table :data="dataList" style="width: 100%" max-height="390" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }">
                     <el-table-column prop="month" label="月份"></el-table-column>
                     <el-table-column prop="totalnum" label="总患者数(人)"></el-table-column>
                     <el-table-column prop="newnum" label="本月新增患者数(人)"> </el-table-column>
@@ -225,6 +225,11 @@ export default {
       chartData: undefined
     }
   },
+  filters: {
+    integMoney(s){
+      return parseInt(s) + '万元'
+    }
+  },
   created() {
     this.changeForm(this.ruleForm)
   },
@@ -360,7 +365,15 @@ export default {
         display: flex;
         flex-flow: row wrap;
         justify-content: space-around;
-
+        .orange{
+          color: rgb(255, 141, 26) !important;
+        }
+        .red{
+          color: rgb(240, 96, 96) !important;
+        }
+        .green{
+          color: rgb(0, 186, 173) !important;
+        }
         >div {
           width: 25%;
           height: 135px;
@@ -418,7 +431,7 @@ export default {
     }
 
     .inBox {
-      height: 430px;
+      height: 480px;
       width: 100%;
       .topBox {
         border-bottom: 1px solid rgba(216, 220, 229, 1);
@@ -440,7 +453,7 @@ export default {
 
       .inChartBox1 {
         width: 1680px;
-        height: 360px;
+        height: 390px;
         margin: 0 auto;
       }
     }
