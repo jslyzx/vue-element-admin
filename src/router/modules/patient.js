@@ -35,7 +35,7 @@ const patientRouter = {
       path: 'shop/detail/:id(\\d+)',
       component: () => import('@/views/patient/basicInfo'),
       name: 'ShopDetail',
-      meta: { title: '门店详情', noCache: true, activeMenu: '/patient/service' },
+      meta: { title: '门店详情', noCache: true },
       hidden: true
     }
   ]

@@ -117,3 +117,11 @@ export function queryPatientCountByMonth(data) {
     params: data
   })
 }
+
+export function queryShopSaleAnalysis(data) {
+  return request({
+    url: '/api/sale/shop/queryShopSaleAnalysis',
+    method: 'get',
+    params: data
+  })
+}
