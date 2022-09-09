@@ -26,7 +26,7 @@
             </el-form-item>
             <el-form-item label="商品">
               <!-- <el-cascader v-model="ruleForm.productId" class="selectRegion" :options="options" @change="handleChange" /> -->
-              <el-input v-model="ruleForm.productId" disabled></el-input>
+              <el-input v-model="inputText" disabled></el-input>
             </el-form-item>
             <el-form-item label="大区" v-if="regionShow">
               <el-select v-model="ruleForm.regionId" placeholder="请选择" @change="changeRegion">
@@ -50,7 +50,7 @@
             </el-form-item>
             <el-form-item v-if="utilsShow == 1" label="医院">
               <el-select v-model="ruleForm.hospital" placeholder="请选择">
-                <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
+                <!-- <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" /> -->
               </el-select>
             </el-form-item>
             <el-form-item v-if="utilsShow == 2" label="性别">
@@ -108,6 +108,7 @@ export default {
   },
   data() {
     return {
+      inputText:'拓益',
       radio1: '',
       rules: {
         //   year: [
@@ -214,7 +215,7 @@ export default {
     },
     changeTime(e) {
       this.ruleForm.queryType = e.target.dataset.time
-      this.$emit("queryProvinceSalePrice", { queryType: this.ruleForm.queryType * 1 })
+      this.$emit("queryProvinceSalePrice", this.ruleForm)
     },
 
   }

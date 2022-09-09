@@ -2,7 +2,8 @@
   <div class="body">
     <div class="formCard">
       <sale-form :rule-form="ruleForm" @changeForm="changeForm" />
-      <div class="chartBox">
+    </div>
+    <div class="chartBox">
         <div class="display">
           <el-card class="s_box">
             <div>
@@ -139,7 +140,6 @@
           </el-card>
         </div>
       </div>
-    </div>
   </div>
 </template>
 <script>
@@ -256,25 +256,10 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-.body {
-  width: 100%;
-  height: 100vh;
-  background: rgba(235, 238, 242, 1);
-  padding: 29px;
-}
-
-.formCard {
-  margin: 0px 24px 25px -10px;
-  width: 1655px;
-  height: 143px;
-}
-
 .chartBox {
-  margin: 25px 24px 25px -1px;
-  width: 1655px;
+  margin-top: 20px;
   height: 80vh;
-  background-color: #fff;
-  padding: 39px 36px 34px 27px;
+  padding: 20x;
 
   .display {
     display: flex;
@@ -324,10 +309,13 @@ export default {
   }
 
   .chartDisplay {
-    margin-top: 32px;
-    width: 1593px;
+    margin-top: 16px;
     display: flex;
     flex-flow: row wrap;
+
+    .el-card{
+      width: 100%;
+    }
 
     ::v-deep .el-card__body {
       padding: 0px !important;
@@ -335,8 +323,7 @@ export default {
 
     .inBox {
       height: 100%;
-      width: 1593px;
-
+      width: 100%;
       .topBox {
         height: 52px;
         display: flex;

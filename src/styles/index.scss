@@ -194,3 +194,12 @@ aside {
 .anchorBL{  
   display: none !important;  
 }
+
+.body {
+  width: 100%;
+  height: calc(100vh - 84px);
+  background: rgba(235, 238, 242, 1);
+  padding: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

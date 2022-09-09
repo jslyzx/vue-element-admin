@@ -250,28 +250,14 @@ export default {
 </script>
   
   <style lang="scss" scoped>
-.body {
-  width: 100%;
-  background: rgba(235, 238, 242, 1);
-  padding: 29px;
-  position: relative;
-  height: calc(100vh - 84px);
-  background: #ebeef2;
-  padding: 10px;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
 .formCard {
   margin: 0px 24px 25px -10px;
   width: 1655px;
 }
 
 .chartBox {
-  margin: 0px 24px 25px -10px;
-  width: 1656px;
+  margin-top: 16px;
   height: 317px;
-  padding-bottom: 20px;
   background-color: #fff;
   .chartTitle {
     background: #fff;
@@ -289,7 +275,7 @@ export default {
   }
 
   .chartDisplay {
-    margin-top: 32px;
+    margin-top: 16px;
     display: flex;
     flex-flow: row wrap;
     ::v-deep .el-card__body {
