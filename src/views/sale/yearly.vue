@@ -308,7 +308,7 @@ export default {
       this.queryMonthSalesPrice();
     },
     async submitTop1(id) {
-      let res = await submitTop({ queryType: this.ruleForm.queryType * 1, medicineId: id });
+      let res = await submitTop({ ...this.ruleForm, medicineId: id });
       if (res.code == 0) {
         this.topData = res.data;
         this.id1=id;
@@ -458,7 +458,7 @@ export default {
             trigger: 'item',
             formatter: '销售金额{c}万<br />销售占比{d}'
           },
-          color: ['#2A58C7', '#3AA0FF', '#FF8D1A', '#D43030', '#00BAAD', '#FFC300', '#A5D63FFF', '#AC33C1FF'],
+          // color: ['#2A58C7', '#3AA0FF', '#FF8D1A', '#D43030', '#00BAAD', '#FFC300', '#A5D63FFF', '#AC33C1FF'],
           legend: [{
             bottom: '50px',
             left: '65px',
@@ -521,7 +521,7 @@ export default {
             trigger: 'item',
             formatter: '销售金额{c}万<br />销售占比{d}'
           },
-          color: ['#2A58C7', '#FF8D1A', '#00BAAD', '#A5D63F', '#EE6666'],
+          color: ['#A5D63F', '#EE6666'],
           legend: {
             formatter: function (name) {
               for (let index in that.chartsData2) {
