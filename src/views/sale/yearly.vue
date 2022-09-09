@@ -197,6 +197,7 @@ export default {
       medicine2Data: [],
       medicine3Data: [],
       medicine4Data: [],
+      id1:'',
     }
   },
   computed: {
@@ -253,9 +254,9 @@ export default {
       }
       this.queryMonthSalesPrice()
     },
-      queryMonthSalesPrice()  {
+    queryMonthSalesPrice()  {
         queryMonthSalesPrice({
-        queryType: this.ruleForm.queryType,
+        ...this.ruleForm,
         type:  this.tabIndex5
       }).then((res) => {
         if (res.code == 0) {
@@ -301,11 +302,16 @@ export default {
     },
     async changeForm(form) {
       this.queryProvinceSalePrice(form);
+      this.query2(form);
+      this.query1(form);
+      this.submitTop1(this.id1);
+      this.queryMonthSalesPrice();
     },
     async submitTop1(id) {
       let res = await submitTop({ queryType: this.ruleForm.queryType * 1, medicineId: id });
       if (res.code == 0) {
         this.topData = res.data;
+        this.id1=id;
       }
     },
     async handleClick(tab) {
@@ -704,7 +710,11 @@ export default {
         this.chartsData1 = res.data.provinceSalePriceRate.map((item, index) => {
           return { name: item.provinceName, value: item.salesPrice, rate: item.salePriceRate }
         });
-      }
+      };
+      this.query2(this.ruleForm);
+      this.query1(this.ruleForm);
+      this.submitTop1(this.id1);
+      this.queryMonthSalesPrice();
     },
   },
   watch: {
