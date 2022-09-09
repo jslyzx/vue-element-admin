@@ -85,3 +85,59 @@ export function saveShop(data) {
     data
   })
 }
+
+export function queryShopInfo(data) {
+  return request({
+    url: '/api/patient/shop/serve/queryShopInfo',
+    method: 'get',
+    params: data
+  })
+}
+
+export function getPatientStructure(data) {
+  return request({
+    url: '/api/patient/analysis/queryPatientStructure',
+    method: 'get',
+    params: data
+  })
+}
+
+export function queryPatientComparison(data) {
+  return request({
+    url: '/api/patient/analysis/queryPatientComparison',
+    method: 'get',
+    params: data
+  })
+}
+
+export function queryPatientCountByMonth(data) {
+  return request({
+    url: '/api/patient/analysis/queryPatientCountByMonth',
+    method: 'get',
+    params: data
+  })
+}
+
+export function queryShopSaleAnalysis(data) {
+  return request({
+    url: '/api/sale/shop/queryShopSaleAnalysis',
+    method: 'get',
+    params: data
+  })
+}
+
+export function queryPatientStopReasonRange(data) {
+  return request({
+    url: '/api/patient/analysis/queryPatientStopReasonRange',
+    method: 'get',
+    params: data
+  })
+}
+
+export function queryPatientAnalysis(data) {
+  return request({
+    url: '/api/patient/analysis/queryPatientAnalysis',
+    method: 'get',
+    params: data
+  })
+}

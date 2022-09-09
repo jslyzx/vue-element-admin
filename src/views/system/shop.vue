@@ -188,6 +188,7 @@ export default {
     async getList() {
       const res = await fetchShopList(this.listQuery)
       this.shopList = res.data.data
+      this.total = res.data.total
       this.listLoading = false
     },
     async getRegionList() {

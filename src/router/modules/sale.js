@@ -20,17 +20,7 @@ const saleRouter = {
       component: () => import('@/views/sale/path'),
       name: 'SalePath',
       meta: { title: '销售流向' }
-    }, {
-      path: 'rate',
-      component: () => import('@/views/sale/rate'),
-      name: 'SaleRate',
-      meta: { title: '指标达成率' }
-    }, {
-      path: 'man',
-      component: () => import('@/views/sale/man'),
-      name: 'SalesMan',
-      meta: { title: '业务员销售情况' }
-    }, {
+    },{
       path: 'shop',
       component: () => import('@/views/sale/shop'),
       name: 'ShopSale',

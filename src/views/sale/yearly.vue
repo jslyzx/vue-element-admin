@@ -25,10 +25,8 @@
                   {{topData.salesPrice?topData.salesPrice[0].currSalePrice:''}}
                 </div>
                 <div class="compare">
-                  <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span
-                      style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
-                  <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
-                      style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
+                  <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
+                  <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
                 </div>
               </div>
             </div>
@@ -47,17 +45,14 @@
                     <el-tab-pane label="规格二" name="357" />
                   </el-tabs>
                 </div>
-
               </div>
               <div class="bottomBox">
                 <div class="price">
                   {{topData.salesNum?topData.salesNum[0].currSaleNum:''}}
                 </div>
                 <div class="compare">
-                  <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span
-                      style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
-                  <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
-                      style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
+                  <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
+                  <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
                 </div>
               </div>
             </div>
@@ -76,17 +71,14 @@
                     <el-tab-pane label="规格二" name="357" />
                   </el-tabs>
                 </div>
-
               </div>
               <div class="bottomBox">
                 <div class="price">
                   {{topData.oldCustomerSalesPrice?topData.oldCustomerSalesPrice[0].currSalePrice:''}}
                 </div>
                 <div class="compare">
-                  <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span
-                      style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
-                  <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
-                      style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
+                  <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
+                  <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
                 </div>
               </div>
             </div>
@@ -105,17 +97,14 @@
                     <el-tab-pane label="规格二" name="357" />
                   </el-tabs>
                 </div>
-
               </div>
               <div class="bottomBox">
                 <div class="price">
                   {{topData.customerSalesPrice?topData.customerSalesPrice[0].currSalePrice:''}}
                 </div>
                 <div class="compare">
-                  <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span
-                      style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
-                  <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
-                      style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
+                  <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
+                  <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
                 </div>
               </div>
             </div>
@@ -139,7 +128,6 @@
               </div>
             </div>
           </el-card>
-
           <el-card style="margin-left:20px">
             <div class="inBox2">
               <h2>各省区销售占比</h2>
@@ -168,17 +156,15 @@
       </div>
     </div>
   </div>
-
 </template>
-
 <script>
 import saleForm from '@/components/saleForm'
-import { queryProvinceSalePriceRate, submitTop, queryShopSale, queryRegionSale, querySectionSale } from "@/api/sales"
-import { queryMonthSalesPrice } from "@/api/home"
+import {  queryProvinceSalePriceRate,  submitTop,  queryShopSale,  queryRegionSale,  querySectionSale  } from "@/api/sales"
+import {  queryMonthSalesPrice  } from "@/api/home"
 import * as echarts from 'echarts'
 require("echarts/theme/macarons"); // echarts theme
 export default {
-  name: 'Yearly',
+  name: 'SaleYearly',
   components: {
     saleForm
   },
@@ -265,12 +251,12 @@ export default {
       } else {
         this.tabIndex5 = 1;
       }
-      this.queryMonthSalesPrice();
+      this.queryMonthSalesPrice()
     },
-    queryMonthSalesPrice() {
-      queryMonthSalesPrice({
+      queryMonthSalesPrice()  {
+        queryMonthSalesPrice({
         queryType: this.ruleForm.queryType,
-        type: this.tabIndex5
+        type:  this.tabIndex5
       }).then((res) => {
         if (res.code == 0) {
           console.log(res);
@@ -667,32 +653,27 @@ export default {
           data: ["规格1", "规格2"],
         },
         calculable: true,
-        xAxis: [
-          {
-            type: "category",
-            data: [
-              "1月",
-              "2月",
-              "3月",
-              "4月",
-              "5月",
-              "6月",
-              "7月",
-              "8月",
-              "9月",
-              "10月",
-              "11月",
-              "12月",
-            ],
-          },
-        ],
-        yAxis: [
-          {
-            type: "value",
-          },
-        ],
-        series: [
-          {
+        xAxis: [{
+          type: "category",
+          data: [
+            "1月",
+            "2月",
+            "3月",
+            "4月",
+            "5月",
+            "6月",
+            "7月",
+            "8月",
+            "9月",
+            "10月",
+            "11月",
+            "12月",
+          ],
+        }, ],
+        yAxis: [{
+          type: "value",
+        }, ],
+        series: [{
             name: "规格1",
             type: "bar",
             data: this.medicine1Data,
@@ -746,8 +727,8 @@ export default {
     }
   }
 }
-</script>
 
+</script>
 <style lang="scss" scoped>
 .body {
   width: 100%;
@@ -843,6 +824,7 @@ export default {
         height: 500px;
       }
 
+
       .inChartBox5 {
         margin: 30px auto;
         width: 800px;
@@ -876,4 +858,5 @@ export default {
     }
   }
 }
+
 </style>
