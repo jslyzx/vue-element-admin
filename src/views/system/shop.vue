@@ -38,7 +38,7 @@
           <span>{{ row.manager }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Actions" align="center" width="230" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
           <el-button type="primary" size="mini" @click="handleEdit(row)">
             编辑
@@ -192,7 +192,7 @@ export default {
       this.listLoading = false
     },
     async getRegionList() {
-      const res = await fetchAreaSubList({ pId: 1 })
+      const res = await fetchAreaSubList({ pId: '91498336854474752' })
       this.regionList = res.data
       this.formRegionList = res.data
     },

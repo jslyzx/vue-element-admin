@@ -237,7 +237,6 @@ export default {
     .selectBox {
       div {
         width: 83px;
-        height: 27.05px;
         margin: 0 0 10px 0;
         opacity: 1;
         background: rgba(255, 255, 255, 1);
@@ -248,8 +247,11 @@ export default {
         color: rgba(166, 166, 166, 1);
         text-align: center;
         vertical-align: center;
-        line-height: 27.05px;
+        line-height: 20px;
         cursor: pointer;
+      }
+      div:last-child{
+        margin: 0;
       }
     }
 
@@ -281,5 +283,10 @@ export default {
     display: none !important;
   }
 }
-
+.el-form-item{
+  margin-bottom: 10px;
+}
+.el-card__body{
+  padding:10px 24px 10px 24px;
+}
 </style>
