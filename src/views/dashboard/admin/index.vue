@@ -31,33 +31,6 @@
           <div id="map" class="chart-part" style="height: 100%" />
         </div>
       </el-col>
-      <!-- <el-col :xs="6" :sm="6" style="height: 100%">
-        <div class="xsyg">
-          <div class="xsTitleBox">
-            <div>销售预估完成率</div>
-            <div class="completionRate">完成率</div>
-            <div class="completionRateNum">{{salesCompletionRate.estimateRate}}%</div>
-          </div>
-          <div>
-            <div class="chart-wrapper">
-              <div id="pieChart1" style="height: 100px; width: 160px;"></div>
-            </div>
-          </div>
-        </div>
-        <div class="xsnd">
-          <div class="xsTitleBox">
-            <div>销售年度完成率</div>
-            <div class="completionRate">完成率</div>
-            <div class="completionRateNum">{{salesCompletionRate.yearRate}}%</div>
-          </div>
-          <div>
-            <div class="chart-wrapper">
-              <div id="pieChart2" style="height: 100px; width: 160px;"></div>
-            </div>
-          </div>
-        </div>
-      </el-col> -->
-
       <el-col :xs="6" :sm="6" style="height: 100%">
         <div class="phBox">
           <div class="phTitle">
@@ -97,7 +70,7 @@
         </div>
       </el-col>
     </el-row>
-    <el-row :gutter="40" class="allChartBox">
+    <el-row :gutter="40" class="allChartBox" style="margin-bottom: 0!important;">
       <el-col :xs="18" :sm="18" style="height: 100%">
         <div class="chartTitle">销售统计</div>
         <div class="barChartBox">
@@ -427,19 +400,9 @@ export default {
 
 <style lang="scss" scoped>
 .el-row {
-  margin-bottom: 20px !important;
+  margin-bottom: 15px !important;
 }
 .dashboard-editor-container {
-  width: 100%;
-  padding: 20px;
-  background-color: rgb(240, 242, 245);
-  position: relative;
-  height: calc(100vh - 84px);
-  background: #ebeef2;
-  padding: 10px;
-  overflow-y: auto;
-  overflow-x: hidden;
-
   .github-corner {
     position: absolute;
     top: 0px;
@@ -498,12 +461,10 @@ export default {
     }
   }
   .allChartBox {
-    height: 459px;
-    margin-bottom: 32px;
+    height: 330px;
+    margin-bottom: 10px;
     .phBox {
       background: #fff;
-      // height: 100%;
-      height: 783px;
       padding: 16px;
       box-sizing: border-box;
       ul {
@@ -513,7 +474,7 @@ export default {
       .pbBox {
         display: flex;
         background: rgba(245, 247, 250, 1);
-        padding: 9px;
+        padding: 8px;
         color: rgba(127, 143, 164, 1);
         font-size: 14px;
         .firstPb {
@@ -536,7 +497,7 @@ export default {
         border-bottom: 1px solid rgba(216, 220, 229, 1);
         line-height: 40px;
         box-sizing: border-box;
-        height: 56px;
+        height: 53px;
       }
     }
   }
@@ -544,7 +505,7 @@ export default {
     background-color: #fff;
     padding: 16px;
     box-sizing: border-box;
-    height: 418px;
+    height: 290px;
   }
   .chart-wrapper {
     background: #fff;
