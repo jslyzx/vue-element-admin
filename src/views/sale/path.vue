@@ -286,7 +286,6 @@ export default {
       width: 816px;
       height: 341px;
       padding: 16px;
-      overflow-y: scroll;
       .topBox {
         display: flex;
         line-height: 28px;
