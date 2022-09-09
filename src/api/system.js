@@ -125,3 +125,19 @@ export function queryShopSaleAnalysis(data) {
     params: data
   })
 }
+
+export function queryPatientStopReasonRange(data) {
+  return request({
+    url: '/api/patient/analysis/queryPatientStopReasonRange',
+    method: 'get',
+    params: data
+  })
+}
+
+export function queryPatientAnalysis(data) {
+  return request({
+    url: '/api/patient/analysis/queryPatientAnalysis',
+    method: 'get',
+    params: data
+  })
+}

@@ -18,20 +18,20 @@
               </div>
               <div class="bottomBox">
                 <div>
-                  <div>543/23%</div>
+                  <div>{{newInfo.num}}/{{newInfo.numRate}}</div>
                   <div>患者人数/占比</div>
                 </div>
                 <div>
-                  <div>1.6</div>
+                  <div>{{newInfo.dot}}</div>
                   <div>Dot</div>
                 </div>
                 <div>
-                  <div>4152456/21%</div>
+                  <div>{{newInfo.sales}}/{{newInfo.salesRate}}</div>
                   <div>销售额/占比</div>
                 </div>
                 <div>
-                  <div>543/23%</div>
-                  <div>患者人数/占比</div>
+                  <div>{{newInfo.buyTimesAvg}}</div>
+                  <div>平均购买次数</div>
                 </div>
               </div>
             </div>
@@ -50,20 +50,20 @@
               </div>
               <div class="bottomBox">
                 <div>
-                  <div>543/23%</div>
+                  <div>{{oldInfo.num}}/{{oldInfo.numRate}}</div>
                   <div>患者人数/占比</div>
                 </div>
                 <div>
-                  <div>1.6</div>
+                  <div>{{oldInfo.dot}}</div>
                   <div>Dot</div>
                 </div>
                 <div>
-                  <div>4152456/21%</div>
+                  <div>{{oldInfo.sales}}/{{oldInfo.salesRate}}</div>
                   <div>销售额/占比</div>
                 </div>
                 <div>
-                  <div>543/23%</div>
-                  <div>患者人数/占比</div>
+                  <div>{{oldInfo.buyTimesAvg}}</div>
+                  <div>平均购买次数</div>
                 </div>
               </div>
             </div>
@@ -87,7 +87,6 @@
                     <el-table-column prop="stopnum" label="脱落人数"> </el-table-column>
                     <el-table-column prop="stoprate" label="脱落率"> </el-table-column>
                   </el-table>
-                  <pagination v-show="total > 0" :total="total" :page.sync="ruleForm.page" :limit.sync="ruleForm.pageSize" @pagination="getPatientList" />
                 </div>
                 <div v-show="tabIndex == 'reason'">
                   <div id="chartBox" ref="chartBox" class="inChartBox1" />
@@ -101,16 +100,15 @@
   </div>
 </template>
 <script>
-import { queryPatientComparison, queryPatientCountByMonth } from '@/api/system'
+import { queryPatientComparison, queryPatientCountByMonth, queryPatientStopReasonRange } from '@/api/system'
 import saleForm from '@/components/saleForm'
-import Pagination from '@/components/Pagination'
 import * as echarts from 'echarts'
+import _ from 'lodash'
 require("echarts/theme/macarons")
 export default {
   name: 'PatientAge',
   components: {
-    saleForm,
-    Pagination
+    saleForm
   },
   data() {
     return {
@@ -221,28 +219,40 @@ export default {
           label: "脱落率",
           prop: "loseRate"
         }
-      ]
-
+      ],
+      oldInfo: {},
+      newInfo: {},
+      chartData: undefined
     }
   },
-  created(){
+  created() {
     this.changeForm()
   },
   methods: {
     async getPatientList() {
-        const res = await queryPatientCountByMonth(this.ruleForm)
-        this.total = res.data.length
-        this.dataList = res.data
+      const res = await queryPatientCountByMonth(this.ruleForm)
+      this.dataList = res.data
+    },
+    async queryPatientComparison() {
+      const res = await queryPatientComparison(this.ruleForm)
+      this.newInfo = res.data.new
+      this.oldInfo = res.data.old
+    },
+    async queryPatientStopReasonRange() {
+      const res = await queryPatientStopReasonRange(this.ruleForm)
+      this.chartData = res.data
     },
     changeForm() {
-        this.getPatientList()
+      this.getPatientList()
+      this.queryPatientComparison()
+      this.queryPatientStopReasonRange()
     },
     initCharts() {
       const charts1 = echarts.init(this.$refs['chartBox'])
       charts1.setOption({
         xAxis: {
           type: 'category',
-          data: ['病情发展', '原因不明', '副反应大', '改治疗方案', '患者放弃', '经济原因', '治疗结束', '去世', '手术期间', '效果不好', '医院暂停', '疫情延迟', '指标不好'],
+          data: _.map(this.chartData,function(v){return v.name}),
           axisTick: {
             show: false,
           }
@@ -256,7 +266,7 @@ export default {
           }
         },
         series: [{
-          data: [20, 20, 50, 40, 10, 25, 35, 20, 20, 50, 40, 10, 25],
+          data: _.map(this.chartData,function(v){return v.value}),
           type: 'bar',
           color: "#3aa0ff",
           barWidth: 30,
@@ -274,6 +284,11 @@ export default {
           }
         }]
       })
+    }
+  },
+  watch: {
+    chartData() {
+      this.initCharts()
     }
   }
 }

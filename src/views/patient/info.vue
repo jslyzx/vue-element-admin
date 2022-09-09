@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <sale-form :rule-form="ruleForm" />
+      <sale-form :rule-form="ruleForm" @changeForm="changeForm" />
       <div class="chartBox">
         <div class="display">
           <el-card class="s_box">
@@ -11,36 +11,23 @@
                   <span>患者总数</span>
                 </div>
                 <div>
-                  <span
-                    style="
+                  <span style="
                       float: right;
                       font-size: 12px;
                       color: rgba(53, 64, 82, 1);
-                    "
-                    ><i
-                      class="el-icon-warning-outline"
-                      style="margin-right: 5px"
-                    />时间范围内发生购买行为的患者数量
+                    "><i class="el-icon-warning-outline" style="margin-right: 5px" />时间范围内发生购买行为的患者数量
                   </span>
                 </div>
               </div>
               <div class="bottomBox">
                 <div v-show="tabIndex == 'total'">
-                  <div class="price">1,438,900</div>
+                  <div class="price">{{num.num}}</div>
                   <div class="compare">
                     <div>
-                      <span>同比</span
-                      ><span style="margin-left: 19px">67.66%</span
-                      ><span style="margin-left: 16px"
-                        ><img src="@/assets/sale_images/路径 16.png"
-                      /></span>
+                      <span>同比</span><span style="margin-left: 16px">{{num.yoy}}</span><span style="margin-left: 16px"><img v-if="parseFloat(num.yoy) >= 0" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span>
                     </div>
-                    <div style="margin-left: 37px">
-                      <span>环比</span
-                      ><span style="margin-left: 19px">-15.89%</span
-                      ><span style="margin-left: 16px"
-                        ><img src="@/assets/sale_images/Info Icon.png"
-                      /></span>
+                    <div style="margin-left: 26px">
+                      <span>环比</span><span style="margin-left: 16px">{{num.mom}}</span><span style="margin-left: 16px"><img v-if="parseFloat(num.mom) >= 0" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span>
                     </div>
                   </div>
                 </div>
@@ -54,36 +41,23 @@
                   <span>患者DOT</span>
                 </div>
                 <div>
-                  <span
-                    style="
+                  <span style="
                       float: right;
                       font-size: 12px;
                       color: rgba(53, 64, 82, 1);
-                    "
-                    ><i
-                      class="el-icon-warning-outline"
-                      style="margin-right: 5px"
-                    />DOT=AVG(SUM(购药量/默认计量/30))
+                    "><i class="el-icon-warning-outline" style="margin-right: 5px" />DOT=AVG(SUM(购药量/默认计量/30))
                   </span>
                 </div>
               </div>
               <div class="bottomBox">
                 <div v-show="tabIndex2 == 'total'">
-                  <div class="price">1,438,900</div>
+                  <div class="price">{{dot.value}}</div>
                   <div class="compare">
                     <div>
-                      <span>同比</span
-                      ><span style="margin-left: 19px">67.66%</span
-                      ><span style="margin-left: 16px"
-                        ><img src="@/assets/sale_images/路径 16.png"
-                      /></span>
+                      <span>同比</span><span style="margin-left: 16px">{{dot.yoy}}</span><span style="margin-left: 16px"><img v-if="parseFloat(dot.yoy) >= 0" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span>
                     </div>
-                    <div style="margin-left: 37px">
-                      <span>环比</span
-                      ><span style="margin-left: 19px">-15.89%</span
-                      ><span style="margin-left: 16px"
-                        ><img src="@/assets/sale_images/Info Icon.png"
-                      /></span>
+                    <div style="margin-left: 26px">
+                      <span>环比</span><span style="margin-left: 16px">{{dot.mom}}</span><span style="margin-left: 16px"><img v-if="parseFloat(dot.mom) >= 0" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span>
                     </div>
                   </div>
                 </div>
@@ -97,36 +71,23 @@
                   <span>新增患者数</span>
                 </div>
                 <div>
-                  <span
-                    style="
+                  <span style="
                       float: right;
                       font-size: 12px;
                       color: rgba(53, 64, 82, 1);
-                    "
-                    ><i
-                      class="el-icon-warning-outline"
-                      style="margin-right: 5px"
-                    />时间范围内新增患者占总患者比重
+                    "><i class="el-icon-warning-outline" style="margin-right: 5px" />时间范围内新增患者占总患者比重
                   </span>
                 </div>
               </div>
               <div class="bottomBox">
                 <div v-show="tabIndex3 == 'total'">
-                  <div class="price">1,438,900</div>
+                  <div class="price">{{newNum.num}}</div>
                   <div class="compare">
                     <div>
-                      <span>同比</span
-                      ><span style="margin-left: 19px">67.66%</span
-                      ><span style="margin-left: 16px"
-                        ><img src="@/assets/sale_images/路径 16.png"
-                      /></span>
+                      <span>同比</span><span style="margin-left: 16px">{{newNum.yoy}}</span><span style="margin-left: 16px"><img v-if="parseFloat(newNum.yoy) >= 0" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span>
                     </div>
-                    <div style="margin-left: 37px">
-                      <span>环比</span
-                      ><span style="margin-left: 19px">-15.89%</span
-                      ><span style="margin-left: 16px"
-                        ><img src="@/assets/sale_images/Info Icon.png"
-                      /></span>
+                    <div style="margin-left: 26px">
+                      <span>环比</span><span style="margin-left: 16px">{{newNum.mom}}</span><span style="margin-left: 16px"><img v-if="parseFloat(newNum.mom) >= 0" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span>
                     </div>
                   </div>
                 </div>
@@ -140,36 +101,23 @@
                   <span>患者脱落数</span>
                 </div>
                 <div>
-                  <span
-                    style="
+                  <span style="
                       float: right;
                       font-size: 12px;
                       color: rgba(53, 64, 82, 1);
-                    "
-                    ><i
-                      class="el-icon-warning-outline"
-                      style="margin-right: 5px"
-                    />时间范围内脱落患者占总患者比重
+                    "><i class="el-icon-warning-outline" style="margin-right: 5px" />时间范围内脱落患者占总患者比重
                   </span>
                 </div>
               </div>
               <div class="bottomBox">
                 <div v-show="tabIndex4 == 'total'">
-                  <div class="price">1,438,900</div>
+                  <div class="price">{{stopNum.value}}</div>
                   <div class="compare">
                     <div>
-                      <span>同比</span
-                      ><span style="margin-left: 19px">67.66%</span
-                      ><span style="margin-left: 16px"
-                        ><img src="@/assets/sale_images/路径 16.png"
-                      /></span>
+                      <span>同比</span><span style="margin-left: 16px">{{stopNum.yoy}}</span><span style="margin-left: 16px"><img v-if="parseFloat(stopNum.yoy) >= 0" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span>
                     </div>
-                    <div style="margin-left: 37px">
-                      <span>环比</span
-                      ><span style="margin-left: 19px">-15.89%</span
-                      ><span style="margin-left: 16px"
-                        ><img src="@/assets/sale_images/Info Icon.png"
-                      /></span>
+                    <div style="margin-left: 26px">
+                      <span>环比</span><span style="margin-left: 16px">{{stopNum.mom}}</span><span style="margin-left: 16px"><img v-if="parseFloat(stopNum.mom) >= 0" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span>
                     </div>
                   </div>
                 </div>
@@ -194,15 +142,16 @@
     </div>
   </div>
 </template>
-  
-  <script>
-import saleForm from "@/components/saleForm";
-import echarts from "echarts";
-require("echarts/theme/macarons"); // echarts theme
+<script>
+import { queryPatientAnalysis } from '@/api/system'
+import saleForm from "@/components/saleForm"
+import echarts from "echarts"
+import _ from 'lodash'
+require("echarts/theme/macarons")
 export default {
   name: "PatientInfo",
   components: {
-    saleForm,
+    saleForm
   },
   data() {
     return {
@@ -221,102 +170,108 @@ export default {
       tabIndex2: "total",
       tabIndex3: "total",
       tabIndex4: "total",
-    };
+      num: {},
+      newNum: {},
+      dot: {},
+      stopNum: {},
+      list: []
+    }
   },
-  computed: {},
-  mounted() {
-    this.initCharts();
+  created() {
+    this.changeForm()
   },
   methods: {
+    async queryPatientAnalysis() {
+      const res = await queryPatientAnalysis(this.ruleForm)
+      this.num = res.data.num
+      this.newNum = res.data.newNum
+      this.dot = res.data.dot
+      this.stopNum = res.data.stopNum
+      this.list = res.data.list
+    },
+    changeForm() {
+      this.queryPatientAnalysis()
+    },
     initCharts() {
-      const charts1 = echarts.init(
-        document.getElementById("chartBox"),
-        "macarons"
-      );
+      const charts1 = echarts.init(document.getElementById("chartBox"),"macarons")
       charts1.setOption({
-        yAxis: {
+        yAxis: [{
           type: "value",
           name: "患者数量（人）",
           show: true,
           axisLine: {
-            show: true,
-          },
-          min: 0,
-        },
+            show: true
+          }
+        },{
+          type: "value",
+          name: "患者DOT",
+          show: true,
+          axisLine: {
+            show: true
+          }
+        }],
         tooltip: {
-          trigger: "axis",
+          trigger: "axis"
         },
         legend: {
           data: ["患者数量", "患者增长数", "患者脱落", "患者DOT"],
           top: 0,
-          right: 410,
-          icon: "roundRect",
+          right: 410
         },
         calculable: true,
-        xAxis: [
-          {
-            type: "category",
-            data: [
-              "1月",
-              "2月",
-              "3月",
-              "4月",
-              "5月",
-              "6月",
-              "7月",
-              "8月",
-              "9月",
-              "10月",
-              "11月",
-              "12月",
-            ],
-          },
-        ],
-        series: [
-          {
-            data: [821, 932, 732, 612, 732, 1231, 355, 612, 497, 868, 812, 456],
+        xAxis: [{
+          type: "category",
+          data: _.map(this.list,function(v){return v.name})
+        }],
+        series: [{
+            data: _.map(this.list,function(v){return v.num}),
             type: "bar",
             name: "患者数量",
             barWidth: "17",
             itemStyle: {
-              color: "#3AA0FF",
-            },
+              color: "#3AA0FF"
+            }
           },
           {
-            data: [220, 412, 215, 148, 517, 167, 321, 80, 192, 447, 641, 187],
+            data: _.map(this.list,function(v){return v.newNum}),
             type: "bar",
             name: "患者增长数",
             barWidth: "17",
             itemStyle: {
-              color: "#00BAAD",
+              color: "#00BAAD"
             },
           },
           {
-            data: [22, 41, 52, 81, 72, 17, 33, 48, 19, 67, 16, 27],
+            data: _.map(this.list,function(v){return v.stopNum}),
             type: "bar",
             name: "患者脱落",
             barWidth: "17",
             itemStyle: {
-              color: "#9873F0",
+              color: "#9873F0"
             },
           },
           {
-            data: [2, 1, 2, 1, 2, 1, 3, 4, 1, 6, 1, 2],
-            type: "bar",
+            data: _.map(this.list,function(v){return v.dot}),
+            yAxisIndex: 1,
+            type: "line",
             name: "患者DOT",
-            barWidth: "17",
             itemStyle: {
-              color: "#FF4F7B",
-            },
-          },
-        ],
-      });
-    },
+              color: "#FF4F7B"
+            }
+          }
+        ]
+      })
+    }
   },
-};
+  watch: {
+    list() {
+      this.initCharts()
+    }
+  }
+}
+
 </script>
-  
-  <style lang="scss" scoped>
+<style lang="scss" scoped>
 .body {
   width: 100%;
   height: 100vh;
@@ -417,5 +372,5 @@ export default {
     }
   }
 }
+
 </style>
-  
