@@ -4,163 +4,171 @@
       <saleForm @queryProvinceSalePrice="queryProvinceSalePrice" :ruleForm="ruleForm" @changeForm="changeForm" />
     </div>
     <div class="chartBox">
-        <div class="display">
-          <el-card class="s_box">
-            <div>
-              <div class="topBox">
-                <div>
-                  <span>销售额</span>
-                  <span style="margin-left:9px"><i class="el-icon-warning-outline" /></span>
-                </div>
-                <div>
-                  <el-tabs v-model="tabIndex" @tab-click="handleClick">
-                    <el-tab-pane label="全部" name="" />
-                    <el-tab-pane label="20mg" name="160" />
-                    <el-tab-pane label="80mg" name="357" />
-                  </el-tabs>
-                </div>
-              </div>
-              <div class="bottomBox">
-                <div class="price">
-                  <!-- {{topData}} -->
-                  {{topData.salesPrice?topData.salesPrice[0].currSalePrice:''}}
-                </div>
-                <div class="compare">
-                  <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
-                  <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
-                </div>
-              </div>
-            </div>
-          </el-card>
-          <el-card class="s_box">
-            <div>
-              <div class="topBox">
-                <div>
-                  <span>销量</span>
-                  <span style="margin-left:9px"><i class="el-icon-warning-outline" /></span>
-                </div>
-                <div>
-                  <el-tabs v-model="tabIndex2" @tab-click="handleClick2">
-                    <el-tab-pane label="全部" name="" />
-                    <el-tab-pane label="20mg" name="160" />
-                    <el-tab-pane label="80mg" name="357" />
-                  </el-tabs>
-                </div>
-              </div>
-              <div class="bottomBox">
-                <div class="price">
-                  {{topData.salesNum?topData.salesNum[0].currSaleNum:''}}
-                </div>
-                <div class="compare">
-                  <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
-                  <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
-                </div>
-              </div>
-            </div>
-          </el-card>
-          <el-card class="s_box">
-            <div>
-              <div class="topBox">
-                <div>
-                  <span>老患者销量</span>
-                  <span style="margin-left:9px"><i class="el-icon-warning-outline" /></span>
-                </div>
-                <div>
-                  <el-tabs v-model="tabIndex3" @tab-click="handleClick3">
-                    <el-tab-pane label="全部" name="" />
-                    <el-tab-pane label="20mg" name="160" />
-                    <el-tab-pane label="80mg" name="357" />
-                  </el-tabs>
-                </div>
-              </div>
-              <div class="bottomBox">
-                <div class="price">
-                  {{topData.oldCustomerSalesPrice?topData.oldCustomerSalesPrice[0].currSalePrice:''}}
-                </div>
-                <div class="compare">
-                  <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
-                  <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
-                </div>
-              </div>
-            </div>
-          </el-card>
-          <el-card class="s_box">
-            <div>
-              <div class="topBox">
-                <div>
-                  <span>新患者销量</span>
-                  <span style="margin-left:9px"><i class="el-icon-warning-outline" /></span>
-                </div>
-                <div>
-                  <el-tabs v-model="tabIndex4" @tab-click="handleClick4">
-                    <el-tab-pane label="全部" name="" />
-                    <el-tab-pane label="20mg" name="160" />
-                    <el-tab-pane label="80mg" name="357" />
-                  </el-tabs>
-                </div>
-              </div>
-              <div class="bottomBox">
-                <div class="price">
-                  {{topData.customerSalesPrice?topData.customerSalesPrice[0].currSalePrice:''}}
-                </div>
-                <div class="compare">
-                  <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
-                  <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
-                </div>
-              </div>
-            </div>
-          </el-card>
-        </div>
-        <div class="chartDisplay">
-          <el-card>
-            <div class="inBox">
-              <div class="topBox">
-                <h3 style="margin-top:1px">销售统计</h3>
-                <div style="margin-top:-5px">
-                  <el-radio-group v-model="tabIndex5" size="small" @change="changeType">
-                    <el-radio-button label="数量" :value="1" />
-                    <el-radio-button label="金额" :value="2" />
-                  </el-radio-group>
-                </div>
+      <div class="display">
+        <el-card class="s_box">
+          <div>
+            <div class="topBox">
+              <div>
+                <span>销售额</span>
+                <span style="margin-left:9px"><i class="el-icon-warning-outline" /></span>
               </div>
               <div>
-                <div id="chartBox" ref="chartBox" v-show="tabIndex5==1" class="inChartBox" />
-                <div id="chartBox5" ref="chartBox5" v-show="tabIndex5==2" class="inChartBox5" />
+                <el-tabs v-model="tabIndex" @tab-click="handleClick">
+                  <el-tab-pane label="全部" name="" />
+                  <el-tab-pane label="20mg" name="160" />
+                  <el-tab-pane label="80mg" name="357" />
+                </el-tabs>
               </div>
             </div>
-          </el-card>
-          <el-card style="margin-left:20px">
-            <div class="inBox2">
-              <h2>各省区销售占比</h2>
-              <div id="chartBox2" ref="chartBox2" class="inChartBox2" />
+            <div class="bottomBox">
+              <div class="price">
+                <!-- {{topData}} -->
+                {{topData.salesPrice?topData.salesPrice[0].currSalePrice:'0'}}
+              </div>
+              <div class="compare">
+                <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span style="margin-left: 16px;"><img
+                      src="@/assets/sale_images/路径 16.png"></span></div>
+                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
+                    style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
+              </div>
             </div>
-          </el-card>
-          <div class="rightBox" style="margin-left:10px">
+          </div>
+        </el-card>
+        <el-card class="s_box">
+          <div>
+            <div class="topBox">
+              <div>
+                <span>销量</span>
+                <span style="margin-left:9px"><i class="el-icon-warning-outline" /></span>
+              </div>
+              <div>
+                <el-tabs v-model="tabIndex2" @tab-click="handleClick2">
+                  <el-tab-pane label="全部" name="" />
+                  <el-tab-pane label="20mg" name="160" />
+                  <el-tab-pane label="80mg" name="357" />
+                </el-tabs>
+              </div>
+            </div>
+            <div class="bottomBox">
+              <div class="price">
+                {{topData.salesNum?topData.salesNum[0].currSaleNum:'0'}}
+              </div>
+              <div class="compare">
+                <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span style="margin-left: 16px;"><img
+                      src="@/assets/sale_images/路径 16.png"></span></div>
+                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
+                    style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
+              </div>
+            </div>
+          </div>
+        </el-card>
+        <el-card class="s_box">
+          <div>
+            <div class="topBox">
+              <div>
+                <span>老患者销量</span>
+                <span style="margin-left:9px"><i class="el-icon-warning-outline" /></span>
+              </div>
+              <div>
+                <el-tabs v-model="tabIndex3" @tab-click="handleClick3">
+                  <el-tab-pane label="全部" name="" />
+                  <el-tab-pane label="20mg" name="160" />
+                  <el-tab-pane label="80mg" name="357" />
+                </el-tabs>
+              </div>
+            </div>
+            <div class="bottomBox">
+              <div class="price">
+                {{topData.oldCustomerSalesNum[0].currSaleNum?topData.oldCustomerSalesNum[0].currSaleNum:'0'}}
+              </div>
+              <div class="compare">
+                <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span style="margin-left: 16px;"><img
+                      src="@/assets/sale_images/路径 16.png"></span></div>
+                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
+                    style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
+              </div>
+            </div>
+          </div>
+        </el-card>
+        <el-card class="s_box">
+          <div>
+            <div class="topBox">
+              <div>
+                <span>新患者销量</span>
+                <span style="margin-left:9px"><i class="el-icon-warning-outline" /></span>
+              </div>
+              <div>
+                <el-tabs v-model="tabIndex4" @tab-click="handleClick4">
+                  <el-tab-pane label="全部" :name=null />
+                  <el-tab-pane label="20mg" name="160" />
+                  <el-tab-pane label="80mg" name="357" />
+                </el-tabs>
+              </div>
+            </div>
+            <div class="bottomBox">
+              <div class="price">
+                {{topData.customerSalesNum[0].currSaleNum?topData.customerSalesNum[0].currSaleNum:'0'}}
+              </div>
+              <div class="compare">
+                <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span style="margin-left: 16px;"><img
+                      src="@/assets/sale_images/路径 16.png"></span></div>
+                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
+                    style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
+              </div>
+            </div>
+          </div>
+        </el-card>
+      </div>
+      <div class="chartDisplay">
+        <el-card>
+          <div class="inBox">
+            <div class="topBox">
+              <h3 style="margin-top:1px">销售统计</h3>
+              <div style="margin-top:-5px">
+                <el-radio-group v-model="tabIndex5" size="small" @change="changeType">
+                  <el-radio-button label="数量" :value="1" />
+                  <el-radio-button label="金额" :value="2" />
+                </el-radio-group>
+              </div>
+            </div>
             <div>
-              <el-card>
-                <div style="box-sizing:border-box;padding:17px 16px;width:383px;height:274px">
-                  <h3>各大区销售占比</h3>
-                  <div id="chartBox3" ref="chartBox3" class="inChartBox3" />
-                </div>
-              </el-card>
+              <div id="chartBox" ref="chartBox" v-show="tabIndex5==1" class="inChartBox" />
+              <div id="chartBox5" ref="chartBox5" v-show="tabIndex5==2" class="inChartBox5" />
             </div>
-            <div style="margin-top: 20px;">
-              <el-card>
-                <div style="box-sizing:border-box;padding:17px 16px;width:383px;height:274px">
-                  <h3>各片区销售占比</h3>
-                  <div id="chartBox4" ref="chartBox4" class="inChartBox4" />
-                </div>
-              </el-card>
-            </div>
+          </div>
+        </el-card>
+        <el-card style="margin-left:20px">
+          <div class="inBox2">
+            <h2>各省区销售占比</h2>
+            <div id="chartBox2" ref="chartBox2" class="inChartBox2" />
+          </div>
+        </el-card>
+        <div class="rightBox" style="margin-left:10px">
+          <div>
+            <el-card>
+              <div style="box-sizing:border-box;padding:17px 16px;width:383px;height:274px">
+                <h3>各大区销售占比</h3>
+                <div id="chartBox3" ref="chartBox3" class="inChartBox3" />
+              </div>
+            </el-card>
+          </div>
+          <div style="margin-top: 20px;">
+            <el-card>
+              <div style="box-sizing:border-box;padding:17px 16px;width:383px;height:274px">
+                <h3>各片区销售占比</h3>
+                <div id="chartBox4" ref="chartBox4" class="inChartBox4" />
+              </div>
+            </el-card>
           </div>
         </div>
       </div>
+    </div>
   </div>
 </template>
 <script>
 import saleForm from '@/components/saleForm'
-import {  queryProvinceSalePriceRate,  submitTop,  queryShopSale,  queryRegionSale,  querySectionSale  } from "@/api/sales"
-import {  queryMonthSalesPrice  } from "@/api/home"
+import { queryProvinceSalePriceRate, submitTop, queryShopSale, queryRegionSale, querySectionSale } from "@/api/sales"
+import { queryMonthSalesPrice } from "@/api/home"
 import * as echarts from 'echarts'
 require("echarts/theme/macarons"); // echarts theme
 export default {
@@ -197,7 +205,7 @@ export default {
       medicine2Data: [],
       medicine3Data: [],
       medicine4Data: [],
-      id1:'',
+      id1: '',
     }
   },
   computed: {
@@ -254,10 +262,10 @@ export default {
       }
       this.queryMonthSalesPrice()
     },
-    queryMonthSalesPrice()  {
-        queryMonthSalesPrice({
+    queryMonthSalesPrice() {
+      queryMonthSalesPrice({
         ...this.ruleForm,
-        type:  this.tabIndex5
+        type: this.tabIndex5
       }).then((res) => {
         if (res.code == 0) {
           console.log(res);
@@ -307,25 +315,34 @@ export default {
       this.submitTop1(this.id1);
       this.queryMonthSalesPrice();
     },
-    async submitTop1(id) {
+    async submitTop1(id, type) {
+      if(id==0){
+        id=''
+      }
       let res = await submitTop({ ...this.ruleForm, medicineId: id });
       if (res.code == 0) {
-        this.topData = res.data;
-        this.id1=id;
+        if (!type) {
+          this.topData = res.data;
+          this.id1 = id;
+        }else{
+          this.topData[type] = res.data[type];
+          this.id1 = id;
+        }
+
       }
     },
     async handleClick(tab) {
-      this.submitTop1(this.tabIndex * 1);
+      this.submitTop1(this.tabIndex * 1, 'salesPrice');
     },
     handleClick2(tab) {
-      this.submitTop1(this.tabIndex2 * 1);
+      this.submitTop1(this.tabIndex2 * 1, 'currSaleNum');
     },
     handleClick3(tab) {
-      this.submitTop1(this.tabIndex3 * 1);
+      this.submitTop1(this.tabIndex3 * 1, 'oldCustomerSalesNum');
 
     },
     handleClick4(tab) {
-      this.submitTop1(this.tabIndex4 * 1);
+      this.submitTop1(this.tabIndex4 * 1, 'customerSalesNum');
     },
     // initCharts() {
     //   const charts1 = echarts.init(this.$refs['chartBox'])
@@ -675,32 +692,32 @@ export default {
             "11月",
             "12月",
           ],
-        }, ],
+        },],
         yAxis: [{
           type: "value",
-        }, ],
+        },],
         series: [{
-            name: "规格1",
-            type: "bar",
-            data: this.medicine1Data,
-            markPoint: {
-              data: [
-                { type: "max", name: "Max" },
-                { type: "min", name: "Min" },
-              ],
-            },
-            itemStyle: {
-              color: "rgba(58, 160, 255, 1)",
-            },
+          name: "规格1",
+          type: "bar",
+          data: this.medicine1Data,
+          markPoint: {
+            data: [
+              { type: "max", name: "Max" },
+              { type: "min", name: "Min" },
+            ],
           },
-          {
-            name: "规格2",
-            type: "bar",
-            data: this.medicine2Data,
-            itemStyle: {
-              color: "rgba(0, 186, 173, 1)",
-            },
+          itemStyle: {
+            color: "rgba(58, 160, 255, 1)",
           },
+        },
+        {
+          name: "规格2",
+          type: "bar",
+          data: this.medicine2Data,
+          itemStyle: {
+            color: "rgba(0, 186, 173, 1)",
+          },
+        },
         ],
       });
     },
@@ -740,7 +757,6 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-
 .chartBox {
   margin-top: 20px;
   height: 86vh;
@@ -855,5 +871,4 @@ export default {
     }
   }
 }
-
 </style>
