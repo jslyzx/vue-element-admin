@@ -26,9 +26,9 @@
                 {{topData.salesPrice?topData.salesPrice[0].currSalePrice:'0'}} 元
               </div>
               <div class="compare">
-                <div><span>同比</span><span style="margin-left: 19px;">{{topData.salesPrice[0].yearGrowthRate||'0%'}}</span><span style="margin-left: 16px;"><img
+                <div><span>同比</span><span style="margin-left: 19px;">{{topData.salesPrice?topData.salesPrice[0].yearGrowthRate:'0%'}}</span><span style="margin-left: 16px;"><img
                       src="@/assets/sale_images/路径 16.png"></span></div>
-                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">{{topData.salesPrice[0].monthGrowthRate||'0%'}}</span><span
+                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">{{topData.salesPrice?topData.salesPrice[0].monthGrowthRate:'0%'}}</span><span
                     style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
               </div>
             </div>
@@ -54,9 +54,9 @@
                 {{topData.salesNum?topData.salesNum[0].currSaleNum:'0'}} 盒
               </div>
               <div class="compare">
-                <div><span>同比</span><span style="margin-left: 19px;">{{topData.salesNum[0].yearGrowthRate||'0%'}}</span><span style="margin-left: 16px;"><img
+                <div><span>同比</span><span style="margin-left: 19px;">{{topData.salesNum?topData.salesNum[0].yearGrowthRate:'0%'}}</span><span style="margin-left: 16px;"><img
                       src="@/assets/sale_images/路径 16.png"></span></div>
-                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">{{topData.salesNum[0].monthGrowthRate||'0%'}}</span><span
+                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">{{topData.salesNum?topData.salesNum[0].monthGrowthRate:'0%'}}</span><span
                     style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
               </div>
             </div>
@@ -79,12 +79,12 @@
             </div>
             <div class="bottomBox">
               <div class="price">
-                {{topData.oldCustomerSalesNum[0].currSaleNum?topData.oldCustomerSalesNum[0].currSaleNum:'0'}} 盒
+                {{topData.oldCustomerSalesNum?topData.oldCustomerSalesNum[0].currSaleNum:'0'}} 盒
               </div>
               <div class="compare">
-                <div><span>同比</span><span style="margin-left: 19px;">{{topData.oldCustomerSalesNum[0].yearGrowthRate||'0%'}}</span><span style="margin-left: 16px;"><img
+                <div><span>同比</span><span style="margin-left: 19px;">{{topData.oldCustomerSalesNum?topData.oldCustomerSalesNum[0].yearGrowthRate:'0%'}}</span><span style="margin-left: 16px;"><img
                       src="@/assets/sale_images/路径 16.png"></span></div>
-                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">{{topData.oldCustomerSalesNum[0].monthGrowthRate||'0%'}}</span>
+                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">{{topData.oldCustomerSalesNum?topData.oldCustomerSalesNum[0].monthGrowthRate:'0%'}}</span>
                   <span
                     style="margin-left: 16px;"> <img src="@/assets/sale_images/Info Icon.png" alt=""></span>
                 </div>
@@ -109,12 +109,12 @@
             </div>
             <div class="bottomBox">
               <div class="price">
-                {{topData.customerSalesNum[0].currSaleNum?topData.customerSalesNum[0].currSaleNum:'0'}} 盒
+                {{topData.customerSalesNum?topData.customerSalesNum[0].currSaleNum:'0'}} 盒
               </div>
               <div class="compare">
-                <div><span>同比</span><span style="margin-left: 19px;">{{topData.customerSalesNum[0].yearGrowthRate||'0%'}}</span><span style="margin-left: 16px;"><img
+                <div><span>同比</span><span style="margin-left: 19px;">{{topData.customerSalesNum?topData.customerSalesNum[0].yearGrowthRate:'0%'}}</span><span style="margin-left: 16px;"><img
                       src="@/assets/sale_images/路径 16.png"></span></div>
-                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">{{topData.customerSalesNum[0].monthGrowthRate||'0%'}}</span><span
+                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">{{topData.customerSalesNum?topData.customerSalesNum[0].monthGrowthRate:'0%'}}</span><span
                     style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
               </div>
             </div>
@@ -475,7 +475,7 @@ export default {
         {
           tooltip: {
             trigger: 'item',
-            formatter: '销售金额{c}万<br />销售占比{d}'
+            formatter: '销售金额: {c}万<br />销售占比: {d}'
           },
           // color: ['#2A58C7', '#3AA0FF', '#FF8D1A', '#D43030', '#00BAAD', '#FFC300', '#A5D63FFF', '#AC33C1FF'],
           legend: [{
@@ -484,7 +484,7 @@ export default {
             formatter: function (name) {
               for (let index in that.chartsData1) {
                 if (name == that.chartsData1[index].name) {
-                  return `${name}   ${that.chartsData1[index].rate}%`
+                  return `${name}   ${that.chartsData1[index].rate}`
                 }
               }
             },
@@ -538,14 +538,14 @@ export default {
         {
           tooltip: {
             trigger: 'item',
-            formatter: '销售金额{c}万<br />销售占比{d}'
+            formatter: '销售金额: {c}万<br />销售占比: {d}'
           },
           color: ['#A5D63F', '#EE6666'],
           legend: {
             formatter: function (name) {
               for (let index in that.chartsData2) {
                 if (name == that.chartsData2[index].name) {
-                  return `${name}   ${that.chartsData2[index].rate}%`
+                  return `${name}   ${that.chartsData2[index].rate}`
                 }
               }
             },
@@ -610,14 +610,14 @@ export default {
         {
           tooltip: {
             trigger: 'item',
-            formatter: '销售金额{c}万<br />销售占比{d}'
+            formatter: '销售金额: {c}万<br />销售占比: {d}'
           },
           color: ['#2A58C7', '#FF8D1A', '#00BAAD', '#A5D63F', '#EE6666'],
           legend: {
             formatter: function (name) {
               for (let index in that.chartsData3) {
                 if (name == that.chartsData3[index].name) {
-                  return `${name}   ${that.chartsData3[index].rate}%`
+                  return `${name}  ${that.chartsData3[index].rate}`
                 }
               }
             },
