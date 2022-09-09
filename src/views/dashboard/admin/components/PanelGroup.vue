@@ -18,8 +18,8 @@
           <div class="tabSta">
             <el-tabs v-model="activeName1" @tab-click="handleClick1">
               <el-tab-pane label="全部" name="" />
-              <el-tab-pane label="规格一" name="160" />
-              <el-tab-pane label="规格二" name="357" />
+              <el-tab-pane label="20mg" name="160" />
+              <el-tab-pane label="80mg" name="357" />
             </el-tabs>
           </div>
         </div>
@@ -80,8 +80,8 @@
           <div class="tabSta">
             <el-tabs v-model="activeName2" @tab-click="handleClick2">
               <el-tab-pane label="全部" name="" />
-              <el-tab-pane label="规格一" name="160" />
-              <el-tab-pane label="规格二" name="third357" />
+              <el-tab-pane label="20mg" name="160" />
+              <el-tab-pane label="80mg" name="third357" />
             </el-tabs>
           </div>
         </div>
@@ -142,8 +142,8 @@
           <div class="tabSta">
             <el-tabs v-model="activeName3" @tab-click="handleClick3">
               <el-tab-pane label="全部" name="" />
-              <el-tab-pane label="规格一" name="160" />
-              <el-tab-pane label="规格二" name="357" />
+              <el-tab-pane label="20mg" name="160" />
+              <el-tab-pane label="80mg" name="357" />
             </el-tabs>
           </div>
         </div>
@@ -204,8 +204,8 @@
           <div class="tabSta">
             <el-tabs v-model="activeName4" @tab-click="handleClick4">
               <el-tab-pane label="全部" name="" />
-              <el-tab-pane label="规格一" name="160" />
-              <el-tab-pane label="规格二" name="357" />
+              <el-tab-pane label="20mg" name="160" />
+              <el-tab-pane label="80mg" name="357" />
             </el-tabs>
           </div>
         </div>

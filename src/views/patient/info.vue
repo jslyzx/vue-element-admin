@@ -21,7 +21,7 @@
               </div>
               <div class="bottomBox">
                 <div v-show="tabIndex == 'total'">
-                  <div class="price">{{num.num}}</div>
+                  <div class="price">{{num.value}}人</div>
                   <div class="compare">
                     <div>
                       <span>同比</span><span style="margin-left: 16px">{{num.yoy}}</span><span style="margin-left: 16px"><img v-if="parseFloat(num.yoy) >= 0" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span>
@@ -51,7 +51,7 @@
               </div>
               <div class="bottomBox">
                 <div v-show="tabIndex2 == 'total'">
-                  <div class="price">{{dot.value}}</div>
+                  <div class="price">{{dot.value}}月</div>
                   <div class="compare">
                     <div>
                       <span>同比</span><span style="margin-left: 16px">{{dot.yoy}}</span><span style="margin-left: 16px"><img v-if="parseFloat(dot.yoy) >= 0" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span>
@@ -81,7 +81,7 @@
               </div>
               <div class="bottomBox">
                 <div v-show="tabIndex3 == 'total'">
-                  <div class="price">{{newNum.num}}</div>
+                  <div class="price">{{newNum.value}}人</div>
                   <div class="compare">
                     <div>
                       <span>同比</span><span style="margin-left: 16px">{{newNum.yoy}}</span><span style="margin-left: 16px"><img v-if="parseFloat(newNum.yoy) >= 0" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span>
@@ -111,7 +111,7 @@
               </div>
               <div class="bottomBox">
                 <div v-show="tabIndex4 == 'total'">
-                  <div class="price">{{stopNum.value}}</div>
+                  <div class="price">{{stopNum.value}}人</div>
                   <div class="compare">
                     <div>
                       <span>同比</span><span style="margin-left: 16px">{{stopNum.yoy}}</span><span style="margin-left: 16px"><img v-if="parseFloat(stopNum.yoy) >= 0" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span>
@@ -156,8 +156,8 @@ export default {
   data() {
     return {
       ruleForm: {
-        time: "year",
-        year: "",
+        queryType: 1,
+        year: "2022",
         startMonth: "",
         endMonth: "",
         goods: "",
@@ -178,19 +178,19 @@ export default {
     }
   },
   created() {
-    this.changeForm()
+    this.changeForm(this.ruleForm)
   },
   methods: {
-    async queryPatientAnalysis() {
-      const res = await queryPatientAnalysis(this.ruleForm)
+    async queryPatientAnalysis(form) {
+      const res = await queryPatientAnalysis(form)
       this.num = res.data.num
       this.newNum = res.data.newNum
       this.dot = res.data.dot
       this.stopNum = res.data.stopNum
       this.list = res.data.list
     },
-    changeForm() {
-      this.queryPatientAnalysis()
+    changeForm(form) {
+      this.queryPatientAnalysis(form)
     },
     initCharts() {
       const charts1 = echarts.init(document.getElementById("chartBox"),"macarons")
@@ -202,19 +202,12 @@ export default {
           axisLine: {
             show: true
           }
-        },{
-          type: "value",
-          name: "患者DOT",
-          show: true,
-          axisLine: {
-            show: true
-          }
         }],
         tooltip: {
           trigger: "axis"
         },
         legend: {
-          data: ["患者数量", "患者增长数", "患者脱落", "患者DOT"],
+          data: ["患者数量", "患者增长数", "患者脱落"],
           top: 0,
           right: 410
         },
@@ -249,15 +242,6 @@ export default {
             itemStyle: {
               color: "#9873F0"
             },
-          },
-          {
-            data: _.map(this.list,function(v){return v.dot}),
-            yAxisIndex: 1,
-            type: "line",
-            name: "患者DOT",
-            itemStyle: {
-              color: "#FF4F7B"
-            }
           }
         ]
       })

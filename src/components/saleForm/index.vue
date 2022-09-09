@@ -16,16 +16,13 @@
         <div class="inputBox">
           <el-form ref="ruleForm" :model="ruleForm" :inline="true" status-icon :rules="rules" label-width="100px">
             <el-form-item label="年份">
-              <el-date-picker v-model="ruleForm.year" value-format="yyyy" type="year" placeholder="选择年"
-                class="selectRegion" />
+              <el-date-picker v-model="ruleForm.year" value-format="yyyy" type="year" placeholder="选择年" class="selectRegion" />
             </el-form-item>
             <el-form-item label="开始月份">
-              <el-date-picker v-model="ruleForm.startMonth" popper-class="monthStyle" type="month" placeholder="选择开始日期"
-                :picker-options="pickerOptions" value-format="MM" class="selectRegion" />
+              <el-date-picker v-model="ruleForm.startMonth" popper-class="monthStyle" type="month" placeholder="选择开始日期" :picker-options="pickerOptions" value-format="MM" class="selectRegion" />
             </el-form-item>
             <el-form-item label="截止月份">
-              <el-date-picker v-model="ruleForm.endMonth" popper-class="monthStyle" type="month" placeholder="选择结束日期"
-                :picker-options="pickerOptions1" value-format="MM" class="selectRegion" />
+              <el-date-picker v-model="ruleForm.endMonth" popper-class="monthStyle" type="month" placeholder="选择结束日期" :picker-options="pickerOptions1" value-format="MM" class="selectRegion" />
             </el-form-item>
             <el-form-item label="商品">
               <!-- <el-cascader v-model="ruleForm.productId" class="selectRegion" :options="options" @change="handleChange" /> -->
@@ -36,17 +33,17 @@
                 <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
-            <el-form-item label="片区" class="mode" v-if="regionShow">
+            <el-form-item label="片区"  v-if="regionShow">
               <el-select v-model="ruleForm.sectionId" placeholder="请选择" @change="changeRegion2">
                 <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
-            <el-form-item label="省区" class="mode" v-if="regionShow">
+            <el-form-item label="省区"  v-if="regionShow">
               <el-select v-model="ruleForm.provinceId" placeholder="请选择" @change="changeRegion3">
                 <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
-            <el-form-item label="门店" class="mode" v-if="regionShow">
+            <el-form-item label="门店"  v-if="regionShow">
               <el-select v-model="ruleForm.shopId" placeholder="请选择">
                 <el-option v-for="item in options4" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
@@ -61,17 +58,17 @@
                 <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
-            <el-form-item v-if="utilsShow == 2" class="mode" label="年龄段">
+            <el-form-item v-if="utilsShow == 2" label="年龄段">
               <el-select v-model="ruleForm.age" placeholder="请选择">
                 <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
-            <el-form-item v-if="utilsShow == 2" class="mode" label="适应症">
+            <el-form-item v-if="utilsShow == 2" label="适应症">
               <el-select v-model="ruleForm.indication" placeholder="请选择">
                 <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
-            <el-form-item class="lastForm">
+            <el-form-item class="lastForm" style="float: right;">
               <el-button type="primary" @click="submitForm('ruleForm')">查询</el-button>
               <el-button @click="resetForm('ruleForm')">重置</el-button>
             </el-form-item>
@@ -81,9 +78,8 @@
     </el-card>
   </div>
 </template>
-
 <script>
-import { queryProvinceSalePriceRate, queryArea,queryShop,submitTop} from "@/api/sales"
+import { queryProvinceSalePriceRate, queryArea, queryShop, submitTop } from "@/api/sales"
 import { emit } from "process"
 export default {
   name: 'SaleForm',
@@ -125,17 +121,16 @@ export default {
         //     { validator: checkAge, trigger: 'blur' }
         //   ],
       },
-      options: [
-      ],
+      options: [],
       options1: [],
       options2: [],
-      options3:[],
-      options4:[],
+      options3: [],
+      options4: [],
     }
   },
   mounted() {
     this.queryData2();
-    
+
   },
   computed: {
     pickerOptions() {
@@ -162,40 +157,40 @@ export default {
   methods: {
     async changeRegion3(id) {
       console.log(id);
-      let res = await queryShop({regionId:this.ruleForm.regionId * 1,page:1,pageSize:100,sectionId:this.ruleForm.sectionId*1,provinceId:id});
+      let res = await queryShop({ regionId: this.ruleForm.regionId + '', page: 1, pageSize: 100, sectionId: this.ruleForm.sectionId + '', provinceId: id + '' });
       if (res.code == 0) {
-          this.options4 = res.data.data.map((item) => {
-            return {
-              value: item.id,
-              label: item.name
-            }
-          })
+        this.options4 = res.data.data.map((item) => {
+          return {
+            value: item.id,
+            label: item.name
+          }
+        })
       }
     },
     async changeRegion2(id) {
-      let res = await this.queryArea1(id * 1);
+      let res = await this.queryArea1(id + '');
       if (res.code == 0) {
-          this.options3 = res.data.map((item) => {
-            return {
-              value: item.id,
-              label: item.name
-            }
-          })
+        this.options3 = res.data.map((item) => {
+          return {
+            value: item.id,
+            label: item.name
+          }
+        })
       }
     },
     async changeRegion(id) {
-      let res = await this.queryArea1(id * 1);
+      let res = await this.queryArea1(id + '');
       if (res.code == 0) {
-          this.options2 = res.data.map((item) => {
-            return {
-              value: item.id,
-              label: item.name
-            }
-          })
+        this.options2 = res.data.map((item) => {
+          return {
+            value: item.id,
+            label: item.name
+          }
+        })
       }
     },
     async queryData2() {
-      let res = await this.queryArea1(1);
+      let res = await this.queryArea1('91498336854474752');
       this.options1 = res.data.map((item) => {
         return {
           value: item.id,
@@ -204,16 +199,16 @@ export default {
       })
     },
     async queryArea1(id) {
-      let res = await queryArea(id);
+      let res = await queryArea(id + '');
       return res;
     },
     handleChange() {
 
     },
-   
+
     submitForm() {
-      let form=JSON.parse(JSON.stringify(this.ruleForm));
-      this.$emit("changeForm",form)
+      let form = JSON.parse(JSON.stringify(this.ruleForm));
+      this.$emit("changeForm", form)
     },
     resetForm() {
 
@@ -225,11 +220,15 @@ export default {
 
   }
 }
-</script>
 
+</script>
 <style lang="scss" scoped>
 .cardBody {
-  height: 143px;
+
+  .el-select,
+  .el-input{
+    width: 220px;
+  }
 
   .outBox {
     display: flex;
@@ -270,15 +269,17 @@ export default {
     // .selectRegion{
     //     width: 50px;
     // }
-    
+
   }
 
 }
+
 </style>
 <style lang="scss">
-  .monthStyle {
-      .el-date-picker__header--bordered {
-        display: none !important;
-      }
-    }
+.monthStyle {
+  .el-date-picker__header--bordered {
+    display: none !important;
+  }
+}
+
 </style>

@@ -73,7 +73,7 @@
           <el-card>
             <div class="inBox">
               <div class="topBox">
-                <el-tabs v-model="tabIndex" @tab-click="handleClick">
+                <el-tabs v-model="tabIndex">
                   <el-tab-pane label="患者数据列表" name="list" />
                   <el-tab-pane label="脱落原因分析" name="reason" />
                 </el-tabs>
@@ -113,7 +113,7 @@ export default {
   data() {
     return {
       ruleForm: {
-        time: 'year',
+        queryType: 1,
         year: '',
         startMonth: '',
         endMonth: '',
@@ -226,26 +226,26 @@ export default {
     }
   },
   created() {
-    this.changeForm()
+    this.changeForm(this.ruleForm)
   },
   methods: {
-    async getPatientList() {
-      const res = await queryPatientCountByMonth(this.ruleForm)
+    async getPatientList(form) {
+      const res = await queryPatientCountByMonth(form)
       this.dataList = res.data
     },
-    async queryPatientComparison() {
-      const res = await queryPatientComparison(this.ruleForm)
+    async queryPatientComparison(form) {
+      const res = await queryPatientComparison(form)
       this.newInfo = res.data.new
       this.oldInfo = res.data.old
     },
-    async queryPatientStopReasonRange() {
-      const res = await queryPatientStopReasonRange(this.ruleForm)
+    async queryPatientStopReasonRange(form) {
+      const res = await queryPatientStopReasonRange(form)
       this.chartData = res.data
     },
-    changeForm() {
-      this.getPatientList()
-      this.queryPatientComparison()
-      this.queryPatientStopReasonRange()
+    changeForm(form) {
+      this.getPatientList(form)
+      this.queryPatientComparison(form)
+      this.queryPatientStopReasonRange(form)
     },
     initCharts() {
       const charts1 = echarts.init(this.$refs['chartBox'])

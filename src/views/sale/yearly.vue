@@ -2,7 +2,8 @@
   <div class="body">
     <div class="formCard">
       <saleForm @queryProvinceSalePrice="queryProvinceSalePrice" :ruleForm="ruleForm" @changeForm="changeForm" />
-      <div class="chartBox">
+    </div>
+    <div class="chartBox">
         <div class="display">
           <el-card class="s_box">
             <div>
@@ -14,8 +15,8 @@
                 <div>
                   <el-tabs v-model="tabIndex" @tab-click="handleClick">
                     <el-tab-pane label="全部" name="" />
-                    <el-tab-pane label="规格一" name="160" />
-                    <el-tab-pane label="规格二" name="357" />
+                    <el-tab-pane label="20mg" name="160" />
+                    <el-tab-pane label="80mg" name="357" />
                   </el-tabs>
                 </div>
               </div>
@@ -41,8 +42,8 @@
                 <div>
                   <el-tabs v-model="tabIndex2" @tab-click="handleClick2">
                     <el-tab-pane label="全部" name="" />
-                    <el-tab-pane label="规格一" name="160" />
-                    <el-tab-pane label="规格二" name="357" />
+                    <el-tab-pane label="20mg" name="160" />
+                    <el-tab-pane label="80mg" name="357" />
                   </el-tabs>
                 </div>
               </div>
@@ -67,8 +68,8 @@
                 <div>
                   <el-tabs v-model="tabIndex3" @tab-click="handleClick3">
                     <el-tab-pane label="全部" name="" />
-                    <el-tab-pane label="规格一" name="160" />
-                    <el-tab-pane label="规格二" name="357" />
+                    <el-tab-pane label="20mg" name="160" />
+                    <el-tab-pane label="80mg" name="357" />
                   </el-tabs>
                 </div>
               </div>
@@ -93,8 +94,8 @@
                 <div>
                   <el-tabs v-model="tabIndex4" @tab-click="handleClick4">
                     <el-tab-pane label="全部" name="" />
-                    <el-tab-pane label="规格一" name="160" />
-                    <el-tab-pane label="规格二" name="357" />
+                    <el-tab-pane label="20mg" name="160" />
+                    <el-tab-pane label="80mg" name="357" />
                   </el-tabs>
                 </div>
               </div>
@@ -143,7 +144,7 @@
                 </div>
               </el-card>
             </div>
-            <div>
+            <div style="margin-top: 20px;">
               <el-card>
                 <div style="box-sizing:border-box;padding:17px 16px;width:383px;height:274px">
                   <h3>各片区销售占比</h3>
@@ -154,7 +155,6 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
 <script>
@@ -346,7 +346,7 @@ export default {
     //     },
     //     calculable: true,
     //     legend: {
-    //       data: ['规格一', '规格二'],
+    //       data: ['20mg', '80mg'],
     //       top: 30,
     //       right: 110,
     //       icon: 'roundRect'
@@ -355,7 +355,7 @@ export default {
     //       {
     //         data: this.medicine3Data,
     //         type: 'bar',
-    //         name: '规格一',
+    //         name: '20mg',
     //         barWidth: '17',
     //         markPoint: {
     //           data: [
@@ -370,7 +370,7 @@ export default {
     //       {
     //         data: this.medicine4Data,
     //         type: 'bar',
-    //         name: '规格二',
+    //         name: '80mg',
     //         barWidth: '17',
     //         itemStyle: {
     //           color: '#00BAAD'
@@ -742,21 +742,16 @@ export default {
 <style lang="scss" scoped>
 .body {
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 84px);
   background: rgba(235, 238, 242, 1);
-  padding: 29px;
-}
-
-.formCard {
-  margin: 0px 24px 25px -10px;
-  width: 1655px;
-  height: 143px;
+  padding: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .chartBox {
-  margin: 25px 24px 25px -1px;
-  width: 1655px;
-  height: 80vh;
+  margin-top: 20px;
+  height: 86vh;
   background-color: #fff;
   padding: 39px 36px 34px 27px;
 

@@ -52,7 +52,7 @@ export default {
   data() {
     return {
       ruleForm: {
-        time: "year",
+        queryType: 1,
         year: "",
         startMonth: "",
         endMonth: "",
@@ -75,14 +75,14 @@ export default {
     }
   },
   created() {
-    this.changeForm()
+    this.changeForm(this.ruleForm)
   },
   methods: {
-    changeForm() {
-      this.getPatientStructure()
+    changeForm(form) {
+      this.getPatientStructure(form)
     },
-    async getPatientStructure() {
-      const res = await getPatientStructure(this.ruleForm)
+    async getPatientStructure(form) {
+      const res = await getPatientStructure(form)
       this.dotRange = res.data.dotRange
       this.locationRange = res.data.locationRange
       this.ageRange = res.data.ageRange
@@ -543,14 +543,6 @@ export default {
       padding-left: 16px;
       border-bottom: 1px solid rgba(233, 233, 233, 1);
     }
-  }
-}
-
-</style>
-<style lang="scss">
-.formCard {
-  .cardBody {
-    height: 196px;
   }
 }
 
