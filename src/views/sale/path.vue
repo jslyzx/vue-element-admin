@@ -286,7 +286,7 @@ export default {
     }
     margin-bottom: 10px;
     .inBox {
-      width: 824px;
+      width: 832px;
       height: 330px;
       padding: 16px;
       .topBox {
