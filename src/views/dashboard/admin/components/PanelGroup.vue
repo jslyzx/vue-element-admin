@@ -5,7 +5,7 @@
         <div class="indexRow">
           <img class="indexMg" src="@/assets/index_img/year1.png" />
           <div>
-            <span>本年销售额 </span>
+            <span>本年销售额</span>
             <el-tooltip
               class="item"
               effect="dark"
@@ -31,10 +31,11 @@
             class="card-panel-num"
             style="color: rgba(255, 141, 26, 1);"
           />
+          <span style="position: relative; top: -1px; font-size: 18px; color: rgba(255, 141, 26, 1);">元</span>
         </div>
         <div class="ratioRow">
           <div v-if="salesPriceInfo.yearGrowthRate">
-            同比：<span class="yearOnYear">{{ salesPriceInfo.yearGrowthRate }}%</span>
+            同比：<span class="yearOnYear">{{ salesPriceInfo.yearGrowthRate }}</span>
             <i
               v-if=" salesPriceInfo.yearGrowthRate < 0 "
               style="color: rgba(160, 250, 197, 1)"
@@ -47,7 +48,7 @@
             />
           </div>
           <div v-if="salesPriceInfo.monthGrowthRate">
-            环比：<span class="ringRatio">{{ salesPriceInfo.monthGrowthRate }}%</span>
+            环比：<span class="ringRatio">{{ salesPriceInfo.monthGrowthRate }}</span>
             <i
               v-if="salesPriceInfo.monthGrowthRate < 0"
               style="color: rgba(160, 250, 197, 1)"
@@ -67,7 +68,7 @@
         <div class="indexRow">
           <img class="indexMg" src="@/assets/index_img/year2.png" />
           <div>
-            <span>本年销量 </span>
+            <span>本年销量</span>
             <el-tooltip
               class="item"
               effect="dark"
@@ -93,6 +94,7 @@
             class="card-panel-num"
             style="color: rgba(42, 130, 228, 1);"
           />
+          <span style="position: relative; top: -1px; font-size: 18px; color: rgba(42, 130, 228, 1);">盒</span>
         </div>
         <div class="ratioRow">
           <div v-if="salesNumInfo.yearGrowthRate">
@@ -109,7 +111,7 @@
             />
           </div>
           <div v-if="salesNumInfo.monthGrowthRate">
-            环比：<span class="ringRatio">{{ salesNumInfo.monthGrowthRate }}%</span>
+            环比：<span class="ringRatio">{{ salesNumInfo.monthGrowthRate }}</span>
             <i
               v-if="salesNumInfo.monthGrowthRate < 0"
               style="color: rgba(160, 250, 197, 1)"
@@ -129,7 +131,7 @@
         <div class="indexRow">
           <img class="indexMg" src="@/assets/index_img/year3.png" />
           <div>
-            <span>年度DOT </span>
+            <span>年度DOT</span>
             <el-tooltip
               class="item"
               effect="dark"
@@ -155,10 +157,11 @@
             class="card-panel-num"
             style="color: rgba(0, 186, 173, 1);"
           />
+          <span style="position: relative; top: -1px; font-size: 18px; color: rgba(0, 186, 173, 1);">月</span>
         </div>
         <div class="ratioRow">
           <div v-if="dotInfo.yearGrowthRate">
-            同比：<span class="yearOnYear">{{ dotInfo.yearGrowthRate }}%</span>
+            同比：<span class="yearOnYear">{{ dotInfo.yearGrowthRate }}</span>
             <i
               v-if=" dotInfo.yearGrowthRate < 0 "
               style="color: rgba(160, 250, 197, 1)"
@@ -171,7 +174,7 @@
             />
           </div>
           <div v-if="dotInfo.monthGrowthRate">
-            环比：<span class="ringRatio">{{ dotInfo.monthGrowthRate }}%</span>
+            环比：<span class="ringRatio">{{ dotInfo.monthGrowthRate }}</span>
             <i
               v-if="dotInfo.monthGrowthRate < 0"
               style="color: rgba(160, 250, 197, 1)"
@@ -191,7 +194,7 @@
         <div class="indexRow">
           <img class="indexMg" src="@/assets/index_img/year4.png" />
           <div>
-            <span>本年患者数 </span>
+            <span>本年患者数</span>
             <el-tooltip
               class="item"
               effect="dark"
@@ -217,6 +220,7 @@
             class="card-panel-num"
             style="color: rgba(240, 96, 96, 1);"
           />
+          <span style="position: relative; top: -1px; font-size: 18px; color: rgba(240, 96, 96, 1);">人</span>
         </div>
         <div class="ratioRow">
           <div v-if="salesInfo.yearGrowthRate">

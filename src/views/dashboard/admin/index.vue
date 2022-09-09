@@ -1,10 +1,7 @@
 <template>
-  <div class="dashboard-editor-container">
+  <div class="dashboard-editor-container body">
     <el-row>
-      <el-col :span="12"
-        ><div class="grid-content bg-purple">首页数据统计</div></el-col
-      >
-      <el-col :span="12">
+      <el-col :span="24">
         <el-radio-group
           @change="handleClick()"
           v-model="dateActive"
@@ -60,12 +57,12 @@
           </div>
         </div>
       </el-col> -->
-      
+
       <el-col :xs="6" :sm="6" style="height: 100%">
         <div class="phBox">
           <div class="phTitle">
             <div>门店销售排行榜（TOP10）</div>
-            <span>查看全部</span>
+            <span @click="goShop">查看全部</span>
           </div>
           <ul>
             <li class="pbBox">
@@ -167,7 +164,7 @@ export default {
       shopSaleList: [],
       medicine1Data: [],
       medicine2Data: [],
-      salesCompletionRate: {}
+      salesCompletionRate: {},
     };
   },
   created() {
@@ -181,6 +178,12 @@ export default {
     this.queryMonthSalesPrice();
   },
   methods: {
+    // 跳转到门店
+    goShop() {
+      this.$router.push({
+        name: "ShopSale",
+      });
+    },
     // 切换年季月日
     handleClick(tab, event) {
       this.queryDot();
@@ -306,9 +309,9 @@ export default {
         queryType: this.dateActive,
       }).then((res) => {
         if (res.code == 0) {
-          this.salesCompletionRate = res.data
-          this.pieChart1()
-          this.pieChart2()
+          this.salesCompletionRate = res.data;
+          this.pieChart1();
+          this.pieChart2();
         }
       });
     },
@@ -333,58 +336,80 @@ export default {
     },
     // 完成率
     pieChart1() {
-      const chart = echarts.init(document.getElementById("pieChart1"), 'macarons')
+      const chart = echarts.init(
+        document.getElementById("pieChart1"),
+        "macarons"
+      );
       chart.setOption({
         tooltip: {
-          trigger: 'item'
+          trigger: "item",
         },
         series: [
           {
-            name: '预估金额: ' + this.salesCompletionRate.salesPrice,
-            type: 'pie',
-            radius: ['40%', '70%'],
+            name: "预估金额: " + this.salesCompletionRate.salesPrice,
+            type: "pie",
+            radius: ["40%", "70%"],
             avoidLabelOverlap: false,
             label: {
               show: false,
-              position: 'center'
+              position: "center",
             },
             labelLine: {
-              show: false
+              show: false,
             },
             data: [
-              { value: this.salesCompletionRate.salesPrice - this.salesCompletionRate.estimateTotalMetrics, name: '未完成金额' },
-              { value: this.salesCompletionRate.estimateTotalMetrics, name: '完成金额' }
-            ]
-          }
-        ]
-      })
+              {
+                value:
+                  this.salesCompletionRate.salesPrice -
+                  this.salesCompletionRate.estimateTotalMetrics,
+                name: "未完成金额",
+              },
+              {
+                value: this.salesCompletionRate.estimateTotalMetrics,
+                name: "完成金额",
+              },
+            ],
+          },
+        ],
+      });
     },
     pieChart2() {
-      let chart = echarts.init(document.getElementById('pieChart2'), 'macarons')
+      let chart = echarts.init(
+        document.getElementById("pieChart2"),
+        "macarons"
+      );
       chart.setOption({
         tooltip: {
-          trigger: 'item'
+          trigger: "item",
         },
         series: [
           {
-            name: '年度金额: ' + this.salesCompletionRate.salesPrice,
-            type: 'pie',
-            radius: ['40%', '70%'],
+            name: "年度金额: " + this.salesCompletionRate.salesPrice,
+            type: "pie",
+            radius: ["40%", "70%"],
             avoidLabelOverlap: false,
             label: {
               show: false,
-              position: 'center'
+              position: "center",
             },
             labelLine: {
-              show: false
+              show: false,
             },
             data: [
-              { value: this.salesCompletionRate.salesPrice - this.salesCompletionRate.totalYearMetrics, name: '未完成金额' },
-              { value: this.salesCompletionRate.totalYearMetrics, name: '完成金额' }
-            ]
-          }
-        ]
-      })
+              {
+                value:
+                  this.salesCompletionRate.salesPrice -
+                  this.salesCompletionRate.totalYearMetrics,
+                name: "未完成金额",
+              },
+              {
+                value: this.salesCompletionRate.totalYearMetrics,
+                name: "完成金额",
+              },
+            ],
+          },
+        ],
+      });
     },
     // 门店排行榜
     queryShopSale() {
@@ -392,7 +417,7 @@ export default {
         queryType: this.dateActive,
       }).then((res) => {
         if (res.code == 0) {
-          this.shopSaleList = res.data;
+          this.shopSaleList = res.data.splice(0, 10);
         }
       });
     },
@@ -405,9 +430,15 @@ export default {
   margin-bottom: 20px !important;
 }
 .dashboard-editor-container {
+  width: 100%;
   padding: 20px;
   background-color: rgb(240, 242, 245);
   position: relative;
+  height: calc(100vh - 84px);
+  background: #ebeef2;
+  padding: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   .github-corner {
     position: absolute;
