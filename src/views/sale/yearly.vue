@@ -134,7 +134,7 @@
                 </div>
               </div>
               <div>
-                <div id="chartBox" ref="chartBox"  v-show="tabIndex5==1" class="inChartBox" />
+                <div id="chartBox" ref="chartBox" v-show="tabIndex5==1" class="inChartBox" />
                 <div id="chartBox5" ref="chartBox5" v-show="tabIndex5==2" class="inChartBox5" />
               </div>
             </div>
@@ -173,8 +173,8 @@
 
 <script>
 import saleForm from '@/components/saleForm'
-import {queryProvinceSalePriceRate,submitTop,queryShopSale,queryRegionSale,querySectionSale} from "@/api/sales"
-import {queryMonthSalesPrice} from "@/api/home"
+import { queryProvinceSalePriceRate, submitTop, queryShopSale, queryRegionSale, querySectionSale } from "@/api/sales"
+import { queryMonthSalesPrice } from "@/api/home"
 import * as echarts from 'echarts'
 require("echarts/theme/macarons"); // echarts theme
 export default {
@@ -206,11 +206,11 @@ export default {
       ],
       chartsData3: [
       ],
-      topData:{},
-      medicine1Data:[],
-      medicine2Data:[],
-      medicine3Data:[],
-      medicine4Data:[],
+      topData: {},
+      medicine1Data: [],
+      medicine2Data: [],
+      medicine3Data: [],
+      medicine4Data: [],
     }
   },
   computed: {
@@ -236,135 +236,206 @@ export default {
       }, 0)
     }
   },
-  created(){
+  created() {
     this.submitTop1('');
-    
+
     this.query1({
-      queryType:this.ruleForm.queryType*1,
+      queryType: this.ruleForm.queryType * 1,
     })
     this.query2({
-      queryType:this.ruleForm.queryType*1,
+      queryType: this.ruleForm.queryType * 1,
     })
   },
   mounted() {
     this.initCharts()
     this.initCharts2()
-    this.$nextTick(function(){
-    this.initCharts3()
+    this.$nextTick(function () {
+      this.initCharts3()
     })
     this.initCharts4()
     this.queryProvinceSalePrice({
-      queryType:this.ruleForm.queryType*1,
+      queryType: this.ruleForm.queryType * 1,
     });
     this.queryMonthSalesPrice();
   },
   methods: {
-    changeType(label){
-      if(label=="数量"){
-        this.tabIndex5=2;
-      }else{
-        this.tabIndex5=1;
+    changeType(label) {
+      if (label == "数量") {
+        this.tabIndex5 = 2;
+      } else {
+        this.tabIndex5 = 1;
       }
       this.queryMonthSalesPrice();
     },
-  queryMonthSalesPrice(){
-    queryMonthSalesPrice({
+    queryMonthSalesPrice() {
+      queryMonthSalesPrice({
         queryType: this.ruleForm.queryType,
-        type:this.tabIndex5
+        type: this.tabIndex5
       }).then((res) => {
         if (res.code == 0) {
           console.log(res);
           let arr1 = [];
           let arr2 = [];
-          if(res.data.monthSalesNum160){
+          if (res.data.monthSalesNum160) {
             res.data.monthSalesNum160.forEach((item) => {
-            arr1.push(item.salesNum);
-          });
-          res.data.monthSalesNum357.forEach((item) => {
-            arr2.push(item.salesNum);
-          });
-          this.medicine1Data = arr1;
-          this.medicine2Data = arr2;
-          console.log(this.medicine1Data,this.medicine2Data);
-          }else{
+              arr1.push(item.salesNum);
+            });
+            res.data.monthSalesNum357.forEach((item) => {
+              arr2.push(item.salesNum);
+            });
+            this.medicine1Data = arr1;
+            this.medicine2Data = arr2;
+            // console.log(this.medicine1Data,this.medicine2Data);
+          } else {
             res.data.monthSalesPrice160.forEach((item) => {
-            arr1.push(item.salesPrice);
-          });
-          res.data.monthSalesPrice357.forEach((item) => {
-            arr2.push(item.salesPrice);
-          });
-          this.medicine3Data = arr1;
-          this.medicine4Data = arr2;
-          console.log(this.medicine3Data,this.medicine4Data);
+              arr1.push(item.salesPrice);
+            });
+            res.data.monthSalesPrice357.forEach((item) => {
+              arr2.push(item.salesPrice);
+            });
+            this.medicine3Data = arr1;
+            this.medicine4Data = arr2;
+            // console.log(this.medicine3Data,this.medicine4Data);
           }
         }
       });
-  },
-  async query2(data){
-  let res=await querySectionSale(data);
-
-   this.chartsData3=res.data.provinceSalePriceRate.map((item,index)=>{
-        return{name:item.sectionName,value:item.salesPrice,rate:item.salePriceRate}
-    });
     },
-  async query1(data){
-   let res=await queryRegionSale(data);
-   this.chartsData2=res.data.provinceSalePriceRate.map((item,index)=>{
-        return{name:item.regionMame,value:item.salesPrice,rate:item.salePriceRate}
-    });
-  },
-   async changeForm(form){
+    async query2(data) {
+      let res = await querySectionSale(data);
+
+      this.chartsData3 = res.data.provinceSalePriceRate.map((item, index) => {
+        return { name: item.sectionName, value: item.salesPrice, rate: item.salePriceRate }
+      });
+    },
+    async query1(data) {
+      let res = await queryRegionSale(data);
+      this.chartsData2 = res.data.provinceSalePriceRate.map((item, index) => {
+        return { name: item.regionMame, value: item.salesPrice, rate: item.salePriceRate }
+      });
+    },
+    async changeForm(form) {
       this.queryProvinceSalePrice(form);
     },
-    async submitTop1(id){
-      let res=await submitTop({queryType:this.ruleForm.queryType*1,medicineId:id});
-      if(res.code==0){
-        this.topData=res.data;
+    async submitTop1(id) {
+      let res = await submitTop({ queryType: this.ruleForm.queryType * 1, medicineId: id });
+      if (res.code == 0) {
+        this.topData = res.data;
       }
     },
     async handleClick(tab) {
-      this.submitTop1(this.tabIndex*1);
+      this.submitTop1(this.tabIndex * 1);
     },
     handleClick2(tab) {
-      this.submitTop1(this.tabIndex2*1);
+      this.submitTop1(this.tabIndex2 * 1);
     },
     handleClick3(tab) {
-      this.submitTop1(this.tabIndex3*1);
+      this.submitTop1(this.tabIndex3 * 1);
 
     },
     handleClick4(tab) {
-      this.submitTop1(this.tabIndex4*1);
+      this.submitTop1(this.tabIndex4 * 1);
     },
+    // initCharts() {
+    //   const charts1 = echarts.init(this.$refs['chartBox'])
+    //   charts1.setOption({
+    //     xAxis: {
+    //       type: 'category',
+    //       data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月']
+    //     },
+    //     yAxis: {
+    //       type: 'value',
+    //       name: '销售额（百万元）',
+    //       show: true,
+    //       axisLine: {
+    //         show: true
+    //       },
+    //       min: 0,
+    //       max: 200
+    //     },
+    //     calculable: true,
+    //     legend: {
+    //       data: ['规格一', '规格二'],
+    //       top: 30,
+    //       right: 110,
+    //       icon: 'roundRect'
+    //     },
+    //     series: [
+    //       {
+    //         data: this.medicine3Data,
+    //         type: 'bar',
+    //         name: '规格一',
+    //         barWidth: '17',
+    //         markPoint: {
+    //           data: [
+    //             { type: "max", name: "Max" },
+    //             { type: "min", name: "Min" },
+    //           ],
+    //         },
+    //         itemStyle: {
+    //           color: '#3AA0FF'
+    //         }
+    //       },
+    //       {
+    //         data: this.medicine4Data,
+    //         type: 'bar',
+    //         name: '规格二',
+    //         barWidth: '17',
+    //         itemStyle: {
+    //           color: '#00BAAD'
+    //         }
+    //       }
+    //     ],
+    //     tooltip: {
+
+    //     }
+
+    //   })
+    // },
     initCharts() {
-      const charts1 = echarts.init(this.$refs['chartBox'])
+      const charts1 = echarts.init(this.$refs['chartBox'], "macarons")
       charts1.setOption({
-        xAxis: {
-          type: 'category',
-          data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月']
-        },
-        yAxis: {
-          type: 'value',
-          name: '销售额（百万元）',
-          show: true,
-          axisLine: {
-            show: true
+        title: {
+          text: "销售额（百万元）",
+          textStyle: {
+            color: "rgba(166, 166, 166, 1)",
           },
-          min: 0,
-          max: 200
+        },
+        tooltip: {
+          trigger: "axis",
+        },
+        legend: {
+          data: ["规格1", "规格2"],
         },
         calculable: true,
-        legend: {
-          data: ['规格一', '规格二'],
-          top: 30,
-          right: 110,
-          icon: 'roundRect'
-        },
+        xAxis: [
+          {
+            type: "category",
+            data: [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月",
+            ],
+          },
+        ],
+        yAxis: [
+          {
+            type: "value",
+          },
+        ],
         series: [
           {
+            name: "规格1",
+            type: "bar",
             data: this.medicine3Data,
-            type: 'bar',
-            name: '规格一',
-            barWidth: '17',
             markPoint: {
               data: [
                 { type: "max", name: "Max" },
@@ -372,225 +443,213 @@ export default {
               ],
             },
             itemStyle: {
-              color: '#3AA0FF'
-            }
+              color: "rgba(58, 160, 255, 1)",
+            },
           },
           {
+            name: "规格2",
+            type: "bar",
             data: this.medicine4Data,
-            type: 'bar',
-            name: '规格二',
-            barWidth: '17',
             itemStyle: {
-              color: '#00BAAD'
-            }
-          }
+              color: "rgba(0, 186, 173, 1)",
+            },
+          },
         ],
-        tooltip: {
-
-        }
-
-      })
+      });
     },
     initCharts2() {
       const that = this
       const charts2 = echarts.init(this.$refs['chartBox2'], "macarons")
-      charts2.setOption({
-        tooltip: {
-          trigger: 'item',
-          formatter: '销售金额{c}万<br />销售占比{d}'
-        },
-        color: ['#2A58C7', '#3AA0FF', '#FF8D1A', '#D43030', '#00BAAD', '#FFC300', '#A5D63FFF', '#AC33C1FF'],
-        legend: [{
-          bottom: '50px',
-          left: '65px',
-          formatter: function (name) {
-            if (name == '江苏省') {
-              return `${name}   ${that.chartsData1[0].rate}%`
-            } else if (name == '安徽省') {
-              return `${name}   ${that.chartsData1[1].rate}%`
-            } else if (name == '广东省') {
-              return `${name}   ${that.chartsData1[2].rate}%`
-            }
+      charts2.setOption(
+        {
+          tooltip: {
+            trigger: 'item',
+            formatter: '销售金额{c}万<br />销售占比{d}'
           },
-          orient: 'vertical',
-          padding: [20, 30],
-          textStyle: {
-            fontSize: '20px'
+          color: ['#2A58C7', '#3AA0FF', '#FF8D1A', '#D43030', '#00BAAD', '#FFC300', '#A5D63FFF', '#AC33C1FF'],
+          legend: [{
+            bottom: '50px',
+            left: '65px',
+            formatter: function (name) {
+              for (let index in that.chartsData1) {
+                if (name == that.chartsData1[index].name) {
+                  return `${name}   ${that.chartsData1[index].rate}%`
+                }
+              }
+            },
+            orient: 'vertical',
+            padding: [20, 30],
+            textStyle: {
+              fontSize: '20px'
+            },
+            x: 'left',
+            itemHeight: 12,
+            itemWidth: 12,
           },
-          x: 'left',
-          itemHeight: 12,
-          itemWidth: 12,
-        }, 
-      ],
-        series: [
-          {
-            name: 'Access From',
-            type: 'pie',
-            radius: ['65%', '25%'],
-            center: ['50%', '30%'],
-            // hoverAnimation:true, //鼠标悬浮是否有区域弹出动画，false:无  true:有
-            avoidLabelOverlap: false,
-            label: {
-              show: true,
-              position: 'inside',
-              // color: '#fff',
-              fontSize: 14,
-              formatter: '{b}\n{d}%'
-            },
-            labelLine:{
-              show:true,
-            },
-            minAngle:5,
-            minShowLabelAngle:10,
-            data: this.chartsData1,
-            itemStyle: {
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
+          ],
+          series: [
+            {
+              name: 'Access From',
+              type: 'pie',
+              radius: ['65%', '25%'],
+              center: ['50%', '30%'],
+              // hoverAnimation:true, //鼠标悬浮是否有区域弹出动画，false:无  true:有
+              avoidLabelOverlap: false,
+              label: {
+                show: true,
+                position: 'inside',
+                // color: '#fff',
+                fontSize: 14,
+                formatter: '{b}\n{d}%'
               },
+              labelLine: {
+                show: true,
+              },
+              minAngle: 5,
+              minShowLabelAngle: 10,
+              data: this.chartsData1,
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                },
+              }
             }
-          }
-        ]
+          ]
 
-      })
+        })
     },
     initCharts3() {
       const that = this
       const charts3 = echarts.init(this.$refs['chartBox3'], "macarons")
-      charts3.setOption({
-        tooltip: {
-          trigger: 'item',
-          formatter: '销售金额{c}万<br />销售占比{d}'
-        },
-        color: ['#2A58C7FF', '#FF8D1AFF', '#00BAADFF', '#A5D63FFF', '#EE6666FF'],
-        legend: {
-          // formatter: function (name) {
-          //   if (name == '大区一') {
-          //     return `${name}   ${(that.chartsData2[0].value / that.countSum2) * 100}%`
-          //   } else if (name == '大区二') {
-          //     return `${name}   ${(that.chartsData2[1].value / that.countSum2) * 100}%`
-          //   } else if (name == '大区三') {
-          //     return `${name}   ${(that.chartsData2[2].value / that.countSum2) * 100}%`
-          //   } else if (name == '大区四') {
-          //     return `${name}   ${(that.chartsData2[3].value / that.countSum2) * 100}%`
-          //   } else if (name == '大区五') {
-          //     return `${name}   ${(that.chartsData2[4].value / that.countSum2) * 100}%`
-          //   }
-          // },
-          left: '3px',
-          orient: 'vertical',
-          itemHeight: 10,
-          padding: [20, 30],
-          textStyle: {
-            fontSize: '20px'
+      charts3.setOption(
+        {
+          tooltip: {
+            trigger: 'item',
+            formatter: '销售金额{c}万<br />销售占比{d}'
           },
-          itemWidth: 10,
-        },
-        series: [
-          {
-            // name: 'Access From',
-            type: 'pie',
-            radius: ['35%', '20%'],
-            center: ['50%', '16%'],
-            avoidLabelOverlap: false,
-            emphasis: {
-              scale: true,
-              scaleSize: 20
+          color: ['#2A58C7', '#FF8D1A', '#00BAAD', '#A5D63F', '#EE6666'],
+          legend: {
+            formatter: function (name) {
+              for (let index in that.chartsData2) {
+                if (name == that.chartsData2[index].name) {
+                  return `${name}   ${that.chartsData2[index].rate}%`
+                }
+              }
             },
-            labelLine: {
-              show: false
+            left: '3px',
+            orient: 'vertical',
+            itemHeight: 10,
+            padding: [20, 30],
+            textStyle: {
+              fontSize: '20px'
             },
-            label: {
-              show: false
-            },
-            itemStyle: {
-              normal: {
-                label: {
-                  show: false,
-                },
-                labelLine: {
-                  show: false,
-                  length: 100,
-                  smooth: 0.5,
-                },
-                // borderWidth: BorderWidth,
-                shadowBlur: 40,
-                borderColor: "#59CFFF",
-                shadowColor: "rgba(0, 0, 0, 0)", //边框阴影
-              },
+            itemWidth: 10,
+          },
+          series: [
+            {
+              // name: 'Access From',
+              type: 'pie',
+              radius: ['35%', '20%'],
+              center: ['50%', '16%'],
+              avoidLabelOverlap: false,
               emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                scale: true,
+                scaleSize: 20
               },
-            },
-            data: this.chartsData2
-          }
-        ]
-      })
+              labelLine: {
+                show: false
+              },
+              label: {
+                show: false
+              },
+              itemStyle: {
+                normal: {
+                  label: {
+                    show: false,
+                  },
+                  labelLine: {
+                    show: false,
+                    length: 100,
+                    smooth: 0.5,
+                  },
+                  // borderWidth: BorderWidth,
+                  shadowBlur: 40,
+                  borderColor: "#59CFFF",
+                  shadowColor: "rgba(0, 0, 0, 0)", //边框阴影
+                },
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                },
+              },
+              minAngle: 5,
+              minShowLabelAngle: 10,
+              data: this.chartsData2
+            }
+          ]
+        })
     },
     initCharts4() {
       const that = this
       const charts4 = echarts.init(this.$refs['chartBox4'], "macarons")
-      charts4.setOption({
-        tooltip: {
-          trigger: 'item',
-          formatter: '销售金额{c}万<br />销售占比{d}'
-        },
-        color: ['#2A58C7', '#FF8D1A', '#00BAAD', '#A5D63F', '#EE6666'],
-        legend: {
-          // formatter: function (name) {
-          //   if (name == '片区一') {
-          //     return `${name}   ${(that.chartsData3[0].value / that.countSum3) * 100}%`
-          //   } else if (name == '片区二') {
-          //     return `${name}   ${(that.chartsData3[1].value / that.countSum3) * 100}%`
-          //   } else if (name == '片区三') {
-          //     return `${name}   ${(that.chartsData3[2].value / that.countSum3) * 100}%`
-          //   } else if (name == '片区四') {
-          //     return `${name}   ${(that.chartsData3[3].value / that.countSum3) * 100}%`
-          //   } else if (name == '片区五') {
-          //     return `${name}   ${(that.chartsData3[4].value / that.countSum3) * 100}%`
-          //   }
-          // },
-          left: '3px',
-          orient: 'vertical',
-          itemHeight: 10,
-          padding: [20, 30],
-          textStyle: {
-            fontSize: '20px'
+      charts4.setOption(
+        {
+          tooltip: {
+            trigger: 'item',
+            formatter: '销售金额{c}万<br />销售占比{d}'
           },
-          itemWidth: 10,
-        },
-        series: [
-          {
-            name: 'Access From',
-            type: 'pie',
-            radius: ['35%', '20%'],
-            center: ['50%', '16%'],
-            avoidLabelOverlap: false,
-            emphasis: {
-              scale: true,
-              scaleSize: 20
+          color: ['#2A58C7', '#FF8D1A', '#00BAAD', '#A5D63F', '#EE6666'],
+          legend: {
+            formatter: function (name) {
+              for (let index in that.chartsData3) {
+                if (name == that.chartsData3[index].name) {
+                  return `${name}   ${that.chartsData3[index].rate}%`
+                }
+              }
             },
-            labelLine: {
-              show: false
+            left: '3px',
+            orient: 'vertical',
+            itemHeight: 10,
+            padding: [20, 30],
+            textStyle: {
+              fontSize: '20px'
             },
-            label: {
-              show: false
-            },
-            data: this.chartsData3,
-            itemStyle:{
+            itemWidth: 10,
+          },
+          series: [
+            {
+              name: 'Access From',
+              type: 'pie',
+              radius: ['35%', '20%'],
+              center: ['50%', '16%'],
+              avoidLabelOverlap: false,
               emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                scale: true,
+                scaleSize: 20
               },
+              labelLine: {
+                show: false
+              },
+              label: {
+                show: false
+              },
+              minAngle: 5,
+              minShowLabelAngle: 10,
+              data: this.chartsData3,
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                },
+              }
             }
-          }
-        ]
+          ]
 
-      })
+        })
     },
     initChart5() {
       this.chart = echarts.init(this.$refs['chartBox5'], "macarons");
@@ -658,30 +717,30 @@ export default {
         ],
       });
     },
-    async queryProvinceSalePrice(query){
-    let res=await queryProvinceSalePriceRate(query);
-    if(res.code==0){
-      this.chartsData1=res.data.provinceSalePriceRate.map((item,index)=>{
-        return{name:item.provinceName,value:item.salesPrice,rate:item.salePriceRate}
-      });
-    }
+    async queryProvinceSalePrice(query) {
+      let res = await queryProvinceSalePriceRate(query);
+      if (res.code == 0) {
+        this.chartsData1 = res.data.provinceSalePriceRate.map((item, index) => {
+          return { name: item.provinceName, value: item.salesPrice, rate: item.salePriceRate }
+        });
+      }
+    },
   },
-  },
-  watch:{
-    chartsData1(){
+  watch: {
+    chartsData1() {
       this.initCharts2();
     },
-    chartsData2(){
+    chartsData2() {
       this.initCharts3();
     },
-    chartsData3(){
+    chartsData3() {
       this.initCharts4();
     },
-    medicine1Data(){
+    medicine1Data() {
       this.initCharts();
       this.initChart5();
     },
-    medicine3Data(){
+    medicine3Data() {
       this.initCharts();
       this.initChart5();
     }
@@ -779,12 +838,13 @@ export default {
       }
 
       .inChartBox {
-        margin: 0 auto;
+        margin: 30px auto;
         width: 800px;
         height: 500px;
       }
+
       .inChartBox5 {
-        margin: 0 auto;
+        margin: 30px auto;
         width: 800px;
         height: 500px;
       }
