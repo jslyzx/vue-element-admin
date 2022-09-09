@@ -23,12 +23,12 @@
             <div class="bottomBox">
               <div class="price">
                 <!-- {{topData}} -->
-                {{topData.salesPrice?topData.salesPrice[0].currSalePrice:'0'}}
+                {{topData.salesPrice?topData.salesPrice[0].currSalePrice:'0'}} 元
               </div>
               <div class="compare">
-                <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span style="margin-left: 16px;"><img
+                <div><span>同比</span><span style="margin-left: 19px;">{{topData.salesPrice[0].yearGrowthRate||'0%'}}</span><span style="margin-left: 16px;"><img
                       src="@/assets/sale_images/路径 16.png"></span></div>
-                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
+                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">{{topData.salesPrice[0].monthGrowthRate||'0%'}}</span><span
                     style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
               </div>
             </div>
@@ -51,12 +51,12 @@
             </div>
             <div class="bottomBox">
               <div class="price">
-                {{topData.salesNum?topData.salesNum[0].currSaleNum:'0'}}
+                {{topData.salesNum?topData.salesNum[0].currSaleNum:'0'}} 盒
               </div>
               <div class="compare">
-                <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span style="margin-left: 16px;"><img
+                <div><span>同比</span><span style="margin-left: 19px;">{{topData.salesNum[0].yearGrowthRate||'0%'}}</span><span style="margin-left: 16px;"><img
                       src="@/assets/sale_images/路径 16.png"></span></div>
-                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
+                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">{{topData.salesNum[0].monthGrowthRate||'0%'}}</span><span
                     style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
               </div>
             </div>
@@ -79,13 +79,15 @@
             </div>
             <div class="bottomBox">
               <div class="price">
-                {{topData.oldCustomerSalesNum[0].currSaleNum?topData.oldCustomerSalesNum[0].currSaleNum:'0'}}
+                {{topData.oldCustomerSalesNum[0].currSaleNum?topData.oldCustomerSalesNum[0].currSaleNum:'0'}} 盒
               </div>
               <div class="compare">
-                <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span style="margin-left: 16px;"><img
+                <div><span>同比</span><span style="margin-left: 19px;">{{topData.oldCustomerSalesNum[0].yearGrowthRate||'0%'}}</span><span style="margin-left: 16px;"><img
                       src="@/assets/sale_images/路径 16.png"></span></div>
-                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
-                    style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
+                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">{{topData.oldCustomerSalesNum[0].monthGrowthRate||'0%'}}</span>
+                  <span
+                    style="margin-left: 16px;"> <img src="@/assets/sale_images/Info Icon.png" alt=""></span>
+                </div>
               </div>
             </div>
           </div>
@@ -107,12 +109,12 @@
             </div>
             <div class="bottomBox">
               <div class="price">
-                {{topData.customerSalesNum[0].currSaleNum?topData.customerSalesNum[0].currSaleNum:'0'}}
+                {{topData.customerSalesNum[0].currSaleNum?topData.customerSalesNum[0].currSaleNum:'0'}} 盒
               </div>
               <div class="compare">
-                <div><span>同比</span><span style="margin-left: 19px;">67.66%</span><span style="margin-left: 16px;"><img
+                <div><span>同比</span><span style="margin-left: 19px;">{{topData.customerSalesNum[0].yearGrowthRate||'0%'}}</span><span style="margin-left: 16px;"><img
                       src="@/assets/sale_images/路径 16.png"></span></div>
-                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">-15.89%</span><span
+                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">{{topData.customerSalesNum[0].monthGrowthRate||'0%'}}</span><span
                     style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
               </div>
             </div>
@@ -316,15 +318,15 @@ export default {
       this.queryMonthSalesPrice();
     },
     async submitTop1(id, type) {
-      if(id==0){
-        id=''
+      if (id == 0) {
+        id = ''
       }
       let res = await submitTop({ ...this.ruleForm, medicineId: id });
       if (res.code == 0) {
         if (!type) {
           this.topData = res.data;
           this.id1 = id;
-        }else{
+        } else {
           this.topData[type] = res.data[type];
           this.id1 = id;
         }
