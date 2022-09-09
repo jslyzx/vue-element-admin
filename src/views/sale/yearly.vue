@@ -14,8 +14,8 @@
                 <div>
                   <el-tabs v-model="tabIndex" @tab-click="handleClick">
                     <el-tab-pane label="全部" name="" />
-                    <el-tab-pane label="规格一" name="160" />
-                    <el-tab-pane label="规格二" name="357" />
+                    <el-tab-pane label="20mg" name="160" />
+                    <el-tab-pane label="80mg" name="357" />
                   </el-tabs>
                 </div>
               </div>
@@ -41,8 +41,8 @@
                 <div>
                   <el-tabs v-model="tabIndex2" @tab-click="handleClick2">
                     <el-tab-pane label="全部" name="" />
-                    <el-tab-pane label="规格一" name="160" />
-                    <el-tab-pane label="规格二" name="357" />
+                    <el-tab-pane label="20mg" name="160" />
+                    <el-tab-pane label="80mg" name="357" />
                   </el-tabs>
                 </div>
               </div>
@@ -67,8 +67,8 @@
                 <div>
                   <el-tabs v-model="tabIndex3" @tab-click="handleClick3">
                     <el-tab-pane label="全部" name="" />
-                    <el-tab-pane label="规格一" name="160" />
-                    <el-tab-pane label="规格二" name="357" />
+                    <el-tab-pane label="20mg" name="160" />
+                    <el-tab-pane label="80mg" name="357" />
                   </el-tabs>
                 </div>
               </div>
@@ -93,8 +93,8 @@
                 <div>
                   <el-tabs v-model="tabIndex4" @tab-click="handleClick4">
                     <el-tab-pane label="全部" name="" />
-                    <el-tab-pane label="规格一" name="160" />
-                    <el-tab-pane label="规格二" name="357" />
+                    <el-tab-pane label="20mg" name="160" />
+                    <el-tab-pane label="80mg" name="357" />
                   </el-tabs>
                 </div>
               </div>
@@ -340,7 +340,7 @@ export default {
     //     },
     //     calculable: true,
     //     legend: {
-    //       data: ['规格一', '规格二'],
+    //       data: ['20mg', '80mg'],
     //       top: 30,
     //       right: 110,
     //       icon: 'roundRect'
@@ -349,7 +349,7 @@ export default {
     //       {
     //         data: this.medicine3Data,
     //         type: 'bar',
-    //         name: '规格一',
+    //         name: '20mg',
     //         barWidth: '17',
     //         markPoint: {
     //           data: [
@@ -364,7 +364,7 @@ export default {
     //       {
     //         data: this.medicine4Data,
     //         type: 'bar',
-    //         name: '规格二',
+    //         name: '80mg',
     //         barWidth: '17',
     //         itemStyle: {
     //           color: '#00BAAD'

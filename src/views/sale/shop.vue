@@ -1,9 +1,9 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <saleForm :rule-form="ruleForm" @change="changeForm" />
+      <saleForm :rule-form="ruleForm" @changeForm="changeForm" />
       <div class="chartBox">
-        <el-table :data="saleList" style="width: 100%" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }">
+        <el-table :data="saleList" style="width: 100%" max-height="650" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }">
           <el-table-column label="门店名称">
             <template slot-scope="{row}">
               <router-link :to="'/patient/shop/detail/' + row.id" class="link-type">
@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       ruleForm: {
-        time: 'year',
+        queryType: 1,
         year: '2022',
         startMonth: '',
         endMonth: '',
@@ -48,14 +48,14 @@ export default {
     }
   },
   created(){
-    this.changeForm()
+    this.changeForm(this.ruleForm)
   },
   methods: {
-    changeForm() {
-        this.queryShopSaleAnalysis()
+    changeForm(form) {
+        this.queryShopSaleAnalysis(form)
     },
-    async queryShopSaleAnalysis() {
-      const res = await queryShopSaleAnalysis(this.ruleForm)
+    async queryShopSaleAnalysis(form) {
+      const res = await queryShopSaleAnalysis(form)
       this.saleList = res.data
     }
   }
@@ -79,7 +79,7 @@ export default {
 .chartBox {
   margin: 25px 24px 25px -1px;
   width: 1655px;
-  height: 811px;
+  height: 700px;
   background-color: #fff;
   padding: 39px 36px 34px 27px;
 }

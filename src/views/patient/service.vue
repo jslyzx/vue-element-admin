@@ -103,7 +103,7 @@ export default {
   data() {
     return {
       ruleForm: {
-        time: "year",
+        queryType: 1,
         year: "",
         startMonth: "",
         endMonth: "",
@@ -123,20 +123,19 @@ export default {
       eduTimesAvg: [] //平均患教次数
     }
   },
-  computed: {},
   created() {
-    this.changeForm()
+    this.changeForm(this.ruleForm)
   },
   methods: {
-    async getServiceList() {
+    async getServiceList(form) {
       this.ruleForm.pageSize = 5
-      const res = await shopServiceList(this.ruleForm)
+      const res = await shopServiceList(form)
       this.serviceList = res.data.data
       this.total = res.data.total
     },
-    async getServiceChart() {
+    async getServiceChart(form) {
       this.ruleForm.pageSize = 5
-      const res = await shopServiceCharts(this.ruleForm)
+      const res = await shopServiceCharts(form)
       this.returnRatio = res.data.returnRatio
       this.infoRate = res.data.infoRate
       this.eduTimesAvg = res.data.eduTimesAvg
@@ -329,9 +328,9 @@ export default {
       }
       charts4.setOption(option)
     },
-    changeForm() {
-      this.getServiceList()
-      this.getServiceChart()
+    changeForm(form) {
+      this.getServiceList(form)
+      this.getServiceChart(form)
     }
   },
   watch: {

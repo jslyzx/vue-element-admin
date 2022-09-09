@@ -151,7 +151,9 @@ export default {
   data() {
     return {
       ruleForm: {
-        queryType: 1
+        queryType: 1,
+        page: 1,
+        pageNum: 10
       },
       utilsShow: 1,
       options: [],
@@ -206,7 +208,7 @@ export default {
   },
   created() {
     this.getHearMap();
-    this.queryHospitalSales();
+    this.queryHospitalSales(this.ruleForm);
   },
   methods: {
     changeForm(form) {
@@ -312,7 +314,6 @@ export default {
 .formCard {
   margin: 0px 24px 25px -10px;
   width: 1655px;
-  height: 196px;
 }
 
 .chartBox {
@@ -369,12 +370,6 @@ export default {
 }
 </style>
 <style lang="scss">
-.formCard {
-  .cardBody {
-    height: 196px;
-  }
-}
-
 .el-table .white-row {
   background: #fff;
 }

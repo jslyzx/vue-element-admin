@@ -125,7 +125,7 @@ export default {
   data() {
     return {
       ruleForm: {
-        time: 'year',
+        queryType: 1,
         year: '',
         startMonth: '',
         endMonth: '',
@@ -140,16 +140,16 @@ export default {
     }
   },
   created() {
-    this.changeForm()
+    this.changeForm(this.ruleForm)
   },
   methods: {
-    async queryShopInfo() {
-      const res = await queryShopInfo(this.ruleForm)
+    async queryShopInfo(form) {
+      const res = await queryShopInfo(form)
       this.monthSales = res.data.monthSales
       this.shopInfo = res.data
     },
-    changeForm() {
-        this.queryShopInfo()
+    changeForm(form) {
+        this.queryShopInfo(form)
     },
     initCharts() {
       const charts1 = echarts.init(this.$refs['chartBox'])
