@@ -122,7 +122,7 @@
         </el-card>
       </div>
       <div class="chartDisplay">
-        <el-card>
+        <el-card style="flex-basis: calc(50% - 10px);">
           <div class="inBox">
             <div class="topBox">
               <h3 style="margin-top:1px">销售统计</h3>
@@ -139,13 +139,13 @@
             </div>
           </div>
         </el-card>
-        <el-card style="margin-left:20px">
+        <el-card style="margin-left: 20px;flex: 1;">
           <div class="inBox2">
             <h2>各省区销售占比</h2>
             <div id="chartBox2" ref="chartBox2" class="inChartBox2" />
           </div>
         </el-card>
-        <div class="rightBox" style="margin-left:10px">
+        <div class="rightBox" style="margin-left: 20px;flex: 1;">
           <div>
             <el-card>
               <div style="box-sizing:border-box;padding:17px 16px;width:383px;height:274px">
@@ -697,18 +697,15 @@ export default {
 <style lang="scss" scoped>
 .chartBox {
   margin-top: 20px;
-  height: 86vh;
-  background-color: #fff;
-  padding: 39px 36px 34px 27px;
 
   .display {
     display: flex;
     flex-flow: row nowrap;
-
+    margin: -10px;
     .s_box {
-      width: 383px;
+      flex: 1;
       height: 140px;
-      margin: 0 21px 0 0;
+      margin: 10px;
 
       ::v-deep .el-card__body {
         padding: 0px !important;
@@ -748,7 +745,7 @@ export default {
   }
 
   .chartDisplay {
-    margin-top: 32px;
+    margin-top: 20px;
     display: flex;
     flex-flow: row wrap;
 
