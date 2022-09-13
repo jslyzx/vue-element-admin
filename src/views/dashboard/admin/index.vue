@@ -141,11 +141,17 @@ export default {
     };
   },
   created() {
-    this.queryDot();
+    const that = this
+    setTimeout(() => {
+      that.queryDot();
+    }, 2000);
     this.querySalesPrice();
     this.querySalesNum();
     this.querySalesInfo();
     this.getHearMap();
+    setTimeout(() => {
+      that.querySalesInfo();
+    }, 3000);
     this.queryShopSale();
     this.querySalesCompletionRate();
     this.queryMonthSalesPrice();
@@ -159,12 +165,15 @@ export default {
     },
     // 切换年季月日
     handleClick(tab, event) {
-      this.queryDot();
+      const that = this
+      setTimeout(() => {
+        that.queryDot();
+      }, 2000);
       this.querySalesPrice();
       this.querySalesNum();
       setTimeout(() => {
-        this.querySalesInfo();
-      }, 1000);
+        that.querySalesInfo();
+      }, 3000);
       this.getHearMap();
       this.queryShopSale();
     },
