@@ -2,7 +2,7 @@
   <div class="sidebar-logo-container" :class="{'collapse':collapse}">
     <transition name="sidebarLogoFade">
       <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo">
+        <img v-if="logoSm" :src="logoSm" class="sidebar-logo">
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
         <img v-if="logo" :src="logo" class="sidebar-logo">
@@ -13,6 +13,7 @@
 
 <script>
 import logo from '@/assets/logo.png'
+import logoSm from '@/assets/logo-sm.png'
 export default {
   name: 'SidebarLogo',
   props: {
@@ -24,7 +25,8 @@ export default {
   data() {
     return {
       title: 'Vue Element Admin',
-      logo: logo
+      logo: logo,
+      logoSm: logoSm
     }
   }
 }
