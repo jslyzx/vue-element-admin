@@ -5,10 +5,10 @@
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
 
     <div class="right-menu">
-
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
           <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <span>系统管理员</span>
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
@@ -127,13 +127,23 @@ export default {
           width: 40px;
           height: 40px;
           border-radius: 10px;
+          float: left;
+        }
+
+        .user-name {
+          line-height: 40px;
+          height: 40px;
+          display: inline-block;
+          float: left;
+          margin-left: 10px;
+          font-size: 14px;
         }
 
         .el-icon-caret-bottom {
           cursor: pointer;
           position: absolute;
           right: -20px;
-          top: 25px;
+          top: 14px;
           font-size: 12px;
         }
       }
