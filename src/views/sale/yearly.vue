@@ -675,7 +675,7 @@ export default {
           trigger: "axis",
         },
         legend: {
-          data: ["规格1", "规格2"],
+          data: ["20mg", "80mg"],
         },
         calculable: true,
         xAxis: [{
@@ -699,7 +699,7 @@ export default {
           type: "value",
         },],
         series: [{
-          name: "规格1",
+          name: "20mg",
           type: "bar",
           data: this.medicine1Data,
           markPoint: {
@@ -713,7 +713,7 @@ export default {
           },
         },
         {
-          name: "规格2",
+          name: "80mg",
           type: "bar",
           data: this.medicine2Data,
           itemStyle: {
