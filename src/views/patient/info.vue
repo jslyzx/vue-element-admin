@@ -52,13 +52,16 @@
               </div>
               <div class="bottomBox">
                 <div v-show="tabIndex2 == 'total'">
-                  <div class="price">{{dot.value}}月</div>
-                  <div class="compare">
-                    <div>
-                      <span>同比</span><span style="margin-left: 16px">{{dot.yoy}}</span><span style="margin-left: 16px"><img v-if="parseFloat(dot.yoy) >= 0" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span>
-                    </div>
-                    <div style="margin-left: 26px">
-                      <span>环比</span><span style="margin-left: 16px">{{dot.mom}}</span><span style="margin-left: 16px"><img v-if="parseFloat(dot.mom) >= 0" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span>
+                  <div v-if="dot == null"> -- </div>
+                  <div v-else>
+                    <div class="price">{{dot.value}}月</div>
+                    <div class="compare">
+                      <div>
+                        <span>同比</span><span style="margin-left: 16px">{{dot.yoy}}</span><span style="margin-left: 16px"><img v-if="parseFloat(dot.yoy) >= 0" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span>
+                      </div>
+                      <div style="margin-left: 26px">
+                        <span>环比</span><span style="margin-left: 16px">{{dot.mom}}</span><span style="margin-left: 16px"><img v-if="parseFloat(dot.mom) >= 0" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span>
+                      </div>
                     </div>
                   </div>
                 </div>
