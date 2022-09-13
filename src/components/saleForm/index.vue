@@ -2,7 +2,7 @@
   <div>
     <el-card class="cardBody">
       <div class="outBox">
-        <div class="selectBox">
+        <div class="selectBox" v-if="quickShow">
           <div ref="year" data-time="1" :class="{ 'active': ruleForm.queryType == '1' }" @click="changeTime">
             当年
           </div>
@@ -101,6 +101,10 @@ export default {
       default: ''
     },
     regionShow: {
+      type: Boolean,
+      default: true
+    },
+    quickShow: {
       type: Boolean,
       default: true
     }

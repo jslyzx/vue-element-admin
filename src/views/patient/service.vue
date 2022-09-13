@@ -71,12 +71,12 @@
                       </router-link>
                     </template>
                   </el-table-column>
-                  <el-table-column prop="customerNum" label="患者总数"></el-table-column>
+                  <el-table-column prop="customerNum" label="患者总数(人)"></el-table-column>
                   <el-table-column prop="newCustomerRate" label="新患者占比"> </el-table-column>
                   <el-table-column prop="infoRate" label="信息完善度"> </el-table-column>
                   <el-table-column prop="returnRatio" label="回访率"> </el-table-column>
-                  <el-table-column prop="timeDiffAvg" label="配送时效"> </el-table-column>
-                  <el-table-column prop="eduTimesAvg" label="平均患教次数"> </el-table-column>
+                  <el-table-column prop="timeDiffAvg" label="配送时效(h)"> </el-table-column>
+                  <el-table-column prop="eduTimesAvg" label="平均患教次数(次)"> </el-table-column>
                 </el-table>
                 <pagination v-show="total > 0" :total="total" :page.sync="ruleForm.page" :limit.sync="ruleForm.pageSize" @pagination="getServiceList" />
               </div>
