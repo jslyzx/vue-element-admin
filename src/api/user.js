@@ -55,3 +55,11 @@ export function shopServiceCharts(data) {
     params: data
   })
 }
+
+export function saveUser(data) {
+  return request({
+    url: '/api/admin/user/save',
+    method: 'post',
+    data
+  })
+}

@@ -23,12 +23,27 @@
     <pagination v-show="total > 0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.pageSize" @pagination="getUsers" />
 
     <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?'编辑角色':'新增角色'">
-      <el-form :model="user" label-width="80px" label-position="left">
+      <el-form :model="user" ref="dataForm" label-width="80px" :rules="rules" label-position="left">
         <el-form-item label="用户编码">
           <el-input v-model="user.username" placeholder="用户编码" />
         </el-form-item>
         <el-form-item label="用户名称">
           <el-input v-model="user.nickname" placeholder="用户名称" />
+        </el-form-item>
+        <el-form-item label="大区" prop="regionId">
+          <el-select v-model="user.regionId" placeholder="大区" clearable style="width: 280px" @change="_onSelectRegion">
+            <el-option v-for="item in regionList" :key="item.id" :label="item.name" :value="item.id" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="片区" prop="sectionId">
+          <el-select v-model="user.sectionId" placeholder="片区" clearable style="width: 280px" @change="_onSelectSection">
+            <el-option v-for="item in sectionList" :key="item.id" :label="item.name" :value="item.id" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="省区" prop="provinceId">
+          <el-select v-model="user.provinceId" placeholder="省区" clearable style="width: 280px">
+            <el-option v-for="item in provinceList" :key="item.id" :label="item.name" :value="item.id" />
+          </el-select>
         </el-form-item>
       </el-form>
       <div style="text-align:right;">
@@ -40,13 +55,16 @@
 </template>
 
 <script>
-import { getUsers, deleteUser } from '@/api/user'
+import { getUsers, deleteUser, saveUser } from '@/api/user'
+import { fetchAreaSubList } from '@/api/system'
 import Pagination from '@/components/Pagination'
 
 const defaultUser = {
   username: '',
   nickname: '',
-  roles: []
+  regionId: '',
+  sectionId: '',
+  provinceId: ''
 }
 
 export default {
@@ -61,27 +79,70 @@ export default {
       listQuery: {
         page: 1,
         pageSize: 10
+      },
+      regionList: [],
+      sectionList: [],
+      provinceList: [],
+      rules: {
+        username: [{ required: true, message: '必填', trigger: 'blur' }],
+        nickname: [{ required: true, message: '必填', trigger: 'blur' }],
+        regionId: [{ required: true, message: '必填', trigger: 'change' }],
+        sectionId: [{ required: true, message: '必填', trigger: 'change' }]
       }
     }
   },
   created() {
     this.getUsers()
+    this.getRegionList()
   },
   methods: {
+    async getSectionList(pId) {
+      const res = await fetchAreaSubList({ pId: pId })
+      this.sectionList= res.data
+    },
+    _onSelectRegion() {
+      this.getSectionList(this.user.regionId + '')
+    },
+    _onSelectSection() {
+      this.getProvinceList(this.user.sectionId + '')
+    },
+    async getRegionList() {
+      const res = await fetchAreaSubList({ pId: '91498336854474752' })
+      this.regionList = res.data
+    },
     async getUsers() {
       const res = await getUsers(this.listQuery)
       this.usersList = res.data.data
       this.total = res.data.total
     },
+    async getProvinceList(pId) {
+      const res = await fetchAreaSubList({ pId: pId })
+      this.provinceList = res.data
+    },
     handleAdd() {
       this.user = Object.assign({}, defaultUser)
       this.dialogType = 'new'
       this.dialogVisible = true
+      this.$nextTick(() => {
+        this.$refs['dataForm'].clearValidate()
+      })
     },
     handleEdit(scope) {
       this.user = scope.row
+      this.user.regionId = this.user.regionId || ''
+      this.user.sectionId = this.user.sectionId || ''
+      this.user.provinceId = this.user.provinceId || ''
+      if(this.user.regionId){
+        this.getSectionList(this.user.regionId)
+      }
+      if(this.user.sectionId){
+        this.getProvinceList(this.user.sectionId)
+      }
       this.dialogType = 'edit'
       this.dialogVisible = true
+      this.$nextTick(() => {
+        this.$refs['dataForm'].clearValidate()
+      })
     },
     handleDelete({ $index, row }) {
       this.$confirm('确定删除?', '提示', {
@@ -105,25 +166,20 @@ export default {
         })
         .catch(err => { console.error(err) })
     },
-    async confirmUser() {
-      const isEdit = this.dialogType === 'edit'
-
-      if (isEdit) {
-
-      } else {
-
-      }
-
-      const { username, nickname } = this.user
-      this.dialogVisible = false
-      this.$notify({
-        title: 'Success',
-        dangerouslyUseHTMLString: true,
-        message: `
-            <div>username: ${username}</div>
-            <div>nickname: ${nickname}</div>
-          `,
-        type: 'success'
+    confirmUser() {
+      this.$refs['dataForm'].validate((valid) => {
+        if (valid) {
+          this.dialogVisible = false
+          saveUser(this.user).then(() => {
+            this.$notify({
+                title: '成功',
+                message: '维护用户信息成功',
+                type: 'success',
+                duration: 5000
+              })
+              this.getUsers()
+          })
+        }
       })
     }
   }

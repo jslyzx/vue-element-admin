@@ -72,7 +72,7 @@ export function fetchShopList(data) {
 
 export function fetchCityList(data) {
   return request({
-    url: '/admin/division/query',
+    url: '/api/admin/division/query',
     method: 'get',
     params: data
   })

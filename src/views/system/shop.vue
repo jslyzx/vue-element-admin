@@ -53,7 +53,7 @@
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" :inline="true" label-width="100px" style=" margin-left:50px;">
         <el-form-item label="大区" prop="regionId">
-          <el-select v-model="temp.regionId" prop="regionId" placeholder="大区" clearable style="width: 280px" @change="_onSelectRegion">
+          <el-select v-model="temp.regionId" placeholder="大区" clearable style="width: 280px" @change="_onSelectRegion">
             <el-option v-for="item in formRegionList" :key="item.id" :label="item.name" :value="item.id" />
           </el-select>
         </el-form-item>
@@ -132,7 +132,8 @@ export default {
         provinceId: '', //省份
         cityId: '', //城市
         longitude: '', //经度
-        latitude: '' //纬度
+        latitude: '', //纬度
+        provinceCode: ''
       },
       dialogFormVisible: false,
       dialogStatus: '',
@@ -183,6 +184,7 @@ export default {
       var list = _.filter(this.formProvinceList, function(v) {
         return v.id === that.temp.provinceId
       })
+      this.temp.provinceCode = list[0].divisionId
       this.getCityList(list[0].divisionId, 'formCityList')
     },
     async getList() {
@@ -239,6 +241,15 @@ export default {
       this.temp = Object.assign({}, row)
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
+      if(this.temp.regionId){
+        this.getSectionList(this.temp.regionId, 'formSectionList')
+      }
+      if(this.temp.sectionId){
+        this.getProvinceList(this.temp.sectionId, 'formProvinceList')
+      }
+      if(this.temp.provinceCode){
+        this.getCityList(this.temp.provinceCode, 'formCityList')
+      }
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
@@ -267,6 +278,7 @@ export default {
     saveShop() {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
+          this.dialogFormVisible = false
           saveShop(this.temp).then(() => {
             this.$notify({
                 title: '成功',
