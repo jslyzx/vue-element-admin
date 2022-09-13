@@ -284,6 +284,9 @@ export default {
     ::v-deep .el-card__body {
       padding: 0px !important;
     }
+    .el-card {
+      width: calc(50% - 10px);
+    }
     margin-bottom: 10px;
     .inBox {
       width: 832px;
