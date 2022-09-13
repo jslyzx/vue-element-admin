@@ -2,7 +2,7 @@
   <div>
     <el-card class="cardBody">
       <div class="outBox">
-        <div class="selectBox" v-if="quickShow">
+        <div class="selectBox">
           <div ref="year" data-time="1" :class="{ 'active': ruleForm.queryType == '1' }" @click="changeTime">
             当年
           </div>
@@ -16,15 +16,19 @@
         <div class="inputBox">
           <el-form ref="ruleForm" :model="ruleForm" :inline="true" status-icon :rules="rules" label-width="100px">
             <el-form-item label="年份">
-              <el-date-picker v-model="ruleForm.year" value-format="yyyy" type="year" placeholder="选择年" class="selectRegion" />
+              <el-date-picker v-model="ruleForm.year" value-format="yyyy" type="year" placeholder="选择年"
+                class="selectRegion" />
             </el-form-item>
             <el-form-item label="开始月份">
-              <el-date-picker v-model="ruleForm.startMonth" popper-class="monthStyle" type="month" placeholder="选择开始日期" :picker-options="pickerOptions" value-format="MM" class="selectRegion" />
+              <el-date-picker v-model="ruleForm.startMonth" popper-class="monthStyle" type="month" placeholder="选择开始日期"
+                :picker-options="pickerOptions" value-format="MM" class="selectRegion" />
             </el-form-item>
             <el-form-item label="截止月份">
-              <el-date-picker v-model="ruleForm.endMonth" popper-class="monthStyle" type="month" placeholder="选择结束日期" :picker-options="pickerOptions1" value-format="MM" class="selectRegion" />
+              <el-date-picker v-model="ruleForm.endMonth" popper-class="monthStyle" type="month" placeholder="选择结束日期"
+                :picker-options="pickerOptions1" value-format="MM" class="selectRegion" />
             </el-form-item>
             <el-form-item label="商品">
+              <!-- <el-cascader v-model="ruleForm.productId" class="selectRegion" :options="options" @change="handleChange" /> -->
               <el-input v-model="inputText" disabled></el-input>
             </el-form-item>
             <el-form-item label="大区" v-if="regionShow">
@@ -32,17 +36,17 @@
                 <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
-            <el-form-item label="片区"  v-if="regionShow">
+            <el-form-item label="片区" v-if="regionShow">
               <el-select v-model="ruleForm.sectionId" placeholder="请选择" @change="changeRegion2">
                 <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
-            <el-form-item label="省区"  v-if="regionShow">
+            <el-form-item label="省区" v-if="regionShow">
               <el-select v-model="ruleForm.provinceId" placeholder="请选择" @change="changeRegion3">
                 <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
-            <el-form-item label="门店"  v-if="regionShow">
+            <el-form-item label="门店" v-if="regionShow">
               <el-select v-model="ruleForm.shopId" placeholder="请选择">
                 <el-option v-for="item in options4" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
@@ -103,15 +107,11 @@ export default {
     regionShow: {
       type: Boolean,
       default: true
-    },
-    quickShow: {
-      type: Boolean,
-      default: true
     }
   },
   data() {
     return {
-      inputText:'拓益',
+      inputText: '拓益',
       radio1: '',
       rules: {
         //   year: [
@@ -158,7 +158,7 @@ export default {
     }
   },
   methods: {
-    async changeRegion3(id) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+    async changeRegion3(id) {
       let res = await queryShop({ regionId: this.ruleForm.regionId + '', page: 1, pageSize: 100, sectionId: this.ruleForm.sectionId + '', provinceId: id + '' });
       if (res.code == 0) {
         this.options4 = res.data.data.map((item) => {
@@ -207,20 +207,24 @@ export default {
     handleChange() {
 
     },
-
     submitForm() {
       let form = JSON.parse(JSON.stringify(this.ruleForm));
       delete form.queryType;
-      this.$emit("changeForm", form)
-    },
-    resetForm() {
-
+      this.$emit("changeForm", form);
     },
     changeTime(e) {
       this.ruleForm.queryType = e.target.dataset.time
-      this.$emit("queryProvinceSalePrice", {queryType:this.ruleForm.queryType})
+      this.$emit("queryProvinceSalePrice", { queryType: this.ruleForm.queryType })
     },
-
+    resetForm() {
+      this.ruleForm.year="";
+      this.ruleForm.startMonth='';
+      this.ruleForm.endMonth='';
+      this.ruleForm.regionId='';
+      this.ruleForm.sectionId='';
+      this.ruleForm.provinceId='';
+      this.ruleForm.shopId='';
+    },
   }
 }
 
@@ -229,7 +233,7 @@ export default {
 .cardBody {
 
   .el-select,
-  .el-input{
+  .el-input {
     width: 220px;
   }
 
@@ -253,7 +257,8 @@ export default {
         line-height: 20px;
         cursor: pointer;
       }
-      div:last-child{
+
+      div:last-child {
         margin: 0;
       }
     }
@@ -278,7 +283,6 @@ export default {
   }
 
 }
-
 </style>
 <style lang="scss">
 .monthStyle {
@@ -286,10 +290,12 @@ export default {
     display: none !important;
   }
 }
-.el-form-item{
+
+.el-form-item {
   margin-bottom: 10px;
 }
-.el-card__body{
-  padding:10px 24px 10px 24px;
+
+.el-card__body {
+  padding: 10px 24px 10px 24px;
 }
 </style>
