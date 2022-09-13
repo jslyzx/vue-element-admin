@@ -24,7 +24,7 @@
       @handleClick3="getClick3"
       @handleClick4="getClick4"
     />
-    <el-row :gutter="40" class="allChartBox" style="height: 305px">
+    <el-row :gutter="20" class="allChartBox" style="height: 305px">
       <el-col :xs="18" :sm="18" style="height: 100%">
         <div class="chartTitle">患者分布热点图</div>
         <div class="mapBox">
@@ -70,7 +70,7 @@
         </div>
       </el-col>
     </el-row>
-    <el-row :gutter="40" class="allChartBox" style="margin-bottom: 0!important;">
+    <el-row :gutter="20" class="allChartBox" style="margin-bottom: 0!important;">
       <el-col :xs="18" :sm="18" style="height: 100%">
         <div class="chartTitle">销售统计</div>
         <div class="barChartBox">
