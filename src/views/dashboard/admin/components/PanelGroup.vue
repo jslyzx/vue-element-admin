@@ -82,7 +82,7 @@
             <el-tabs v-model="activeName2" @tab-click="handleClick2">
               <el-tab-pane label="全部" name="" />
               <el-tab-pane label="20mg" name="160" />
-              <el-tab-pane label="80mg" name="third357" />
+              <el-tab-pane label="80mg" name="357" />
             </el-tabs>
           </div>
         </div>
