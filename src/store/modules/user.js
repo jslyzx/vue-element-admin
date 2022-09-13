@@ -7,7 +7,10 @@ const state = {
   name: '',
   avatar: '',
   introduction: '',
-  roles: []
+  roles: [],
+  regionId: '',
+  sectionId: '',
+  provinceId: ''
 }
 
 const mutations = {
@@ -25,6 +28,15 @@ const mutations = {
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
+  },
+  SET_REGION: (state, regionId) => {
+    state.regionId = regionId
+  },
+  SET_SECTION: (state, sectionId) => {
+    state.sectionId = sectionId
+  },
+  SET_PROVINCE: (state, provinceId) => {
+    state.provinceId = provinceId
   }
 }
 
@@ -55,10 +67,13 @@ const actions = {
         }
         data.roles = ["admin"]
         data.avatar = 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif';
-        const { roles, nickname, avatar} = data
+        const { roles, nickname, avatar, provinceId, sectionId, regionId } = data
         commit('SET_ROLES', roles)
         commit('SET_NAME', nickname)
         commit('SET_AVATAR', avatar)
+        commit('SET_REGION', regionId)
+        commit('SET_SECTION', sectionId)
+        commit('SET_PROVINCE', provinceId)
         resolve(data)
       }).catch(error => {
         reject(error)
@@ -72,6 +87,9 @@ const actions = {
       logout(state.token).then(() => {
         commit('SET_TOKEN', '')
         commit('SET_ROLES', [])
+        commit('SET_REGION', '')
+        commit('SET_SECTION', '')
+        commit('SET_PROVINCE', '')
         removeToken()
         resetRouter()
 
@@ -91,6 +109,9 @@ const actions = {
     return new Promise(resolve => {
       commit('SET_TOKEN', '')
       commit('SET_ROLES', [])
+      commit('SET_REGION', '')
+      commit('SET_SECTION', '')
+      commit('SET_PROVINCE', '')
       removeToken()
       resolve()
     })
