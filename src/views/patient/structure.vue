@@ -531,7 +531,7 @@ export default {
   margin-top: 20px;
 
   .chartBox {
-    width: 844px;
+    flex: 1;
     height: 360px;
     padding-bottom: 20px;
     background-color: #fff;
@@ -571,7 +571,7 @@ export default {
 
   .chartContent1,
   .chartContent2 {
-    width: 394px;
+    flex: 1;
     height: 360px;
     background: #fff;
     margin-left: 20px;

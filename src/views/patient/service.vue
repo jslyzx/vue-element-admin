@@ -366,7 +366,7 @@ export default {
     justify-content: space-between;
 
     .s_box {
-      width: 383px;
+      width: calc(25% - 10px);
       height: 258px;
 
       ::v-deep .el-card__body {
