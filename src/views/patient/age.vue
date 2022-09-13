@@ -315,8 +315,8 @@ export default {
     flex-flow: row nowrap;
 
     .s_box {
-      width: 838px;
-      margin: 0 28px 0 0;
+      flex: 1;
+      margin: 0 20px 0 0;
 
       ::v-deep .el-card__body {
         padding: 0px !important;
