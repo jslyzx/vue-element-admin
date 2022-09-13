@@ -40,13 +40,13 @@
                 <el-table-column
                   width="130"
                   prop="currSaleNum"
-                  label="销售数量"
+                  label="销售数量(盒)"
                 >
                 </el-table-column>
                 <el-table-column
                   width="130"
                   prop="currSalePrice"
-                  label="销售金额"
+                  label="销售金额(元)"
                 >
                 </el-table-column>
                 <el-table-column
@@ -97,9 +97,9 @@
               >
                 <el-table-column prop="officeName" label="科室名称">
                 </el-table-column>
-                <el-table-column prop="currSaleNum" label="销售数量">
+                <el-table-column prop="currSaleNum" label="销售数量(盒)">
                 </el-table-column>
-                <el-table-column prop="currSalePrice" label="销售金额">
+                <el-table-column prop="currSalePrice" label="销售金额(元)">
                 </el-table-column>
                 <el-table-column prop="monthGrowthRate" label="环比">
                 </el-table-column>

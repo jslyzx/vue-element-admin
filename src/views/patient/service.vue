@@ -62,7 +62,7 @@
                 <div style="margin-top: -5px"></div>
               </div>
               <div class="tableBox">
-                <el-table :data="serviceList" style="width: 100%" max-height="270" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }">
+                <el-table :data="serviceList" style="width: 100%" max-height="290" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }">
                   <el-table-column prop="sectionName" label="片区"></el-table-column>
                   <el-table-column label="门店名称">
                     <template slot-scope="{row}">
@@ -129,6 +129,7 @@ export default {
   methods: {
     async getServiceList(form) {
       this.ruleForm.pageSize = 5
+      Object.assign(form, this.ruleForm)
       const res = await shopServiceList(form)
       this.serviceList = res.data.data
       this.total = res.data.total
@@ -333,9 +334,8 @@ export default {
       this.getServiceChart(form)
     },
     changeTime(form) {
-      this.ruleForm.queryType = form.queryType
-      this.getServiceList(this.ruleForm)
-      this.getServiceChart(this.ruleForm)
+      this.getServiceList(form)
+      this.getServiceChart(form)
     },
   },
   watch: {

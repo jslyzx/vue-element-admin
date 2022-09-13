@@ -87,8 +87,7 @@ export default {
       this.getPatientStructure(form);
     },
     changeTime(form) {
-      this.ruleForm.queryType = form.queryType
-      this.getPatientStructure(this.ruleForm);
+      this.getPatientStructure(form);
     },
     async getPatientStructure(form) {
       const res = await getPatientStructure(form);
