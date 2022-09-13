@@ -2,14 +2,14 @@ import request from '@/utils/request'
 
 export function fetchAreaList() {
   return request({
-    url: '/admin/area/queryTree',
+    url: '/api/admin/area/queryTree',
     method: 'get'
   })
 }
 
 export function saveRegion(data) {
   return request({
-    url: '/admin/area/save',
+    url: '/api/admin/area/save',
     method: 'post',
     data
   })
@@ -17,14 +17,14 @@ export function saveRegion(data) {
 
 export function fetchProvList() {
   return request({
-    url: '/admin/division/query',
+    url: '/api/admin/division/query',
     method: 'get'
   })
 }
 
 export function fetchSaleList(data) {
   return request({
-    url: '/admin/salesman/grid',
+    url: '/api/admin/salesman/grid',
     method: 'get',
     params: data
   })
@@ -32,7 +32,7 @@ export function fetchSaleList(data) {
 
 export function fetchAreaSubList(data) {
   return request({
-    url: '/admin/area/query',
+    url: '/api/admin/area/query',
     method: 'get',
     params: data
   })
@@ -40,7 +40,7 @@ export function fetchAreaSubList(data) {
 
 export function saveSale(data) {
   return request({
-    url: '/admin/salesman/save',
+    url: '/api/admin/salesman/save',
     method: 'post',
     data
   })
@@ -48,7 +48,7 @@ export function saveSale(data) {
 
 export function deleteSale(data) {
   return request({
-    url: '/admin/salesman/delete_physical',
+    url: '/api/admin/salesman/delete_physical',
     method: 'delete',
     params: data
   })
@@ -56,7 +56,7 @@ export function deleteSale(data) {
 
 export function deleteRegion(data) {
   return request({
-    url: '/admin/area/deleteTree',
+    url: '/api/admin/area/deleteTree',
     method: 'delete',
     params: data
   })
@@ -64,7 +64,7 @@ export function deleteRegion(data) {
 
 export function fetchShopList(data) {
   return request({
-    url: '/admin/shop/grid',
+    url: '/api/admin/shop/grid',
     method: 'get',
     params: data
   })
@@ -80,7 +80,7 @@ export function fetchCityList(data) {
 
 export function saveShop(data) {
   return request({
-    url: '/admin/shop/save',
+    url: '/api/admin/shop/save',
     method: 'post',
     data
   })
@@ -88,7 +88,7 @@ export function saveShop(data) {
 
 export function queryShopInfo(data) {
   return request({
-    url: '/patient/shop/serve/queryShopInfo',
+    url: '/api/patient/shop/serve/queryShopInfo',
     method: 'get',
     params: data
   })
@@ -96,7 +96,7 @@ export function queryShopInfo(data) {
 
 export function getPatientStructure(data) {
   return request({
-    url: '/patient/analysis/queryPatientStructure',
+    url: '/api/patient/analysis/queryPatientStructure',
     method: 'get',
     params: data
   })
@@ -104,7 +104,7 @@ export function getPatientStructure(data) {
 
 export function queryPatientComparison(data) {
   return request({
-    url: '/patient/analysis/queryPatientComparison',
+    url: '/api/patient/analysis/queryPatientComparison',
     method: 'get',
     params: data
   })
@@ -112,7 +112,7 @@ export function queryPatientComparison(data) {
 
 export function queryPatientCountByMonth(data) {
   return request({
-    url: '/patient/analysis/queryPatientCountByMonth',
+    url: '/api/patient/analysis/queryPatientCountByMonth',
     method: 'get',
     params: data
   })
@@ -120,7 +120,7 @@ export function queryPatientCountByMonth(data) {
 
 export function queryShopSaleAnalysis(data) {
   return request({
-    url: '/sale/shop/queryShopSaleAnalysis',
+    url: '/api/sale/shop/queryShopSaleAnalysis',
     method: 'get',
     params: data
   })
@@ -128,7 +128,7 @@ export function queryShopSaleAnalysis(data) {
 
 export function queryPatientStopReasonRange(data) {
   return request({
-    url: '/patient/analysis/queryPatientStopReasonRange',
+    url: '/api/patient/analysis/queryPatientStopReasonRange',
     method: 'get',
     params: data
   })
@@ -136,7 +136,7 @@ export function queryPatientStopReasonRange(data) {
 
 export function queryPatientAnalysis(data) {
   return request({
-    url: '/patient/analysis/queryPatientAnalysis',
+    url: '/api/patient/analysis/queryPatientAnalysis',
     method: 'get',
     params: data
   })

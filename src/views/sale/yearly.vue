@@ -211,30 +211,10 @@ export default {
     }
   },
   computed: {
-    countSum() {
-      return this.chartsData1.reduce((data1, data2) => {
-        if (data2.value) {
-          return data2.value + data1
-        }
-      }, 0)
-    },
-    countSum2() {
-      return this.chartsData2.reduce((data1, data2) => {
-        if (data2.value) {
-          return data2.value + data1
-        }
-      }, 0)
-    },
-    countSum3() {
-      return this.chartsData3.reduce((data1, data2) => {
-        if (data2.value) {
-          return data2.value + data1
-        }
-      }, 0)
-    }
+  
   },
   created() {
-    this.submitTop1('');
+    this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: '' });
 
     this.query1({
       queryType: this.ruleForm.queryType * 1,
@@ -266,7 +246,7 @@ export default {
     },
     queryMonthSalesPrice() {
       queryMonthSalesPrice({
-        ...this.ruleForm,
+        queryType:this.ruleForm.queryType,
         type: this.tabIndex5
       }).then((res) => {
         if (res.code == 0) {
@@ -314,14 +294,15 @@ export default {
       this.queryProvinceSalePrice(form);
       this.query2(form);
       this.query1(form);
-      this.submitTop1(this.id1);
+      this.submitTop1({...form,medicineId:this.id1});
       this.queryMonthSalesPrice();
     },
-    async submitTop1(id, type) {
+    async submitTop1(data,id,type) {
+      console.log(data);
       if (id == 0) {
         id = ''
       }
-      let res = await submitTop({ ...this.ruleForm, medicineId: id });
+      let res = await submitTop(data);
       if (res.code == 0) {
         if (!type) {
           this.topData = res.data;
@@ -346,62 +327,6 @@ export default {
     handleClick4(tab) {
       this.submitTop1(this.tabIndex4 * 1, 'customerSalesNum');
     },
-    // initCharts() {
-    //   const charts1 = echarts.init(this.$refs['chartBox'])
-    //   charts1.setOption({
-    //     xAxis: {
-    //       type: 'category',
-    //       data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月']
-    //     },
-    //     yAxis: {
-    //       type: 'value',
-    //       name: '销售额（百万元）',
-    //       show: true,
-    //       axisLine: {
-    //         show: true
-    //       },
-    //       min: 0,
-    //       max: 200
-    //     },
-    //     calculable: true,
-    //     legend: {
-    //       data: ['20mg', '80mg'],
-    //       top: 30,
-    //       right: 110,
-    //       icon: 'roundRect'
-    //     },
-    //     series: [
-    //       {
-    //         data: this.medicine3Data,
-    //         type: 'bar',
-    //         name: '20mg',
-    //         barWidth: '17',
-    //         markPoint: {
-    //           data: [
-    //             { type: "max", name: "Max" },
-    //             { type: "min", name: "Min" },
-    //           ],
-    //         },
-    //         itemStyle: {
-    //           color: '#3AA0FF'
-    //         }
-    //       },
-    //       {
-    //         data: this.medicine4Data,
-    //         type: 'bar',
-    //         name: '80mg',
-    //         barWidth: '17',
-    //         itemStyle: {
-    //           color: '#00BAAD'
-    //         }
-    //       }
-    //     ],
-    //     tooltip: {
-
-    //     }
-
-    //   })
-    // },
     initCharts() {
       const charts1 = echarts.init(this.$refs['chartBox'], "macarons")
       charts1.setOption({
@@ -675,7 +600,7 @@ export default {
           trigger: "axis",
         },
         legend: {
-          data: ["规格1", "规格2"],
+          data: ["20mg", "80mg"],
         },
         calculable: true,
         xAxis: [{
@@ -699,7 +624,7 @@ export default {
           type: "value",
         },],
         series: [{
-          name: "规格1",
+          name: "20mg",
           type: "bar",
           data: this.medicine1Data,
           markPoint: {
@@ -713,7 +638,7 @@ export default {
           },
         },
         {
-          name: "规格2",
+          name: "80mg",
           type: "bar",
           data: this.medicine2Data,
           itemStyle: {
@@ -730,9 +655,9 @@ export default {
           return { name: item.provinceName, value: item.salesPrice, rate: item.salePriceRate }
         });
       };
-      this.query2(this.ruleForm);
-      this.query1(this.ruleForm);
-      this.submitTop1(this.id1);
+      this.query2(query);
+      this.query1(query);
+      this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: this.id1 });
       this.queryMonthSalesPrice();
     },
   },

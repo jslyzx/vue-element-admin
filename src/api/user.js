@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function login(data) {
   return request({
-    url: '/login',
+    url: '/api/login',
     method: 'post',
     formData: true,
     data
@@ -26,7 +26,7 @@ export function logout() {
 
 export function getUsers(data) {
   return request({
-    url: '/admin/user/grid',
+    url: '/api/admin/user/grid',
     method: 'get',
     params: data
   })
@@ -34,7 +34,7 @@ export function getUsers(data) {
 
 export function deleteUser(data) {
   return request({
-    url: '/admin/user/delete_physical',
+    url: '/api/admin/user/delete_physical',
     method: 'delete',
     params: data
   })
@@ -42,7 +42,7 @@ export function deleteUser(data) {
 
 export function shopServiceList(data) {
   return request({
-    url: '/patient/shop/serve/grid',
+    url: '/api/patient/shop/serve/grid',
     method: 'get',
     params: data
   })
@@ -50,7 +50,7 @@ export function shopServiceList(data) {
 
 export function shopServiceCharts(data) {
   return request({
-    url: '/patient/shop/serve/chartData',
+    url: '/api/patient/shop/serve/chartData',
     method: 'get',
     params: data
   })
