@@ -101,7 +101,7 @@
               </div>
               <div>
                 <el-tabs v-model="tabIndex4" @tab-click="handleClick4">
-                  <el-tab-pane label="全部" :name=null />
+                  <el-tab-pane label="全部" name="" />
                   <el-tab-pane label="20mg" name="160" />
                   <el-tab-pane label="80mg" name="357" />
                 </el-tabs>
@@ -172,6 +172,7 @@ import saleForm from '@/components/saleForm'
 import { queryProvinceSalePriceRate, submitTop, queryShopSale, queryRegionSale, querySectionSale } from "@/api/sales"
 import { queryMonthSalesPrice } from "@/api/home"
 import * as echarts from 'echarts'
+import { type } from 'os';
 require("echarts/theme/macarons"); // echarts theme
 export default {
   name: 'SaleYearly',
@@ -230,10 +231,13 @@ export default {
       this.initCharts3()
     })
     this.initCharts4()
-    this.queryProvinceSalePrice({
+    this.queryProvinceSalePrice1({
       queryType: this.ruleForm.queryType * 1,
     });
-    this.queryMonthSalesPrice();
+    this.queryMonthSalesPrice({
+        queryType:this.ruleForm.queryType,
+        type: this.tabIndex5
+      });
   },
   methods: {
     changeType(label) {
@@ -242,15 +246,14 @@ export default {
       } else {
         this.tabIndex5 = 1;
       }
-      this.queryMonthSalesPrice()
-    },
-    queryMonthSalesPrice() {
-      queryMonthSalesPrice({
+      this.queryMonthSalesPrice({
         queryType:this.ruleForm.queryType,
         type: this.tabIndex5
-      }).then((res) => {
+      })
+    },
+    queryMonthSalesPrice(data) {
+      queryMonthSalesPrice(data).then((res) => {
         if (res.code == 0) {
-          console.log(res);
           let arr1 = [];
           let arr2 = [];
           if (res.data.monthSalesNum160) {
@@ -291,16 +294,19 @@ export default {
       });
     },
     async changeForm(form) {
-      this.queryProvinceSalePrice(form);
+      this.queryProvinceSalePrice1(form);
       this.query2(form);
       this.query1(form);
       this.submitTop1({...form,medicineId:this.id1});
-      this.queryMonthSalesPrice();
+      this.queryMonthSalesPrice({...form,
+        type: this.tabIndex5
+      });
     },
     async submitTop1(data,id,type) {
-      console.log(data);
       if (id == 0) {
         id = ''
+      } if(data.medicineId==0){
+        delete data.medicineId
       }
       let res = await submitTop(data);
       if (res.code == 0) {
@@ -315,17 +321,17 @@ export default {
       }
     },
     async handleClick(tab) {
-      this.submitTop1(this.tabIndex * 1, 'salesPrice');
+      this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: this.tabIndex },this.tabIndex, 'salesPrice');
     },
     handleClick2(tab) {
-      this.submitTop1(this.tabIndex2 * 1, 'currSaleNum');
+      this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: this.tabIndex2},this.tabIndex2, 'currSaleNum');
     },
     handleClick3(tab) {
-      this.submitTop1(this.tabIndex3 * 1, 'oldCustomerSalesNum');
+      this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: this.tabIndex3},this.tabIndex3, 'oldCustomerSalesNum');
 
     },
     handleClick4(tab) {
-      this.submitTop1(this.tabIndex4 * 1, 'customerSalesNum');
+      this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: this.tabIndex4},this.tabIndex4, 'customerSalesNum');
     },
     initCharts() {
       const charts1 = echarts.init(this.$refs['chartBox'], "macarons")
@@ -648,18 +654,24 @@ export default {
         ],
       });
     },
-    async queryProvinceSalePrice(query) {
+    queryProvinceSalePrice(query) {
+      this.query2(query);
+      this.query1(query);
+      this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: this.id1 });
+      this.queryMonthSalesPrice({
+        ...query,
+        type: this.tabIndex5
+      });
+      this.queryProvinceSalePrice1(query);
+    },
+    async queryProvinceSalePrice1(query){
       let res = await queryProvinceSalePriceRate(query);
       if (res.code == 0) {
         this.chartsData1 = res.data.provinceSalePriceRate.map((item, index) => {
           return { name: item.provinceName, value: item.salesPrice, rate: item.salePriceRate }
         });
       };
-      this.query2(query);
-      this.query1(query);
-      this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: this.id1 });
-      this.queryMonthSalesPrice();
-    },
+    }
   },
   watch: {
     chartsData1() {
