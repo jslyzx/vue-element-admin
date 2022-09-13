@@ -222,6 +222,12 @@ export default {
           type: "category",
           data: _.map(this.list,function(v){return v.name})
         }],
+        grid: {
+          x: 50,
+          y: 60,
+          x2: 10,
+          y2: 35
+        },
         series: [{
             data: _.map(this.list,function(v){return v.num}),
             type: "bar",
