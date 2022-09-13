@@ -32,17 +32,17 @@
               <el-input v-model="inputText" disabled></el-input>
             </el-form-item>
             <el-form-item label="大区" v-if="regionShow">
-              <el-select v-model="ruleForm.regionId" placeholder="请选择" @change="changeRegion">
+              <el-select v-model="ruleForm.regionId" placeholder="请选择" @change="changeRegion" :disabled="!!regionId">
                 <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
             <el-form-item label="片区" v-if="regionShow">
-              <el-select v-model="ruleForm.sectionId" placeholder="请选择" @change="changeRegion2">
+              <el-select v-model="ruleForm.sectionId" placeholder="请选择" @change="changeRegion2" :disabled="!!sectionId">
                 <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
             <el-form-item label="省区" v-if="regionShow">
-              <el-select v-model="ruleForm.provinceId" placeholder="请选择" @change="changeRegion3">
+              <el-select v-model="ruleForm.provinceId" placeholder="请选择" @change="changeRegion3" :disabled="!!provinceId">
                 <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
@@ -82,6 +82,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import { queryProvinceSalePriceRate, queryArea, queryShop, submitTop } from "@/api/sales"
 import { emit } from "process"
 export default {
@@ -128,14 +129,29 @@ export default {
       options1: [],
       options2: [],
       options3: [],
-      options4: [],
+      options4: []
     }
   },
   mounted() {
     this.queryData2();
-
+    if(this.regionId){
+      this.ruleForm.regionId = this.regionId
+      this.changeRegion(this.regionId)
+    }
+    if(this.sectionId){
+      this.ruleForm.sectionId = this.sectionId
+      this.changeRegion2(this.sectionId)
+    }
+    if(this.provinceId){
+      this.ruleForm.provinceId = this.provinceId
+    }
   },
   computed: {
+    ...mapGetters([
+      'regionId',
+      'sectionId',
+      'provinceId'
+    ]),
     pickerOptions() {
       const that = this
       return {
@@ -214,7 +230,17 @@ export default {
     },
     changeTime(e) {
       this.ruleForm.queryType = e.target.dataset.time
-      this.$emit("queryProvinceSalePrice", { queryType: this.ruleForm.queryType })
+      let form = { queryType: this.ruleForm.queryType }
+      if(this.regionId){
+        form.regionId = this.regionId
+      }
+      if(this.sectionId){
+        form.sectionId = this.sectionId
+      }
+      if(this.provinceId){
+        form.provinceId = this.provinceId
+      }
+      this.$emit("queryProvinceSalePrice", form)
     },
     resetForm() {
       this.ruleForm.year="";
