@@ -193,8 +193,7 @@ export default {
       this.queryPatientAnalysis(form)
     },
     changeTime(form) {
-      this.ruleForm.queryType = form.queryType;
-      this.queryPatientAnalysis(this.ruleForm);
+      this.queryPatientAnalysis(form)
     },
     initCharts() {
       const charts1 = echarts.init(document.getElementById("chartBox"),"macarons")

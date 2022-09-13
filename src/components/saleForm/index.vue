@@ -2,7 +2,7 @@
   <div>
     <el-card class="cardBody">
       <div class="outBox">
-        <div class="selectBox">
+        <div class="selectBox" v-if="quickShow">
           <div ref="year" data-time="1" :class="{ 'active': ruleForm.queryType == '1' }" @click="changeTime">
             当年
           </div>
@@ -25,7 +25,6 @@
               <el-date-picker v-model="ruleForm.endMonth" popper-class="monthStyle" type="month" placeholder="选择结束日期" :picker-options="pickerOptions1" value-format="MM" class="selectRegion" />
             </el-form-item>
             <el-form-item label="商品">
-              <!-- <el-cascader v-model="ruleForm.productId" class="selectRegion" :options="options" @change="handleChange" /> -->
               <el-input v-model="inputText" disabled></el-input>
             </el-form-item>
             <el-form-item label="大区" v-if="regionShow">
@@ -102,6 +101,10 @@ export default {
       default: ''
     },
     regionShow: {
+      type: Boolean,
+      default: true
+    },
+    quickShow: {
       type: Boolean,
       default: true
     }

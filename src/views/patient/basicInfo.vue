@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <saleForm :rule-form="ruleForm" :region-show="false" @changeForm="changeForm" />
+      <saleForm :rule-form="ruleForm" :region-show="false" @changeForm="changeForm" :quick-show="false" />
       <div class="chartBox">
         <div class="display">
           <el-card class="s_box">

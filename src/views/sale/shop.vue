@@ -64,15 +64,14 @@ export default {
   },
   methods: {
     changeForm(form) {
-      this.queryShopSaleAnalysis(form);
+      this.queryShopSaleAnalysis(form)
     },
     changeTime(form) {
-      this.ruleForm.queryType = form.queryType;
-      this.queryShopSaleAnalysis(this.ruleForm);
+      this.queryShopSaleAnalysis(form)
     },
     async queryShopSaleAnalysis(form) {
-      const res = await queryShopSaleAnalysis(form);
-      this.saleList = res.data;
+      const res = await queryShopSaleAnalysis(form)
+      this.saleList = res.data
     },
   },
 };

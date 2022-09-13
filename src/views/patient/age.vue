@@ -19,11 +19,11 @@
               </div>
               <div class="bottomBox">
                 <div>
-                  <div>{{newInfo.num}}/{{newInfo.numRate}}</div>
+                  <div>{{newInfo.num}}人/{{newInfo.numRate}}</div>
                   <div>患者人数/占比</div>
                 </div>
                 <div>
-                  <div class="orange">{{newInfo.dot}}</div>
+                  <div class="orange">{{newInfo.dot}}月</div>
                   <div>Dot</div>
                 </div>
                 <div>
@@ -51,11 +51,11 @@
               </div>
               <div class="bottomBox">
                 <div>
-                  <div>{{oldInfo.num}}/{{oldInfo.numRate}}</div>
+                  <div>{{oldInfo.num}}人/{{oldInfo.numRate}}</div>
                   <div>患者人数/占比</div>
                 </div>
                 <div>
-                  <div class="orange">{{oldInfo.dot}}</div>
+                  <div class="orange">{{oldInfo.dot}}月</div>
                   <div>Dot</div>
                 </div>
                 <div>
@@ -253,10 +253,9 @@ export default {
       this.queryPatientStopReasonRange(form)
     },
     changeTime(form) {
-      this.ruleForm.queryType = form.queryType
-      this.getPatientList(this.ruleForm)
-      this.queryPatientComparison(this.ruleForm)
-      this.queryPatientStopReasonRange(this.ruleForm)
+      this.getPatientList(form)
+      this.queryPatientComparison(form)
+      this.queryPatientStopReasonRange(form)
     },
     initCharts() {
       const charts1 = echarts.init(this.$refs['chartBox'])
