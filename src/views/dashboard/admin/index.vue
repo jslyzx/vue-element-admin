@@ -226,7 +226,8 @@ export default {
       this.queryDot();
     },
     getClick4(item) {
-      console.log("cpnclick", item);
+      this.salesInfoData.medicineId = item;
+      this.querySalesInfo();
     },
     // 热力图
     getHearMap() {
