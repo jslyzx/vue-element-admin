@@ -323,7 +323,7 @@ export default {
       this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: this.tabIndex },this.tabIndex, 'salesPrice');
     },
     handleClick2(tab) {
-      this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: this.tabIndex2},this.tabIndex2, 'currSaleNum');
+      this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: this.tabIndex2},this.tabIndex2, 'salesNum');
     },
     handleClick3(tab) {
       this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: this.tabIndex3},this.tabIndex3, 'oldCustomerSalesNum');
