@@ -361,6 +361,7 @@ export default {
 
       .bottomBox {
         width: 100%;
+        padding-right: 20px;
         display: flex;
         flex-flow: row wrap;
         justify-content: space-around;
@@ -374,7 +375,7 @@ export default {
           color: rgb(0, 186, 173) !important;
         }
         >div {
-          width: 25%;
+          width: 35%;
           height: 135px;
           display: flex;
           flex-flow: column wrap;
@@ -404,11 +405,11 @@ export default {
         }
 
         >div:nth-child(3) {
-          width: 30%;
+          width: 35%;
         }
 
         >div:nth-child(4) {
-          width: 30%;
+          width: 15%;
         }
       }
     }
