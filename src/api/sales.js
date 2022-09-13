@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function queryProvinceSalePriceRate(data) {
     return request({
-        url: '/api/yearSales/queryProvinceSalePriceRate',
+        url: '/yearSales/queryProvinceSalePriceRate',
         method: 'post',
         data,
     })
@@ -10,21 +10,21 @@ export function queryProvinceSalePriceRate(data) {
 
 export function queryRegionSale(data) {
     return request({
-        url: '/api/yearSales/queryRegionSalePriceRate',
+        url: '/yearSales/queryRegionSalePriceRate',
         method: 'post',
         data,
     })
 }
 export function querySectionSale(data) {
     return request({
-        url: '/api/yearSales/querySectionSalePriceRate',
+        url: '/yearSales/querySectionSalePriceRate',
         method: 'post',
         data,
     })
 }
 export function queryArea(pId) {
   return request({
-    url: '/api/admin/area/query',
+    url: '/admin/area/query',
     method: 'get',
     params: { pId }
   })
@@ -32,7 +32,7 @@ export function queryArea(pId) {
 
 export function queryShop(data) {
   return request({
-    url: '/api/admin/shop/grid',
+    url: '/admin/shop/grid',
     method: 'get',
     params: data
   })
@@ -40,7 +40,7 @@ export function queryShop(data) {
 
 export function submitTop(data) {
   return request({
-    url: '/api/yearSales/querySalesInfo',
+    url: '/yearSales/querySalesInfo',
     method: 'post',
     params: data
   })

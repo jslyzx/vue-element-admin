@@ -2,14 +2,14 @@ import request from '@/utils/request'
 
 export function fetchAreaList() {
   return request({
-    url: '/api/admin/area/queryTree',
+    url: '/admin/area/queryTree',
     method: 'get'
   })
 }
 
 export function saveRegion(data) {
   return request({
-    url: '/api/admin/area/save',
+    url: '/admin/area/save',
     method: 'post',
     data
   })
@@ -17,14 +17,14 @@ export function saveRegion(data) {
 
 export function fetchProvList() {
   return request({
-    url: '/api/admin/division/query',
+    url: '/admin/division/query',
     method: 'get'
   })
 }
 
 export function fetchSaleList(data) {
   return request({
-    url: '/api/admin/salesman/grid',
+    url: '/admin/salesman/grid',
     method: 'get',
     params: data
   })
@@ -32,7 +32,7 @@ export function fetchSaleList(data) {
 
 export function fetchAreaSubList(data) {
   return request({
-    url: '/api/admin/area/query',
+    url: '/admin/area/query',
     method: 'get',
     params: data
   })
@@ -40,7 +40,7 @@ export function fetchAreaSubList(data) {
 
 export function saveSale(data) {
   return request({
-    url: '/api/admin/salesman/save',
+    url: '/admin/salesman/save',
     method: 'post',
     data
   })
@@ -48,7 +48,7 @@ export function saveSale(data) {
 
 export function deleteSale(data) {
   return request({
-    url: '/api/admin/salesman/delete_physical',
+    url: '/admin/salesman/delete_physical',
     method: 'delete',
     params: data
   })
@@ -56,7 +56,7 @@ export function deleteSale(data) {
 
 export function deleteRegion(data) {
   return request({
-    url: '/api/admin/area/deleteTree',
+    url: '/admin/area/deleteTree',
     method: 'delete',
     params: data
   })
@@ -64,7 +64,7 @@ export function deleteRegion(data) {
 
 export function fetchShopList(data) {
   return request({
-    url: '/api/admin/shop/grid',
+    url: '/admin/shop/grid',
     method: 'get',
     params: data
   })
@@ -72,7 +72,7 @@ export function fetchShopList(data) {
 
 export function fetchCityList(data) {
   return request({
-    url: '/api/admin/division/query',
+    url: '/admin/division/query',
     method: 'get',
     params: data
   })
@@ -80,7 +80,7 @@ export function fetchCityList(data) {
 
 export function saveShop(data) {
   return request({
-    url: '/api/admin/shop/save',
+    url: '/admin/shop/save',
     method: 'post',
     data
   })
@@ -88,7 +88,7 @@ export function saveShop(data) {
 
 export function queryShopInfo(data) {
   return request({
-    url: '/api/patient/shop/serve/queryShopInfo',
+    url: '/patient/shop/serve/queryShopInfo',
     method: 'get',
     params: data
   })
@@ -96,7 +96,7 @@ export function queryShopInfo(data) {
 
 export function getPatientStructure(data) {
   return request({
-    url: '/api/patient/analysis/queryPatientStructure',
+    url: '/patient/analysis/queryPatientStructure',
     method: 'get',
     params: data
   })
@@ -104,7 +104,7 @@ export function getPatientStructure(data) {
 
 export function queryPatientComparison(data) {
   return request({
-    url: '/api/patient/analysis/queryPatientComparison',
+    url: '/patient/analysis/queryPatientComparison',
     method: 'get',
     params: data
   })
@@ -112,7 +112,7 @@ export function queryPatientComparison(data) {
 
 export function queryPatientCountByMonth(data) {
   return request({
-    url: '/api/patient/analysis/queryPatientCountByMonth',
+    url: '/patient/analysis/queryPatientCountByMonth',
     method: 'get',
     params: data
   })
@@ -120,7 +120,7 @@ export function queryPatientCountByMonth(data) {
 
 export function queryShopSaleAnalysis(data) {
   return request({
-    url: '/api/sale/shop/queryShopSaleAnalysis',
+    url: '/sale/shop/queryShopSaleAnalysis',
     method: 'get',
     params: data
   })
@@ -128,7 +128,7 @@ export function queryShopSaleAnalysis(data) {
 
 export function queryPatientStopReasonRange(data) {
   return request({
-    url: '/api/patient/analysis/queryPatientStopReasonRange',
+    url: '/patient/analysis/queryPatientStopReasonRange',
     method: 'get',
     params: data
   })
@@ -136,7 +136,7 @@ export function queryPatientStopReasonRange(data) {
 
 export function queryPatientAnalysis(data) {
   return request({
-    url: '/api/patient/analysis/queryPatientAnalysis',
+    url: '/patient/analysis/queryPatientAnalysis',
     method: 'get',
     params: data
   })

@@ -4,7 +4,7 @@ import request from '@/utils/request'
 // 医院流向数据
 export function queryHospitalSales(query) {
     return request({
-        url: '/api/SalesFlow/queryHospitalSales',
+        url: '/SalesFlow/queryHospitalSales',
         method: 'post',
         params: query
     })
@@ -12,7 +12,7 @@ export function queryHospitalSales(query) {
 // 医院科室流向数据
 export function queryHospitalOfficeSales(query) {
     return request({
-        url: '/api/SalesFlow/queryHospitalOfficeSales',
+        url: '/SalesFlow/queryHospitalOfficeSales',
         method: 'post',
         params: query
     })
@@ -20,7 +20,7 @@ export function queryHospitalOfficeSales(query) {
 // 热力图
 export function queryCustomerHotInfo(query) {
     return request({
-        url: '/api/index/queryCustomerHotInfo',
+        url: '/index/queryCustomerHotInfo',
         method: 'post',
         params: query
     })
