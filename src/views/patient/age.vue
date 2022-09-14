@@ -81,7 +81,7 @@
               </div>
               <div class="inChartBox">
                 <div v-show="tabIndex == 'list'" style="padding:15px">
-                  <el-table :data="dataList" style="width: 100%" max-height="390" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }">
+                  <el-table :data="dataList" style="width: 100%" max-height="390" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }" border>
                     <el-table-column prop="month" label="月份"></el-table-column>
                     <el-table-column prop="totalnum" label="总患者数(人)"></el-table-column>
                     <el-table-column prop="newnum" label="本月新增患者数(人)"> </el-table-column>
@@ -361,6 +361,7 @@ export default {
 
       .bottomBox {
         width: 100%;
+        padding-right: 20px;
         display: flex;
         flex-flow: row wrap;
         justify-content: space-around;
@@ -374,7 +375,7 @@ export default {
           color: rgb(0, 186, 173) !important;
         }
         >div {
-          width: 25%;
+          width: 35%;
           height: 135px;
           display: flex;
           flex-flow: column wrap;
@@ -404,11 +405,11 @@ export default {
         }
 
         >div:nth-child(3) {
-          width: 30%;
+          width: 35%;
         }
 
         >div:nth-child(4) {
-          width: 30%;
+          width: 15%;
         }
       }
     }
