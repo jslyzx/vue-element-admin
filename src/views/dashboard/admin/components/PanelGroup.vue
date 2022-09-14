@@ -5,7 +5,7 @@
         <div class="indexRow">
           <img class="indexMg" src="@/assets/index_img/year1.png" />
           <div>
-            <span>本年销售额</span>
+            <span>{{queryType == 1 ? '本年' : (queryType == 2 ? '当季' : (queryType == 3 ? '当月' : (queryType == 4 ? '当日' : '')))}}销售额</span>
             <el-tooltip
               class="item"
               effect="dark"
@@ -68,7 +68,7 @@
         <div class="indexRow">
           <img class="indexMg" src="@/assets/index_img/year2.png" />
           <div>
-            <span>本年销量</span>
+            <span>{{queryType == 1 ? '本年' : (queryType == 2 ? '当季' : (queryType == 3 ? '当月' : (queryType == 4 ? '当日' : '')))}}销量</span>
             <el-tooltip
               class="item"
               effect="dark"
@@ -131,7 +131,7 @@
         <div class="indexRow">
           <img class="indexMg" src="@/assets/index_img/year3.png" />
           <div>
-            <span>年度DOT</span>
+            <span>{{queryType == 1 ? '年度' : (queryType == 2 ? '当季' : (queryType == 3 ? '当月' : (queryType == 4 ? '当日' : '')))}}DOT</span>
             <el-tooltip
               class="item"
               effect="dark"
@@ -194,7 +194,7 @@
         <div class="indexRow">
           <img class="indexMg" src="@/assets/index_img/year4.png" />
           <div>
-            <span>本年患者数</span>
+            <span>{{queryType == 1 ? '本年' : (queryType == 2 ? '当季' : (queryType == 3 ? '当月' : (queryType == 4 ? '当日' : '')))}}患者数</span>
             <el-tooltip
               class="item"
               effect="dark"
@@ -257,6 +257,7 @@
 
 <script>
 import CountTo from "vue-count-to";
+import { string } from 'clipboard';
 
 export default {
   components: {
@@ -274,7 +275,11 @@ export default {
     },
     salesInfo: {
       type: Object
-    }
+    },
+    queryType: {
+      type: String,
+      default: '1'
+    },
   },
   data() {
     return {
