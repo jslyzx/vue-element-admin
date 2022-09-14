@@ -17,27 +17,27 @@
       </div>
       <div class="chartContent1">
         <div class="smallChartTitle">按省区分布(人)</div>
-        <div id="smallChartBox1" style="height: 100%; width: 100%" />
+        <div id="smallChartBox1" style="height: 100%; width: 100%; padding: 10px;" />
       </div>
       <div class="chartContent2">
         <div class="smallChartTitle">按年龄分布(人)</div>
-        <div id="smallChartBox2" style="height: 100%; width: 100%" />
+        <div id="smallChartBox2" style="height: 100%; width: 100%; padding: 10px;" />
       </div>
     </div>
     <div class="container">
       <div class="chartBox">
         <div class="chartTitle">按适应症分布(人)</div>
         <div class="mapBox syzBox">
-          <div id="chartBox2" style="height: 288px; width: 100%" />
+          <div id="chartBox2" style="height: 288px; width: 100%; padding: 10px;" />
         </div>
       </div>
       <div class="chartContent1">
         <div class="smallChartTitle">按性别分布(人)</div>
-        <div id="smallChartBox3" style="height: 100%; width: 100%" />
+        <div id="smallChartBox3" style="height: 100%; width: 100%; padding: 10px;" />
       </div>
       <div class="chartContent2">
         <div class="smallChartTitle">按BMI分布(人)</div>
-        <div id="smallChartBox4" style="height: 100%; width: 100%" />
+        <div id="smallChartBox4" style="height: 100%; width: 100%; padding: 10px;" />
       </div>
     </div>
   </div>
@@ -109,11 +109,7 @@ export default {
           trigger: "item",
         },
         legend: {
-          type: "scroll",
-          orient: "vertical",
-          left: 20,
-          top: 20,
-          bottom: 20,
+          bottom: 0,
         },
         series: [
           {
@@ -133,6 +129,7 @@ export default {
             type: "pie",
             radius: [50, 100],
             center: ["50%", "50%"],
+            top: -45,
             itemStyle: {
               borderRadius: 12,
             },
@@ -254,9 +251,7 @@ export default {
           trigger: "item",
         },
         legend: {
-          top: "middle",
-          right: 10,
-          orient: "vertical",
+          bottom: 0,
         },
         series: [
           {
@@ -324,29 +319,15 @@ export default {
           },
         },
         color: ["#7B79FF", "#FFB0E2", "#59CFFF"],
-        legend: [
-          {
-            icon: "bar",
-            data: ["男", "女"],
-            itemGap: 60,
-            itemWidth: 14,
-            y: "240",
-            x: "100",
-          },
-          {
-            icon: "bar",
-            data: ["不详"],
-            itemGap: 60,
-            itemWidth: 14,
-            y: "260",
-            x: "100",
-          },
-        ],
+        legend: {
+          bottom: 50,
+          orient: "vertical",
+        },
         series: [
           {
             name: "男",
             type: "pie",
-            top: -125,
+            top: -90,
             clockWise: true, //顺时加载
             hoverAnimation: false, //鼠标移入变大
             radius: ["50%", "51%"],
@@ -379,7 +360,7 @@ export default {
           },
           {
             name: "女",
-            top: -125,
+            top: -90,
             type: "pie",
             clockWise: true,
             hoverAnimation: false,
@@ -414,7 +395,7 @@ export default {
           {
             name: "不详",
             type: "pie",
-            top: -125,
+            top: -90,
             clockWise: true,
             hoverAnimation: false,
             radius: ["30%", "31%"],
@@ -470,7 +451,7 @@ export default {
           data: _.map(this.bmiRange, function (v) {
             return v.name;
           }),
-          bottom: 60,
+          bottom: 50,
           textStyle: {
             color: "#999999",
             fontSize: 12,
@@ -488,7 +469,7 @@ export default {
           {
             name: "按BMI分布",
             type: "pie",
-            top: -125,
+            top: -95,
             radius: "50%",
             data: this.bmiRange,
             label: {
