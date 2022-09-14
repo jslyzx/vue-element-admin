@@ -23,6 +23,7 @@
                 :data="hospitalSales"
                 style="width: 100%"
                 :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }"
+                border
               >
                 <el-table-column
                   prop="hosptailName"
@@ -94,6 +95,7 @@
                 :data="hospitalOfficeSales"
                 style="width: 100%"
                 :row-class-name="tableRowClassName"
+                border
               >
                 <el-table-column prop="officeName" label="科室名称">
                 </el-table-column>
