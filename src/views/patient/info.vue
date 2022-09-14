@@ -270,8 +270,6 @@ export default {
 <style lang="scss" scoped>
 .chartBox {
   margin-top: 20px;
-  height: 80vh;
-  padding: 20x;
 
   .display {
     display: flex;
@@ -349,7 +347,7 @@ export default {
       .inChartBox {
         margin: 0 auto;
         width: 100%;
-        height: 500px;
+        height: 480px;
         padding: 20px 10px;
         box-sizing: border-box;
       }

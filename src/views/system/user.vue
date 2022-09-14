@@ -13,6 +13,16 @@
           {{ scope.row.nickname }}
         </template>
       </el-table-column>
+      <el-table-column align="center" label="用户职位" width="220">
+        <template slot-scope="scope">
+          {{ scope.row.post }}
+        </template>
+      </el-table-column>
+      <el-table-column align="center" label="手机号" width="220">
+        <template slot-scope="scope">
+          {{ scope.row.phone }}
+        </template>
+      </el-table-column>
       <el-table-column align="center" label="操作">
         <template slot-scope="scope">
           <el-button type="primary" size="small" @click="handleEdit(scope)">编辑</el-button>
@@ -22,25 +32,31 @@
     </el-table>
     <pagination v-show="total > 0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.pageSize" @pagination="getUsers" />
 
-    <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?'编辑角色':'新增角色'">
-      <el-form :model="user" ref="dataForm" label-width="80px" :rules="rules" label-position="left">
+    <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?'编辑用户':'新增用户'">
+      <el-form :model="user" ref="dataForm" label-width="80px" label-position="left">
         <el-form-item label="用户编码">
           <el-input v-model="user.username" placeholder="用户编码" />
         </el-form-item>
         <el-form-item label="用户名称">
           <el-input v-model="user.nickname" placeholder="用户名称" />
         </el-form-item>
-        <el-form-item label="大区" prop="regionId">
+        <el-form-item label="用户职位">
+          <el-input v-model="user.post" placeholder="用户职位" />
+        </el-form-item>
+        <el-form-item label="手机号">
+          <el-input v-model="user.phone" placeholder="手机号" />
+        </el-form-item>
+        <el-form-item label="大区">
           <el-select v-model="user.regionId" placeholder="大区" clearable style="width: 280px" @change="_onSelectRegion">
             <el-option v-for="item in regionList" :key="item.id" :label="item.name" :value="item.id" />
           </el-select>
         </el-form-item>
-        <el-form-item label="片区" prop="sectionId">
+        <el-form-item label="片区">
           <el-select v-model="user.sectionId" placeholder="片区" clearable style="width: 280px" @change="_onSelectSection">
             <el-option v-for="item in sectionList" :key="item.id" :label="item.name" :value="item.id" />
           </el-select>
         </el-form-item>
-        <el-form-item label="省区" prop="provinceId">
+        <el-form-item label="省区">
           <el-select v-model="user.provinceId" placeholder="省区" clearable style="width: 280px">
             <el-option v-for="item in provinceList" :key="item.id" :label="item.name" :value="item.id" />
           </el-select>
