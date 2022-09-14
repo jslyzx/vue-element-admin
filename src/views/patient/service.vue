@@ -62,7 +62,7 @@
                 <div style="margin-top: -5px"></div>
               </div>
               <div class="tableBox">
-                <el-table :data="serviceList" style="width: 100%" max-height="290" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }">
+                <el-table :data="serviceList" style="width: 100%" max-height="290" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }" border>
                   <el-table-column prop="sectionName" label="片区"></el-table-column>
                   <el-table-column label="门店名称">
                     <template slot-scope="{row}">

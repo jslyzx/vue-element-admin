@@ -81,7 +81,7 @@
               </div>
               <div class="inChartBox">
                 <div v-show="tabIndex == 'list'" style="padding:15px">
-                  <el-table :data="dataList" style="width: 100%" max-height="390" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }">
+                  <el-table :data="dataList" style="width: 100%" max-height="390" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }" border>
                     <el-table-column prop="month" label="月份"></el-table-column>
                     <el-table-column prop="totalnum" label="总患者数(人)"></el-table-column>
                     <el-table-column prop="newnum" label="本月新增患者数(人)"> </el-table-column>

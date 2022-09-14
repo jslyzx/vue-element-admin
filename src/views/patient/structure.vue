@@ -346,7 +346,7 @@ export default {
           {
             name: "男",
             type: "pie",
-            top: -125,
+            top: -60,
             clockWise: true, //顺时加载
             hoverAnimation: false, //鼠标移入变大
             radius: ["50%", "51%"],
@@ -379,7 +379,7 @@ export default {
           },
           {
             name: "女",
-            top: -125,
+            top: -60,
             type: "pie",
             clockWise: true,
             hoverAnimation: false,
@@ -414,7 +414,7 @@ export default {
           {
             name: "不详",
             type: "pie",
-            top: -125,
+            top: -60,
             clockWise: true,
             hoverAnimation: false,
             radius: ["30%", "31%"],
@@ -479,16 +479,16 @@ export default {
             backgroundColor: "transparent",
             rich: {
               b: {
-                width: 200,
-              },
-            },
-          },
+                width: 200
+              }
+            }
+          }
         },
         series: [
           {
             name: "按BMI分布",
             type: "pie",
-            top: -125,
+            top: -80,
             radius: "50%",
             data: this.bmiRange,
             label: {
