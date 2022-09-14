@@ -454,7 +454,7 @@ export default {
             {
               // name: 'Access From',
               type: 'pie',
-              radius: ['35%', '20%'],
+              radius: ['30%', '20%'],
               center: ['50%', '16%'],
               avoidLabelOverlap: false,
               emphasis: {
@@ -532,7 +532,7 @@ export default {
             {
               name: 'Access From',
               type: 'pie',
-              radius: ['35%', '20%'],
+              radius: ['30%', '20%'],
               center: ['50%', '16%'],
               avoidLabelOverlap: false,
               emphasis: {
@@ -570,6 +570,7 @@ export default {
           textStyle: {
             color: "rgba(166, 166, 166, 1)",
           },
+          left:"15px"
         },
         tooltip: {
           trigger: "axis",
@@ -598,6 +599,12 @@ export default {
         yAxis: [{
           type: "value",
         },],
+        grid: {
+            x: 50,
+            y: 60,
+            x2: 10,
+            y2: 35
+          },
         series: [{
           name: "20mg",
           type: "bar",
@@ -630,8 +637,14 @@ export default {
           textStyle: {
             color: "rgba(166, 166, 166, 1)",
           },
-
+          left:"15px"
         },
+        grid: {
+            x: 50,
+            y: 60,
+            x2: 10,
+            y2: 35
+          },
         tooltip: {
           trigger: "axis",
         },
