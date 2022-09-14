@@ -302,15 +302,16 @@ export default {
     queryMonthSalesPrice() {
       queryMonthSalesPrice({
         queryType: this.dateActive,
+        type: 1
       }).then((res) => {
         if (res.code == 0) {
           let arr1 = [];
           let arr2 = [];
-          res.data.monthSalesNum160.forEach((item) => {
-            arr1.push(item.salesNum);
+          res.data.monthSalesPrice160.forEach((item) => {
+            arr1.push(item.salesPrice);
           });
-          res.data.monthSalesNum357.forEach((item) => {
-            arr2.push(item.salesNum);
+          res.data.monthSalesPrice357.forEach((item) => {
+            arr2.push(item.salesPrice);
           });
           this.medicine1Data = arr1;
           this.medicine2Data = arr2;
