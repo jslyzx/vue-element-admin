@@ -136,10 +136,6 @@
             <div class="topBox">
               <h3 style="margin-top:1px">销售统计</h3>
               <div style="margin-top:-5px">
-                <!-- <el-radio-group v-model="tabIndex5"  size="small" @change="changeType">
-                  <el-radio-button label="数量" name="1" />
-                  <el-radio-button label="金额" name="2" />
-                </el-radio-group> -->
                 <div style="display:flex;line-height: 24px;width: 80px;border: 1px solid #ccc;text-align: center;">
                   <div style="width:50%;font-size: 12px;border-right: 1px solid #ccc;cursor: pointer;" @click="changeType(2)" :class="tabIndex5==2?'active':''">数量</div>
                   <div style="width:50%;font-size: 12px;cursor: pointer;" :class="tabIndex5==1?'active':''" @click="changeType(1)">金额</div>
@@ -147,8 +143,7 @@
               </div>
             </div>
             <div>
-              <div id="chartBox" ref="chartBox" v-show="tabIndex5==1" class="inChartBox" />
-              <div id="chartBox5" ref="chartBox5" v-show="tabIndex5==2" class="inChartBox5" />
+              <div id="chartBox5" ref="chartBox5" class="inChartBox5" />
             </div>
           </div>
         </el-card>
@@ -245,7 +240,6 @@ export default {
     })
   },
   mounted() {
-    this.initCharts()
     this.initCharts2()
     this.$nextTick(function () {
       this.initCharts3()
@@ -260,7 +254,7 @@ export default {
     });
     window.addEventListener("resize", () => {
       this.chart.resize();
-      this.charts1.resize();
+      // this.charts1.resize();
       this.charts2.resize();
       this.charts3.resize();
       this.charts4.resize();
@@ -269,7 +263,7 @@ export default {
   beforeDestroy() {
     window.removeEventListener("resize", () => {
       this.chart.resize();
-      this.charts1.resize();
+      // this.charts1.resize();
       this.charts2.resize();
       this.charts3.resize();
       this.charts4.resize();
@@ -365,73 +359,6 @@ export default {
     },
     handleClick4(tab) {
       this.submitTop1({ queryType: this.ruleForm.queryType, medicineId: this.tabIndex4 }, this.tabIndex4, 'customerSalesNum');
-    },
-    initCharts() {
-      this.charts1 = echarts.init(this.$refs['chartBox'], "macarons")
-      this.charts1.setOption({
-        title: {
-          text: "销售额（百万元）",
-          textStyle: {
-            color: "rgba(166, 166, 166, 1)",
-          },
-
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        legend: {
-          data: ["20mg", "80mg"],
-        },
-        calculable: true,
-        xAxis: [
-          {
-            type: "category",
-            data: [
-              "1月",
-              "2月",
-              "3月",
-              "4月",
-              "5月",
-              "6月",
-              "7月",
-              "8月",
-              "9月",
-              "10月",
-              "11月",
-              "12月",
-            ],
-          },
-        ],
-        yAxis: [
-          {
-            type: "value",
-          },
-        ],
-        series: [
-          {
-            name: "20mg",
-            type: "bar",
-            data: this.medicine3Data,
-            markPoint: {
-              data: [
-                { type: "max", name: "Max" },
-                { type: "min", name: "Min" },
-              ],
-            },
-            itemStyle: {
-              color: "rgba(58, 160, 255, 1)",
-            },
-          },
-          {
-            name: "80mg",
-            type: "bar",
-            data: this.medicine4Data,
-            itemStyle: {
-              color: "rgba(0, 186, 173, 1)",
-            },
-          },
-        ],
-      });
     },
     initCharts2() {
       const that = this
@@ -635,7 +562,9 @@ export default {
     },
     initChart5() {
       this.chart = echarts.init(this.$refs['chartBox5'], "macarons");
-      this.chart.setOption({
+      if(this.tabIndex5==2){
+        this.chart.clear();
+        this.chart.setOption({
         title: {
           text: "销量（盒）",
           textStyle: {
@@ -693,6 +622,73 @@ export default {
         },
         ],
       });
+      }else{
+        this.chart.clear();
+        this.chart.setOption({
+        title: {
+          text: "销售额（百万元）",
+          textStyle: {
+            color: "rgba(166, 166, 166, 1)",
+          },
+
+        },
+        tooltip: {
+          trigger: "axis",
+        },
+        legend: {
+          data: ["20mg", "80mg"],
+        },
+        calculable: true,
+        xAxis: [
+          {
+            type: "category",
+            data: [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月",
+            ],
+          },
+        ],
+        yAxis: [
+          {
+            type: "value",
+          },
+        ],
+        series: [
+          {
+            name: "20mg",
+            type: "bar",
+            data: this.medicine3Data,
+            markPoint: {
+              data: [
+                { type: "max", name: "Max" },
+                { type: "min", name: "Min" },
+              ],
+            },
+            itemStyle: {
+              color: "rgba(58, 160, 255, 1)",
+            },
+          },
+          {
+            name: "80mg",
+            type: "bar",
+            data: this.medicine4Data,
+            itemStyle: {
+              color: "rgba(0, 186, 173, 1)",
+            },
+          },
+        ],
+        });
+      }
     },
     queryProvinceSalePrice(query) {
       this.query2(query);
@@ -724,11 +720,9 @@ export default {
       this.initCharts4();
     },
     medicine1Data() {
-      this.initCharts();
       this.initChart5();
     },
     medicine3Data() {
-      this.initCharts();
       this.initChart5();
     }
   }
@@ -821,7 +815,7 @@ export default {
 
       .inChartBox5 {
         margin: 30px auto;
-        width: 863px;
+        width: 100%;
         height: 500px;
       }
     }
