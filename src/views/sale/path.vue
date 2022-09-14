@@ -70,8 +70,8 @@
                 background
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page="ruleForm.page"
-                :page-size="ruleForm.pageNum"
+                :current-page="page"
+                :page-size="pageNum"
                 layout="total, sizes, prev, pager, next"
                 :total="total"
                 :page-sizes="pageSizes"
@@ -137,10 +137,10 @@ export default {
     return {
       ruleForm: {
         queryType: 1,
-        page: 1,
-        pageNum: 5
       },
-      pageSizes: [5,10,15],
+      page: 1,
+      pageNum: 5,
+      pageSizes: [5, 10, 15],
       utilsShow: 1,
       options: [],
       hospitalOfficeSales: [],
@@ -148,26 +148,36 @@ export default {
       hospitalSales: [],
       total: 0,
       flag: true,
+      isQueryType: true,
     };
   },
   created() {
-    this.getHearMap();
-    this.queryHospitalSales(this.ruleForm);
+    this.getHearMap({ queryType: 1 });
+    this.queryHospitalSales({ queryType: 1, page: 1, pageNum: 5 });
   },
   methods: {
     changeForm(form) {
-      this.getHearMap();
-      this.queryHospitalSales(form);
+      this.page = 1;
+      this.isQueryType = false;
+      this.getHearMap(form);
+      let data = form;
+      data.page = this.page;
+      data.pageNum = this.pageNum;
+      this.queryHospitalSales(data);
     },
     changeTime(form) {
-      this.getHearMap();
-      this.queryHospitalSales(form);
+      this.page = 1;
+      this.isQueryType = true;
+      this.getHearMap({ queryType: form.queryType });
+      this.queryHospitalSales({
+        queryType: form.queryType,
+        page: 1,
+        pageNum: 5,
+      });
     },
     // 热力图
-    getHearMap() {
-      queryCustomerHotInfo({
-        queryType: this.ruleForm.queryType,
-      }).then((res) => {
+    getHearMap(form) {
+      queryCustomerHotInfo(form).then((res) => {
         if (res.code == 0) {
           res.data.forEach((item) => {
             item.count = item.customerNum;
@@ -239,13 +249,41 @@ export default {
     },
     //每页条数改变时触发 选择一页显示多少行
     handleSizeChange(val) {
-      this.ruleForm.pageNum = val;
-      this.queryHospitalSales(this.ruleForm);
+      console.log(this.ruleForm)
+      let data = this.ruleForm;
+      if (this.isQueryType) {
+        this.pageNum = val;
+        this.queryHospitalSales({
+          queryType: data.queryType,
+          page: this.page,
+          pageNum: this.pageNum,
+        });
+      } else {
+        this.pageNum = val;
+        delete data.queryType;
+        data.page = this.page;
+        data.pageNum = this.pageNum;
+        this.queryHospitalSales(data);
+      }
     },
     //当前页改变时触发 跳转其他页
     handleCurrentChange(val) {
-      this.ruleForm.page = val;
-      this.queryHospitalSales(this.ruleForm);
+      console.log(this.ruleForm)
+      let data = this.ruleForm;
+      if (this.isQueryType) {
+        this.page = val;
+        this.queryHospitalSales({
+          queryType: data.queryType,
+          page: this.page,
+          pageNum: this.pageNum,
+        });
+      } else {
+        this.page = val;
+        delete data.queryType;
+        data.page = this.page;
+        data.pageNum = this.pageNum;
+        this.queryHospitalSales(data);
+      }
     },
     tableRowClassName({ row, rowIndex }) {
       if (rowIndex % 2 !== 0) {
@@ -259,7 +297,6 @@ export default {
 </script>
   
   <style lang="scss" scoped>
-
 .chartBox {
   margin-top: 16px;
   height: 317px;
