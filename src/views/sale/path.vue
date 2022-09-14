@@ -72,7 +72,7 @@
                 @current-change="handleCurrentChange"
                 :current-page="page"
                 :page-size="pageNum"
-                layout="total, sizes, prev, pager, next"
+                layout="total, prev, pager, next"
                 :total="total"
                 :page-sizes="pageSizes"
                 style="margin-top: 12px"
