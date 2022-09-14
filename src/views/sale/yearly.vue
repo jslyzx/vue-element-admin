@@ -141,8 +141,8 @@
                   <el-radio-button label="金额" name="2" />
                 </el-radio-group> -->
                 <div style="display:flex;line-height: 24px;width: 80px;border: 1px solid #ccc;text-align: center;">
-                  <div style="width:50%;font-size: 12px;border-right: 1px solid #ccc;" @click="changeType(2)" :class="tabIndex5==2?'active':''">数量</div>
-                  <div style="width:50%;font-size: 12px;" :class="tabIndex5==1?'active':''" @click="changeType(1)">金额</div>
+                  <div style="width:50%;font-size: 12px;border-right: 1px solid #ccc;cursor: pointer;" @click="changeType(2)" :class="tabIndex5==2?'active':''">数量</div>
+                  <div style="width:50%;font-size: 12px;cursor: pointer;" :class="tabIndex5==1?'active':''" @click="changeType(1)">金额</div>
                 </div>
               </div>
             </div>
@@ -565,7 +565,13 @@ export default {
               minShowLabelAngle: 10,
               data: this.chartsData2
             }
-          ]
+          ],
+          grid: {
+            x: 50,
+            y: 60,
+            x2: 10,
+            y2: 35
+          }
         })
     },
     initCharts4() {
