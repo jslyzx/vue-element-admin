@@ -415,6 +415,7 @@ export default {
       charts4.setOption(option);
     },
     changeForm(form) {
+      delete form.queryType;
       this.getServiceList(form);
       this.getServiceChart(form);
     },
