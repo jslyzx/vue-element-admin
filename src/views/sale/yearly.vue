@@ -26,9 +26,11 @@
                 {{topData.salesPrice?topData.salesPrice[0].currSalePrice:'0'}} 元
               </div>
               <div class="compare">
-                <div><span>同比</span><span style="margin-left: 19px;">{{topData.salesPrice?topData.salesPrice[0].yearGrowthRate:'0%'}}</span><span style="margin-left: 16px;"><img
-                      src="@/assets/sale_images/路径 16.png"></span></div>
-                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">{{topData.salesPrice?topData.salesPrice[0].monthGrowthRate:'0%'}}</span><span
+                <div><span>同比</span><span
+                    style="margin-left: 19px;">{{topData.salesPrice?topData.salesPrice[0].yearGrowthRate:'0%'}}</span><span
+                    style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
+                <div style="margin-left:37px"><span>环比</span><span
+                    style="margin-left: 19px;">{{topData.salesPrice?topData.salesPrice[0].monthGrowthRate:'0%'}}</span><span
                     style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
               </div>
             </div>
@@ -51,12 +53,14 @@
             </div>
             <div class="bottomBox">
               <div class="price">
-                {{topData.salesNum?topData.salesNum[0].currSaleNum:'0'}} 盒
+                {{topData.salesNum?topData.salesNum[0].currSaleNum?topData.salesNum[0].currSaleNum:'0':'0'}} 盒
               </div>
               <div class="compare">
-                <div><span>同比</span><span style="margin-left: 19px;">{{topData.salesNum?topData.salesNum[0].yearGrowthRate:'0%'}}</span><span style="margin-left: 16px;"><img
-                      src="@/assets/sale_images/路径 16.png"></span></div>
-                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">{{topData.salesNum?topData.salesNum[0].monthGrowthRate:'0%'}}</span><span
+                <div><span>同比</span><span
+                    style="margin-left: 19px;">{{topData.salesNum?topData.salesNum[0].yearGrowthRate:'0%'}}</span><span
+                    style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
+                <div style="margin-left:37px"><span>环比</span><span
+                    style="margin-left: 19px;">{{topData.salesNum?topData.salesNum[0].monthGrowthRate:'0%'}}</span><span
                     style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
               </div>
             </div>
@@ -79,14 +83,16 @@
             </div>
             <div class="bottomBox">
               <div class="price">
-                {{topData.oldCustomerSalesNum?topData.oldCustomerSalesNum[0].currSaleNum:'0'}} 盒
+                {{topData.oldCustomerSalesNum?topData.oldCustomerSalesNum[0].currSaleNum?topData.oldCustomerSalesNum[0].currSaleNum:'0':'0'}}
+                盒
               </div>
               <div class="compare">
-                <div><span>同比</span><span style="margin-left: 19px;">{{topData.oldCustomerSalesNum?topData.oldCustomerSalesNum[0].yearGrowthRate:'0%'}}</span><span style="margin-left: 16px;"><img
-                      src="@/assets/sale_images/路径 16.png"></span></div>
-                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">{{topData.oldCustomerSalesNum?topData.oldCustomerSalesNum[0].monthGrowthRate:'0%'}}</span>
-                  <span
-                    style="margin-left: 16px;"> <img src="@/assets/sale_images/Info Icon.png" alt=""></span>
+                <div><span>同比</span><span
+                    style="margin-left: 19px;">{{topData.oldCustomerSalesNum?topData.oldCustomerSalesNum[0].yearGrowthRate:'0%'}}</span><span
+                    style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
+                <div style="margin-left:37px"><span>环比</span><span
+                    style="margin-left: 19px;">{{topData.oldCustomerSalesNum?topData.oldCustomerSalesNum[0].monthGrowthRate:'0%'}}</span>
+                  <span style="margin-left: 16px;"> <img src="@/assets/sale_images/Info Icon.png" alt=""></span>
                 </div>
               </div>
             </div>
@@ -109,12 +115,15 @@
             </div>
             <div class="bottomBox">
               <div class="price">
-                {{topData.customerSalesNum?topData.customerSalesNum[0].currSaleNum:'0'}} 盒
+                {{topData.customerSalesNum?topData.customerSalesNum[0].currSaleNum?topData.customerSalesNum[0].currSaleNum:'0':'0'}}
+                盒
               </div>
               <div class="compare">
-                <div><span>同比</span><span style="margin-left: 19px;">{{topData.customerSalesNum?topData.customerSalesNum[0].yearGrowthRate:'0%'}}</span><span style="margin-left: 16px;"><img
-                      src="@/assets/sale_images/路径 16.png"></span></div>
-                <div style="margin-left:37px"><span>环比</span><span style="margin-left: 19px;">{{topData.customerSalesNum?topData.customerSalesNum[0].monthGrowthRate:'0%'}}</span><span
+                <div><span>同比</span><span
+                    style="margin-left: 19px;">{{topData.customerSalesNum?topData.customerSalesNum[0].yearGrowthRate:'0%'}}</span><span
+                    style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
+                <div style="margin-left:37px"><span>环比</span><span
+                    style="margin-left: 19px;">{{topData.customerSalesNum?topData.customerSalesNum[0].monthGrowthRate:'0%'}}</span><span
                     style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
               </div>
             </div>
@@ -127,37 +136,39 @@
             <div class="topBox">
               <h3 style="margin-top:1px">销售统计</h3>
               <div style="margin-top:-5px">
-                <el-radio-group v-model="tabIndex5" size="small" @change="changeType">
-                  <el-radio-button label="数量" :value="1" />
-                  <el-radio-button label="金额" :value="2" />
-                </el-radio-group>
+                <div style="display:flex;line-height: 24px;width: 80px;border: 1px solid #ccc;text-align: center;">
+                  <div style="width:50%;font-size: 12px;border-right: 1px solid #ccc;cursor: pointer;" @click="changeType(2)" :class="tabIndex5==2?'active':''">数量</div>
+                  <div style="width:50%;font-size: 12px;cursor: pointer;" :class="tabIndex5==1?'active':''" @click="changeType(1)">金额</div>
+                </div>
               </div>
             </div>
             <div>
-              <div id="chartBox" ref="chartBox" v-show="tabIndex5==1" class="inChartBox" />
-              <div id="chartBox5" ref="chartBox5" v-show="tabIndex5==2" class="inChartBox5" />
+              <div id="chartBox5" ref="chartBox5" class="inChartBox5" />
             </div>
           </div>
         </el-card>
         <el-card style="margin-left: 20px;flex: 1;">
           <div class="inBox2">
-            <h2>各省区销售占比</h2>
+            <div style="border-bottom:1px solid #ccc;padding:15px 0 15px 18px;font-size: 18px;font-weight: 700;">各省区销售占比
+            </div>
             <div id="chartBox2" ref="chartBox2" class="inChartBox2" />
           </div>
         </el-card>
         <div class="rightBox" style="margin-left: 20px;flex: 1;">
           <div>
             <el-card>
-              <div style="box-sizing:border-box;padding:17px 16px;width:383px;height:274px">
-                <h3>各大区销售占比</h3>
+              <div style="box-sizing:border-box;width:100%;height:274px">
+                <div style="border-bottom:1px solid #ccc;padding:15px 0 15px 18px;font-size: 18px;font-weight: 700;">
+                  各大区销售占比</div>
                 <div id="chartBox3" ref="chartBox3" class="inChartBox3" />
               </div>
             </el-card>
           </div>
           <div style="margin-top: 20px;">
             <el-card>
-              <div style="box-sizing:border-box;padding:17px 16px;width:383px;height:274px">
-                <h3>各片区销售占比</h3>
+              <div style="box-sizing:border-box;width:100%;height:274px">
+                <div style="border-bottom:1px solid #ccc;padding:15px 0 15px 18px;font-size: 18px;font-weight: 700;">
+                  各片区销售占比</div>
                 <div id="chartBox4" ref="chartBox4" class="inChartBox4" />
               </div>
             </el-card>
@@ -195,7 +206,7 @@ export default {
       tabIndex2: '',
       tabIndex3: '',
       tabIndex4: '',
-      tabIndex5: 1,
+      tabIndex5: "1",
       chartsData1: [
       ],
       chartsData2: [
@@ -208,13 +219,18 @@ export default {
       medicine3Data: [],
       medicine4Data: [],
       id1: '',
+      chart:null,
+      charts1: null,
+      charts2: null,
+      charts3: null,
+      charts4: null
     }
   },
   computed: {
-  
+
   },
   created() {
-    this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: '' });
+    this.submitTop1({ queryType: this.ruleForm.queryType, medicineId: '' });
 
     this.query1({
       queryType: this.ruleForm.queryType * 1,
@@ -224,7 +240,6 @@ export default {
     })
   },
   mounted() {
-    this.initCharts()
     this.initCharts2()
     this.$nextTick(function () {
       this.initCharts3()
@@ -234,19 +249,31 @@ export default {
       queryType: this.ruleForm.queryType * 1,
     });
     this.queryMonthSalesPrice({
-        queryType:this.ruleForm.queryType,
-        type: this.tabIndex5
-      });
+      queryType: this.ruleForm.queryType,
+      type: this.tabIndex5
+    });
+    window.addEventListener("resize", () => {
+      this.chart.resize();
+      // this.charts1.resize();
+      this.charts2.resize();
+      this.charts3.resize();
+      this.charts4.resize();
+    })
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", () => {
+      this.chart.resize();
+      // this.charts1.resize();
+      this.charts2.resize();
+      this.charts3.resize();
+      this.charts4.resize();
+    });
   },
   methods: {
     changeType(label) {
-      if (label == "数量") {
-        this.tabIndex5 = 2;
-      } else {
-        this.tabIndex5 = 1;
-      }
+      this.tabIndex5=label;
       this.queryMonthSalesPrice({
-        queryType:this.ruleForm.queryType,
+        queryType: this.ruleForm.queryType,
         type: this.tabIndex5
       })
     },
@@ -296,15 +323,16 @@ export default {
       this.queryProvinceSalePrice1(form);
       this.query2(form);
       this.query1(form);
-      this.submitTop1({...form,medicineId:this.id1});
-      this.queryMonthSalesPrice({...form,
+      this.submitTop1({ ...form, medicineId: this.id1 });
+      this.queryMonthSalesPrice({
+        ...form,
         type: this.tabIndex5
       });
     },
-    async submitTop1(data,id,type) {
+    async submitTop1(data, id, type) {
       if (id == 0) {
         id = ''
-      } if(data.medicineId==0){
+      } if (data.medicineId == 0) {
         delete data.medicineId
       }
       let res = await submitTop(data);
@@ -320,26 +348,289 @@ export default {
       }
     },
     async handleClick(tab) {
-      this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: this.tabIndex },this.tabIndex, 'salesPrice');
+      this.submitTop1({ queryType: this.ruleForm.queryType, medicineId: this.tabIndex }, this.tabIndex, 'salesPrice');
     },
     handleClick2(tab) {
-      this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: this.tabIndex2},this.tabIndex2, 'salesNum');
+      this.submitTop1({ queryType: this.ruleForm.queryType, medicineId: this.tabIndex2 }, this.tabIndex2, 'salesNum');
     },
     handleClick3(tab) {
-      this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: this.tabIndex3},this.tabIndex3, 'oldCustomerSalesNum');
+      this.submitTop1({ queryType: this.ruleForm.queryType, medicineId: this.tabIndex3 }, this.tabIndex3, 'oldCustomerSalesNum');
 
     },
     handleClick4(tab) {
-      this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: this.tabIndex4},this.tabIndex4, 'customerSalesNum');
+      this.submitTop1({ queryType: this.ruleForm.queryType, medicineId: this.tabIndex4 }, this.tabIndex4, 'customerSalesNum');
     },
-    initCharts() {
-      const charts1 = echarts.init(this.$refs['chartBox'], "macarons")
-      charts1.setOption({
+    initCharts2() {
+      const that = this
+      this.charts2 = echarts.init(this.$refs['chartBox2'], "macarons")
+      this.charts2.setOption(
+        {
+          tooltip: {
+            trigger: 'item',
+            formatter: '销售金额: {c}万<br />销售占比: {d}'
+          },
+          // color: ['#2A58C7', '#3AA0FF', '#FF8D1A', '#D43030', '#00BAAD', '#FFC300', '#A5D63FFF', '#AC33C1FF'],
+          legend: [{
+            bottom: '0%',
+            left: 'center',
+            formatter: function (name) {
+              for (let index in that.chartsData1) {
+                if (name == that.chartsData1[index].name) {
+                  return `${name}   ${that.chartsData1[index].rate ? that.chartsData1[index].rate : '0%'}`
+                }
+              }
+            },
+            orient: 'vertical',
+            padding: [20, 30],
+            textStyle: {
+              fontSize: '20px'
+            },
+            x: 'left',
+            itemHeight: 12,
+            itemWidth: 12,
+          },
+          ],
+          series: [
+            {
+              name: 'Access From',
+              type: 'pie',
+              radius: ['60%', '25%'],
+              center: ['50%', '30%'],
+              // hoverAnimation:true, //鼠标悬浮是否有区域弹出动画，false:无  true:有
+              avoidLabelOverlap: false,
+              label: {
+                show: true,
+                position: 'inside',
+                // color: '#fff',
+                fontSize: 14,
+                formatter: '{b}\n{d}%'
+              },
+              labelLine: {
+                show: true,
+              },
+              minAngle: 5,
+              minShowLabelAngle: 10,
+              data: this.chartsData1,
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                },
+              }
+            }
+          ]
+
+        })
+    },
+    initCharts3() {
+      const that = this
+      this.charts3 = echarts.init(this.$refs['chartBox3'], "macarons")
+      this.charts3.setOption(
+        {
+          tooltip: {
+            trigger: 'item',
+            formatter: '销售金额: {c}万<br />销售占比: {d}'
+          },
+          color: ['#A5D63F', '#EE6666'],
+          legend: {
+            formatter: function (name) {
+              for (let index in that.chartsData2) {
+                if (name == that.chartsData2[index].name) {
+                  return `${name}   ${that.chartsData2[index].rate ? that.chartsData2[index].rate : '0%'}`
+                }
+              }
+            },
+            left: '3px',
+            orient: 'vertical',
+            itemHeight: 10,
+            padding: [20, 30],
+            textStyle: {
+              fontSize: '20px'
+            },
+            itemWidth: 10,
+          },
+          series: [
+            {
+              // name: 'Access From',
+              type: 'pie',
+              radius: ['35%', '20%'],
+              center: ['50%', '16%'],
+              avoidLabelOverlap: false,
+              emphasis: {
+                scale: true,
+                scaleSize: 20
+              },
+              labelLine: {
+                show: false
+              },
+              label: {
+                show: false
+              },
+              itemStyle: {
+                normal: {
+                  label: {
+                    show: false,
+                  },
+                  labelLine: {
+                    show: false,
+                    length: 100,
+                    smooth: 0.5,
+                  },
+                  // borderWidth: BorderWidth,
+                  shadowBlur: 40,
+                  borderColor: "#59CFFF",
+                  shadowColor: "rgba(0, 0, 0, 0)", //边框阴影
+                },
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                },
+              },
+              minAngle: 5,
+              minShowLabelAngle: 10,
+              data: this.chartsData2
+            }
+          ],
+          grid: {
+            x: 50,
+            y: 60,
+            x2: 10,
+            y2: 35
+          }
+        })
+    },
+    initCharts4() {
+      const that = this
+      this.charts4 = echarts.init(this.$refs['chartBox4'], "macarons")
+      this.charts4.setOption(
+        {
+          tooltip: {
+            trigger: 'item',
+            formatter: '销售金额: {c}万<br />销售占比: {d}'
+          },
+          color: ['#2A58C7', '#FF8D1A', '#00BAAD', '#A5D63F', '#EE6666'],
+          legend: {
+            formatter: function (name) {
+              for (let index in that.chartsData3) {
+                if (name == that.chartsData3[index].name) {
+                  return `${name}  ${that.chartsData3[index].rate ? that.chartsData3[index].rate : '0%'}`
+                }
+              }
+            },
+            left: '3px',
+            orient: 'vertical',
+            itemHeight: 10,
+            padding: [20, 30],
+            textStyle: {
+              fontSize: '20px'
+            },
+            itemWidth: 10,
+          },
+          series: [
+            {
+              name: 'Access From',
+              type: 'pie',
+              radius: ['35%', '20%'],
+              center: ['50%', '16%'],
+              avoidLabelOverlap: false,
+              emphasis: {
+                scale: true,
+                scaleSize: 20
+              },
+              labelLine: {
+                show: false
+              },
+              label: {
+                show: false
+              },
+              minAngle: 5,
+              minShowLabelAngle: 10,
+              data: this.chartsData3,
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                },
+              }
+            }
+          ]
+
+        })
+    },
+    initChart5() {
+      this.chart = echarts.init(this.$refs['chartBox5'], "macarons");
+      if(this.tabIndex5==2){
+        this.chart.clear();
+        this.chart.setOption({
+        title: {
+          text: "销量（盒）",
+          textStyle: {
+            color: "rgba(166, 166, 166, 1)",
+          },
+        },
+        tooltip: {
+          trigger: "axis",
+        },
+        legend: {
+          data: ["20mg", "80mg"],
+        },
+        calculable: true,
+        xAxis: [{
+          type: "category",
+          data: [
+            "1月",
+            "2月",
+            "3月",
+            "4月",
+            "5月",
+            "6月",
+            "7月",
+            "8月",
+            "9月",
+            "10月",
+            "11月",
+            "12月",
+          ],
+        },],
+        yAxis: [{
+          type: "value",
+        },],
+        series: [{
+          name: "20mg",
+          type: "bar",
+          data: this.medicine1Data,
+          markPoint: {
+            data: [
+              { type: "max", name: "Max" },
+              { type: "min", name: "Min" },
+            ],
+          },
+          itemStyle: {
+            color: "rgba(58, 160, 255, 1)",
+          },
+        },
+        {
+          name: "80mg",
+          type: "bar",
+          data: this.medicine2Data,
+          itemStyle: {
+            color: "rgba(0, 186, 173, 1)",
+          },
+        },
+        ],
+      });
+      }else{
+        this.chart.clear();
+        this.chart.setOption({
         title: {
           text: "销售额（百万元）",
           textStyle: {
             color: "rgba(166, 166, 166, 1)",
           },
+
         },
         tooltip: {
           trigger: "axis",
@@ -396,274 +687,20 @@ export default {
             },
           },
         ],
-      });
-    },
-    initCharts2() {
-      const that = this
-      const charts2 = echarts.init(this.$refs['chartBox2'], "macarons")
-      charts2.setOption(
-        {
-          tooltip: {
-            trigger: 'item',
-            formatter: '销售金额: {c}万<br />销售占比: {d}'
-          },
-          // color: ['#2A58C7', '#3AA0FF', '#FF8D1A', '#D43030', '#00BAAD', '#FFC300', '#A5D63FFF', '#AC33C1FF'],
-          legend: [{
-            bottom: '50px',
-            left: '65px',
-            formatter: function (name) {
-              for (let index in that.chartsData1) {
-                if (name == that.chartsData1[index].name) {
-                  return `${name}   ${that.chartsData1[index].rate}`
-                }
-              }
-            },
-            orient: 'vertical',
-            padding: [20, 30],
-            textStyle: {
-              fontSize: '20px'
-            },
-            x: 'left',
-            itemHeight: 12,
-            itemWidth: 12,
-          },
-          ],
-          series: [
-            {
-              name: 'Access From',
-              type: 'pie',
-              radius: ['65%', '25%'],
-              center: ['50%', '30%'],
-              // hoverAnimation:true, //鼠标悬浮是否有区域弹出动画，false:无  true:有
-              avoidLabelOverlap: false,
-              label: {
-                show: true,
-                position: 'inside',
-                // color: '#fff',
-                fontSize: 14,
-                formatter: '{b}\n{d}%'
-              },
-              labelLine: {
-                show: true,
-              },
-              minAngle: 5,
-              minShowLabelAngle: 10,
-              data: this.chartsData1,
-              itemStyle: {
-                emphasis: {
-                  shadowBlur: 10,
-                  shadowOffsetX: 0,
-                  shadowColor: 'rgba(0, 0, 0, 0.5)'
-                },
-              }
-            }
-          ]
-
-        })
-    },
-    initCharts3() {
-      const that = this
-      const charts3 = echarts.init(this.$refs['chartBox3'], "macarons")
-      charts3.setOption(
-        {
-          tooltip: {
-            trigger: 'item',
-            formatter: '销售金额: {c}万<br />销售占比: {d}'
-          },
-          color: ['#A5D63F', '#EE6666'],
-          legend: {
-            formatter: function (name) {
-              for (let index in that.chartsData2) {
-                if (name == that.chartsData2[index].name) {
-                  return `${name}   ${that.chartsData2[index].rate}`
-                }
-              }
-            },
-            left: '3px',
-            orient: 'vertical',
-            itemHeight: 10,
-            padding: [20, 30],
-            textStyle: {
-              fontSize: '20px'
-            },
-            itemWidth: 10,
-          },
-          series: [
-            {
-              // name: 'Access From',
-              type: 'pie',
-              radius: ['35%', '20%'],
-              center: ['50%', '16%'],
-              avoidLabelOverlap: false,
-              emphasis: {
-                scale: true,
-                scaleSize: 20
-              },
-              labelLine: {
-                show: false
-              },
-              label: {
-                show: false
-              },
-              itemStyle: {
-                normal: {
-                  label: {
-                    show: false,
-                  },
-                  labelLine: {
-                    show: false,
-                    length: 100,
-                    smooth: 0.5,
-                  },
-                  // borderWidth: BorderWidth,
-                  shadowBlur: 40,
-                  borderColor: "#59CFFF",
-                  shadowColor: "rgba(0, 0, 0, 0)", //边框阴影
-                },
-                emphasis: {
-                  shadowBlur: 10,
-                  shadowOffsetX: 0,
-                  shadowColor: 'rgba(0, 0, 0, 0.5)'
-                },
-              },
-              minAngle: 5,
-              minShowLabelAngle: 10,
-              data: this.chartsData2
-            }
-          ]
-        })
-    },
-    initCharts4() {
-      const that = this
-      const charts4 = echarts.init(this.$refs['chartBox4'], "macarons")
-      charts4.setOption(
-        {
-          tooltip: {
-            trigger: 'item',
-            formatter: '销售金额: {c}万<br />销售占比: {d}'
-          },
-          color: ['#2A58C7', '#FF8D1A', '#00BAAD', '#A5D63F', '#EE6666'],
-          legend: {
-            formatter: function (name) {
-              for (let index in that.chartsData3) {
-                if (name == that.chartsData3[index].name) {
-                  return `${name}  ${that.chartsData3[index].rate}`
-                }
-              }
-            },
-            left: '3px',
-            orient: 'vertical',
-            itemHeight: 10,
-            padding: [20, 30],
-            textStyle: {
-              fontSize: '20px'
-            },
-            itemWidth: 10,
-          },
-          series: [
-            {
-              name: 'Access From',
-              type: 'pie',
-              radius: ['35%', '20%'],
-              center: ['50%', '16%'],
-              avoidLabelOverlap: false,
-              emphasis: {
-                scale: true,
-                scaleSize: 20
-              },
-              labelLine: {
-                show: false
-              },
-              label: {
-                show: false
-              },
-              minAngle: 5,
-              minShowLabelAngle: 10,
-              data: this.chartsData3,
-              itemStyle: {
-                emphasis: {
-                  shadowBlur: 10,
-                  shadowOffsetX: 0,
-                  shadowColor: 'rgba(0, 0, 0, 0.5)'
-                },
-              }
-            }
-          ]
-
-        })
-    },
-    initChart5() {
-      this.chart = echarts.init(this.$refs['chartBox5'], "macarons");
-      this.chart.setOption({
-        title: {
-          text: "销售额（百万元）",
-          textStyle: {
-            color: "rgba(166, 166, 166, 1)",
-          },
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        legend: {
-          data: ["20mg", "80mg"],
-        },
-        calculable: true,
-        xAxis: [{
-          type: "category",
-          data: [
-            "1月",
-            "2月",
-            "3月",
-            "4月",
-            "5月",
-            "6月",
-            "7月",
-            "8月",
-            "9月",
-            "10月",
-            "11月",
-            "12月",
-          ],
-        },],
-        yAxis: [{
-          type: "value",
-        },],
-        series: [{
-          name: "20mg",
-          type: "bar",
-          data: this.medicine1Data,
-          markPoint: {
-            data: [
-              { type: "max", name: "Max" },
-              { type: "min", name: "Min" },
-            ],
-          },
-          itemStyle: {
-            color: "rgba(58, 160, 255, 1)",
-          },
-        },
-        {
-          name: "80mg",
-          type: "bar",
-          data: this.medicine2Data,
-          itemStyle: {
-            color: "rgba(0, 186, 173, 1)",
-          },
-        },
-        ],
-      });
+        });
+      }
     },
     queryProvinceSalePrice(query) {
       this.query2(query);
       this.query1(query);
-      this.submitTop1({ queryType:this.ruleForm.queryType, medicineId: this.id1 });
+      this.submitTop1({ queryType: this.ruleForm.queryType, medicineId: this.id1 });
       this.queryMonthSalesPrice({
         ...query,
         type: this.tabIndex5
       });
       this.queryProvinceSalePrice1(query);
     },
-    async queryProvinceSalePrice1(query){
+    async queryProvinceSalePrice1(query) {
       let res = await queryProvinceSalePriceRate(query);
       if (res.code == 0) {
         this.chartsData1 = res.data.provinceSalePriceRate.map((item, index) => {
@@ -683,11 +720,9 @@ export default {
       this.initCharts4();
     },
     medicine1Data() {
-      this.initCharts();
       this.initChart5();
     },
     medicine3Data() {
-      this.initCharts();
       this.initChart5();
     }
   }
@@ -695,6 +730,10 @@ export default {
 
 </script>
 <style lang="scss" scoped>
+.active{
+  color:#fff;
+  background-color: #409eff;
+}
 .chartBox {
   margin-top: 20px;
 
@@ -702,6 +741,7 @@ export default {
     display: flex;
     flex-flow: row nowrap;
     margin: -10px;
+
     .s_box {
       flex: 1;
       height: 140px;
@@ -754,7 +794,7 @@ export default {
     }
 
     .inBox {
-      width: 787px;
+      width: 100%;
       height: 566px;
 
       .topBox {
@@ -768,40 +808,43 @@ export default {
 
       .inChartBox {
         margin: 30px auto;
-        width: 800px;
+        width: 100%;
         height: 500px;
       }
 
 
       .inChartBox5 {
         margin: 30px auto;
-        width: 800px;
+        width: 100%;
         height: 500px;
       }
     }
 
     .inBox2 {
-      width: 383px;
+      width: 100%;
       height: 566px;
-      padding: 21px 0 0 18px;
+      padding: 0px 0 0 0px;
 
       ::v-deep .el-card__body {
         padding: 0px !important;
       }
 
       .inChartBox2 {
-        width: 350px;
+        margin: 30px auto;
+        width: 100%;
         height: 450px;
       }
     }
 
     .inChartBox3 {
-      width: 450px;
+      margin: 30px auto;
+      width: 100%;
       height: 550px;
     }
 
     .inChartBox4 {
-      width: 450px;
+      margin: 30px auto;
+      width: 100%;
       height: 550px;
     }
   }

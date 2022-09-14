@@ -277,9 +277,10 @@ export default {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-
+    margin: -10px;
     .s_box {
-      width: 383px;
+      flex: 1;
+      margin: 10px;
       height: 140px;
 
       ::v-deep .el-card__body {

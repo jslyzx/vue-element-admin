@@ -222,7 +222,8 @@ export default {
       ],
       oldInfo: {},
       newInfo: {},
-      chartData: undefined
+      chartData: undefined,
+      chart1: null
     }
   },
   filters: {
@@ -230,8 +231,18 @@ export default {
       return parseInt(s) + '万元'
     }
   },
-  created() {
+  mounted (){
     this.changeForm(this.ruleForm)
+    window.addEventListener("resize", () => {
+      this.chart1.resize()
+    })
+    window.addEventListener("click", () => {
+      this.chart1.resize()
+    })
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize")
+    window.removeEventListener("click")
   },
   methods: {
     async getPatientList(form) {
@@ -258,14 +269,20 @@ export default {
       this.queryPatientStopReasonRange(form)
     },
     initCharts() {
-      const charts1 = echarts.init(this.$refs['chartBox'])
-      charts1.setOption({
+      this.chart1 = echarts.init(this.$refs['chartBox'])
+      this.chart1.setOption({
         xAxis: {
           type: 'category',
           data: _.map(this.chartData,function(v){return v.name}),
           axisTick: {
             show: false,
           }
+        },
+        grid: {
+          x: 50,
+          y: 60,
+          x2: 10,
+          y2: 35
         },
         yAxis: {
           type: 'value',
@@ -293,7 +310,13 @@ export default {
               }
             }
           }
-        }]
+        }],
+        grid: {
+          x: 50,
+          y: 60,
+          x2: 10,
+          y2: 35
+        }
       })
     }
   },
@@ -452,7 +475,7 @@ export default {
       }
 
       .inChartBox1 {
-        width: 1680px;
+        width: 100%;
         height: 390px;
         margin: 0 auto;
       }

@@ -175,6 +175,8 @@ export default {
   },
   methods: {
     async changeRegion3(id) {
+      this.ruleForm.shopId='';
+      this.options4=[];
       let res = await queryShop({ regionId: this.ruleForm.regionId + '', page: 1, pageSize: 100, sectionId: this.ruleForm.sectionId + '', provinceId: id + '' });
       if (res.code == 0) {
         this.options4 = res.data.data.map((item) => {
@@ -186,6 +188,10 @@ export default {
       }
     },
     async changeRegion2(id) {
+      this.ruleForm.provinceId="";
+      this.ruleForm.shopId="";
+      this.options3=[];
+      this.options4=[];
       let res = await this.queryArea1(id + '');
       if (res.code == 0) {
         this.options3 = res.data.map((item) => {
@@ -197,6 +203,12 @@ export default {
       }
     },
     async changeRegion(id) {
+      this.ruleForm.sectionId="";
+      this.ruleForm.provinceId="";
+      this.ruleForm.shopId="";
+      this.option2=[];
+      this.options3=[];
+      this.options4=[];
       let res = await this.queryArea1(id + '');
       if (res.code == 0) {
         this.options2 = res.data.map((item) => {
