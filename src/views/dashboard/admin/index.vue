@@ -5,7 +5,6 @@
         <el-radio-group
           @change="handleClick()"
           v-model="dateActive"
-          style="float: right"
         >
           <el-radio-button label="1" name="1">当年</el-radio-button>
           <el-radio-button label="2" name="2">当季</el-radio-button>
