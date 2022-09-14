@@ -19,6 +19,7 @@
       :salesNumInfo="salesNumInfo"
       :salesPriceInfo="salesPriceInfo"
       :salesInfo="salesInfo"
+      :queryType="dateActive"
       @handleClick1="getClick1"
       @handleClick2="getClick2"
       @handleClick3="getClick3"
@@ -488,10 +489,10 @@ export default {
         color: rgba(127, 143, 164, 1);
         font-size: 14px;
         .firstPb {
-          width: 25%;
+          width: 50px;
         }
         .secondPb {
-          width: 45%;
+          width: calc(70% - 51px);
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
