@@ -243,6 +243,7 @@ export default {
     changeTime(e) {
       this.ruleForm.queryType = e.target.dataset.time
       let form = { queryType: this.ruleForm.queryType }
+      this.resetForm();
       if(this.regionId){
         form.regionId = this.regionId
       }
