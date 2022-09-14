@@ -267,6 +267,12 @@ export default {
             show: false,
           }
         },
+        grid: {
+          x: 50,
+          y: 60,
+          x2: 10,
+          y2: 35
+        },
         yAxis: {
           type: 'value',
           name: '人',
@@ -293,7 +299,13 @@ export default {
               }
             }
           }
-        }]
+        }],
+        grid: {
+          x: 50,
+          y: 60,
+          x2: 10,
+          y2: 35
+        }
       })
     }
   },
