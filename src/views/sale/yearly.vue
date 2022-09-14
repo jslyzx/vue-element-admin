@@ -609,12 +609,6 @@ export default {
           name: "20mg",
           type: "bar",
           data: this.medicine1Data,
-          markPoint: {
-            data: [
-              { type: "max", name: "Max" },
-              { type: "min", name: "Min" },
-            ],
-          },
           itemStyle: {
             color: "rgba(58, 160, 255, 1)",
           },
@@ -681,12 +675,6 @@ export default {
             name: "20mg",
             type: "bar",
             data: this.medicine3Data,
-            markPoint: {
-              data: [
-                { type: "max", name: "Max" },
-                { type: "min", name: "Min" },
-              ],
-            },
             itemStyle: {
               color: "rgba(58, 160, 255, 1)",
             },
