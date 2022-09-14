@@ -93,7 +93,7 @@
                   prop="sectionName"
                   label="片区"
                 ></el-table-column>
-                <el-table-column label="门店名称">
+                <el-table-column label="门店名称" width="370">
                   <template slot-scope="{ row }">
                     <router-link
                       :to="'/patient/shop/detail/' + row.id"
@@ -121,8 +121,8 @@
               <pagination
                 v-show="total > 0"
                 :total="total"
-                :page.sync="ruleForm.page"
-                :limit.sync="ruleForm.pageSize"
+                :page.sync="page"
+                :limit.sync="pageSize"
                 @pagination="getServiceList"
               />
             </div>
@@ -157,9 +157,7 @@ export default {
         bigArea: "",
         middleArea: "",
         provienceArea: "",
-        shop: "",
-        page: 1,
-        pageSize: 5,
+        shop: ""
       },
       total: 0,
       serviceList: [], //月度统计数据
@@ -167,6 +165,9 @@ export default {
       infoRate: [], //信息完善度
       timeDiffAvg: [], //平均配送时效
       eduTimesAvg: [], //平均患教次数
+      tempQuery: {},
+      page: 1,
+      pageSize: 5
     };
   },
   created() {
@@ -174,15 +175,23 @@ export default {
   },
   methods: {
     async getServiceList(form) {
-      this.ruleForm.pageSize = 5;
-      Object.assign(form, this.ruleForm);
-      const res = await shopServiceList(form);
-      this.serviceList = res.data.data;
-      this.total = res.data.total;
+      var queryForm = {}
+      if(form.limit){
+        Object.assign(queryForm, this.tempQuery, form)
+        queryForm.pageSize = queryForm.limit
+      }else{
+        Object.assign(queryForm, this.tempQuery)
+        queryForm.page = 1
+        queryForm.pageSize = 5
+      }
+      const res = await shopServiceList(queryForm)
+      this.serviceList = res.data.data
+      this.total = res.data.total
     },
     async getServiceChart(form) {
-      this.ruleForm.pageSize = 5;
-      const res = await shopServiceCharts(form);
+      var queryForm = {}
+      Object.assign(queryForm, form, {page: 1, pageSize: 5})
+      const res = await shopServiceCharts(queryForm)
       this.returnRatio = res.data.returnRatio;
       this.infoRate = res.data.infoRate;
       this.eduTimesAvg = res.data.eduTimesAvg;
@@ -415,13 +424,14 @@ export default {
       charts4.setOption(option);
     },
     changeForm(form) {
-      delete form.queryType;
-      this.getServiceList(form);
-      this.getServiceChart(form);
+      this.tempQuery = form
+      this.getServiceList(form)
+      this.getServiceChart(form)
     },
     changeTime(form) {
-      this.getServiceList(form);
-      this.getServiceChart(form);
+      this.tempQuery = form
+      this.getServiceList(form)
+      this.getServiceChart(form)
     },
   },
   watch: {

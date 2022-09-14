@@ -14,7 +14,7 @@
           max-height="650"
           :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }"
         >
-          <el-table-column label="门店名称">
+          <el-table-column label="门店名称" width="370">
             <template slot-scope="{ row }">
               <router-link
                 :to="'/patient/shop/detail/' + row.id"
