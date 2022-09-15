@@ -259,10 +259,6 @@ export default {
       this.ruleForm.year = "";
       this.ruleForm.startMonth = '';
       this.ruleForm.endMonth = '';
-      this.ruleForm.regionId = '';
-      this.ruleForm.sectionId = '';
-      this.ruleForm.provinceId = '';
-      this.ruleForm.shopId = '';
     },
   }
 }
