@@ -432,9 +432,10 @@ export default {
             trigger: 'item',
             formatter: '销售金额: {c}万<br />销售占比: {d}'
           },
-          color: ['#A5D63F', '#EE6666'],
+          color: ['#A5D63F'],
           legend: {
             formatter: function (name) {
+              console.log(that.chartsData2);
               for (let index in that.chartsData2) {
                 if (name == that.chartsData2[index].name) {
                   return `${name}   ${that.chartsData2[index].rate ? that.chartsData2[index].rate : '0%'}`
@@ -467,27 +468,7 @@ export default {
               label: {
                 show: false
               },
-              itemStyle: {
-                normal: {
-                  label: {
-                    show: false,
-                  },
-                  labelLine: {
-                    show: false,
-                    length: 100,
-                    smooth: 0.5,
-                  },
-                  // borderWidth: BorderWidth,
-                  shadowBlur: 40,
-                  borderColor: "#59CFFF",
-                  shadowColor: "rgba(0, 0, 0, 0)", //边框阴影
-                },
-                emphasis: {
-                  shadowBlur: 10,
-                  shadowOffsetX: 0,
-                  shadowColor: 'rgba(0, 0, 0, 0.5)'
-                },
-              },
+         
               minAngle: 5,
               minShowLabelAngle: 10,
               data: this.chartsData2
@@ -545,8 +526,8 @@ export default {
               label: {
                 show: false
               },
-              minAngle: 5,
-              minShowLabelAngle: 10,
+              // minAngle: 5,
+              // minShowLabelAngle: 10,
               data: this.chartsData3,
               itemStyle: {
                 emphasis: {
