@@ -400,6 +400,7 @@ export default {
       queryShopSale({
         queryType: this.dateActive,
       }).then((res) => {
+        this.shopSaleList = []
         if (res.code == 0 && res.data.length) {
           this.shopSaleList = res.data.splice(0, 10);
         }
