@@ -149,6 +149,7 @@ export default {
       total: 0,
       flag: true,
       isQueryType: true,
+      tempQuery: {}
     };
   },
   created() {
@@ -157,6 +158,7 @@ export default {
   },
   methods: {
     changeForm(form) {
+      this.tempQuery = form
       this.page = 1;
       this.isQueryType = false;
       this.getHearMap(form);
@@ -166,6 +168,7 @@ export default {
       this.queryHospitalSales(data);
     },
     changeTime(form) {
+      this.tempQuery = form
       this.page = 1;
       this.isQueryType = true;
       this.getHearMap({ queryType: form.queryType });
@@ -225,7 +228,7 @@ export default {
     queryOfficeSales(row) {
       this.officeSalesName = row.hosptailName;
       queryHospitalOfficeSales({
-        queryType: 1,
+        ...this.tempQuery,
         hospitalId: row.hospitalId,
       }).then((res) => {
         if (res.code == 0) {
