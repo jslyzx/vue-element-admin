@@ -64,7 +64,7 @@
                   {{ item.shopName }}
                 </div>
               </el-tooltip>
-              <div class="thirdPb">￥{{ item.salePrice }}</div>
+              <div class="thirdPb">￥{{ item.salePrice }}万元</div>
             </li>
           </ul>
         </div>

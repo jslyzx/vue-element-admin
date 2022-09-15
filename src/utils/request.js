@@ -19,8 +19,7 @@ service.interceptors.request.use(
       config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
       config.data = qs.stringify(config.data)
     }
-
-    if (store.getters.token) {
+    if (store.getters.token && config.url.indexOf('queryShopInfo') === -1) {
       if (config.params) {
         config.params.lander = getToken()
       }

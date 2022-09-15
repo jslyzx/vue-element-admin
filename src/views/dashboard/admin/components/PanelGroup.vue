@@ -30,6 +30,7 @@
             :duration="2600"
             class="card-panel-num"
             style="color: rgba(255, 141, 26, 1);"
+            :decimals="2"
           />
           <span style="position: relative; top: -1px; font-size: 18px; color: rgba(255, 141, 26, 1);">元</span>
         </div>
