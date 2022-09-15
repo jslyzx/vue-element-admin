@@ -80,7 +80,7 @@
                 <div class="m_box">
                   <div><img src="@/assets/patient_images/分组 7.png" /></div>
                   <div>
-                    <div>{{shopInfo.usageNumAvg}}</div>
+                    <div>{{shopInfo.usageNumAvg}}盒</div>
                     <div>患者平均用药量</div>
                   </div>
                 </div>
