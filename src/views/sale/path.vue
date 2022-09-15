@@ -47,7 +47,7 @@
                 <el-table-column
                   width="130"
                   prop="currSalePrice"
-                  label="销售金额(元)"
+                  label="销售金额(万元)"
                 >
                 </el-table-column>
                 <el-table-column
@@ -101,7 +101,7 @@
                 </el-table-column>
                 <el-table-column prop="currSaleNum" label="销售数量(盒)">
                 </el-table-column>
-                <el-table-column prop="currSalePrice" label="销售金额(元)">
+                <el-table-column prop="currSalePrice" label="销售金额(万元)">
                 </el-table-column>
                 <el-table-column prop="monthGrowthRate" label="环比">
                 </el-table-column>
@@ -149,6 +149,7 @@ export default {
       total: 0,
       flag: true,
       isQueryType: true,
+      tempQuery: { queryType: 1 }
     };
   },
   created() {
@@ -157,8 +158,10 @@ export default {
   },
   methods: {
     changeForm(form) {
+      this.tempQuery = form
       this.page = 1;
       this.isQueryType = false;
+      this.flag = true
       this.getHearMap(form);
       let data = form;
       data.page = this.page;
@@ -166,7 +169,9 @@ export default {
       this.queryHospitalSales(data);
     },
     changeTime(form) {
+      this.tempQuery = form
       this.page = 1;
+      this.flag = true
       this.isQueryType = true;
       this.getHearMap({ queryType: form.queryType });
       this.queryHospitalSales({
@@ -225,7 +230,7 @@ export default {
     queryOfficeSales(row) {
       this.officeSalesName = row.hosptailName;
       queryHospitalOfficeSales({
-        queryType: 1,
+        ...this.tempQuery,
         hospitalId: row.hospitalId,
       }).then((res) => {
         if (res.code == 0) {

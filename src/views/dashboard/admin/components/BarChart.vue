@@ -53,7 +53,7 @@ export default {
       this.chart = echarts.init(this.$el, "macarons");
       this.chart.setOption({
         title: {
-          text: "销售额（百万元）",
+          text: "销售额（万元）",
           textStyle: {
             color: "rgba(166, 166, 166, 1)",
           },

@@ -27,7 +27,7 @@
                   <div>Dot</div>
                 </div>
                 <div>
-                  <div class="green">{{newInfo.sales | integMoney}}/{{newInfo.salesRate}}</div>
+                  <div class="green">{{newInfo.sales}}/{{newInfo.salesRate}}</div>
                   <div>销售额/占比</div>
                 </div>
                 <div>
@@ -59,7 +59,7 @@
                   <div>Dot</div>
                 </div>
                 <div>
-                  <div class="green">{{oldInfo.sales | integMoney}}/{{oldInfo.salesRate}}</div>
+                  <div class="green">{{oldInfo.sales}}/{{oldInfo.salesRate}}</div>
                   <div>销售额/占比</div>
                 </div>
                 <div>
