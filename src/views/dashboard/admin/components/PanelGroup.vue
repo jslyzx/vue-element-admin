@@ -89,7 +89,7 @@
         <div class="card-panel-description">
           <count-to
             :start-val="0"
-            :end-val="salesNumInfo.ringSaleNum"
+            :end-val="salesNumInfo.currSaleNum"
             :duration="2600"
             class="card-panel-num"
             style="color: rgba(42, 130, 228, 1);"
