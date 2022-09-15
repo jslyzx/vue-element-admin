@@ -23,7 +23,7 @@
             <div class="bottomBox">
               <div class="price">
                 <!-- {{topData}} -->
-                {{topData.salesPrice?topData.salesPrice[0].currSalePrice:'0'}} 元
+                {{topData.salesPrice?topData.salesPrice[0].currSalePrice:'0'}} 万元
               </div>
               <div class="compare">
                 <div><span>同比</span><span
@@ -627,7 +627,7 @@ export default {
         this.chart.clear();
         this.chart.setOption({
         title: {
-          text: "销售额（百万元）",
+          text: "销售额（万元）",
           textStyle: {
             color: "rgba(166, 166, 166, 1)",
           },

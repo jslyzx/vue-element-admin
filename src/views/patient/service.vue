@@ -78,7 +78,7 @@
         <el-card>
           <div class="inBox">
             <div class="topBox">
-              <h3 style="margin-top: 1px">月度数据统计</h3>
+              <h3 style="margin-top: 1px">门店数据统计</h3>
               <div style="margin-top: -5px"></div>
             </div>
             <div class="tableBox">

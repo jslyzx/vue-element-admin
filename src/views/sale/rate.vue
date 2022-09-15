@@ -227,7 +227,7 @@ export default {
                         type: 'value',
                         min: 0,
                         max: 10,
-                        name: '销售额（百万元）',
+                        name: '销售额（万元）',
                         axisLine: {
                             show: true
                         },

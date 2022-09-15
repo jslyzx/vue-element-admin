@@ -181,14 +181,14 @@ export default {
             let str = '';
             params.forEach((item, index) => {
               str +=
-                '<span style="display:inline-block;margin-right:5px;border-radius:50%;width:10px;height:10px;left:5px;background-color:' + item.color + '"></span>' + item.name + "销售额" + " : " + item.data + '元' + "<br />";
+                '<span style="display:inline-block;margin-right:5px;border-radius:50%;width:10px;height:10px;left:5px;background-color:' + item.color + '"></span>' + item.name + "销售额" + " : " + item.data + '万元' + "<br />";
             });
             return str;
           },
         },
         yAxis: {
           type: 'value',
-          value: '元',
+          value: '万元',
           axisLine: {
             show: true,
             lineStyle: {
