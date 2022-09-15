@@ -3,7 +3,6 @@
     <div class="formCard">
       <sale-form
         :rule-form="ruleForm"
-        :utilsShow="utilsShow"
         @changeForm="changeForm"
         @queryProvinceSalePrice="changeTime"
       />

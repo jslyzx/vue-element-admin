@@ -32,18 +32,18 @@
             style="color: rgba(255, 141, 26, 1);"
             :decimals="2"
           />
-          <span style="position: relative; top: -1px; font-size: 18px; color: rgba(255, 141, 26, 1);">元</span>
+          <span style="position: relative; top: -1px; font-size: 18px; color: rgba(255, 141, 26, 1);">万元</span>
         </div>
         <div class="ratioRow">
           <div v-if="salesPriceInfo.yearGrowthRate">
             同比：<span class="yearOnYear">{{ salesPriceInfo.yearGrowthRate }}</span>
             <i
-              v-if=" salesPriceInfo.yearGrowthRate < 0 "
-              style="color: rgba(160, 250, 197, 1)"
+              v-if="parseInt(salesPriceInfo.yearGrowthRate) < 0 "
+              style="color: rgba(0, 186, 173, 1)"
               class="el-icon-caret-bottom"
             />
             <i
-              v-if=" salesPriceInfo.yearGrowthRate > 0 "
+              v-if="parseInt(salesPriceInfo.yearGrowthRate) > 0 "
               style="color: red"
               class="el-icon-caret-top"
             />
@@ -51,12 +51,12 @@
           <div v-if="salesPriceInfo.monthGrowthRate">
             环比：<span class="ringRatio">{{ salesPriceInfo.monthGrowthRate }}</span>
             <i
-              v-if="salesPriceInfo.monthGrowthRate < 0"
-              style="color: rgba(160, 250, 197, 1)"
+              v-if="parseInt(salesPriceInfo.monthGrowthRate) < 0"
+              style="color: rgba(0, 186, 173, 1)"
               class="el-icon-caret-bottom"
             />
             <i
-              v-if="salesPriceInfo.monthGrowthRate > 0"
+              v-if="parseInt(salesPriceInfo.monthGrowthRate) > 0"
               style="color: red"
               class="el-icon-caret-top"
             />
@@ -101,12 +101,12 @@
           <div v-if="salesNumInfo.yearGrowthRate">
             同比：<span class="yearOnYear">{{ salesNumInfo.yearGrowthRate }}</span>
             <i
-              v-if="salesNumInfo.yearGrowthRate < 0"
-              style="color: rgba(160, 250, 197, 1)"
+              v-if="parseInt(salesNumInfo.yearGrowthRate) < 0"
+              style="color: rgba(0, 186, 173, 1)"
               class="el-icon-caret-bottom"
             />
             <i
-              v-if="salesNumInfo.yearGrowthRate > 0"
+              v-if="parseInt(salesNumInfo.yearGrowthRate) > 0"
               style="color: red"
               class="el-icon-caret-top"
             />
@@ -114,12 +114,12 @@
           <div v-if="salesNumInfo.monthGrowthRate">
             环比：<span class="ringRatio">{{ salesNumInfo.monthGrowthRate }}</span>
             <i
-              v-if="salesNumInfo.monthGrowthRate < 0"
-              style="color: rgba(160, 250, 197, 1)"
+              v-if="parseInt(salesNumInfo.monthGrowthRate) < 0"
+              style="color: rgba(0, 186, 173, 1)"
               class="el-icon-caret-bottom"
             />
             <i
-              v-if="salesNumInfo.monthGrowthRate > 0"
+              v-if="parseInt(salesNumInfo.monthGrowthRate) > 0"
               style="color: red"
               class="el-icon-caret-top"
             />
@@ -157,6 +157,7 @@
             :duration="2600"
             class="card-panel-num"
             style="color: rgba(0, 186, 173, 1);"
+            :decimals="2"
           />
           <span style="position: relative; top: -1px; font-size: 18px; color: rgba(0, 186, 173, 1);">月</span>
         </div>
@@ -164,12 +165,12 @@
           <div v-if="dotInfo.yearGrowthRate">
             同比：<span class="yearOnYear">{{ dotInfo.yearGrowthRate }}</span>
             <i
-              v-if=" dotInfo.yearGrowthRate < 0 "
-              style="color: rgba(160, 250, 197, 1)"
+              v-if="parseInt(dotInfo.yearGrowthRate) < 0 "
+              style="color: rgba(0, 186, 173, 1)"
               class="el-icon-caret-bottom"
             />
             <i
-              v-if=" dotInfo.yearGrowthRate > 0 "
+              v-if="parseInt(dotInfo.yearGrowthRate) > 0 "
               style="color: red"
               class="el-icon-caret-top"
             />
@@ -177,12 +178,12 @@
           <div v-if="dotInfo.monthGrowthRate">
             环比：<span class="ringRatio">{{ dotInfo.monthGrowthRate }}</span>
             <i
-              v-if="dotInfo.monthGrowthRate < 0"
-              style="color: rgba(160, 250, 197, 1)"
+              v-if="parseInt(dotInfo.monthGrowthRate) < 0"
+              style="color: rgba(0, 186, 173, 1)"
               class="el-icon-caret-bottom"
             />
             <i
-              v-if="dotInfo.monthGrowthRate > 0"
+              v-if="parseInt(dotInfo.monthGrowthRate) > 0"
               style="color: red"
               class="el-icon-caret-top"
             />
@@ -227,12 +228,12 @@
           <div v-if="salesInfo.yearGrowthRate">
             同比：<span class="yearOnYear">{{ salesInfo.yearGrowthRate }}</span>
             <i
-              v-if="salesInfo.yearGrowthRate < 0"
-              style="color: rgba(160, 250, 197, 1)"
+              v-if="parseInt(salesInfo.yearGrowthRate) < 0"
+              style="color: rgba(0, 186, 173, 1)"
               class="el-icon-caret-bottom"
             />
             <i
-              v-if="salesInfo.yearGrowthRate > 0"
+              v-if="parseInt(salesInfo.yearGrowthRate) > 0"
               style="color: red"
               class="el-icon-caret-top"
             />
@@ -240,12 +241,12 @@
           <div v-if="salesInfo.monthGrowthRate">
             环比：<span class="ringRatio">{{ salesInfo.monthGrowthRate }}</span>
             <i
-              v-if="salesInfo.monthGrowthRate < 0"
-              style="color: rgba(160, 250, 197, 1)"
+              v-if="parseInt(salesInfo.monthGrowthRate) < 0"
+              style="color: rgba(0, 186, 173, 1)"
               class="el-icon-caret-bottom"
             />
             <i
-              v-if="salesInfo.monthGrowthRate > 0"
+              v-if="parseInt(salesInfo.monthGrowthRate) > 0"
               style="color: red"
               class="el-icon-caret-top"
             />
