@@ -28,10 +28,10 @@
               <div class="compare">
                 <div><span>同比</span><span
                     style="margin-left: 19px;">{{topData.salesPrice?topData.salesPrice[0].yearGrowthRate:'0%'}}</span><span
-                    style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
+                    style="margin-left: 16px;"><img v-if="topData.salesPrice?(parseFloat(topData.salesPrice[0].yearGrowthRate) >= 0?true:false):''" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span></div>
                 <div style="margin-left:37px"><span>环比</span><span
                     style="margin-left: 19px;">{{topData.salesPrice?topData.salesPrice[0].monthGrowthRate:'0%'}}</span><span
-                    style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
+                    style="margin-left: 16px;"><img v-if="topData.salesPrice?(parseFloat(topData.salesPrice[0].monthGrowthRate) >= 0?true:false):''" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span></div>
               </div>
             </div>
           </div>
@@ -58,10 +58,10 @@
               <div class="compare">
                 <div><span>同比</span><span
                     style="margin-left: 19px;">{{topData.salesNum?topData.salesNum[0].yearGrowthRate:'0%'}}</span><span
-                    style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
+                    style="margin-left: 16px;"><img v-if="topData.salesNum?(parseFloat(topData.salesNum[0].yearGrowthRate) >= 0?true:false):''" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span></div>
                 <div style="margin-left:37px"><span>环比</span><span
                     style="margin-left: 19px;">{{topData.salesNum?topData.salesNum[0].monthGrowthRate:'0%'}}</span><span
-                    style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
+                    style="margin-left: 16px;"><img v-if="topData.salesNum?(parseFloat(topData.salesNum[0].monthGrowthRate) >= 0?true:false):''" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span></div>
               </div>
             </div>
           </div>
@@ -89,10 +89,10 @@
               <div class="compare">
                 <div><span>同比</span><span
                     style="margin-left: 19px;">{{topData.oldCustomerSalesNum?topData.oldCustomerSalesNum[0].yearGrowthRate:'0%'}}</span><span
-                    style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
+                    style="margin-left: 16px;"><img v-if="topData.oldCustomerSalesNum?(parseFloat(topData.oldCustomerSalesNum[0].yearGrowthRate) >= 0?true:false):''" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span></div>
                 <div style="margin-left:37px"><span>环比</span><span
                     style="margin-left: 19px;">{{topData.oldCustomerSalesNum?topData.oldCustomerSalesNum[0].monthGrowthRate:'0%'}}</span>
-                  <span style="margin-left: 16px;"> <img src="@/assets/sale_images/Info Icon.png" alt=""></span>
+                  <span style="margin-left: 16px;"> <img v-if="topData.oldCustomerSalesNum?(parseFloat(topData.oldCustomerSalesNum[0].monthGrowthRate) >= 0?true:false):''" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span>
                 </div>
               </div>
             </div>
@@ -121,10 +121,10 @@
               <div class="compare">
                 <div><span>同比</span><span
                     style="margin-left: 19px;">{{topData.customerSalesNum?topData.customerSalesNum[0].yearGrowthRate:'0%'}}</span><span
-                    style="margin-left: 16px;"><img src="@/assets/sale_images/路径 16.png"></span></div>
+                    style="margin-left: 16px;"><img v-if="topData.customerSalesNum?(parseFloat(topData.customerSalesNum[0].yearGrowthRate) >= 0?true:false):''" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span></div>
                 <div style="margin-left:37px"><span>环比</span><span
                     style="margin-left: 19px;">{{topData.customerSalesNum?topData.customerSalesNum[0].monthGrowthRate:'0%'}}</span><span
-                    style="margin-left: 16px;"><img src="@/assets/sale_images/Info Icon.png"></span></div>
+                    style="margin-left: 16px;"><img v-if="topData.customerSalesNum?(parseFloat(topData.customerSalesNum[0].monthGrowthRate) >= 0?true:false):''" src="@/assets/sale_images/路径 16.png" /><img v-else src="@/assets/sale_images/Info Icon.png" /></span></div>
               </div>
             </div>
           </div>

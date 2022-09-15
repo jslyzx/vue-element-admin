@@ -302,16 +302,16 @@ export default {
     queryMonthSalesPrice() {
       queryMonthSalesPrice({
         queryType: this.dateActive,
-        type: 1
+        type: 2
       }).then((res) => {
         if (res.code == 0) {
           let arr1 = [];
           let arr2 = [];
-          res.data.monthSalesPrice160.forEach((item) => {
-            arr1.push(item.salesPrice);
+          res.data.monthSalesNum160.forEach((item) => {
+            arr1.push(item.salesNum);
           });
-          res.data.monthSalesPrice357.forEach((item) => {
-            arr2.push(item.salesPrice);
+          res.data.monthSalesNum357.forEach((item) => {
+            arr2.push(item.salesNum);
           });
           this.medicine1Data = arr1;
           this.medicine2Data = arr2;
@@ -400,7 +400,7 @@ export default {
       queryShopSale({
         queryType: this.dateActive,
       }).then((res) => {
-        if (res.code == 0) {
+        if (res.code == 0 && res.data.length) {
           this.shopSaleList = res.data.splice(0, 10);
         }
       });
