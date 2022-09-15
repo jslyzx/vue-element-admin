@@ -14,8 +14,9 @@
           </div>
         </div>
         <div class="inputBox">
-          <el-form ref="ruleForm" :model="ruleForm" :inline="true" status-icon :rules="rules" label-width="100px">
-            <el-form-item label="年份">
+          <el-form ref="ruleForm" :model="ruleForm" :inline="true" status-icon 
+            label-width="100px">
+            <el-form-item label="年份" >
               <el-date-picker v-model="ruleForm.year" value-format="yyyy" type="year" placeholder="选择年"
                 class="selectRegion" />
             </el-form-item>
@@ -42,7 +43,8 @@
               </el-select>
             </el-form-item>
             <el-form-item label="省区" v-if="regionShow">
-              <el-select v-model="ruleForm.provinceId" placeholder="请选择" @change="changeRegion3" :disabled="!!provinceId">
+              <el-select v-model="ruleForm.provinceId" placeholder="请选择" @change="changeRegion3"
+                :disabled="!!provinceId">
                 <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
@@ -115,15 +117,9 @@ export default {
       inputText: '拓益',
       radio1: '',
       rules: {
-        //   year: [
-        //     { validator: validatePass, trigger: 'blur' }
-        //   ],
-        //   startMonth: [
-        //     { validator: validatePass2, trigger: 'blur' }
-        //   ],
-        //   endMonth: [
-        //     { validator: checkAge, trigger: 'blur' }
-        //   ],
+          year: [
+          {required:true,trigger:'change', message: '请输入活动名称',}
+          ],
       },
       options: [],
       options1: [],
@@ -134,15 +130,15 @@ export default {
   },
   mounted() {
     this.queryData2();
-    if(this.regionId){
+    if (this.regionId) {
       this.ruleForm.regionId = this.regionId
       this.changeRegion(this.regionId)
     }
-    if(this.sectionId){
+    if (this.sectionId) {
       this.ruleForm.sectionId = this.sectionId
       this.changeRegion2(this.sectionId)
     }
-    if(this.provinceId){
+    if (this.provinceId) {
       this.ruleForm.provinceId = this.provinceId
     }
   },
@@ -175,8 +171,8 @@ export default {
   },
   methods: {
     async changeRegion3(id) {
-      this.ruleForm.shopId='';
-      this.options4=[];
+      this.ruleForm.shopId = '';
+      this.options4 = [];
       let res = await queryShop({ regionId: this.ruleForm.regionId + '', page: 1, pageSize: 100, sectionId: this.ruleForm.sectionId + '', provinceId: id + '' });
       if (res.code == 0) {
         this.options4 = res.data.data.map((item) => {
@@ -188,10 +184,10 @@ export default {
       }
     },
     async changeRegion2(id) {
-      this.ruleForm.provinceId="";
-      this.ruleForm.shopId="";
-      this.options3=[];
-      this.options4=[];
+      this.ruleForm.provinceId = "";
+      this.ruleForm.shopId = "";
+      this.options3 = [];
+      this.options4 = [];
       let res = await this.queryArea1(id + '');
       if (res.code == 0) {
         this.options3 = res.data.map((item) => {
@@ -203,12 +199,12 @@ export default {
       }
     },
     async changeRegion(id) {
-      this.ruleForm.sectionId="";
-      this.ruleForm.provinceId="";
-      this.ruleForm.shopId="";
-      this.option2=[];
-      this.options3=[];
-      this.options4=[];
+      this.ruleForm.sectionId = "";
+      this.ruleForm.provinceId = "";
+      this.ruleForm.shopId = "";
+      this.option2 = [];
+      this.options3 = [];
+      this.options4 = [];
       let res = await this.queryArea1(id + '');
       if (res.code == 0) {
         this.options2 = res.data.map((item) => {
@@ -236,33 +232,37 @@ export default {
 
     },
     submitForm() {
-      let form = JSON.parse(JSON.stringify(this.ruleForm));
-      delete form.queryType;
-      this.$emit("changeForm", form);
+      if(!this.ruleForm.year){
+        this.$message.error('请选择年份');
+      }else{
+        let form = JSON.parse(JSON.stringify(this.ruleForm));
+          delete form.queryType;
+          this.$emit("changeForm", form);
+      }
     },
     changeTime(e) {
       this.ruleForm.queryType = e.target.dataset.time
       let form = { queryType: this.ruleForm.queryType }
       this.resetForm();
-      if(this.regionId){
+      if (this.regionId) {
         form.regionId = this.regionId
       }
-      if(this.sectionId){
+      if (this.sectionId) {
         form.sectionId = this.sectionId
       }
-      if(this.provinceId){
+      if (this.provinceId) {
         form.provinceId = this.provinceId
       }
       this.$emit("queryProvinceSalePrice", form)
     },
     resetForm() {
-      this.ruleForm.year="";
-      this.ruleForm.startMonth='';
-      this.ruleForm.endMonth='';
-      this.ruleForm.regionId='';
-      this.ruleForm.sectionId='';
-      this.ruleForm.provinceId='';
-      this.ruleForm.shopId='';
+      this.ruleForm.year = "";
+      this.ruleForm.startMonth = '';
+      this.ruleForm.endMonth = '';
+      this.ruleForm.regionId = '';
+      this.ruleForm.sectionId = '';
+      this.ruleForm.provinceId = '';
+      this.ruleForm.shopId = '';
     },
   }
 }
