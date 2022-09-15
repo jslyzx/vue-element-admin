@@ -149,7 +149,7 @@ export default {
       total: 0,
       flag: true,
       isQueryType: true,
-      tempQuery: {}
+      tempQuery: { queryType: 1 }
     };
   },
   created() {
@@ -161,6 +161,7 @@ export default {
       this.tempQuery = form
       this.page = 1;
       this.isQueryType = false;
+      this.flag = true
       this.getHearMap(form);
       let data = form;
       data.page = this.page;
@@ -170,6 +171,7 @@ export default {
     changeTime(form) {
       this.tempQuery = form
       this.page = 1;
+      this.flag = true
       this.isQueryType = true;
       this.getHearMap({ queryType: form.queryType });
       this.queryHospitalSales({
