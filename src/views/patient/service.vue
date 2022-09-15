@@ -154,9 +154,6 @@ export default {
         startMonth: "",
         endMonth: "",
         goods: "",
-        bigArea: "",
-        middleArea: "",
-        provienceArea: "",
         shop: ""
       },
       total: 0,
