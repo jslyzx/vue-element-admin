@@ -134,7 +134,7 @@
         <el-card style="flex-basis: calc(50% - 10px);">
           <div class="inBox">
             <div class="topBox">
-              <h3 style="margin-top:1px">销售统计</h3>
+              <h3 style="margin-top:1px">年度销售统计</h3>
               <div style="margin-top:-5px">
                 <div style="display:flex;line-height: 24px;width: 80px;border: 1px solid #ccc;text-align: center;">
                   <div style="width:50%;font-size: 12px;border-right: 1px solid #ccc;cursor: pointer;" @click="changeType(2)" :class="tabIndex5==2?'active':''">数量</div>

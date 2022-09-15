@@ -72,7 +72,7 @@
     </el-row>
     <el-row :gutter="20" class="allChartBox" style="margin-bottom: 0!important;">
       <el-col :xs="18" :sm="18" style="height: 100%">
-        <div class="chartTitle">销售统计</div>
+        <div class="chartTitle">年度销售统计</div>
         <div class="barChartBox">
           <bar-chart
             v-if="medicine1Data.length > 0"
