@@ -346,18 +346,18 @@ export default {
 
       }
     },
-    async handleClick(tab) {
-      this.submitTop1({ queryType: this.ruleForm.queryType, medicineId: this.tabIndex }, this.tabIndex, 'salesPrice');
+    handleClick(tab) {
+      this.submitTop1({ ...this.temQuery, medicineId: this.tabIndex }, this.tabIndex, 'salesPrice');
     },
     handleClick2(tab) {
-      this.submitTop1({ queryType: this.ruleForm.queryType, medicineId: this.tabIndex2 }, this.tabIndex2, 'salesNum');
+      this.submitTop1({ ...this.temQuery, medicineId: this.tabIndex2 }, this.tabIndex2, 'salesNum');
     },
     handleClick3(tab) {
-      this.submitTop1({ queryType: this.ruleForm.queryType, medicineId: this.tabIndex3 }, this.tabIndex3, 'oldCustomerSalesNum');
+      this.submitTop1({ ...this.temQuery, medicineId: this.tabIndex3 }, this.tabIndex3, 'oldCustomerSalesNum');
 
     },
     handleClick4(tab) {
-      this.submitTop1({ queryType: this.ruleForm.queryType, medicineId: this.tabIndex4 }, this.tabIndex4, 'customerSalesNum');
+      this.submitTop1({ ...this.temQuery, medicineId: this.tabIndex4 }, this.tabIndex4, 'customerSalesNum');
     },
     initCharts2() {
       const that = this
