@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <saleForm @queryProvinceSalePrice="queryProvinceSalePrice" :ruleForm="ruleForm" @changeTime="changeTime" @changeForm="changeForm" />
+      <saleForm @queryProvinceSalePrice="queryProvinceSalePrice" :ruleForm="ruleForm" @changeForm="changeForm" />
     </div>
     <div class="chartBox">
       <div class="display">
@@ -298,21 +298,11 @@ export default {
     });
   },
   methods: {
-    changeTime(form) {
-      this.temQuery = form
-      this.queryProvinceSalePrice1(form);
-      this.query2(form);
-      this.query1(form);
-      this.submitTop1({ ...form, medicineId: this.id1 });
-      this.queryMonthSalesPrice({
-        ...form,
-        type: this.tabIndex5
-      });
-    },
     changeType(label) {
-      this.tabIndex5=label;
+      this.tabIndex5 = label;
+      var query = this.temQuery.year ? { year: this.temQuery.year} : { queryType: 1 }
       this.queryMonthSalesPrice({
-        ...this.temQuery,
+        ...query,
         type: this.tabIndex5
       })
     },
@@ -395,7 +385,6 @@ export default {
     },
     handleClick3(tab) {
       this.submitTop1({ ...this.temQuery, medicineId: this.tabIndex3 }, this.tabIndex3, 'oldCustomerSalesNum');
-
     },
     handleClick4(tab) {
       this.submitTop1({ ...this.temQuery, medicineId: this.tabIndex4 }, this.tabIndex4, 'customerSalesNum');
@@ -712,15 +701,18 @@ export default {
         });
       }
     },
-    queryProvinceSalePrice(query) {
-      this.query2(query);
-      this.query1(query);
-      this.submitTop1({ queryType: this.ruleForm.queryType, medicineId: this.id1 });
-      this.queryMonthSalesPrice({
-        ...query,
-        type: this.tabIndex5
-      });
-      this.queryProvinceSalePrice1(query);
+    queryProvinceSalePrice(form) {
+      this.temQuery = form
+      this.queryProvinceSalePrice1(form);
+      this.query2(form);
+      this.query1(form);
+      this.submitTop1({ ...form, medicineId: this.id1 });
+      if(form.queryType == '1'){
+        this.queryMonthSalesPrice({
+          ...form,
+          type: this.tabIndex5
+        })
+      }
     },
     async queryProvinceSalePrice1(query) {
       let res = await queryProvinceSalePriceRate(query);
