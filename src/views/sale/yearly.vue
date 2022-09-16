@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <saleForm @queryProvinceSalePrice="queryProvinceSalePrice" :ruleForm="ruleForm" @changeForm="changeForm" />
+      <saleForm @queryProvinceSalePrice="queryProvinceSalePrice" :ruleForm="ruleForm" @changeTime="changeTime" @changeForm="changeForm" />
     </div>
     <div class="chartBox">
       <div class="display">
@@ -10,7 +10,14 @@
             <div class="topBox">
               <div>
                 <span>销售额</span>
-                <span style="margin-left:9px"><i class="el-icon-warning-outline" /></span>
+                <el-tooltip
+                  class="item"
+                  effect="dark"
+                  content="时间范围内的销售额"
+                  placement="top-start"
+                >
+                  <i class="el-icon-warning" />
+                </el-tooltip>
               </div>
               <div>
                 <el-tabs v-model="tabIndex" @tab-click="handleClick">
@@ -41,7 +48,14 @@
             <div class="topBox">
               <div>
                 <span>销量</span>
-                <span style="margin-left:9px"><i class="el-icon-warning-outline" /></span>
+                <el-tooltip
+                  class="item"
+                  effect="dark"
+                  content="时间范围内的销量"
+                  placement="top-start"
+                >
+                  <i class="el-icon-warning" />
+                </el-tooltip>
               </div>
               <div>
                 <el-tabs v-model="tabIndex2" @tab-click="handleClick2">
@@ -71,7 +85,14 @@
             <div class="topBox">
               <div>
                 <span>老患者销量</span>
-                <span style="margin-left:9px"><i class="el-icon-warning-outline" /></span>
+                <el-tooltip
+                  class="item"
+                  effect="dark"
+                  content="时间范围内的老患者销量"
+                  placement="top-start"
+                >
+                  <i class="el-icon-warning" />
+                </el-tooltip>
               </div>
               <div>
                 <el-tabs v-model="tabIndex3" @tab-click="handleClick3">
@@ -103,7 +124,14 @@
             <div class="topBox">
               <div>
                 <span>新患者销量</span>
-                <span style="margin-left:9px"><i class="el-icon-warning-outline" /></span>
+                <el-tooltip
+                  class="item"
+                  effect="dark"
+                  content="时间范围内的新患者销量"
+                  placement="top-start"
+                >
+                  <i class="el-icon-warning" />
+                </el-tooltip>
               </div>
               <div>
                 <el-tabs v-model="tabIndex4" @tab-click="handleClick4">
@@ -224,7 +252,9 @@ export default {
       charts2: null,
       charts3: null,
       charts4: null,
-      temQuery: {}
+      temQuery: {
+        queryType: 1
+      }
     }
   },
   created() {
@@ -268,6 +298,17 @@ export default {
     });
   },
   methods: {
+    changeTime(form) {
+      this.temQuery = form
+      this.queryProvinceSalePrice1(form);
+      this.query2(form);
+      this.query1(form);
+      this.submitTop1({ ...form, medicineId: this.id1 });
+      this.queryMonthSalesPrice({
+        ...form,
+        type: this.tabIndex5
+      });
+    },
     changeType(label) {
       this.tabIndex5=label;
       this.queryMonthSalesPrice({
