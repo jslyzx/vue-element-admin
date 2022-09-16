@@ -121,11 +121,15 @@ export default {
     this.queryData2();
     if (this.regionId) {
       this.ruleForm.regionId = this.regionId
-      this.changeRegion(this.regionId)
+      if(this.regionShow){
+        this.changeRegion(this.regionId)
+      }
     }
     if (this.sectionId) {
       this.ruleForm.sectionId = this.sectionId
-      this.changeRegion2(this.sectionId)
+      if(this.regionShow){
+        this.changeRegion2(this.sectionId)
+      }
     }
     if (this.provinceId) {
       this.ruleForm.provinceId = this.provinceId

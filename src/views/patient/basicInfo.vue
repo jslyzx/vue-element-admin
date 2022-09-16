@@ -125,14 +125,9 @@ export default {
   data() {
     return {
       ruleForm: {
-        queryType: 1,
         year: '',
         startMonth: '',
         endMonth: '',
-        goods: '',
-        bigArea: '',
-        middleArea: '',
-        provienceArea: '',
         shopId: this.$route.params.id
       },
       monthSales: [],
