@@ -223,11 +223,9 @@ export default {
       charts1: null,
       charts2: null,
       charts3: null,
-      charts4: null
+      charts4: null,
+      temQuery: {}
     }
-  },
-  computed: {
-
   },
   created() {
     this.submitTop1({ queryType: this.ruleForm.queryType, medicineId: '' });
@@ -273,7 +271,7 @@ export default {
     changeType(label) {
       this.tabIndex5=label;
       this.queryMonthSalesPrice({
-        queryType: this.ruleForm.queryType,
+        ...this.temQuery,
         type: this.tabIndex5
       })
     },
@@ -320,6 +318,7 @@ export default {
       });
     },
     async changeForm(form) {
+      this.temQuery = form
       this.queryProvinceSalePrice1(form);
       this.query2(form);
       this.query1(form);

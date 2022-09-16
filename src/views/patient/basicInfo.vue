@@ -26,7 +26,7 @@
                   <div class="content">
                     <el-descriptions :column="2">
                       <el-descriptions-item label="授权商品" :span="24">拓益</el-descriptions-item>
-                      <el-descriptions-item label="开办时间"><span>2014-12-12</span>
+                      <el-descriptions-item label="开办时间"><span>{{shopInfo.createTime | parseTime('{y}-{m}-{d}')}}</span>
                       </el-descriptions-item>
                       <el-descriptions-item label="电话"><span>{{shopInfo.phone}}</span><span style="margin-left:10px"><img src="@/assets/patient_images/分组 1.png" /></span>
                       </el-descriptions-item>
@@ -115,6 +115,7 @@
 import { queryShopInfo } from '@/api/system'
 import saleForm from '@/components/saleForm'
 import * as echarts from 'echarts'
+import { parseTime } from '@/filters'
 import _ from 'lodash'
 require("echarts/theme/macarons")
 export default {
