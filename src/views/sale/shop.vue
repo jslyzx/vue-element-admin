@@ -25,9 +25,9 @@
               </router-link>
             </template>
           </el-table-column>
-          <el-table-column prop="provinceName" label="省区"></el-table-column>
-          <el-table-column prop="sectionName" label="片区"> </el-table-column>
           <el-table-column prop="regionName" label="大区"> </el-table-column>
+          <el-table-column prop="sectionName" label="片区"> </el-table-column>
+          <el-table-column prop="provinceName" label="省区"></el-table-column>
           <el-table-column prop="num" label="销售数量(盒)"> </el-table-column>
           <el-table-column prop="total" label="销售金额(万元)"> </el-table-column>
           <el-table-column prop="mom" label="环比"> </el-table-column>

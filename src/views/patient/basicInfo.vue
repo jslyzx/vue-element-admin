@@ -14,7 +14,7 @@
                   <div>
                     <span class="title">{{shopInfo.name}}</span>
                     <el-tag type="" effect="plain" style="margin-right:9px">
-                      中国
+                      {{shopInfo.provinceName}}
                     </el-tag>
                     <el-tag type="success" effect="plain" style="margin-right:9px">
                       特药定点
@@ -126,7 +126,7 @@ export default {
   data() {
     return {
       ruleForm: {
-        year: '',
+        year: '2022',
         startMonth: '',
         endMonth: '',
         shopId: this.$route.params.id
