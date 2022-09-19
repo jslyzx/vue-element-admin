@@ -14,7 +14,7 @@ const saleRouter = {
       path: 'yearly',
       component: () => import('@/views/sale/yearly'),
       name: 'SaleYearly',
-      meta: { title: '年度销售' }
+      meta: { title: '销售汇总' }
     }, {
       path: 'path',
       component: () => import('@/views/sale/path'),
