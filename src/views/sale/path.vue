@@ -177,7 +177,7 @@ export default {
       this.queryHospitalSales({
         queryType: form.queryType,
         page: 1,
-        pageNum: 5,
+        pageNum: 5
       });
     },
     // 热力图
@@ -242,15 +242,17 @@ export default {
     queryHospitalSales(form) {
       queryHospitalSales(form).then((res) => {
         if (res.code == 0) {
-          this.total = res.data.count;
-          this.hospitalSales = res.data.data;
-          if (this.flag) {
-            this.queryOfficeSales(res.data.data[0]);
-            this.officeSalesName = res.data.data[0].hosptailName;
-            this.flag = false;
+          this.total = res.data.count
+          this.hospitalSales = res.data.data
+          if (this.flag && this.hospitalSales && this.hospitalSales.length) {
+            this.queryOfficeSales(res.data.data[0])
+            this.officeSalesName = res.data.data[0].hosptailName
+            this.flag = false
+          }else {
+            this.hospitalOfficeSales = []
           }
         }
-      });
+      })
     },
     //每页条数改变时触发 选择一页显示多少行
     handleSizeChange(val) {
