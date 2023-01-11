@@ -62,7 +62,7 @@ export default {
           trigger: "axis",
         },
         legend: {
-          data: ["20mg", "80mg"],
+          data: ["240mg", "80mg"],
         },
         calculable: true,
         xAxis: [
@@ -91,7 +91,7 @@ export default {
         ],
         series: [
           {
-            name: "20mg",
+            name: "240mg",
             type: "bar",
             data: this.medicine1Data,
             itemStyle: {

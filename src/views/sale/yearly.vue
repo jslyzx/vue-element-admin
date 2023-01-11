@@ -22,7 +22,7 @@
               <div>
                 <el-tabs v-model="tabIndex" @tab-click="handleClick">
                   <el-tab-pane label="全部" name="" />
-                  <el-tab-pane label="20mg" name="160" />
+                  <el-tab-pane label="240mg" name="160" />
                   <el-tab-pane label="80mg" name="357" />
                 </el-tabs>
               </div>
@@ -60,7 +60,7 @@
               <div>
                 <el-tabs v-model="tabIndex2" @tab-click="handleClick2">
                   <el-tab-pane label="全部" name="" />
-                  <el-tab-pane label="20mg" name="160" />
+                  <el-tab-pane label="240mg" name="160" />
                   <el-tab-pane label="80mg" name="357" />
                 </el-tabs>
               </div>
@@ -97,7 +97,7 @@
               <div>
                 <el-tabs v-model="tabIndex3" @tab-click="handleClick3">
                   <el-tab-pane label="全部" name="" />
-                  <el-tab-pane label="20mg" name="160" />
+                  <el-tab-pane label="240mg" name="160" />
                   <el-tab-pane label="80mg" name="357" />
                 </el-tabs>
               </div>
@@ -136,7 +136,7 @@
               <div>
                 <el-tabs v-model="tabIndex4" @tab-click="handleClick4">
                   <el-tab-pane label="全部" name="" />
-                  <el-tab-pane label="20mg" name="160" />
+                  <el-tab-pane label="240mg" name="160" />
                   <el-tab-pane label="80mg" name="357" />
                 </el-tabs>
               </div>
@@ -586,7 +586,7 @@ export default {
           trigger: "axis",
         },
         legend: {
-          data: ["20mg", "80mg"],
+          data: ["240mg", "80mg"],
         },
         calculable: true,
         xAxis: [{
@@ -616,7 +616,7 @@ export default {
             y2: 35
           },
         series: [{
-          name: "20mg",
+          name: "240mg",
           type: "bar",
           data: this.medicine1Data,
           itemStyle: {
@@ -653,7 +653,7 @@ export default {
           trigger: "axis",
         },
         legend: {
-          data: ["20mg", "80mg"],
+          data: ["240mg", "80mg"],
         },
         calculable: true,
         xAxis: [
@@ -682,7 +682,7 @@ export default {
         ],
         series: [
           {
-            name: "20mg",
+            name: "240mg",
             type: "bar",
             data: this.medicine3Data,
             itemStyle: {
