@@ -154,7 +154,7 @@ export default {
         startMonth: "",
         endMonth: "",
         goods: "",
-        shop: ""
+        shop: "",
       },
       total: 0,
       serviceList: [], //月度统计数据
@@ -164,7 +164,7 @@ export default {
       eduTimesAvg: [], //平均患教次数
       tempQuery: {},
       page: 1,
-      pageSize: 5
+      pageSize: 5,
     };
   },
   created() {
@@ -172,23 +172,23 @@ export default {
   },
   methods: {
     async getServiceList(form) {
-      var queryForm = {}
-      if(form.limit){
-        Object.assign(queryForm, this.tempQuery, form)
-        queryForm.pageSize = queryForm.limit
-      }else{
-        Object.assign(queryForm, this.tempQuery)
-        queryForm.page = 1
-        queryForm.pageSize = 5
+      var queryForm = {};
+      if (form.limit) {
+        Object.assign(queryForm, this.tempQuery, form);
+        queryForm.pageSize = queryForm.limit;
+      } else {
+        Object.assign(queryForm, this.tempQuery);
+        queryForm.page = 1;
+        queryForm.pageSize = 5;
       }
-      const res = await shopServiceList(queryForm)
-      this.serviceList = res.data.data
-      this.total = res.data.total
+      const res = await shopServiceList(queryForm);
+      this.serviceList = res.data.data;
+      this.total = res.data.total;
     },
     async getServiceChart(form) {
-      var queryForm = {}
-      Object.assign(queryForm, form, {page: 1, pageSize: 5})
-      const res = await shopServiceCharts(queryForm)
+      var queryForm = {};
+      Object.assign(queryForm, form, { page: 1, pageSize: 5 });
+      const res = await shopServiceCharts(queryForm);
       this.returnRatio = res.data.returnRatio;
       this.infoRate = res.data.infoRate;
       this.eduTimesAvg = res.data.eduTimesAvg;
@@ -196,47 +196,99 @@ export default {
     },
     initCharts1() {
       const that = this;
+      console.log(that.infoRate)
       const charts1 = echarts.init(
         document.getElementById("chartBox1"),
         "macarons"
       );
       const option = {
-        tooltip: {
-          trigger: "item",
-          formatter: "{b} : {c}%",
+        title: {
         },
-        legend: {
-          type: "scroll",
-          orient: "vertical",
-          formatter: function (name) {
-            var str = option.series[0].data.filter((item) => {
-              return item.name == name;
-            });
-            return `${name}：${str[0].value}%`;
+        tooltip: {
+          trigger: "axis",
+          formatter: "{c}%",
+          axisPointer: {
+            type: "shadow",
           },
-          right: 0,
-          top: "middle",
+        },
+        legend: {},
+        grid: {
+          left: "20px",
+          right: "20px",
+          bottom: "20px",
+          top: "10px",
+        },
+        xAxis: {
+          type: "value",
+          show:false
+        },
+        yAxis: {
+            show: false,
+            type: 'category',
+            data: that.infoRate.map((item) => {
+            return item.name;
+          }),
+            inverse: true,
+            splitLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLine: {
+                show: false
+            },
+            axisLabel: {
+                show: true,
+                inside: true,
+                splitNumber: 50,
+                boundaryGap: [20, 20],
+                textStyle: {
+                    color: '#fff',
+                    verticalAlign: 'bottom',
+                    align: 'left',
+                    padding: [200, 0, 10, 0]
+                }
+            }
         },
         series: [
           {
+            type: "bar",
+            data: that.infoRate.map((item) => {
+              return item.value;
+            }),
             label: {
-              show: false,
-              position: "center",
-            },
-            emphasis: {
-              label: {
-                show: true,
+              show: true,
+              position: "insideLeft",
+              formatter: function (params) {
+                return that.infoRate[params.dataIndex].name + '：' + that.infoRate[params.dataIndex].value + '%'
+              },
+              rich: {
+                name: {},
               },
             },
-            // name: "按DOT分布",
-            type: "pie",
-            radius: ["30%", "90%"],
-            center: ["30%", "50%"],
-            roseType: "area",
             itemStyle: {
-              borderRadius: 8,
+              color: function (p) {
+                let colorList = [
+                  "#FF458C",
+                  "#5C7BD9",
+                  "#9FE080",
+                  "#FFDC60",
+                  "#FF7070",
+                  "#CB7BF4",
+                  "#4B7CF3",
+                  "#F24354",
+                  "#32D5B9",
+                  "#F19E34",
+                  "#9565F4",
+                  "#0255FD",
+                  "#7ED3F4",
+                  "#002E5A",
+                  "#07D2F9",
+                ];
+                return colorList[p.dataIndex];
+              },
             },
-            data: this.infoRate,
           },
         ],
       };
@@ -368,15 +420,25 @@ export default {
           type: "value",
         },
         grid: {
-          x: 55,
-          y: 6,
+          left: "20px",
+          right: "20px",
+          bottom: "50px",
+          top: "10px",
         },
         series: [
           {
             data: _.map(this.timeDiffAvg, function (v) {
               return v.value;
             }),
-            type: "line",
+            type: "bar",
+            barWidth: 30,
+            label: {
+              show: true,
+              position: "inside",
+            },
+            itemStyle: {
+              color:"#07D2F9"
+              },
           },
         ],
       };
@@ -393,8 +455,10 @@ export default {
           trigger: "item",
         },
         grid: {
-          x: 55,
-          y: 6,
+          left: "20px",
+          right: "20px",
+          bottom: "50px",
+          top: "10px",
         },
         xAxis: {
           type: "category",
@@ -406,6 +470,15 @@ export default {
             rotate: 30,
           },
         },
+        markPoint: {
+          data: [
+            { type: "max", name: "Max" },
+            { type: "min", name: "Min" },
+          ],
+        },
+        markLine: {
+          data: [{ type: "average", name: "Avg" }],
+        },
         yAxis: {
           type: "value",
         },
@@ -415,20 +488,27 @@ export default {
               return v.value;
             }),
             type: "bar",
+            barWidth: 30,
+            label: {
+              show: true,
+              position: "inside",
+            },
+            itemStyle: {
+            },
           },
         ],
       };
       charts4.setOption(option);
     },
     changeForm(form) {
-      this.tempQuery = form
-      this.getServiceList(form)
-      this.getServiceChart(form)
+      this.tempQuery = form;
+      this.getServiceList(form);
+      this.getServiceChart(form);
     },
     changeTime(form) {
-      this.tempQuery = form
-      this.getServiceList(form)
-      this.getServiceChart(form)
+      this.tempQuery = form;
+      this.getServiceList(form);
+      this.getServiceChart(form);
     },
   },
   watch: {
