@@ -196,60 +196,52 @@ export default {
     },
     initCharts1() {
       const that = this;
-      console.log(that.infoRate)
+      console.log(that.infoRate);
       const charts1 = echarts.init(
         document.getElementById("chartBox1"),
         "macarons"
       );
       const option = {
-        title: {
-        },
-        tooltip: {
-          trigger: "axis",
-          formatter: "{c}%",
-          axisPointer: {
-            type: "shadow",
-          },
-        },
+        title: {},
         legend: {},
         grid: {
-          left: "20px",
-          right: "20px",
-          bottom: "20px",
-          top: "10px",
+          left: "0",
+          right: "0",
+          bottom: "0",
+          top: "0",
         },
         xAxis: {
           type: "value",
-          show:false
+          show: false,
         },
         yAxis: {
-            show: false,
-            type: 'category',
-            data: that.infoRate.map((item) => {
+          show: false,
+          type: "category",
+          data: that.infoRate.map((item) => {
             return item.name;
           }),
-            inverse: true,
-            splitLine: {
-                show: false
+          inverse: true,
+          splitLine: {
+            show: false,
+          },
+          axisTick: {
+            show: false,
+          },
+          axisLine: {
+            show: false,
+          },
+          axisLabel: {
+            show: true,
+            inside: true,
+            splitNumber: 50,
+            boundaryGap: [20, 20],
+            textStyle: {
+              color: "#fff",
+              verticalAlign: "bottom",
+              align: "left",
+              padding: [200, 0, 10, 0],
             },
-            axisTick: {
-                show: false
-            },
-            axisLine: {
-                show: false
-            },
-            axisLabel: {
-                show: true,
-                inside: true,
-                splitNumber: 50,
-                boundaryGap: [20, 20],
-                textStyle: {
-                    color: '#fff',
-                    verticalAlign: 'bottom',
-                    align: 'left',
-                    padding: [200, 0, 10, 0]
-                }
-            }
+          },
         },
         series: [
           {
@@ -261,7 +253,12 @@ export default {
               show: true,
               position: "insideLeft",
               formatter: function (params) {
-                return that.infoRate[params.dataIndex].name + '：' + that.infoRate[params.dataIndex].value + '%'
+                return (
+                  that.infoRate[params.dataIndex].name +
+                  "：" +
+                  that.infoRate[params.dataIndex].value +
+                  "%"
+                );
               },
               rich: {
                 name: {},
@@ -272,8 +269,8 @@ export default {
                 let colorList = [
                   "#FF458C",
                   "#5C7BD9",
-                  "#9FE080",
-                  "#FFDC60",
+                  "#00b894",
+                  "#e17055",
                   "#FF7070",
                   "#CB7BF4",
                   "#4B7CF3",
@@ -406,6 +403,12 @@ export default {
         tooltip: {
           trigger: "item",
         },
+        grid: {
+          left: "20px",
+          right: "20px",
+          bottom: "50px",
+          top: "10px",
+        },
         xAxis: {
           type: "category",
           data: _.map(this.timeDiffAvg, function (v) {
@@ -418,12 +421,25 @@ export default {
         },
         yAxis: {
           type: "value",
-        },
-        grid: {
-          left: "20px",
-          right: "20px",
-          bottom: "50px",
-          top: "10px",
+          show: false,
+          axisTick: {
+            show: false,
+          },
+          axisLine: {
+            lineStyle: {
+              color: "#609aeb",
+            },
+          },
+          axisLabel: {
+            show: false,
+          },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              type: "dotted",
+              color: "rgba(121,158,232,0.3)",
+            },
+          },
         },
         series: [
           {
@@ -434,11 +450,35 @@ export default {
             barWidth: 30,
             label: {
               show: true,
-              position: "inside",
+              position: "top",
             },
             itemStyle: {
-              color:"#07D2F9"
+              normal: {
+                barBorderRadius: 4,
+                color: {
+                  type: "linear",
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "#0984e3", // 0% 处的颜色
+                    },
+                    {
+                      offset: 0.6,
+                      color: "#269CF7", // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: "#ffffff", // 100% 处的颜色
+                    },
+                  ],
+                  globalCoord: true, // 缺省为 false
+                },
               },
+            },
           },
         ],
       };
@@ -481,6 +521,25 @@ export default {
         },
         yAxis: {
           type: "value",
+          show: false,
+          axisTick: {
+            show: false,
+          },
+          axisLine: {
+            lineStyle: {
+              color: "#609aeb",
+            },
+          },
+          axisLabel: {
+            show: false,
+          },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              type: "dotted",
+              color: "rgba(121,158,232,0.3)",
+            },
+          },
         },
         series: [
           {
@@ -491,9 +550,34 @@ export default {
             barWidth: 30,
             label: {
               show: true,
-              position: "inside",
+              position: "top",
             },
             itemStyle: {
+              normal: {
+                barBorderRadius: 4,
+                color: {
+                  type: "linear",
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "#00987A", // 0% 处的颜色
+                    },
+                    {
+                      offset: 0.6,
+                      color: "#0BBE9B", // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: "#ffffff", // 100% 处的颜色
+                    },
+                  ],
+                  globalCoord: true, // 缺省为 false
+                },
+              },
             },
           },
         ],
@@ -586,9 +670,11 @@ export default {
     margin-top: 16px;
     display: flex;
     flex-flow: row wrap;
+
     .el-card {
       width: 100%;
     }
+
     ::v-deep .el-card__body {
       padding: 0px !important;
     }
@@ -616,6 +702,7 @@ export default {
 
     .tableBox {
       padding: 10px;
+
       .pagination-container {
         padding: 0;
         margin-top: 10px;
