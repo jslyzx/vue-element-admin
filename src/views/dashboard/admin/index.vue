@@ -2,10 +2,7 @@
   <div class="dashboard-editor-container body">
     <el-row>
       <el-col :span="24">
-        <el-radio-group
-          @change="handleClick()"
-          v-model="dateActive"
-        >
+        <el-radio-group @change="handleClick()" v-model="dateActive">
           <el-radio-button label="1" name="1">当年</el-radio-button>
           <el-radio-button label="2" name="2">当季</el-radio-button>
           <el-radio-button label="3" name="3">当月</el-radio-button>
@@ -13,17 +10,9 @@
         </el-radio-group>
       </el-col>
     </el-row>
-    <panel-group
-      :dotInfo="dotInfo"
-      :salesNumInfo="salesNumInfo"
-      :salesPriceInfo="salesPriceInfo"
-      :salesInfo="salesInfo"
-      :queryType="dateActive"
-      @handleClick1="getClick1"
-      @handleClick2="getClick2"
-      @handleClick3="getClick3"
-      @handleClick4="getClick4"
-    />
+    <panel-group :dotInfo="dotInfo" :salesNumInfo="salesNumInfo" :salesPriceInfo="salesPriceInfo" :salesInfo="salesInfo"
+      :queryType="dateActive" @handleClick1="getClick1" @handleClick2="getClick2" @handleClick3="getClick3"
+      @handleClick4="getClick4" />
     <el-row :gutter="20" class="allChartBox" style="height: 305px">
       <el-col :xs="18" :sm="18" style="height: 100%">
         <div class="chartTitle">患者分布热点图</div>
@@ -43,23 +32,14 @@
               <div class="secondPb">药房</div>
               <div class="thirdPb">本月销售额</div>
             </li>
-            <li
-              v-for="(item, index) in shopSaleList"
-              :key="index"
-              class="pbBox bgfff"
-            >
+            <li v-for="(item, index) in shopSaleList" :key="index" class="pbBox bgfff">
               <div class="firstPb">
                 <img v-if="index == 0" src="@/assets/index_img/gold.png" />
                 <img v-if="index == 1" src="@/assets/index_img/silver.png" />
                 <img v-if="index == 2" src="@/assets/index_img/bronze.png" />
                 <div v-if="index > 2">{{ index + 1 }}</div>
               </div>
-              <el-tooltip
-                class="item"
-                effect="dark"
-                :content="item.shopName"
-                placement="top-start"
-              >
+              <el-tooltip class="item" effect="dark" :content="item.shopName" placement="top-start">
                 <div class="secondPb">
                   {{ item.shopName }}
                 </div>
@@ -74,11 +54,7 @@
       <el-col :xs="18" :sm="18" style="height: 100%">
         <div class="chartTitle">年度销售统计</div>
         <div class="barChartBox">
-          <bar-chart
-            v-if="medicine1Data.length > 0"
-            :medicine1Data="medicine1Data"
-            :medicine2Data="medicine2Data"
-          />
+          <bar-chart v-if="medicine1Data.length > 0" :medicine1Data="medicine1Data" :medicine2Data="medicine2Data" />
         </div>
       </el-col>
     </el-row>
@@ -414,6 +390,7 @@ export default {
 .el-row {
   margin-bottom: 15px !important;
 }
+
 .dashboard-editor-container {
   .github-corner {
     position: absolute;
@@ -426,26 +403,31 @@ export default {
     display: flex;
     justify-content: space-around;
   }
+
   .xsyg {
     height: 46%;
     background: #fff;
     display: flex;
   }
+
   .xsnd {
     height: 46%;
     background: #fff;
     margin-top: 6%;
     display: flex;
   }
+
   .xsTitleBox {
     width: 60%;
     font-size: 16px;
     padding: 16px 20px;
+
     .completionRate {
       color: rgba(0, 0, 0, 0.45);
       margin-top: 16px;
       font-size: 14px;
     }
+
     .completionRateNum {
       font-size: 24px;
       font-weight: 700;
@@ -454,6 +436,7 @@ export default {
       margin-top: 10px;
     }
   }
+
   .phTitle {
     display: flex;
     justify-content: space-between;
@@ -461,10 +444,12 @@ export default {
     padding-bottom: 16px;
     border-bottom: 1px solid rgba(216, 220, 229, 1);
     margin-bottom: 16px;
+
     div {
       font-size: 16px;
       color: rgba(0, 0, 0, 0.85);
     }
+
     span {
       font-size: 14px;
       font-weight: 400;
@@ -472,38 +457,46 @@ export default {
       cursor: pointer;
     }
   }
+
   .allChartBox {
     height: 330px;
     margin-bottom: 10px;
+
     .phBox {
       background: #fff;
       padding: 16px;
       box-sizing: border-box;
+
       ul {
         // height: 370px;
         // overflow-y: scroll;
       }
+
       .pbBox {
         display: flex;
         background: rgba(245, 247, 250, 1);
         padding: 8px;
         color: rgba(127, 143, 164, 1);
         font-size: 14px;
+
         .firstPb {
           width: 50px;
         }
+
         .secondPb {
           width: calc(70% - 51px);
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
+
         .thirdPb {
           width: 30%;
           text-align: right;
           padding-right: 12px;
         }
       }
+
       .bgfff {
         background-color: #fff;
         border-bottom: 1px solid rgba(216, 220, 229, 1);
@@ -513,17 +506,20 @@ export default {
       }
     }
   }
+
   .barChartBox {
     background-color: #fff;
     padding: 16px;
     box-sizing: border-box;
     height: 290px;
   }
+
   .chart-wrapper {
     background: #fff;
     padding: 16px 16px 0;
     margin-bottom: 32px;
   }
+
   .chartTitle {
     background: #fff;
     line-height: 40px;
@@ -533,18 +529,21 @@ export default {
     padding-left: 16px;
     border-bottom: 1px solid rgba(233, 233, 233, 1);
   }
+
   .mapBox {
     padding: 10px;
     height: calc(100% - 40px);
     background: #fff;
   }
 }
+
 ul,
 li {
   padding: 0;
   margin: 0;
   list-style: none;
 }
+
 @media (max-width: 1024px) {
   .chart-wrapper {
     padding: 8px;

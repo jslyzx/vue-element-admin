@@ -8,8 +8,11 @@ import Layout from '@/layout'
 
 /* Router Modules */
 import patientRouter from './modules/patient'
+import shopRouter from './modules/shop'
 import saleRouter from './modules/sale'
 import systemRouter from './modules/system'
+import businessRouter from './modules/business'
+import evalRouter from './modules/eval'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -84,6 +87,9 @@ export const constantRoutes = [
   },
   saleRouter,
   patientRouter,
+  shopRouter,
+  businessRouter,
+  evalRouter,
   systemRouter
 ]
 

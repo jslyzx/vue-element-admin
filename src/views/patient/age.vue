@@ -1,102 +1,103 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <saleForm :rule-form="ruleForm" @changeForm="changeForm" @queryProvinceSalePrice="changeTime"/>
+      <saleForm :rule-form="ruleForm" @changeForm="changeForm" @queryProvinceSalePrice="changeTime" />
     </div>
     <div class="chartBox">
-        <div class="display">
-          <el-card class="s_box">
-            <div>
-              <div class="topBox">
-                <div>
-                  <span><img src="@/assets/patient_images/分组 5.png" /></span>
-                  <span>新患者</span>
-                </div>
-                <div>
-                  <span style="margin-top: 10px;"><i class="el-icon-warning-outline" /></span>
-                  <span class="text">选定时间范围内新发生购买行为的患者</span>
-                </div>
+      <div class="display">
+        <el-card class="s_box">
+          <div>
+            <div class="topBox">
+              <div>
+                <span><img src="@/assets/patient_images/分组 5.png"></span>
+                <span>新患者</span>
               </div>
-              <div class="bottomBox">
-                <div>
-                  <div>{{newInfo.num}}人/{{newInfo.numRate}}</div>
-                  <div>患者人数/占比</div>
-                </div>
-                <div>
-                  <div class="orange">{{newInfo.dot}}月</div>
-                  <div>Dot</div>
-                </div>
-                <div>
-                  <div class="green">{{newInfo.sales}}/{{newInfo.salesRate}}</div>
-                  <div>销售额/占比</div>
-                </div>
-                <div>
-                  <div class="red">{{newInfo.buyTimesAvg}}</div>
-                  <div>平均购买次数</div>
-                </div>
+              <div>
+                <span style="margin-top: 10px;"><i class="el-icon-warning-outline" /></span>
+                <span class="text">选定时间范围内新发生购买行为的患者</span>
               </div>
             </div>
-          </el-card>
-          <el-card class="s_box">
-            <div>
-              <div class="topBox">
-                <div>
-                  <span><img width="35" src="@/assets/patient_images/分组 8.png" /></span>
-                  <span>老患者</span>
-                </div>
-                <div>
-                  <span style="margin-top: 10px;"><i class="el-icon-warning-outline" /></span>
-                  <span class="text">选定时间范围内新发生购买行为的患者</span>
-                </div>
+            <div class="bottomBox">
+              <div>
+                <div>{{ newInfo.num }}人/{{ newInfo.numRate }}</div>
+                <div>患者人数/占比</div>
               </div>
-              <div class="bottomBox">
-                <div>
-                  <div>{{oldInfo.num}}人/{{oldInfo.numRate}}</div>
-                  <div>患者人数/占比</div>
-                </div>
-                <div>
-                  <div class="orange">{{oldInfo.dot}}月</div>
-                  <div>Dot</div>
-                </div>
-                <div>
-                  <div class="green">{{oldInfo.sales}}/{{oldInfo.salesRate}}</div>
-                  <div>销售额/占比</div>
-                </div>
-                <div>
-                  <div class="red">{{oldInfo.buyTimesAvg}}</div>
-                  <div>平均购买次数</div>
-                </div>
+              <div>
+                <div class="orange">{{ newInfo.dot }}月</div>
+                <div>Dot</div>
+              </div>
+              <div>
+                <div class="green">{{ newInfo.sales }}/{{ newInfo.salesRate }}</div>
+                <div>销售额/占比</div>
+              </div>
+              <div>
+                <div class="red">{{ newInfo.buyTimesAvg }}</div>
+                <div>平均购买次数</div>
               </div>
             </div>
-          </el-card>
-        </div>
-        <div class="chartDisplay">
-          <el-card>
-            <div class="inBox">
-              <div class="topBox">
-                <el-tabs v-model="tabIndex">
-                  <el-tab-pane label="患者数据列表" name="list" />
-                  <el-tab-pane label="脱落原因分析" name="reason" />
-                </el-tabs>
+          </div>
+        </el-card>
+        <el-card class="s_box">
+          <div>
+            <div class="topBox">
+              <div>
+                <span><img width="35" src="@/assets/patient_images/分组 8.png"></span>
+                <span>老患者</span>
               </div>
-              <div class="inChartBox">
-                <div v-show="tabIndex == 'list'" style="padding:15px">
-                  <el-table :data="dataList" style="width: 100%" max-height="390" :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }" border>
-                    <el-table-column prop="month" label="月份"></el-table-column>
-                    <el-table-column prop="totalnum" label="总患者数(人)"></el-table-column>
-                    <el-table-column prop="newnum" label="本月新增患者数(人)"> </el-table-column>
-                    <el-table-column prop="stopnum" label="脱落人数(人)"> </el-table-column>
-                    <el-table-column prop="stoprate" label="脱落率(%)"> </el-table-column>
-                  </el-table>
-                </div>
-                <div v-show="tabIndex == 'reason'">
-                  <div id="chartBox" ref="chartBox" class="inChartBox1" />
-                </div>
+              <div>
+                <span style="margin-top: 10px;"><i class="el-icon-warning-outline" /></span>
+                <span class="text">选定时间范围内新发生购买行为的患者</span>
               </div>
             </div>
-          </el-card>
-        </div>
+            <div class="bottomBox">
+              <div>
+                <div>{{ oldInfo.num }}人/{{ oldInfo.numRate }}</div>
+                <div>患者人数/占比</div>
+              </div>
+              <div>
+                <div class="orange">{{ oldInfo.dot }}月</div>
+                <div>Dot</div>
+              </div>
+              <div>
+                <div class="green">{{ oldInfo.sales }}/{{ oldInfo.salesRate }}</div>
+                <div>销售额/占比</div>
+              </div>
+              <div>
+                <div class="red">{{ oldInfo.buyTimesAvg }}</div>
+                <div>平均购买次数</div>
+              </div>
+            </div>
+          </div>
+        </el-card>
       </div>
+      <div class="chartDisplay">
+        <el-card>
+          <div class="inBox">
+            <div class="topBox">
+              <el-tabs v-model="tabIndex">
+                <el-tab-pane label="患者数据列表" name="list" />
+                <el-tab-pane label="脱落原因分析" name="reason" />
+              </el-tabs>
+            </div>
+            <div class="inChartBox">
+              <div v-show="tabIndex == 'list'" style="padding:15px">
+                <el-table :data="dataList" style="width: 100%" max-height="390"
+                  :header-cell-style="{ background: 'rgba(245, 247, 250, 1)' }" border>
+                  <el-table-column prop="month" label="月份" />
+                  <el-table-column prop="totalnum" label="总患者数(人)" />
+                  <el-table-column prop="newnum" label="本月新增患者数(人)" />
+                  <el-table-column prop="stopnum" label="脱落人数(人)" />
+                  <el-table-column prop="stoprate" label="脱落率(%)" />
+                </el-table>
+              </div>
+              <div v-show="tabIndex == 'reason'">
+                <div id="chartBox" ref="chartBox" class="inChartBox1" />
+              </div>
+            </div>
+          </div>
+        </el-card>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -104,11 +105,16 @@ import { queryPatientComparison, queryPatientCountByMonth, queryPatientStopReaso
 import saleForm from '@/components/saleForm'
 import * as echarts from 'echarts'
 import _ from 'lodash'
-require("echarts/theme/macarons")
+require('echarts/theme/macarons')
 export default {
   name: 'PatientAge',
   components: {
     saleForm
+  },
+  filters: {
+    integMoney(s) {
+      return parseInt(s) + '万元'
+    }
   },
   data() {
     return {
@@ -134,91 +140,91 @@ export default {
         pageSize: 10,
         total: 100,
         tableData: [{
-            id: 1,
-            month: '1月',
-            lastMonth: 128,
-            sumCount: 365,
-            thisMonth: 157,
-            loseCount: 85,
-            loseRate: "29%"
-          },
-          {
-            id: 2,
-            month: '2月',
-            lastMonth: 128,
-            sumCount: 365,
-            thisMonth: 157,
-            loseCount: 85,
-            loseRate: "29%"
-          },
-          {
-            id: 3,
-            month: '3月',
-            lastMonth: 128,
-            sumCount: 365,
-            thisMonth: 157,
-            loseCount: 85,
-            loseRate: "29%"
-          },
-          {
-            id: 4,
-            month: '4月',
-            lastMonth: 128,
-            sumCount: 365,
-            thisMonth: 157,
-            loseCount: 85,
-            loseRate: "29%"
-          },
-          {
-            id: 5,
-            month: '5月',
-            lastMonth: 128,
-            sumCount: 365,
-            thisMonth: 157,
-            loseCount: 85,
-            loseRate: "29%"
-          },
-          {
-            id: 6,
-            month: '6月',
-            lastMonth: 128,
-            sumCount: 365,
-            thisMonth: 157,
-            loseCount: 85,
-            loseRate: "29%"
-          },
-        ]
-      },
-      headerData: [{
           id: 1,
-          label: "月份",
-          prop: "month"
+          month: '1月',
+          lastMonth: 128,
+          sumCount: 365,
+          thisMonth: 157,
+          loseCount: 85,
+          loseRate: '29%'
         },
         {
           id: 2,
-          label: "上月患者数",
-          prop: "lastMonth"
+          month: '2月',
+          lastMonth: 128,
+          sumCount: 365,
+          thisMonth: 157,
+          loseCount: 85,
+          loseRate: '29%'
         },
         {
           id: 3,
-          label: "总患者数",
-          prop: "sumCount"
+          month: '3月',
+          lastMonth: 128,
+          sumCount: 365,
+          thisMonth: 157,
+          loseCount: 85,
+          loseRate: '29%'
         },
         {
           id: 4,
-          label: "本月新增患者数",
-          prop: "thisMonth"
+          month: '4月',
+          lastMonth: 128,
+          sumCount: 365,
+          thisMonth: 157,
+          loseCount: 85,
+          loseRate: '29%'
         },
         {
           id: 5,
-          label: "脱落人数",
-          prop: "loseCount"
+          month: '5月',
+          lastMonth: 128,
+          sumCount: 365,
+          thisMonth: 157,
+          loseCount: 85,
+          loseRate: '29%'
         },
         {
           id: 6,
-          label: "脱落率",
-          prop: "loseRate"
+          month: '6月',
+          lastMonth: 128,
+          sumCount: 365,
+          thisMonth: 157,
+          loseCount: 85,
+          loseRate: '29%'
         }
+        ]
+      },
+      headerData: [{
+        id: 1,
+        label: '月份',
+        prop: 'month'
+      },
+      {
+        id: 2,
+        label: '上月患者数',
+        prop: 'lastMonth'
+      },
+      {
+        id: 3,
+        label: '总患者数',
+        prop: 'sumCount'
+      },
+      {
+        id: 4,
+        label: '本月新增患者数',
+        prop: 'thisMonth'
+      },
+      {
+        id: 5,
+        label: '脱落人数',
+        prop: 'loseCount'
+      },
+      {
+        id: 6,
+        label: '脱落率',
+        prop: 'loseRate'
+      }
       ],
       oldInfo: {},
       newInfo: {},
@@ -226,23 +232,23 @@ export default {
       chart1: null
     }
   },
-  filters: {
-    integMoney(s){
-      return parseInt(s) + '万元'
+  watch: {
+    chartData() {
+      this.initCharts()
     }
   },
-  mounted (){
+  mounted() {
     this.changeForm(this.ruleForm)
-    window.addEventListener("resize", () => {
+    window.addEventListener('resize', () => {
       this.chart1.resize()
     })
-    window.addEventListener("click", () => {
+    window.addEventListener('click', () => {
       this.chart1.resize()
     })
   },
   beforeDestroy() {
-    window.removeEventListener("resize")
-    window.removeEventListener("click")
+    window.removeEventListener('resize')
+    window.removeEventListener('click')
   },
   methods: {
     async getPatientList(form) {
@@ -273,9 +279,9 @@ export default {
       this.chart1.setOption({
         xAxis: {
           type: 'category',
-          data: _.map(this.chartData,function(v){return v.name}),
+          data: _.map(this.chartData, function (v) { return v.name }),
           axisTick: {
-            show: false,
+            show: false
           }
         },
         grid: {
@@ -290,46 +296,34 @@ export default {
           min: 0,
           max: 60,
           axisLine: {
-            show: true,
+            show: true
           }
         },
         series: [{
-          data: _.map(this.chartData,function(v){return v.value}),
+          data: _.map(this.chartData, function (v) { return v.value }),
           type: 'bar',
-          color: "#3aa0ff",
+          color: '#3aa0ff',
           barWidth: 30,
-          itemStyle: { //上方显示数值
+          itemStyle: { // 上方显示数值
             normal: {
               label: {
-                show: true, //开启显示
-                position: 'top', //在上方显示
-                textStyle: { //数值样式
+                show: true, // 开启显示
+                position: 'top', // 在上方显示
+                textStyle: { // 数值样式
                   color: 'black',
                   fontSize: 16
                 }
               }
             }
           }
-        }],
-        grid: {
-          x: 50,
-          y: 60,
-          x2: 10,
-          y2: 35
-        }
+        }]
       })
-    }
-  },
-  watch: {
-    chartData() {
-      this.initCharts()
     }
   }
 }
 
 </script>
 <style lang="scss" scoped>
-
 .chartBox {
   margin-top: 20px;
 
@@ -388,15 +382,19 @@ export default {
         display: flex;
         flex-flow: row wrap;
         justify-content: space-around;
-        .orange{
+
+        .orange {
           color: rgb(255, 141, 26) !important;
         }
-        .red{
+
+        .red {
           color: rgb(240, 96, 96) !important;
         }
-        .green{
+
+        .green {
           color: rgb(0, 186, 173) !important;
         }
+
         >div {
           width: 35%;
           height: 135px;
@@ -446,9 +444,11 @@ export default {
     margin-top: 16px;
     display: flex;
     flex-flow: row wrap;
-    .el-card{
+
+    .el-card {
       width: 100%;
     }
+
     ::v-deep .el-card__body {
       padding: 0px !important;
     }
@@ -456,6 +456,7 @@ export default {
     .inBox {
       height: 480px;
       width: 100%;
+
       .topBox {
         border-bottom: 1px solid rgba(216, 220, 229, 1);
 
@@ -482,5 +483,4 @@ export default {
     }
   }
 }
-
 </style>

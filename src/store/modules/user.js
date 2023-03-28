@@ -10,7 +10,8 @@ const state = {
   roles: [],
   regionId: '',
   sectionId: '',
-  provinceId: ''
+  provinceId: '',
+  userId: ''
 }
 
 const mutations = {
@@ -37,6 +38,9 @@ const mutations = {
   },
   SET_PROVINCE: (state, provinceId) => {
     state.provinceId = provinceId
+  },
+  SET_USERID: (state, userId) => {
+    state.userId = userId
   }
 }
 
@@ -67,9 +71,10 @@ const actions = {
         }
         data.roles = ["admin"]
         data.avatar = 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif';
-        const { roles, nickname, avatar, provinceId, sectionId, regionId } = data
+        const { roles, nickname, avatar, provinceId, sectionId, regionId, id } = data
         commit('SET_ROLES', roles)
         commit('SET_NAME', nickname)
+        commit('SET_USERID', id)
         commit('SET_AVATAR', avatar)
         commit('SET_REGION', regionId)
         commit('SET_SECTION', sectionId)
@@ -88,6 +93,7 @@ const actions = {
     commit('SET_REGION', '')
     commit('SET_SECTION', '')
     commit('SET_PROVINCE', '')
+    commit('SET_USERID', '')
     removeToken()
     resetRouter()
 

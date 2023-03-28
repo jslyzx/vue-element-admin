@@ -1,0 +1,137 @@
+[
+  {
+    "code": "HOSPITAL_NUM",
+    "name": "附近（三甲）医院数",
+    "enable": false,
+    "upLimit": "",
+    "weight": "",
+    "value": ""
+  },
+  {
+    "code": "MEDICARE_QUA",
+    "name": "医保资质",
+    "enable": false,
+    "weight": "",
+    "children": [
+      {
+        "code": "MEDICARE_STD",
+        "name": "双通道",
+        "enable": false,
+        "upLimit": "",
+        "weight": "",
+        "value": ""
+      },
+      {
+        "code": "MEDICARE_DTP",
+        "name": "DTP",
+        "enable": false,
+        "upLimit": "",
+        "weight": "",
+        "value": ""
+      },
+      {
+        "code": "MEDICARE_MM",
+        "name": "门慢",
+        "enable": false,
+        "upLimit": "",
+        "weight": "",
+        "value": ""
+      },
+      {
+        "code": "MEDICARE_MT",
+        "name": "门特",
+        "enable": false,
+        "upLimit": "",
+        "weight": "",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "code": "COLD_CHAIN_NUM",
+    "name": "冷链设备数",
+    "enable": false,
+    "upLimit": "",
+    "weight": "",
+    "value": ""
+  },
+  {
+    "code": "OPERATING_AREA",
+    "name": "经营面积",
+    "enable": false,
+    "upLimit": "",
+    "weight": "",
+    "value": ""
+  },
+  {
+    "code": "EMPLOYEE_NUM",
+    "name": "在岗人员数",
+    "enable": false,
+    "weight": "",
+    "children": [
+      {
+        "code": "EMPLOYEE_TOTAL_NUM",
+        "name": "总员工数",
+        "enable": false,
+        "upLimit": "",
+        "weight": "",
+        "value": ""
+      },
+      {
+        "code": "EMPLOYEE_LP_NUM",
+        "name": "执业药师数",
+        "enable": false,
+        "upLimit": "",
+        "weight": "",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "code": "REVISIT_TIMELY",
+    "name": "随访及时率",
+    "enable": false,
+    "upLimit": "",
+    "weight": "",
+    "value": ""
+  },
+  {
+    "code": "PATIENT_EDU_TIMES",
+    "name": "患教次数",
+    "enable": false,
+    "upLimit": "",
+    "cycle": "",
+    "isCycle": true,
+    "weight": "",
+    "value": ""
+  },
+  {
+    "code": "SERVE_CSI",
+    "name": "服务满意度",
+    "enable": false,
+    "upLimit": "",
+    "cycle": "",
+    "isCycle": true,
+    "weight": "",
+    "value": ""
+  },
+  {
+    "code": "DATA_COMPLETENESS",
+    "name": "数据完整性",
+    "enable": false,
+    "upLimit": "",
+    "cycle": "",
+    "isCycle": true,
+    "weight": "",
+    "value": ""
+  },
+  {
+    "code": "DRUG_SALES",
+    "name": "药品销量",
+    "enable": false,
+    "weight": "",
+    "cycle": "",
+    "isCycle": true,
+    "children": []
+  }
+]
