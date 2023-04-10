@@ -2,143 +2,173 @@
   {
     "code": "HOSPITAL_NUM",
     "name": "附近（三甲）医院数",
+    "fixedUpLimit": false,
     "enable": false,
     "upLimit": "",
     "weight": "",
-    "value": ""
+    "needCycle": false
   },
   {
     "code": "MEDICARE_QUA",
     "name": "医保资质",
+    "fixedUpLimit": true,
     "enable": false,
-    "fixVal": 100,
+    "upLimit": "100",
     "weight": "",
+    "needCycle": false,
     "children": [
       {
         "code": "MEDICARE_STD",
         "name": "双通道",
+        "fixedUpLimit": true,
         "enable": false,
-        "upLimit": "",
+        "upLimit": "1",
         "weight": "",
-        "value": "",
-        "fixVal": 1
+        "needCycle": false
       },
       {
         "code": "MEDICARE_DTP",
         "name": "DTP",
+        "fixedUpLimit": true,
         "enable": false,
-        "upLimit": "",
+        "upLimit": "1",
         "weight": "",
-        "value": "",
-        "fixVal": 1
+        "needCycle": false
       },
       {
         "code": "MEDICARE_MM",
         "name": "门慢",
+        "fixedUpLimit": true,
         "enable": false,
-        "upLimit": "",
+        "upLimit": "1",
         "weight": "",
-        "value": "",
-        "fixVal": 1
+        "needCycle": false
       },
       {
         "code": "MEDICARE_MT",
         "name": "门特",
+        "fixedUpLimit": true,
         "enable": false,
-        "upLimit": "",
+        "upLimit": "1",
         "weight": "",
-        "value": "",
-        "fixVal": 1
+        "needCycle": false
       }
     ]
   },
   {
     "code": "COLD_CHAIN_NUM",
     "name": "冷链设备数",
+    "fixedUpLimit": false,
     "enable": false,
     "upLimit": "",
     "weight": "",
-    "value": ""
+    "needCycle": false
   },
   {
     "code": "OPERATING_AREA",
     "name": "经营面积",
+    "fixedUpLimit": false,
     "enable": false,
     "upLimit": "",
     "weight": "",
-    "value": ""
+    "needCycle": false
   },
   {
     "code": "EMPLOYEE_NUM",
     "name": "在岗人员数",
+    "fixedUpLimit": true,
     "enable": false,
-    "fixVal": 100,
+    "upLimit": "100",
     "weight": "",
+    "needCycle": false,
     "children": [
       {
         "code": "EMPLOYEE_TOTAL_NUM",
         "name": "总员工数",
+        "fixedUpLimit": false,
         "enable": false,
         "upLimit": "",
         "weight": "",
-        "value": ""
+        "needCycle": false
       },
       {
         "code": "EMPLOYEE_LP_NUM",
         "name": "执业药师数",
+        "fixedUpLimit": false,
         "enable": false,
         "upLimit": "",
         "weight": "",
-        "value": ""
+        "needCycle": false
       }
     ]
   },
   {
     "code": "REVISIT_TIMELY",
     "name": "随访及时率",
+    "fixedUpLimit": false,
     "enable": false,
     "upLimit": "",
     "weight": "",
-    "value": "",
-    "isCycle": true
+    "cycle": "",
+    "needCycle": true
   },
   {
     "code": "PATIENT_EDU_TIMES",
     "name": "患教次数",
+    "fixedUpLimit": false,
     "enable": false,
     "upLimit": "",
     "cycle": "",
-    "isCycle": true,
-    "weight": "",
-    "value": ""
+    "needCycle": true,
+    "weight": ""
   },
   {
     "code": "SERVE_CSI",
     "name": "服务满意度",
+    "fixedUpLimit": false,
     "enable": false,
     "upLimit": "",
     "cycle": "",
-    "isCycle": true,
-    "weight": "",
-    "value": ""
+    "needCycle": true,
+    "weight": ""
   },
   {
     "code": "DATA_COMPLETENESS",
     "name": "数据完整性",
+    "fixedUpLimit": false,
     "enable": false,
     "upLimit": "",
     "cycle": "",
-    "isCycle": true,
-    "weight": "",
-    "value": ""
+    "needCycle": true,
+    "weight": ""
   },
   {
     "code": "DRUG_SALES",
     "name": "药品销量",
+    "fixedUpLimit": true,
     "enable": false,
+    "upLimit": "100",
     "weight": "",
+    "needCycle": true,
     "cycle": "",
-    "isCycle": true,
-    "children": []
+    "children": [
+      {
+        "code": "160",
+        "enable": true,
+        "fixedUpLimit": false,
+        "name": "拓益-特瑞普利单抗注射液-240mg(6ml)/瓶",
+        "needCycle": false,
+        "upLimit": "",
+        "weight": ""
+      }, {
+        "code": "357",
+        "enable": true,
+        "fixedUpLimit": false,
+        "needCycle": false,
+        "name": "拓益-特瑞普利单抗注射液-80mg（2ml）/瓶",
+        "upLimit": "",
+        "weight": ""
+      }
+    ]
   }
 ]

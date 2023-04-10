@@ -2,7 +2,7 @@
   <div>
     <el-dialog
       width="800px"
-      :title="!formData.id ? '新增' : '編輯'"
+      :title="!formData.id ? '新增' : '编辑'"
       :visible.sync="visible"
       :before-close="cancel"
       :close-on-click-modal="false"
@@ -46,7 +46,7 @@
             width="180"
           >
             <template slot-scope="scope">
-              <span v-if="multipleSelection.includes(scope.row)">
+              <span v-if="multipleSelection.includes(scope.row) && !scope.row.fixedUpLimit">
                 <el-input v-model="scope.row.upLimit" maxlength="300" placeholder="请输入" size="mini" />
               </span>
               <span v-else>{{ scope.row.upLimit }}</span>
@@ -68,7 +68,7 @@
             label="周期"
           >
             <template slot-scope="scope">
-              <span v-if="multipleSelection.includes(scope.row)&&(scope.row.cycle!=null)">
+              <span v-if="multipleSelection.includes(scope.row) && (scope.row.needCycle)">
 
                 <el-select v-model="scope.row.cycle" class="full-width-input" clearable size="mini">
                   <el-option
