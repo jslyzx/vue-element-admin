@@ -31,7 +31,7 @@
       <el-table-column type="selection" min-width="5" align="center" />
       <el-table-column prop="name" label="姓名" width="120" min-width="10">
         <template slot-scope="scope">
-          <span class="detail" @click="goDetail(scope.row)">{{ scope.row.name }} </span>
+          <a class="detail" @click="goDetail(scope.row)">{{ scope.row.name }} </a>
         </template>
       </el-table-column>
       <el-table-column prop="phone" label="手机号" width="180" min-width="10" />
@@ -53,6 +53,7 @@
       @pagination="changePagination"
     />
     <add-or-edit ref="edit" @tableCall="queryData" />
+    <add-or-edit ref="add" @tableCall="queryData" />
   </div>
 </template>
 
@@ -105,7 +106,7 @@ export default {
       grid({
         page,
         pageSize,
-        keyword,
+        ...{ name: keyword },
         ...this.moreParams
       }).then(response => {
         const obj = response.data
@@ -116,7 +117,7 @@ export default {
       })
     },
     add() {
-      this.$refs['edit'].showEdit()
+      this.$refs['add'].showEdit()
     },
     edit(row) {
       this.$refs['edit'].showEdit(row)
@@ -151,10 +152,4 @@ export default {
 </script>
 
 <style scoped>
-.detail{
-  color: aquamarine;
-}
-.detail:hover{
-  cursor: pointer;
-}
 </style>

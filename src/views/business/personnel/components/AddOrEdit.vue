@@ -2,7 +2,7 @@
   <div>
     <el-dialog
       width="800px"
-      :title="!formData.id ? '新增' : '編輯'"
+      :title="!formData.id ? '新增' : '编辑'"
       :visible.sync="visible"
       :before-close="cancel"
       :close-on-click-modal="false"
@@ -47,7 +47,7 @@
                   :key="index"
                   :label="item.value"
                   :disabled="item.disabled"
-                  style="{display: inline}"
+                  style="display: inline"
                 >{{ item.label }}</el-radio>
               </el-radio-group>
             </el-form-item>

@@ -7,7 +7,7 @@ const evalRouter = {
   name: 'eval',
   meta: {
     title: '评估方案',
-    icon: 'eval'
+    icon: 'wenjianjia'
   },
   children: [
     {

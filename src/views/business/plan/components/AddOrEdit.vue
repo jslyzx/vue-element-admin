@@ -2,7 +2,7 @@
   <div>
     <el-dialog
       width="800px"
-      :title="!formData.id ? '新增' : '編輯'"
+      :title="!formData.id ? '新增' : '编辑'"
       :visible.sync="visible"
       :before-close="cancel"
       :close-on-click-modal="false"
@@ -51,7 +51,6 @@
               :key="index"
               :label="item.label"
               :value="item.value"
-              :disabled="item.disabled"
             />
           </el-select>
         </el-form-item>
@@ -64,7 +63,6 @@
                   :key="index"
                   :label="item.label"
                   :value="item.value"
-                  :disabled="item.disabled"
                 />
               </el-select>
             </el-form-item>
@@ -73,7 +71,8 @@
             <el-form-item v-if="formData.cycle==0" label="周期日" prop="cycleDay">
               <el-date-picker
                 v-model="formData.cycleDay"
-                value-format="yyyy-MM-dd"
+                value-format="MM-dd"
+                format="MM-dd"
                 align="right"
                 type="date"
                 placeholder="选择日期"
@@ -98,8 +97,8 @@
                 <el-option
                   v-for="(item, index) in weekOptions"
                   :key="index"
-                  :label="item"
-                  :value="item"
+                  :label="item.label"
+                  :value="item.value"
                 />
               </el-select>
             </el-form-item>
@@ -146,8 +145,32 @@ export default {
       shopIdsOptions: [],
       checkDataOptions: [],
       monthOptions: [],
-      weekOptions: ['一', '二', '三', '四', '五', '六', '日'],
+      weekOptions: [{
+        value: '1',
+        label: '周一'
+      },{
+        value: '2',
+        label: '周二'
+      },{
+        value: '3',
+        label: '周三'
+      },{
+        value: '4',
+        label: '周四'
+      },{
+        value: '5',
+        label: '周五'
+      },{
+        value: '6',
+        label: '周六'
+      },{
+        value: '7',
+        label: '周日'
+      }],
       cycleOptions: [{
+        'value': 0,
+        'label': '每年'
+      }, {
         'label': '每月',
         'value': 1
       }, {
@@ -156,9 +179,6 @@ export default {
       }, {
         'label': '每天',
         'value': 3
-      }, {
-        'value': 0,
-        'label': '每年'
       }]
     }
   },
@@ -167,7 +187,7 @@ export default {
   created() { },
   mounted() {
     // this.getRegionList
-    for (let i = 1; i < 29; i++) {
+    for (let i = 1; i < 31; i++) {
       this.monthOptions.push(i)
     }
     this.monthOptions.push('最后一天')
@@ -256,7 +276,6 @@ export default {
             'checkName': v.label
           }
         })
-        console.log(checkData)
         const submitData = {
           ...this.formData,
           checkData: checkDataList
@@ -264,7 +283,7 @@ export default {
         save(submitData).then(res => {
           if (res.code === 0) {
             this.$message({
-              message: res.msg,
+              message: '提交成功',
               type: 'success'
             })
             this.visible = false

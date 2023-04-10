@@ -15,6 +15,7 @@ export function save(data) {
     data
   })
 }
+
 export function find(data) {
   return request({
     url: 'demo/eval/find',
@@ -30,6 +31,7 @@ export function enable(data) {
     params: data
   })
 }
+
 export function disable(data) {
   return request({
     url: 'demo/eval/disable',
@@ -37,6 +39,7 @@ export function disable(data) {
     params: data
   })
 }
+
 export function cancel(data) {
   return request({
     url: 'demo/eval/delete',
@@ -44,5 +47,4 @@ export function cancel(data) {
     params: data
   })
 }
-
 

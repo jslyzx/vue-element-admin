@@ -81,7 +81,7 @@
             </div>
           </div>
         </el-card>
-        <el-card class="mr20">
+        <el-card class="ml20">
           <div class="inBox">
             <div class="topBox">
               <img
@@ -351,7 +351,7 @@ export default {
         margin-right: 12px;
       }
     }
-    .mr20 {
+    .ml20 {
       margin-left: 20px;
     }
   }

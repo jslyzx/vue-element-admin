@@ -7,7 +7,7 @@ const businessRouter = {
   name: 'business',
   meta: {
     title: '商务管理',
-    icon: 'business'
+    icon: 'wenjianjia'
   },
   children: [
     {

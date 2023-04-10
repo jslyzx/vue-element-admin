@@ -8,7 +8,7 @@
         </el-form-item>
       </div>
       <el-form-item>
-        <el-input v-model="keyword" placeholder="任务名称" clearable @keyup.enter.native="queryData" />
+        <el-input v-model="keyword" placeholder="药房名称" clearable @keyup.enter.native="queryData" />
         <!-- clearable：是否可清空    @keyup.enter.native 回车触发 -->
       </el-form-item>
       <el-form-item>
@@ -103,7 +103,7 @@ export default {
       grid({
         page,
         pageSize,
-        keyword,
+        ...{ name: keyword },
         ...this.moreParams
       }).then(response => {
         const obj = response.data

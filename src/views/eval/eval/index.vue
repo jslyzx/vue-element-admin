@@ -45,6 +45,7 @@
       :limit.sync="pagination.pageSize"
       @pagination="changePagination"
     />
+    <add-or-edit ref="add" @tableCall="queryData" />
     <add-or-edit ref="edit" @tableCall="queryData" />
   </div>
 </template>
@@ -96,7 +97,7 @@ export default {
       grid({
         page,
         pageSize,
-        keyword,
+        ...{ name: keyword },
         ...this.moreParams
       }).then(response => {
         const obj = response.data
@@ -107,7 +108,7 @@ export default {
       })
     },
     add() {
-      this.$refs['edit'].showEdit()
+      this.$refs['add'].showEdit()
     },
     edit(row) {
       this.$refs['edit'].showEdit(row)

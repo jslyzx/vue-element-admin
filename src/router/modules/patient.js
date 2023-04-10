@@ -7,7 +7,7 @@ const patientRouter = {
   name: 'Patient',
   meta: {
     title: '患者',
-    icon: 'person'
+    icon: 'wenjianjia'
   },
   children: [
     {

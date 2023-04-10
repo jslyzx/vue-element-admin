@@ -32,7 +32,11 @@
       <el-table-column prop="name" label="任务名称" min-width="10" />
       <el-table-column prop="startDate" label="任务开始时间" width="180" min-width="10" />
       <el-table-column prop="endDate" label="任务结束时间" width="180" min-width="10" />
-      <el-table-column prop="state" label="状态" width="180" min-width="10" />
+      <el-table-column prop="state" label="状态" width="180" min-width="10">
+        <template slot-scope="{row}">
+          {{ row.state | stateFilter }}
+        </template>
+      </el-table-column>
       <el-table-column prop="createTime" label="创建时间" width="180" min-width="10" />
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -49,6 +53,7 @@
       :limit.sync="pagination.pageSize"
       @pagination="changePagination"
     />
+    <add-or-edit ref="add" @tableCall="queryData" />
     <add-or-edit ref="edit" @tableCall="queryData" />
   </div>
 </template>
@@ -58,11 +63,6 @@
 import AddOrEdit from './components/AddOrEdit'
 import { grid, cancel, disable, enable } from '@/api/task'
 // import { list } from '@/api/test' // 引入请求
-
-// | 0      | 待执行 | 新建待执行           |
-// | 1      | 已签到 | 完成签到             |
-// | 2      | 已执行 | 完成盘库及检查项填写 |
-// | 9      | 已取消 |                      |
 
 export default {
   name: 'BusinessTask',
@@ -86,6 +86,26 @@ export default {
   async created() {
     this.queryData()
   },
+  filters: {
+    stateFilter(state) {
+      let re = ''
+      switch(state){
+        case 0:
+          re = '待执行'
+          break
+        case 1:
+          re = '已签到'
+          break
+        case 2:
+          re = '已执行'
+          break
+        case 9:
+          re = '已取消'
+          break
+      }
+      return re
+    }
+  },
   methods: {
     queryReset() {
       this.keyword = ''
@@ -107,7 +127,7 @@ export default {
       grid({
         page,
         pageSize,
-        keyword,
+        ...{ name: keyword },
         ...this.moreParams
       }).then(response => {
         const obj = response.data
@@ -118,31 +138,10 @@ export default {
       })
     },
     add() {
-      this.$refs['edit'].showEdit()
+      this.$refs['add'].showEdit()
     },
     edit(row) {
       this.$refs['edit'].showEdit(row)
-    },
-    changeSwitch(row) {
-      if (row.inUse === 1) {
-        enable({ id: row.id }).then(res => {
-          this.$message({
-            message: res.msg,
-            type: 'success'
-          })
-          this.queryReset()
-        })
-      } else {
-        disable({ id: row.id }).then(res => {
-          this.$message({
-            message: res.msg,
-            type: 'success'
-          })
-          this.queryReset()
-        }).catch({
-
-        })
-      }
     },
     hdelete(row) {
       console.log(row)

@@ -11,6 +11,7 @@
     "code": "MEDICARE_QUA",
     "name": "医保资质",
     "enable": false,
+    "fixVal": 100,
     "weight": "",
     "children": [
       {
@@ -19,7 +20,8 @@
         "enable": false,
         "upLimit": "",
         "weight": "",
-        "value": ""
+        "value": "",
+        "fixVal": 1
       },
       {
         "code": "MEDICARE_DTP",
@@ -27,7 +29,8 @@
         "enable": false,
         "upLimit": "",
         "weight": "",
-        "value": ""
+        "value": "",
+        "fixVal": 1
       },
       {
         "code": "MEDICARE_MM",
@@ -35,7 +38,8 @@
         "enable": false,
         "upLimit": "",
         "weight": "",
-        "value": ""
+        "value": "",
+        "fixVal": 1
       },
       {
         "code": "MEDICARE_MT",
@@ -43,7 +47,8 @@
         "enable": false,
         "upLimit": "",
         "weight": "",
-        "value": ""
+        "value": "",
+        "fixVal": 1
       }
     ]
   },
@@ -67,6 +72,7 @@
     "code": "EMPLOYEE_NUM",
     "name": "在岗人员数",
     "enable": false,
+    "fixVal": 100,
     "weight": "",
     "children": [
       {
@@ -93,7 +99,8 @@
     "enable": false,
     "upLimit": "",
     "weight": "",
-    "value": ""
+    "value": "",
+    "isCycle": true
   },
   {
     "code": "PATIENT_EDU_TIMES",

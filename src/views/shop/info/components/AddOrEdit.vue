@@ -46,8 +46,15 @@
             <el-form-item label="经营面积（m2）" prop="operatingArea">
               <el-input v-model="formData.operatingArea" type="text" clearable />
             </el-form-item>
-            <el-form-item label="城市坐标" prop="cityAxis">
-              <el-input v-model="formData.cityAxis" type="text" clearable />
+            <el-form-item label="评估方案" prop="schemeId">
+              <el-select v-model="formData.schemeId" class="full-width-input" clearable>
+                <el-option
+                  v-for="(item, index) in evalList"
+                  :key="index"
+                  :label="item.name"
+                  :value="item.id"
+                />
+              </el-select>
             </el-form-item>
             <el-form-item label="是否DTP药房" prop="isDtp">
               <el-radio-group v-model="formData.isDtp">
@@ -56,7 +63,7 @@
                   :key="index"
                   :label="item.value"
                   :disabled="item.disabled"
-                  style="{display: inline}"
+                  style="display: inline"
                 >{{ item.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
@@ -67,7 +74,7 @@
                   :key="index"
                   :label="item.value"
                   :disabled="item.disabled"
-                  style="{display: inline}"
+                  style="display: inline"
                 >{{ item.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
@@ -88,7 +95,7 @@
             <el-form-item label="冷链设备数" prop="coldChainNum">
               <el-input v-model="formData.coldChainNum" type="text" clearable />
             </el-form-item>
-            <el-form-item label="经验范围" prop="businessScope">
+            <el-form-item label="经营范围" prop="businessScope">
               <el-input v-model="formData.businessScope" type="text" clearable />
             </el-form-item>
             <el-form-item label="门店坐标" prop="axis">
@@ -101,7 +108,7 @@
                   :key="index"
                   :label="item.value"
                   :disabled="item.disabled"
-                  style="{display: inline}"
+                  style="display: inline"
                 >{{ item.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
@@ -112,7 +119,7 @@
                   :key="index"
                   :label="item.value"
                   :disabled="item.disabled"
-                  style="{display: inline}"
+                  style="display: inline"
                 >{{ item.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
@@ -130,6 +137,7 @@
 <script>
 import { save, find } from '@/api/shop'
 import { fetchAreaSubList, fetchCityList } from '@/api/system'
+import { grid } from '@/api/eval'
 export default {
   name: 'AddOrEdit',
   data() {
@@ -149,7 +157,6 @@ export default {
         commerceAddress: '',
         functionalArea: '',
         operatingArea: '',
-        cityAxis: '',
         isDtp: '',
         isMt: '',
         address: '',
@@ -160,12 +167,17 @@ export default {
         businessScope: '',
         axis: '',
         isMm: '',
-        isStd: ''
+        isStd: '',
+        schemeId: ''
       },
       rules: {
         name: [{
           required: true,
           message: '字段值不可为空'
+        }],
+        schemeId: [{
+          required: true,
+          message: '请选择'
         }],
         lpNum: [{
           pattern: /^\d+(\.\d+)?$/,
@@ -220,12 +232,15 @@ export default {
       }, {
         'value': 1,
         'label': '是'
-      }]
+      }],
+      evalList: []
     }
   },
   computed: {},
   watch: {},
-  created() { },
+  created() {
+    this.getEvalList()
+  },
   mounted() {
     // this.getRegionList
   },
@@ -270,6 +285,10 @@ export default {
         this.formData = this.$options.data().formData
       }
       this.visible = true
+    },
+    async getEvalList() {
+      const res = await grid({ page: 1, pageSize: 100 })
+      this.evalList = res.data.data
     },
     async detail(id) {
       const res = await find({ id })

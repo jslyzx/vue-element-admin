@@ -40,7 +40,7 @@ export function disable(data) {
 export function cancel(data) {
   return request({
     url: 'demo/task/delete',
-    method: 'post',
+    method: 'delete',
     params: data
   })
 }

@@ -8,7 +8,7 @@
         </el-form-item>
       </div>
       <el-form-item>
-        <el-input v-model="keyword" placeholder="任务名称" clearable @keyup.enter.native="queryData" />
+        <el-input v-model="keyword" placeholder="检查项名称" clearable @keyup.enter.native="queryData" />
         <!-- clearable：是否可清空    @keyup.enter.native 回车触发 -->
       </el-form-item>
       <el-form-item>
@@ -59,6 +59,7 @@
       :limit.sync="pagination.pageSize"
       @pagination="changePagination"
     />
+    <add-or-edit ref="add" @tableCall="queryData" />
     <add-or-edit ref="edit" @tableCall="queryData" />
   </div>
 </template>
@@ -110,7 +111,7 @@ export default {
       grid({
         page,
         pageSize,
-        keyword,
+        ...{ name: keyword },
         ...this.moreParams
       }).then(response => {
         const obj = response.data
@@ -121,7 +122,7 @@ export default {
       })
     },
     add() {
-      this.$refs['edit'].showEdit()
+      this.$refs['add'].showEdit()
     },
     edit(row) {
       this.$refs['edit'].showEdit(row)
@@ -130,7 +131,7 @@ export default {
       if (row.inUse === 1) {
         enable(row).then(res => {
           this.$message({
-            message: res.msg,
+            message: '启用成功',
             type: 'success'
           })
           this.queryReset()
@@ -138,7 +139,7 @@ export default {
       } else {
         disable(row).then(res => {
           this.$message({
-            message: res.msg,
+            message: '停用成功',
             type: 'success'
           })
           this.queryReset()

@@ -7,7 +7,7 @@ const shopRouter = {
   name: 'shop',
   meta: {
     title: '药房管理',
-    icon: 'shop'
+    icon: 'wenjianjia'
   },
   children: [
     {

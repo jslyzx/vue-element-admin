@@ -7,7 +7,7 @@ const saleRouter = {
   name: 'Sale',
   meta: {
     title: '销售',
-    icon: 'claim'
+    icon: 'wenjianjia'
   },
   children: [
     {

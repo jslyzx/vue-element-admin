@@ -8,7 +8,7 @@
         </el-form-item>
       </div>
       <el-form-item>
-        <el-input v-model="keyword" placeholder="任务名称" clearable @keyup.enter.native="queryData" />
+        <el-input v-model="keyword" placeholder="计划名称" clearable @keyup.enter.native="queryData" />
         <!-- clearable：是否可清空    @keyup.enter.native 回车触发 -->
       </el-form-item>
       <el-form-item>
@@ -30,8 +30,12 @@
       <!-- selection-change	当选择项发生变化时会触发该事件 -->
       <el-table-column type="selection" min-width="5" align="center" />
       <el-table-column prop="name" label="计划名称" min-width="10" />
-      <el-table-column prop="phone" label="计划周期" width="180" min-width="10" />
-      <el-table-column prop="gender" label="周期日" width="180" min-width="10" />
+      <el-table-column label="计划周期" width="180" min-width="10">
+        <template slot-scope="{row}">
+          {{ row.cycle | cycleFilter }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="cycleDay" label="周期日" width="180" min-width="10" />
       <el-table-column prop="inUse" label="状态" width="180" min-width="10">
         <template slot-scope="scope">
           <el-switch
@@ -62,6 +66,7 @@
       :limit.sync="pagination.pageSize"
       @pagination="changePagination"
     />
+    <add-or-edit ref="add" @tableCall="queryData" />
     <add-or-edit ref="edit" @tableCall="queryData" />
   </div>
 </template>
@@ -117,7 +122,7 @@ export default {
       grid({
         page,
         pageSize,
-        keyword,
+        ...{ name: keyword },
         ...this.moreParams
       }).then(response => {
         const obj = response.data
@@ -128,7 +133,7 @@ export default {
       })
     },
     add() {
-      this.$refs['edit'].showEdit()
+      this.$refs['add'].showEdit()
     },
     edit(row) {
       this.$refs['edit'].showEdit(row)
@@ -137,7 +142,7 @@ export default {
       if (row.inUse === 1) {
         enable({ id: row.id }).then(res => {
           this.$message({
-            message: res.msg,
+            message: '启用成功',
             type: 'success'
           })
           this.queryReset()
@@ -145,7 +150,7 @@ export default {
       } else {
         disable({ id: row.id }).then(res => {
           this.$message({
-            message: res.msg,
+            message: '停用成功',
             type: 'success'
           })
           this.queryReset()
@@ -170,6 +175,12 @@ export default {
         .catch(() => {
 
         })
+    }
+  },
+  filters: {
+    cycleFilter(type) {
+      const map = ['每年', '每月', '每周', '每天']
+      return map[type]
     }
   }
 }
