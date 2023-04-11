@@ -1,6 +1,18 @@
 <template>
   <div class="body">
-    <div id="container" class="chart-part" style="height: 100%" />
+    <div class="inner">
+      <div class="head clearfix">
+        <div class="title fl">授权药房分布</div>
+        <div class="fr">
+          <el-radio-group v-model="type" size="small">
+            <el-radio-button label="总数" ></el-radio-button>
+            <el-radio-button label="DTP药房"></el-radio-button>
+            <el-radio-button label="关联药房"></el-radio-button>
+          </el-radio-group>
+        </div>
+      </div>
+      <div id="container" class="chart-part" style="height: calc(100% - 40px)" />
+      </div>
   </div>
 </template>
 <script>
@@ -10,6 +22,7 @@ export default {
   name: 'ShopDistributed',
   data() {
     return {
+      type: '总数',
       map: {}
     }
   },
@@ -68,147 +81,176 @@ export default {
         {
           'name': '南京德众堂大药房有限公司',
           'longitude': 118.7642593383789,
-          'latitude': 32.043853759765628
+          'latitude': 32.043853759765628,
+          'type': 2
         },
         {
           'name': '苏州德轩堂药房有限公司',
           'longitude': 120.54890441894531,
-          'latitude': 31.4341983795166
+          'latitude': 31.4341983795166,
+          'type': 2
         },
         {
           'name': '徐州延顺堂药房有限公司',
           'longitude': 117.17539978027344,
-          'latitude': 34.26227569580078
+          'latitude': 34.26227569580078,
+          'type': 2
         },
         {
           'name': '淮安德轩堂药房有限公司',
           'longitude': 119.01316833496094,
-          'latitude': 33.62675094604492
+          'latitude': 33.62675094604492,
+          'type': 2
         },
         {
           'name': '常州德轩堂药房有限公司',
           'longitude': 119.959716796875,
-          'latitude': 31.78243637084961
+          'latitude': 31.78243637084961,
+          'type': 2
         },
         {
           'name': '南京延顺堂大药房有限公司',
           'longitude': 118.78749084472656,
-          'latitude': 32.064022064208987
+          'latitude': 32.064022064208987,
+          'type': 2
         },
         {
           'name': '无锡德轩堂药房有限公司',
           'longitude': 120.31443786621094,
-          'latitude': 31.547887802124025
+          'latitude': 31.547887802124025,
+          'type': 2
         },
         {
           'name': '扬州德轩堂药房有限公司',
           'longitude': 119.4072265625,
-          'latitude': 32.3927001953125
+          'latitude': 32.3927001953125,
+          'type': 2
         },
         {
           'name': '盐城德轩堂药房有限公司',
           'longitude': 120.1700668334961,
-          'latitude': 33.38267517089844
+          'latitude': 33.38267517089844,
+          'type': 1
         },
         {
           'name': '南通德轩堂药房有限公司',
           'longitude': 120.86742401123047,
-          'latitude': 32.00920867919922
+          'latitude': 32.00920867919922,
+          'type': 1
         },
         {
           'name': '江苏德轩堂医药（集团）有限公司江苏省肿瘤医院药房',
           'longitude': 118.79000091552735,
-          'latitude': 32.06999969482422
+          'latitude': 32.06999969482422,
+          'type': 1
         },
         {
           'name': '连云港德益康连锁大药房',
           'longitude': 119.16741943359375,
-          'latitude': 34.60169982910156
+          'latitude': 34.60169982910156,
+          'type': 1
         },
         {
           'name': '广州德轩堂药房有限公司',
           'longitude': 113.29737854003906,
-          'latitude': 23.12896156311035
+          'latitude': 23.12896156311035,
+          'type': 1
         },
         {
           'name': '重庆德轩堂药房有限公司',
           'longitude': 106.56463623046875,
-          'latitude': 29.520980834960939
+          'latitude': 29.520980834960939,
+          'type': 1
         },
         {
           'name': '云南德轩堂药业有限公司',
           'longitude': 102.69091796875,
-          'latitude': 25.04450225830078
+          'latitude': 25.04450225830078,
+          'type': 1
         },
         {
           'name': '杭州德轩堂众康药房有限公司',
           'longitude': 120.18572235107422,
-          'latitude': 30.260610580444337
+          'latitude': 30.260610580444337,
+          'type': 1
         },
         {
           'name': '合肥德轩堂药房有限公司',
           'longitude': 117.30792236328125,
-          'latitude': 31.793212890625
+          'latitude': 31.793212890625,
+          'type': 1
         },
         {
           'name': '石家庄宁益德轩堂药房有限公司',
           'longitude': 114.48253631591797,
-          'latitude': 38.06251525878906
+          'latitude': 38.06251525878906,
+          'type': 1
         },
         {
           'name': '福州德轩堂医药有限公司',
           'longitude': 119.30177307128906,
-          'latitude': 26.07280731201172
+          'latitude': 26.07280731201172,
+          'type': 1
         },
         {
           'name': '深圳德轩堂药房有限公司',
           'longitude': 114.09757232666016,
-          'latitude': 22.561246871948243
+          'latitude': 22.561246871948243,
+          'type': 1
         },
         {
           'name': '长沙德轩堂药房有限公司',
           'longitude': 112.9884033203125,
-          'latitude': 28.216472625732423
+          'latitude': 28.216472625732423,
+          'type': 1
         },
         {
           'name': '天津德轩堂药房有限公司',
           'longitude': 117.17594909667969,
-          'latitude': 39.06995391845703
+          'latitude': 39.06995391845703,
+          'type': 1
         },
         {
           'name': '济南德轩堂药房有限公司',
           'longitude': 116.99533081054688,
-          'latitude': 36.65618133544922
+          'latitude': 36.65618133544922,
+          'type': 1
         },
         {
           'name': '河南德轩堂药房有限公司',
           'longitude': 113.70039367675781,
-          'latitude': 34.75701141357422
+          'latitude': 34.75701141357422,
+          'type': 1
         },
         {
           'name': '成都德轩堂药房有限公司',
           'longitude': 104.0665512084961,
-          'latitude': 30.628673553466798
+          'latitude': 30.628673553466798,
+          'type': 1
         },
         {
           'name': '宿迁德轩堂药房有限公司',
           'longitude': 118.29732513427735,
-          'latitude': 33.94375991821289
+          'latitude': 33.94375991821289,
+          'type': 1
         },
         {
           'name': '江苏德轩堂医药（集团）有限公司南京市第二医院药房',
           'longitude': 118.7688980102539,
-          'latitude': 32.08869934082031
+          'latitude': 32.08869934082031,
+          'type': 1
         },
         {
           'name': '泰州德轩堂药房有限公司',
           'longitude': 119.92945861816406,
-          'latitude': 32.47151565551758
+          'latitude': 32.47151565551758,
+          'type': 1
         },
         {
           'name': '苏州延顺堂药房有限公司',
           'longitude': 120.61083984375,
-          'latitude': 31.34779930114746
+          'latitude': 31.34779930114746,
+          'type': 2
         }
       ]
       // 输入经纬度和名称，标记
@@ -221,9 +263,14 @@ export default {
         // 创建标记
         var marker = new BMap.Marker(pt)
         // 定义文本内容
-
+        var opts = {
+          width: 250,
+          height: 5,
+          title: '',
+          message: ''
+        }
         // 添加显示文本
-        var infoWindow = new BMap.InfoWindow("<p style='font-size:14px;'>" + name + '</p>')
+        var infoWindow = new BMap.InfoWindow(name, opts)
 
         // 添加鼠标放置事件
         marker.addEventListener('mouseover', function () { this.openInfoWindow(infoWindow) })
@@ -239,63 +286,9 @@ export default {
       pointList.forEach(item => {
         bindPoint(item.longitude, item.latitude, item.name, item.type)
       })
-      // bindPoint(116.493895, 29.859667, '大光村')
-      // bindPoint(121.386816, 29.859667, '李广村')
-      // bindPoint(121.286816, 29.859667, '李广村')
-      // bindPoint(121.186816, 29.859667, '李广村')
-      // bindPoint(121.086816, 29.859667, '李广村')
-
-      // var lon
-      // var lat
-      // var randomPoint = 50000
-      // // 循环生成randomPoint个点
-      // for (var k = 0; k < randomPoint; k++) {
-      //   lon = randomNum(115.1, 115.3)
-      //   lat = randomNum(35.7, 36.0)
-      //   console.log(lon + ', ' + lat)
-      //   bindPoint(lon, lat, k)
-      // }
       // 调用API聚合函数将标记数组显示在地图上
       var markerClusterer = new BMapLib.MarkerClusterer(map, { markers: markers1 })
       var markerClusterer1 = new BMapLib.MarkerClusterer(map, { markers: markers2 })
-    },
-    initmark() {
-      var markers = []
-      var pt = null
-      var i = 0
-      var w = [{
-        p: new BMap.Point(116.480945, 39.953416)
-      }, {
-        p: new BMap.Point(116.407503, 39.984104)
-      }, {
-        p: new BMap.Point(116.497502, 39.908802)
-      }, {
-        p: new BMap.Point(116.373514, 40.040417)
-      }, {
-        p: new BMap.Point(116.380945, 39.953416)
-      }, {
-        p: new BMap.Point(116.307503, 39.984104)
-      }, {
-        p: new BMap.Point(116.397502, 39.908802)
-      }, {
-        p: new BMap.Point(98.407503, 39.984104)
-      }, {
-        p: new BMap.Point(98.407503, 39.984104)
-      }, {
-        p: new BMap.Point(118.588703, 31.575689)
-      }, {
-        p: new BMap.Point(119.01874, 32.588932)
-      }]
-      for (; i < w.length; i++) {
-        pt = new BMap.Point(Math.random() * 30 + 85, Math.random() * 20 + 21)
-        pt = w[i].p
-        markers.push(new BMap.Marker(pt))
-      }
-      console.log(markers)
-      // 最简单的用法，生成一个marker数组，然后调用markerClusterer类即可。
-      var markerClusterer = new BMapLib.MarkerClusterer(map, {
-        markers: markers
-      })
     },
     provinceArea(cityName) {
       var bdary = new BMap.Boundary()
@@ -454,10 +447,77 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.chartBox {
-  margin-top: 16px;
-  background-color: #fff;
-  padding: 20px;
-  height: calc(100% - 130px);
-}
+  .inner {
+    height: calc(100vh - 110px);
+    background: #fff;
+    padding: 10px;
+    .head {
+      margin-bottom: 10px;
+      .title {
+        line-height: 32px;
+        height: 32px;
+      }
+    }
+    .chartBox {
+      margin-top: 16px;
+      background-color: #fff;
+      padding: 20px;
+      height: calc(100% - 40px);
+    }
+  }
+  ::v-deep .BMap_bubble_title {
+    color:white;
+    font-size:13px;
+    font-weight:bold;
+    text-align:left;
+    padding-left:5px;
+    padding-top:5px;
+    border-bottom:1px solid gray;
+    background-color:#0066b3;
+  }
+  ::v-deep .BMap_bubble_content {
+    background-color:white;
+    padding-left:5px;
+    padding-top:5px;
+    padding-bottom:10px;
+  }
+  ::v-deep .BMap_pop div:nth-child(9) {
+    top:75px !important;
+    border-radius:7px;
+  }
+  
+  ::v-deep .BMap_pop img {
+    top:85px !important;
+    left:250px !important;
+  }
+  ::v-deep .BMap_top {
+    display:none;
+  }
+  ::v-deep .BMap_bottom {
+    display:none;
+  }
+  ::v-deep .BMap_center {
+    display:none;
+  }
+  ::v-deep .BMap_pop div:nth-child(1) div {
+    display:none;
+  }
+  ::v-deep .BMap_pop div:nth-child(3) {
+    display:none;
+  }
+  ::v-deep .BMap_pop div:nth-child(4) {
+    display:none;
+  }
+  ::v-deep .BMap_pop div:nth-child(5) {
+    display:none;
+  }
+  ::v-deep .BMap_pop div:nth-child(6) {
+    display:none;
+  }
+  ::v-deep .BMap_pop div:nth-child(7) {
+    display:none;
+  }
+  ::v-deep .BMap_pop div:nth-child(8) {
+    display:none;
+  }
 </style>

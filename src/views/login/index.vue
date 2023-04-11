@@ -4,7 +4,7 @@
       <div class="leftBox"></div>
       <div class="rightBox">
         <img style="margin-top: 120px;height: 100px;" src="@/assets/logo2.png">
-        <div style="font-size: 28px; font-weight: 700; color: #354C57; margin-top: 30px">欢迎登陆工业数据采集系统</div>
+        <div style="font-size: 28px; font-weight: 700; color: #354C57; margin-top: 30px">欢迎登陆零售监管分析系统</div>
         <el-form
           ref="loginForm"
           :model="loginForm"
