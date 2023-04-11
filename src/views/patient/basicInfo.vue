@@ -6,31 +6,30 @@
         <div class="display">
           <el-card class="s_box">
             <div>
-              <div class="topBox">
-                <div>基本信息</div>
-              </div>
               <div class="bottomBox">
-                <div>
+                <img src="@/assets/shop_images/shop.jpg" />
+                <div style="margin-left: 30px;" :style="shopInfo.isDtp ? 'margin-top: -15px;' : ''">
                   <div>
                     <span class="title">{{shopInfo.name}}</span>
-                    <el-tag type="" effect="plain" style="margin-right:9px">
-                      {{shopInfo.provinceName}}
-                    </el-tag>
-                    <el-tag type="success" effect="plain" style="margin-right:9px">
-                      特药定点
-                    </el-tag>
-                    <el-tag type="warning" effect="plain">
-                      医保定点
-                    </el-tag>
+                    <img v-if="shopInfo.isDtp" src="@/assets/shop_images/dtp.png" style="width: 100px;position: relative;top: 14px;">
+                    <el-tag color="#F0933C" style="border-radius: 20px; margin-right: 10px; color: #fff;">{{shopInfo.regionName}}</el-tag>
                   </div>
                   <div class="content">
-                    <el-descriptions :column="2">
-                      <el-descriptions-item label="授权商品" :span="24">拓益</el-descriptions-item>
-                      <el-descriptions-item label="开办时间"><span>{{shopInfo.createTime | parseTime('{y}-{m}-{d}')}}</span>
+                    <el-descriptions :column="2" :colon="false">
+                      <el-descriptions-item>
+                        <span><img style="position: relative; top: 7px; height: 25px; width: 25px;" src="@/assets/shop_images/dh.png" /></span><span style="margin-left:5px;">{{shopInfo.phone}}</span>
                       </el-descriptions-item>
-                      <el-descriptions-item label="电话"><span>{{shopInfo.phone}}</span><span style="margin-left:10px"><img src="@/assets/patient_images/分组 1.png" /></span>
+                      <el-descriptions-item label="医保资质：">
+                        <el-tag color="#EDFDF9" style="border-radius: 20px; margin-right: 10px; color: #56B9AF;" size="small" v-if="shopInfo.isStd" effect="plain">双通道定点</el-tag>
+                        <el-tag color="#EDF5FD" style="border-radius: 20px; margin-right: 10px; color: #599BF5;" size="small" v-if="shopInfo.isMm" effect="plain">门慢</el-tag>
+                        <el-tag color="#5497F4" style="border-radius: 20px; margin-right: 10px; color: #fff;" size="small" v-if="shopInfo.isMt" effect="plain">门特</el-tag>
                       </el-descriptions-item>
-                      <el-descriptions-item label="药房地址">{{shopInfo.address}}</el-descriptions-item>
+                      <el-descriptions-item style="visibility: hidden;"></el-descriptions-item>
+                      <el-descriptions-item label="创新支付："><img style="position: relative;top: -3px;" src="@/assets/shop_images/yb.png"><img style="position: relative;top: -4px;" src="@/assets/shop_images/zf.png"></el-descriptions-item>
+                      <el-descriptions-item label="开办时间："><span>{{shopInfo.createTime | parseTime('{y}-{m}-{d}')}}</span></el-descriptions-item>
+                      <el-descriptions-item label="授权药品：">拓益</el-descriptions-item>
+                      <el-descriptions-item label="药房地址：">{{shopInfo.address}}</el-descriptions-item>
+                      <el-descriptions-item label="慈善定点：">拓益</el-descriptions-item>
                       <!-- <el-descriptions-item label="所属">
                         江苏省德轩堂（集团）有限公司
                       </el-descriptions-item> -->
@@ -38,7 +37,11 @@
                   </div>
                 </div>
                 <div style="margin:-10px 20px 0 0">
-                  <img src="@/assets/patient_images/图层 3.png.png" />
+                  <!-- <img v-if="shopInfo.infoRate > 90" src="@/assets/shop_images/levelS.png" />
+                  <img v-if="shopInfo.infoRate > 90" src="@/assets/shop_images/levelA.png" />
+                  <img v-if="shopInfo.infoRate > 90" src="@/assets/shop_images/levelB.png" />
+                  <img v-if="shopInfo.infoRate > 90" src="@/assets/shop_images/levelC.png" />
+                  <img v-if="shopInfo.infoRate > 90" src="@/assets/shop_images/levelD.png" /> -->
                 </div>
               </div>
             </div>
@@ -46,7 +49,7 @@
           <el-card class="s_box" style="margin-top:29px">
             <div>
               <div class="topBox">
-                <div>运营信息</div>
+                <div>动态运营分析</div>
               </div>
               <div class="bottomBox2">
                 <div class="m_box">
@@ -99,10 +102,19 @@
           <el-card>
             <div class="inBox">
               <div class="topBox">
-                <h3 style="margin-top:1px">月度销售统计</h3>
+                <h3 style="margin-top:1px">静态标准</h3>
               </div>
               <div>
-                <div id="chartBox" ref="chartBox" class="inChartBox" />
+                <!-- <div id="chartBox" ref="chartBox" class="inChartBox" /> -->
+                <ul>
+                  <li style="width: 30%;"><span>经营面积：</span>300mi</li>
+                  <li style="width: 30%;"><span>商业位置：</span>院内店</li>
+                  <li style="width: 40%;"><span>信息系统：</span> 患者服务系统、DDI直连系统、冷链监控系统、GSP系统</li>
+                  <li style="width: 60%;"><span>储存设备：</span>冷链箱(5个),冷藏柜(容积4.5m)阴凉柜(容积4.5m)</li>
+                  <li style="width: 40%;"><span>岗位人员：</span>初级药师2人、中级药师2人、执业药师4人</li>
+                  <li style="width: 100%;"><span>功能区域：</span>药事咨询区(面积120m)、患教活动区(面积120日)、药品调配区(面积120m)、慈普赠药区(面积120m)</li>
+                  <li style="width: 100%;"><span>经营范围：</span>普药、生物制品、肿瘤药品、中药饮片、中成药、化学药制剂、抗生素、生化药品、生物制品(除疫苗)等</li>
+                </ul>
               </div>
             </div>
           </el-card>
@@ -242,7 +254,6 @@ export default {
   .display {
     .s_box:nth-child(1) {
       width: 1657px;
-      height: 204px;
 
       ::v-deep .el-card__body {
         padding: 0px !important;
@@ -265,14 +276,19 @@ export default {
 
       .bottomBox {
         width: 100%;
-        padding: 17px 0px 0 26px;
+        padding: 17px 0px 10px 26px;
         display: flex;
         flex-flow: row wrap;
-        justify-content: space-between;
-
+        justify-content: start;
+        >img {
+          width: 190px;
+          height: 134px;
+          margin-top: 20px;
+        }
         .title {
-          font-size: 14px;
-          font-weight: 500;
+
+          font-size: 17px;
+          font-weight: 700;
           color: rgba(58, 160, 255, 1);
           margin-right: 10px;
         }
@@ -280,7 +296,6 @@ export default {
         .content {
           margin-top: 10px;
           width: 900px;
-          height: 200px;
         }
       }
     }
@@ -371,7 +386,17 @@ export default {
     .inBox {
       width: 1657px;
       height: 407px;
-
+      ul {
+        li {
+          display: inline-block;
+          margin-top: 35px;
+          color: #000;
+          font-weight: 500;
+          span {
+            color: #666;
+          }
+        }
+      }
       .topBox {
         height: 52px;
         display: flex;
