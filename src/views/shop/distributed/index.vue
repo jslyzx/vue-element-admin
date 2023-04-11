@@ -5,7 +5,7 @@
         <div class="title fl">授权药房分布</div>
         <div class="fr">
           <el-radio-group v-model="type" size="small">
-            <el-radio-button label="总数" ></el-radio-button>
+            <el-radio-button label="总数"></el-radio-button>
             <el-radio-button label="DTP药房"></el-radio-button>
             <el-radio-button label="关联药房"></el-radio-button>
           </el-radio-group>
@@ -18,12 +18,15 @@
 <script>
 import { grid } from '@/api/shop'
 import _ from 'lodash'
+import img1 from '@/assets/shop_images/pic1.png'
+import img2 from '@/assets/shop_images/pic2.png'
 let BMap = {}
 let map = {}
 export default {
   name: 'ShopDistributed',
   data() {
     return {
+      img1,
       type: '总数',
       map: {},
       shopArr: []
@@ -98,7 +101,10 @@ export default {
       })
     },
     initMarks() {
-      var markers1 = []; var markers2 = []
+      var markers1 = [] //dtp药房
+      var markers2 = [] //关联药房
+      let icon1 = new BMap.Icon(img1, new BMap.Size(24, 30))
+      let icon2 = new BMap.Icon(img2, new BMap.Size(24, 30))
       // 输入经纬度和名称，标记
       function bindPoint(longti, lati, name, isDtp) {
         // map.clearOverlays();//清空原来的标注
@@ -107,7 +113,7 @@ export default {
         // 创建点
         pt = new BMap.Point(longti, lati)
         // 创建标记
-        var marker = new BMap.Marker(pt)
+        var marker = new BMap.Marker(pt, {icon: isDtp ? icon1 : icon2})
         // 定义文本内容
         var opts = {
           width: 250,
@@ -293,6 +299,17 @@ export default {
   watch: {
     shopArr() {
       this.initMap()
+    }
+  },
+  computed: {
+    dtpNum() {
+      return _.filter(this.shopArr,function(v){ return v.isDtp }).length
+    },
+    totalNum() {
+      return this.shopArr.length
+    },
+    otherNum() {
+      return _.filter(this.shopArr,function(v){ return !v.isDtp }).length
     }
   }
 }
