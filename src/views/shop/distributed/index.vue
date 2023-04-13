@@ -11,6 +11,18 @@
           </el-radio-group>
         </div>
       </div>
+      <div class="sum clearfix">
+        <div class="item" v-if="type === '总数' || type === 'DTP药房'">
+          <img :src="img1" class="fl">
+          <span class="name fl">DTP药房</span>
+          <span class="num fl">{{dtpNum}}家</span>
+        </div>
+        <div class="item" v-if="type === '总数' || type === '关联药房'">
+          <img :src="img2" class="fl">
+          <span class="name fl">关联药房</span>
+          <span class="num fl">{{otherNum}}家</span>
+        </div>
+      </div>
       <div id="container" class="chart-part" style="height: calc(100% - 40px)" />
       </div>
   </div>
@@ -18,8 +30,8 @@
 <script>
 import { grid } from '@/api/shop'
 import _ from 'lodash'
-import img1 from '@/assets/shop_images/pic1.png'
-import img2 from '@/assets/shop_images/pic2.png'
+import img1 from '@/assets/shop_images/pic3.png'
+import img2 from '@/assets/shop_images/pic4.png'
 let BMap = {}
 let map = {}
 export default {
@@ -27,6 +39,7 @@ export default {
   data() {
     return {
       img1,
+      img2,
       type: '总数',
       map: {},
       shopArr: []
@@ -331,6 +344,36 @@ export default {
       background-color: #fff;
       padding: 20px;
       height: calc(100% - 40px);
+    }
+    .sum {
+      background-color: #fff;
+      height: 40px;
+      position: absolute;
+      top: 120px;
+      right: 40px;
+      z-index: 99;
+      border-radius: 5px;
+      padding: 0 10px;
+      .item {
+        float: left;
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+        .name {
+          margin: 0 10px;
+        }
+        &:first-child .num {
+          color: #1890ff;
+          margin-right: 20px;
+        }
+        &:last-child .num {
+          color: orange;
+        }
+        img {
+          margin-top: 10px;
+          height: 20px;
+        }
+      }
     }
   }
   ::v-deep .BMap_bubble_title {

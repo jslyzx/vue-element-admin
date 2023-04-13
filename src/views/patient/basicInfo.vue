@@ -1,7 +1,6 @@
 <template>
   <div class="body">
     <div class="formCard">
-      <saleForm :rule-form="ruleForm" :region-show="false" @changeForm="changeForm" :quick-show="false" />
       <div class="chartBox">
         <div class="display">
           <el-card class="s_box">
@@ -36,20 +35,21 @@
                     </el-descriptions>
                   </div>
                 </div>
-                <div style="margin:-10px 20px 0 0">
-                  <!-- <img v-if="shopInfo.infoRate > 90" src="@/assets/shop_images/levelS.png" />
-                  <img v-if="shopInfo.infoRate > 90" src="@/assets/shop_images/levelA.png" />
-                  <img v-if="shopInfo.infoRate > 90" src="@/assets/shop_images/levelB.png" />
-                  <img v-if="shopInfo.infoRate > 90" src="@/assets/shop_images/levelC.png" />
-                  <img v-if="shopInfo.infoRate > 90" src="@/assets/shop_images/levelD.png" /> -->
+                <div style="flex: auto;margin-right: 70px;text-align: right;">
+                  <img v-if="shopInfo.grades >= 90" src="@/assets/shop_images/levelS.png" style="height: 160px;" />
+                  <img v-else-if="shopInfo.grades >= 80" src="@/assets/shop_images/levelA.png" style="height: 160px;" />
+                  <img v-else-if="shopInfo.grades >= 70" src="@/assets/shop_images/levelB.png" style="height: 160px;" />
+                  <img v-else-if="shopInfo.grades >= 60" src="@/assets/shop_images/levelC.png" style="height: 160px;" />
+                  <img v-else src="@/assets/shop_images/levelD.png" style="height: 160px;" />
                 </div>
               </div>
             </div>
           </el-card>
-          <el-card class="s_box" style="margin-top:29px">
+          <el-card class="s_box" style="margin-top:20px">
             <div>
               <div class="topBox">
-                <div>动态运营分析</div>
+                <div class="fl">动态运营分析</div>
+                <div class="fr" style="color: #3aa0ff;">{{shopInfo.dynamicGrades}}<span style="font-size: 12px;">分</span></div>
               </div>
               <div class="bottomBox2">
                 <div class="m_box">
@@ -102,18 +102,18 @@
           <el-card>
             <div class="inBox">
               <div class="topBox">
-                <h3 style="margin-top:1px">静态标准</h3>
+                <h3 style="margin-top:1px;float: left;">静态标准</h3>
+                <div class="fr" style="color: #3aa0ff;font-size: 16px;font-weight: 700;">{{shopInfo.staticGrades}}<span style="font-size: 12px;">分</span></div>
               </div>
               <div>
-                <!-- <div id="chartBox" ref="chartBox" class="inChartBox" /> -->
                 <ul>
-                  <li style="width: 30%;"><span>经营面积：</span>300mi</li>
-                  <li style="width: 30%;"><span>商业位置：</span>院内店</li>
+                  <li style="width: 30%;"><span>经营面积：</span>{{shopInfo.operatingArea}}m<sup>2</sup></li>
+                  <li style="width: 30%;"><span>商业位置：</span>{{shopInfo.commerceAddress || ''}}</li>
                   <li style="width: 40%;"><span>信息系统：</span> 患者服务系统、DDI直连系统、冷链监控系统、GSP系统</li>
-                  <li style="width: 60%;"><span>储存设备：</span>冷链箱(5个),冷藏柜(容积4.5m)阴凉柜(容积4.5m)</li>
-                  <li style="width: 40%;"><span>岗位人员：</span>初级药师2人、中级药师2人、执业药师4人</li>
-                  <li style="width: 100%;"><span>功能区域：</span>药事咨询区(面积120m)、患教活动区(面积120日)、药品调配区(面积120m)、慈普赠药区(面积120m)</li>
-                  <li style="width: 100%;"><span>经营范围：</span>普药、生物制品、肿瘤药品、中药饮片、中成药、化学药制剂、抗生素、生化药品、生物制品(除疫苗)等</li>
+                  <li style="width: 60%;"><span>储存设备：</span>冷链箱({{shopInfo.coldChainNum}}个)</li>
+                  <li style="width: 40%;"><span>岗位人员：</span>执业药师{{shopInfo.lpNum}}人</li>
+                  <li style="width: 100%;"><span>功能区域：</span>{{shopInfo.functionalArea}}</li>
+                  <li style="width: 100%;"><span>经营范围：</span>{{shopInfo.businessScope}}</li>
                 </ul>
               </div>
             </div>
@@ -124,110 +124,23 @@
   </div>
 </template>
 <script>
-import { queryShopInfo } from '@/api/system'
-import saleForm from '@/components/saleForm'
-import * as echarts from 'echarts'
+import { find } from '@/api/shop'
 import { parseTime } from '@/filters'
 import _ from 'lodash'
-require("echarts/theme/macarons")
 export default {
   name: 'ShopDetail',
-  components: {
-    saleForm
-  },
   data() {
     return {
-      ruleForm: {
-        year: '2022',
-        startMonth: '',
-        endMonth: '',
-        shopId: this.$route.params.id
-      },
-      monthSales: [],
+      shopId: this.$route.params.id,
       shopInfo: {}
     }
   },
-  created() {
-    this.changeForm(this.ruleForm)
+  async created() {
+    const res = await find({id: this.shopId})
+    this.shopInfo = res.data
   },
   methods: {
-    async queryShopInfo(form) {
-      const res = await queryShopInfo(form)
-      this.monthSales = res.data.monthSales
-      this.shopInfo = res.data
-    },
-    changeForm(form) {
-        this.queryShopInfo(form)
-    },
-    initCharts() {
-      const charts1 = echarts.init(this.$refs['chartBox'])
-      charts1.setOption({
-        color: ['#6382e7'],
-        grid: {
-          left: 80,
-        },
-        xAxis: {
-          type: 'category',
-          data: _.map(this.monthSales, function(v){return v.name}),
-          axisTick: {
-            show: false,
-          },
-          axisLine: {
-            show: true,
-            lineStyle: {
-              color: '#f2f2f2',
-            }
-          },
-          axisLabel: {
-            show: true,
-            color: '#000'
-          }
-        },
-        tooltip: {
-          trigger: 'axis',
-          formatter: function(params) {
-            let str = '';
-            params.forEach((item, index) => {
-              str +=
-                '<span style="display:inline-block;margin-right:5px;border-radius:50%;width:10px;height:10px;left:5px;background-color:' + item.color + '"></span>' + item.name + "销售额" + " : " + item.data + '万元' + "<br />";
-            });
-            return str;
-          },
-        },
-        yAxis: {
-          type: 'value',
-          value: '万元',
-          axisLine: {
-            show: true,
-            lineStyle: {
-              color: '#f2f2f2',
-            }
-          },
-          axisLabel: {
-            show: true,
-            color: '#000'
-          },
-          splitLine: {
-            lineStyle: {
-              type: "dashed"
-            }
-          }
-        },
-        series: [{
-          data: _.map(this.monthSales, function(v){return v.value}),
-          type: 'line',
-          smooth: true,
-          itemStyle: {
-            opacity: 0
-          }
-        }]
-      })
-    }
-  },
-  watch: {
-    monthSales() {
-      this.initCharts()
-    }
+
   }
 }
 
@@ -235,21 +148,18 @@ export default {
 <style lang="scss" scoped>
 .body {
   width: 100%;
-  height: 120vh;
   background: rgba(235, 238, 242, 1);
-  padding: 29px;
+  padding: 0 29px;
 }
 
 .formCard {
   margin: 0px 24px 25px -10px;
   width: 1655px;
-  height: 143px;
 }
 
 .chartBox {
   margin: 27px 24px 25px -1px;
   width: 1655px;
-  height: 80vh;
 
   .display {
     .s_box:nth-child(1) {
@@ -375,7 +285,7 @@ export default {
   }
 
   .chartDisplay {
-    margin-top: 32px;
+    margin-top: 20px;
     display: flex;
     flex-flow: row wrap;
 
@@ -385,7 +295,6 @@ export default {
 
     .inBox {
       width: 1657px;
-      height: 407px;
       ul {
         li {
           display: inline-block;
@@ -407,7 +316,6 @@ export default {
       }
 
       .inChartBox {
-        //   margin: 0 auto;
         width: 1800px;
         height: 350px;
       }
