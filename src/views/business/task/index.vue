@@ -42,6 +42,7 @@
         <template slot-scope="scope">
           <el-button type="primary" size="small" @click="edit(scope.row)">编辑</el-button>
           <el-button type="danger" size="small" @click="hdelete(scope.row)">删除</el-button>
+          <el-button type="primary" size="small" @click="view(scope.row.id)">执行情况</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -55,18 +56,20 @@
     />
     <add-or-edit ref="add" @tableCall="queryData" />
     <add-or-edit ref="edit" @tableCall="queryData" />
+    <detail ref="detail" />
   </div>
 </template>
 
 <script>
 // import MoreSearch from './components/MoreSearch'
 import AddOrEdit from './components/AddOrEdit'
+import detail from './components/detail'
 import { grid, cancel, disable, enable } from '@/api/task'
 // import { list } from '@/api/test' // 引入请求
 
 export default {
   name: 'BusinessTask',
-  components: { AddOrEdit },
+  components: { AddOrEdit, detail },
   data() {
     return {
       // 遮罩层
@@ -159,6 +162,9 @@ export default {
         .catch(() => {
 
         })
+    },
+    view(id) {
+      this.$refs['detail'].show(id)
     }
   }
 }

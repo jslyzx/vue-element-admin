@@ -37,4 +37,11 @@ export function disable(data) {
     params: data
   })
 }
+export function query(data) {
+  return request({
+    url: 'demo/task/check/detail/query',
+    method: 'get',
+    params: data
+  })
+}
 

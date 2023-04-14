@@ -19,6 +19,7 @@
                         <span><img style="position: relative; top: 7px; height: 25px; width: 25px;" src="@/assets/shop_images/dh.png" /></span><span style="margin-left:5px;">{{shopInfo.phone}}</span>
                       </el-descriptions-item>
                       <el-descriptions-item label="医保资质：">
+                        <el-tag color="#EDFDF9" style="border-radius: 20px; margin-right: 10px; color: #56B9AF;" size="small" v-if="shopInfo.isDtp" effect="plain">DTP</el-tag>
                         <el-tag color="#EDFDF9" style="border-radius: 20px; margin-right: 10px; color: #56B9AF;" size="small" v-if="shopInfo.isStd" effect="plain">双通道定点</el-tag>
                         <el-tag color="#EDF5FD" style="border-radius: 20px; margin-right: 10px; color: #599BF5;" size="small" v-if="shopInfo.isMm" effect="plain">门慢</el-tag>
                         <el-tag color="#5497F4" style="border-radius: 20px; margin-right: 10px; color: #fff;" size="small" v-if="shopInfo.isMt" effect="plain">门特</el-tag>
@@ -49,20 +50,20 @@
             <div>
               <div class="topBox">
                 <div class="fl">动态运营分析</div>
-                <div class="fr" style="color: #3aa0ff;">{{shopInfo.dynamicGrades}}<span style="font-size: 12px;">分</span></div>
+                <div class="fr" style="color: #3aa0ff;" v-if="shopInfo.dynamicGrades">{{shopInfo.dynamicGrades}}<span style="font-size: 12px;">分</span></div>
               </div>
               <div class="bottomBox2">
                 <div class="m_box">
                   <div><img src="@/assets/patient_images/分组 2.png" /></div>
                   <div>
-                    <div>{{shopInfo.infoRate}}</div>
+                    <div>{{shopInfo.infoRate}}%</div>
                     <div>信息采集完善度</div>
                   </div>
                 </div>
                 <div class="m_box">
                   <div><img src="@/assets/patient_images/分组 3.png" /></div>
                   <div>
-                    <div>{{shopInfo.returnRatio}}</div>
+                    <div>{{shopInfo.returnRatio}}%</div>
                     <div>回访及时率</div>
                   </div>
                 </div>
@@ -76,7 +77,7 @@
                 <div class="m_box">
                   <div><img src="@/assets/patient_images/分组 6.png" /></div>
                   <div>
-                    <div>{{shopInfo.satisfaction}}</div>
+                    <div>{{shopInfo.satisfaction}}星</div>
                     <div>服务满意度</div>
                   </div>
                 </div>
@@ -103,7 +104,7 @@
             <div class="inBox">
               <div class="topBox">
                 <h3 style="margin-top:1px;float: left;">静态标准</h3>
-                <div class="fr" style="color: #3aa0ff;font-size: 16px;font-weight: 700;">{{shopInfo.staticGrades}}<span style="font-size: 12px;">分</span></div>
+                <div class="fr" style="color: #3aa0ff;font-size: 16px;font-weight: 700;" v-if="shopInfo.staticGrades">{{shopInfo.staticGrades}}<span style="font-size: 12px;">分</span></div>
               </div>
               <div>
                 <ul>

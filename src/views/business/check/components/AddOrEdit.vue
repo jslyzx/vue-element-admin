@@ -109,11 +109,16 @@ export default {
   },
   methods: {
     showEdit(row) {
+      const that = this
       if (row) {
         this.detail(row.id)
       } else {
         this.formData = this.$options.data().formData
-        this.formData.details.push(this.tempVo)
+        const tmp = Object.assign({}, this.tempVo)
+        this.formData.details.push(tmp)
+        setTimeout(() => {
+          that.$refs.vForm.clearValidate()
+        }, 0)
       }
       this.visible = true
     },
@@ -136,7 +141,8 @@ export default {
       })
     },
     addItem() {
-      this.formData.details.push(this.tempVo)
+      const tmp = Object.assign({}, this.tempVo)
+      this.formData.details.push(tmp)
     },
     removeItem(i) {
       if(this.formData.details.length === 1){

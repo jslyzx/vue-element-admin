@@ -4,7 +4,7 @@
       <div class="head clearfix">
         <div class="title fl">授权药房分布</div>
         <div class="fr">
-          <el-radio-group v-model="type" size="small">
+          <el-radio-group v-model="type" size="small" @input="switchType">
             <el-radio-button label="总数"></el-radio-button>
             <el-radio-button label="DTP药房"></el-radio-button>
             <el-radio-button label="关联药房"></el-radio-button>
@@ -59,7 +59,15 @@ export default {
         pageSize: 100
       })
       let arr = res.data.data
-      arr = _.filter(arr, function(v){return !!v.axis})
+      const that = this
+      arr = _.filter(arr, function(v){
+        if(that.type === '总数')
+          return !!v.axis
+        else if(that.type === 'DTP药房') 
+          return !!v.axis && v.isDtp === 1
+        else
+          return !!v.axis && v.isDtp !== 1
+      })
       let tmp = []
       this.shopArr = _.map(arr, function(v){
         tmp = v.axis.split(',')
@@ -307,6 +315,9 @@ export default {
         map.addOverlay(ply)
         map.setViewport(ply.getPath()) // 调整视野
       })
+    },
+    switchType() {
+      this.getShopList()
     }
   },
   watch: {

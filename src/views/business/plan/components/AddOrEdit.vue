@@ -146,25 +146,25 @@ export default {
       checkDataOptions: [],
       monthOptions: [],
       weekOptions: [{
-        value: '1',
+        value: '周一',
         label: '周一'
       },{
-        value: '2',
+        value: '周二',
         label: '周二'
       },{
-        value: '3',
+        value: '周三',
         label: '周三'
       },{
-        value: '4',
+        value: '周四',
         label: '周四'
       },{
-        value: '5',
+        value: '周五',
         label: '周五'
       },{
-        value: '6',
+        value: '周六',
         label: '周六'
       },{
-        value: '7',
+        value: '周日',
         label: '周日'
       }],
       cycleOptions: [{
@@ -194,11 +194,15 @@ export default {
   },
   methods: {
     showEdit(row) {
+      const that = this
       if (row) {
         // this.formData = Object.assign({}, row)
         this.detail(row.id)
       } else {
         this.formData = this.$options.data().formData
+        setTimeout(() => {
+          that.$refs.vForm.clearValidate()
+        }, 0)
       }
       this.init()
       this.visible = true
