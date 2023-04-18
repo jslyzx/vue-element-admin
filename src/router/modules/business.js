@@ -31,7 +31,7 @@ const businessRouter = {
       name: 'BusinessCheck',
       meta: { title: '合规检查' }
     }, {
-      path: 'detail',
+      path: 'detail/:id',
       component: () => import('@/views/business/personnel/detail'),
       name: 'BusinessPersonnelDetail',
       hidden: true,

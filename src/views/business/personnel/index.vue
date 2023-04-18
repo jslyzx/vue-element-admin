@@ -29,6 +29,7 @@
     >
       <!-- selection-change	当选择项发生变化时会触发该事件 -->
       <el-table-column type="selection" min-width="5" align="center" />
+      <el-table-column prop="code" label="工号" width="180" min-width="10" />
       <el-table-column prop="name" label="姓名" width="120" min-width="10">
         <template slot-scope="scope">
           <a class="detail" @click="goDetail(scope.row)">{{ scope.row.name }} </a>

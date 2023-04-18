@@ -14,7 +14,7 @@
             <el-input v-model="item.title" type="text" clearable />
           </el-form-item>
           <el-form-item label="类型" :prop="'details.' + i + '.type'" class="required" :rules="{ required: true, message: '类型不能为空', trigger: 'blur' }">
-            <el-select v-model="item.type" class="full-width-input" clearable>
+            <el-select v-model="item.type" class="full-width-input" clearable @change="changeType(i)">
               <el-option
                 v-for="(type, index) in typeOptions"
                 :label="type.label"
@@ -73,10 +73,10 @@ export default {
         }]
       },
       typeOptions: [{
-        'label': 'input框',
+        'label': '输入框',
         'value': 'input'
       }, {
-        'label': 'textarea框',
+        'label': '文本区域',
         'value': 'textarea'
       }, {
         'label': '单选框',
@@ -179,6 +179,12 @@ export default {
         return false
       }
       this.formData.details[i].options.splice(t, 1)
+    },
+    changeType(i) {
+      this.formData.details[i].options = [{
+        label: '',
+        value: ''
+      }]
     }
   }
 }

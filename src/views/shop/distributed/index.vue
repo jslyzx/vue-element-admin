@@ -23,8 +23,8 @@
           <span class="num fl">{{otherNum}}家</span>
         </div>
       </div>
-      <div id="container" class="chart-part" style="height: calc(100% - 40px)" />
-      </div>
+      <div id="container" class="chart-part" style="height: calc(100% - 40px)"></div>
+    </div>
   </div>
 </template>
 <script>

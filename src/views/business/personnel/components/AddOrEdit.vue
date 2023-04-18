@@ -28,17 +28,22 @@
         </el-form-item>
         <el-row>
           <el-col :span="12" class="grid-cell">
+            <el-form-item label="工号" prop="code" class="required">
+              <el-input v-model="formData.code" type="text" class="full-width-input" clearable />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12" class="grid-cell">
             <el-form-item label="姓名" prop="name" class="required">
               <el-input v-model="formData.name" type="text" class="full-width-input" clearable />
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="12" class="grid-cell">
             <el-form-item label="手机号" prop="phone" class="required">
               <el-input v-model="formData.phone" class="full-width-input" type="text" clearable />
             </el-form-item>
           </el-col>
-        </el-row>
-        <el-row>
           <el-col :span="12" class="grid-cell">
             <el-form-item label="性别" prop="gender" class="required">
               <el-radio-group v-model="formData.gender">
@@ -82,11 +87,11 @@ export default {
     return {
       visible: false,
       formData: {
+        code: '',
         name: '',
         phone: '',
         gender: 2
       },
-
       addressOptions: [],
       addressProps: {
         expandTrigger: 'hover',
@@ -103,6 +108,10 @@ export default {
           message: '字段值不可为空'
         }],
         provinceId: [{
+          required: true,
+          message: '字段值不可为空'
+        }],
+        code: [{
           required: true,
           message: '字段值不可为空'
         }],
@@ -178,9 +187,9 @@ export default {
     },
     async detail(id) {
       const res = await find({ id })
-      const { name, gender, phone, shopIds, regionId, sectionId, provinceId } = res.data
+      const { code, name, gender, phone, shopIds, regionId, sectionId, provinceId } = res.data
       const address = [regionId, sectionId, provinceId]
-      this.formData = Object.assign({}, { name, gender, shopIds, phone, address, id })
+      this.formData = Object.assign({}, { code, name, gender, shopIds, phone, address, id })
       this.visible = true
     },
     cancel() {
@@ -189,9 +198,9 @@ export default {
     submitData() {
       this.$refs['vForm'].validate(valid => {
         if (!valid) return
-        const { name, gender, phone, address, shopIds, id } = this.formData
+        const { code, name, gender, phone, address, shopIds, id } = this.formData
         const submitData = {
-          name, gender, phone, id,
+          code, name, gender, phone, id,
           regionId: address[0],
           sectionId: address[1],
           provinceId: address[2],

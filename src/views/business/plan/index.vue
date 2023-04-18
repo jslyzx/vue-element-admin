@@ -35,7 +35,11 @@
           {{ row.cycle | cycleFilter }}
         </template>
       </el-table-column>
-      <el-table-column prop="cycleDay" label="周期日" width="180" min-width="10" />
+      <el-table-column prop="cycleDay" label="周期日" width="180" min-width="10">
+        <template slot-scope="{row}">
+          {{ row.cycleDay | cycleDayFilter }}
+        </template>
+      </el-table-column>
       <el-table-column prop="inUse" label="状态" width="180" min-width="10">
         <template slot-scope="scope">
           <el-switch
@@ -181,6 +185,14 @@ export default {
     cycleFilter(type) {
       const map = ['每年', '每月', '每周', '每天']
       return map[type]
+    },
+    cycleDayFilter(cycleDay) {
+      let re = []
+      if(cycleDay.indexOf('-') > -1) {
+        re = cycleDay.split('-')
+        return re[0] + '月' + re[1] + '日'
+      }
+      return cycleDay
     }
   }
 }

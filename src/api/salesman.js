@@ -38,3 +38,10 @@ export function authorized(data) {
   })
 }
 
+export function detail(data) {
+  return request({
+    url: 'demo/salesman/detail',
+    method: 'get',
+    params: data
+  })
+}

@@ -42,7 +42,7 @@
         <template slot-scope="scope">
           <el-button type="primary" size="small" @click="edit(scope.row)">编辑</el-button>
           <el-button type="danger" size="small" @click="hdelete(scope.row)">删除</el-button>
-          <el-button type="primary" size="small" @click="view(scope.row.id)">执行情况</el-button>
+          <el-button type="primary" size="small" @click="view(scope.row.id)" v-if="scope.row.state !== 0">执行情况</el-button>
         </template>
       </el-table-column>
     </el-table>
