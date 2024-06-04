@@ -1,95 +1,63 @@
 <template>
-  <div v-if="!item.hidden">
-    <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
-      <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
-        <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
-          <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)" :title="onlyOneChild.meta.title" />
-        </el-menu-item>
-      </app-link>
-    </template>
-
-    <el-submenu v-else ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
-      <template slot="title">
-        <item v-if="item.meta" :icon="item.meta && item.meta.icon" :title="item.meta.title" />
+  <div class="sidebar">
+    <el-menu :default-active="activeMenu" text-color="rgb(191, 203, 217)" class="el-menu-vertical">
+      <template v-for="menu in menuData">
+        <template v-if="menu.children && menu.children.length > 0">
+          <el-submenu :index="menu.id.toString()">
+            <template slot="title">{{ menu.name }}</template>
+            <sidebar-item class="nest-menu" :menu-data="menu.children"></sidebar-item>
+          </el-submenu>
+        </template>
+        <template v-else>
+          <!-- 使用 router-link 实现路由跳转 -->
+          <router-link :to="menu.url">
+            <el-menu-item class="submenu-title-noDropdown" :index="menu.url">{{
+              menu.name
+            }}</el-menu-item>
+          </router-link>
+        </template>
       </template>
-      <sidebar-item
-        v-for="child in item.children"
-        :key="child.path"
-        :is-nest="true"
-        :item="child"
-        :base-path="resolvePath(child.path)"
-        class="nest-menu"
-      />
-    </el-submenu>
+    </el-menu>
   </div>
 </template>
 
 <script>
-import path from 'path'
-import { isExternal } from '@/utils/validate'
-import Item from './Item'
-import AppLink from './Link'
-import FixiOSBug from './FixiOSBug'
-
 export default {
-  name: 'SidebarItem',
-  components: { Item, AppLink },
-  mixins: [FixiOSBug],
+  name: "SidebarItem",
   props: {
-    // route object
-    item: {
-      type: Object,
-      required: true
+    menuData: {
+      type: Array,
+      required: true,
     },
-    isNest: {
-      type: Boolean,
-      default: false
-    },
-    basePath: {
-      type: String,
-      default: ''
-    }
   },
   data() {
-    // To fix https://github.com/PanJiaChen/vue-admin-template/issues/237
-    // TODO: refactor with render function
-    this.onlyOneChild = null
-    return {}
+    return {
+      activeMenu: "", // 当前激活的菜单项
+    };
   },
-  methods: {
-    hasOneShowingChild(children = [], parent) {
-      const showingChildren = children.filter(item => {
-        if (item.hidden) {
-          return false
-        } else {
-          // Temp set(will be used if only has one showing child)
-          this.onlyOneChild = item
-          return true
-        }
-      })
-
-      // When there is only one child router, the child router is displayed by default
-      if (showingChildren.length === 1) {
-        return true
-      }
-
-      // Show parent if there are no child router to display
-      if (showingChildren.length === 0) {
-        this.onlyOneChild = { ... parent, path: '', noShowingChildren: true }
-        return true
-      }
-
-      return false
+  computed: {
+    // 当前路由路径
+    currentPath() {
+      return this.$route.path;
     },
-    resolvePath(routePath) {
-      if (isExternal(routePath)) {
-        return routePath
-      }
-      if (isExternal(this.basePath)) {
-        return this.basePath
-      }
-      return path.resolve(this.basePath, routePath)
-    }
-  }
-}
+  },
+  watch: {
+    currentPath(newVal) {
+      this.activeMenu = newVal; // 监听当前路径变化，设置激活的菜单项
+    },
+  },
+};
 </script>
+
+<style scoped>
+.sidebar {
+  width: 200px;
+  height: 100%;
+  background: rgb(48, 65, 86);
+}
+
+.el-menu-vertical {
+  border-right: none;
+  background: rgb(48, 65, 86);
+}
+</style>

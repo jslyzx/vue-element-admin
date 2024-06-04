@@ -47,3 +47,12 @@ export function queryShopSale(data) {
   })
 }
 
+export function queryShop(data) {
+  return request({
+    url: `/sale/shop/queryShopSaleAnalysis`,
+    method: 'get',
+    params: data,
+  })
+}
+
+

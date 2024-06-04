@@ -37,6 +37,7 @@
       </el-table-column>
       <el-table-column prop="phone" label="手机号" width="180" min-width="10" />
       <el-table-column prop="gender" label="性别" width="180" min-width="10" />
+      <el-table-column prop="level" label="商务级别 " width="180" min-width="10" />
       <el-table-column prop="createTime" label="创建时间" width="180" min-width="10" />
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="scope">

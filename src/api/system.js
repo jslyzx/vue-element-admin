@@ -141,3 +141,39 @@ export function queryPatientAnalysis(data) {
     params: data
   })
 }
+
+// 角色管理列表
+export function queryRoles(data) {
+  return request({
+    url: '/admin/role/grid',
+    method: 'get',
+    params: data
+  })
+}
+
+// 保存角色
+export function saveRole(data) {
+  return request({
+    url: '/admin/role/save',
+    method: 'post',
+    data
+  })
+}
+
+// 获取权限列表
+export function queryUserMenu(data) {
+  return request({
+    url: '/admin/role/queryRoleMenu',
+    method: 'get',
+    params: data
+  })
+}
+
+// 保存权限分配
+export function saveUserMenu(data) {
+  return request({
+    url: '/admin/role/saveRoleMenu',
+    method: 'post',
+    data
+  })
+}

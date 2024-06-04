@@ -31,6 +31,13 @@ const systemRouter = {
       meta: {
         title: '地区管理'
       }
+    },{
+      path: 'role',
+      component: () => import('@/views/system/role'),
+      name: 'Role',
+      meta: {
+        title: '系统角色管理'
+      }
     }
   ]
 }

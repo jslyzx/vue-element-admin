@@ -5,7 +5,7 @@
       :title="!formData.id ? '新增' : '编辑'"
       :visible.sync="visible"
       :before-close="cancel"
-      :close-on-click-modal="false"
+      :close-on-click-modal="false" 
     >
       <el-form
         ref="vForm"
@@ -55,6 +55,17 @@
                   style="display: inline"
                 >{{ item.label }}</el-radio>
               </el-radio-group>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12" class="grid-cell">
+            <el-form-item label="商务级别" prop="level" class="required">
+              <el-select v-model="formData.level" class="full-width-input" clearable filterable >
+                <el-option label="大区总监" value="1" />
+                <el-option label="区域经理" value="2" />
+                <el-option label="信息顾问" value="3" />
+              </el-select>
             </el-form-item>
           </el-col>
         </el-row>
@@ -130,6 +141,10 @@ export default {
         gender: [{
           required: true,
           message: '字段值不可为空'
+        }],
+        level: [{
+          required: true,
+          message: '字段值不可为空'
         }]
       },
       genderOptions: [{
@@ -187,9 +202,9 @@ export default {
     },
     async detail(id) {
       const res = await find({ id })
-      const { code, name, gender, phone, shopIds, regionId, sectionId, provinceId } = res.data
+      const { code, name, gender, phone, shopIds, regionId, sectionId, provinceId, level } = res.data
       const address = [regionId, sectionId, provinceId]
-      this.formData = Object.assign({}, { code, name, gender, shopIds, phone, address, id })
+      this.formData = Object.assign({}, { code, name, gender, shopIds, phone, address, id, level })
       this.visible = true
     },
     cancel() {
@@ -198,9 +213,9 @@ export default {
     submitData() {
       this.$refs['vForm'].validate(valid => {
         if (!valid) return
-        const { code, name, gender, phone, address, shopIds, id } = this.formData
+        const { code, name, gender, phone, address, shopIds, id, level } = this.formData
         const submitData = {
-          code, name, gender, phone, id,
+          code, name, gender, phone, id, level,
           regionId: address[0],
           sectionId: address[1],
           provinceId: address[2],

@@ -39,8 +39,8 @@ module.exports = {
     proxy: {
       '/api': {
         // target: 'http://business.dyk-it.com:8915/api/',
-        target: 'http://172.16.2.120:8913/',
-        changeOrigin: true,
+        target: 'http://172.16.2.109:8913/',
+        changeOrigin: true, 
         pathRewrite: {
           '/api': ''
         }

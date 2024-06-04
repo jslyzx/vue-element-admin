@@ -53,6 +53,7 @@ const actions = {
         const { data } = response
         commit('SET_TOKEN', data.id)
         commit('SET_NAME', data.nickname)
+        localStorage.setItem('menu_data', JSON.stringify(data.userMenuVOList))
         setToken(data.id)
         resolve()
       }).catch(error => {
@@ -94,6 +95,7 @@ const actions = {
     commit('SET_SECTION', '')
     commit('SET_PROVINCE', '')
     commit('SET_USERID', '')
+    localStorage.removeItem('menu_data');
     removeToken()
     resetRouter()
 
